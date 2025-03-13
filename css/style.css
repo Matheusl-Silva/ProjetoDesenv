@@ -1,0 +1,14 @@
+.hero { 
+  background-size: cover;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 4rem;
+}
+.navbar-nav .nav-link {
+  font-size: 1.25rem; 
+}
