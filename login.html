@@ -4,253 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto Saúde - Login</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        
-        body {
-            display: flex;
-            height: 100vh;
-        }
-        
-        .login-container {
-            flex: 1;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .image-container {
-            flex: 1;
-            background-color: #81d4fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            margin-bottom: 60px;
-        }
-        
-        .logo-icon {
-            display: flex;
-            margin-right: 10px;
-        }
-        
-        .logo-square {
-            width: 20px;
-            height: 20px;
-            background-color: #0277bd;
-            margin: 2px;
-        }
-        
-        .logo-text {
-            font-size: 20px;
-            font-weight: bold;
-            color: #0277bd;
-        }
-        
-        h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            color: #0277bd;
-        }
-        
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-        }
-        
-        form {
-            max-width: 400px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: normal;
-        }
-        
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .method-container {
-            display: flex;
-            margin-bottom: 20px;
-        }
-        
-        .radio-container {
-            display: flex;
-            align-items: center;
-            margin-right: 20px;
-        }
-        
-        input[type="radio"] {
-            margin-right: 8px;
-        }
-        
-        .remember-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        
-        .forgot-password {
-            color: #0277bd;
-            text-decoration: none;
-        }
-        
-        .sign-in-button {
-            width: 100%;
-            padding: 12px;
-            background-color: #0277bd;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-        
-        .sus-card-button {
-            width: 100%;
-            padding: 12px;
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-        
-        .card-icon {
-            margin-right: 10px;
-            width: 20px;
-            height: 20px;
-            fill: #0277bd;
-        }
-        
-        .signup-link {
-            text-align: center;
-        }
-        
-        .signup-link a {
-            color: #0277bd;
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="login-container">
-        <div class="logo">
-            <div class="logo-icon">
-                <div class="logo-square"></div>
-                <div class="logo-square"></div>
-                <div style="display: flex; flex-direction: column;">
-                    <div class="logo-square"></div>
-                    <div class="logo-square"></div>
-                </div>
+    <div class="main-container">
+        <div class="login-card">
+            <div class="logo">
+                <div class="logo-text">Projeto Saúde</div>
             </div>
-            <div class="logo-text">Projeto Saúde</div>
+            
+            <h1>Bem-vindo</h1>
+            <p class="subtitle">Por favor, insira seus dados para acessar</p>
+            
+            <form>
+                <label for="email">Endereço de e-mail</label>
+                <input type="email" id="email" placeholder="Insira seu e-mail" required>
+                
+                <label>Método de acesso</label>
+                <div class="method-container">
+                    <div class="radio-container">
+                        <input type="radio" id="rademail" name="metodo" checked>
+                        <label for="rademail">E-mail</label>
+                    </div>
+                    <div class="radio-container">
+                        <input type="radio" id="radcartao" name="metodo">
+                        <label for="radcartao">Cartão SUS</label>
+                    </div>
+                </div>
+                
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" placeholder="Insira sua senha" required>
+                
+                <div class="container">
+                    <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                </div>
+                
+                <button class="sign-in-button">Entrar</button>
+                
+            </form>
+            
+            <div class="signup-link">
+                Não tem uma conta? <a href="#">Cadastre-se</a>
+            </div>
         </div>
-        
-        <h1>Bem-vindo</h1>
-        <p class="subtitle">Por favor, insira seus dados para acessar</p>
-        
-        <form>
-            <label for="email">Endereço de e-mail</label>
-            <input type="email" id="email" placeholder="Insira seu e-mail" required>
-            
-            <label>Método de acesso</label>
-            <div class="method-container">
-                <div class="radio-container">
-                    <input type="radio" id="rademail" name="metodo" checked>
-                    <label for="rademail">E-mail</label>
-                </div>
-                <div class="radio-container">
-                    <input type="radio" id="radcartao" name="metodo">
-                    <label for="radcartao">Cartão SUS</label>
-                </div>
-            </div>
-            
-            <label for="senha">Senha</label>
-            <input type="password" id="senha" placeholder="Insira sua senha" required>
-            
-            <div class="remember-container">
-                <div class="radio-container">
-                    <input type="checkbox" id="remember">
-                    <label for="remember">Lembrar por 30 dias</label>
-                </div>
-                <a href="#" class="forgot-password">Esqueceu a senha?</a>
-            </div>
-            
-            <button class="sign-in-button">Entrar</button>
-            
-            <button class="sus-card-button" type="button">
-                <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V12H20V18ZM20 8H4V6H20V8Z"/>
-                </svg>
-                Acessar com Cartão SUS
-            </button>
-        </form>
-        
-        <div class="signup-link">
-            Não tem uma conta? <a href="#">Cadastre-se</a>
-        </div>
-    </div>
-    
-    <div class="image-container">
-        <svg class="illustration" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" width="80%" height="80%">
-            <!-- Background elements -->
-            <g opacity="0.5">
-                <circle cx="120" cy="100" r="5" fill="#fff" />
-                <circle cx="350" cy="80" r="3" fill="#fff" />
-                <circle cx="280" cy="150" r="4" fill="#fff" />
-                <circle cx="180" cy="320" r="5" fill="#fff" />
-                <circle cx="400" cy="250" r="4" fill="#fff" />
-                
-                <rect x="80" y="120" width="40" height="40" rx="5" fill="none" stroke="#fff" stroke-width="2" />
-                <rect x="300" y="100" width="30" height="30" rx="5" fill="none" stroke="#fff" stroke-width="2" />
-                <rect x="200" y="250" width="40" height="40" rx="5" fill="none" stroke="#fff" stroke-width="2" />
-                
-                <circle cx="350" cy="300" r="20" fill="none" stroke="#fff" stroke-width="2" />
-            </g>
-            
-            <!-- Healthcare Illustration -->
-            <g transform="translate(250, 250)">
-                <!-- Medical symbol -->
-                <circle cx="0" cy="0" r="80" fill="#fff" opacity="0.2" />
-                <rect x="-10" y="-60" width="20" height="120" rx="5" fill="#fff" />
-                <rect x="-60" y="-10" width="120" height="20" rx="5" fill="#fff" />
-                
-                <!-- Heart rate line -->
-                <path d="M-100,-60 L-80,-60 L-70,-30 L-50,-90 L-30,-60 L-10,-60 L0,-40 L10,-60 L30,-60 L50,-90 L70,-30 L80,-60 L100,-60" 
-                      stroke="#fff" fill="none" stroke-width="3" />
-                
-                <!-- Stethoscope -->
-                <circle cx="-70" cy="40" r="15" fill="#fff" opacity="0.6" />
-                <path d="M-70,55 C-70,70 -50,80 -30,80 C-10,80 0,70 0,60" stroke="#fff" fill="none" stroke-width="3" />
-                <path d="M0,60 C0,70 20,70 20,60 L20,20" stroke="#fff" fill="none" stroke-width="3" />
-                <circle cx="20" cy="10" r="10" fill="#fff" />
-            </g>
-        </svg>
     </div>
 </body>
 </html>
