@@ -64,12 +64,6 @@ form {
   text-align: left;
 }
 
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: normal;
-}
-
 input[type="email"],
 input[type="password"] {
   width: 100%;
