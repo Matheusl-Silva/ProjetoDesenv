@@ -4,51 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login.css">
     <title>Login</title>
   </head>
-  <body>
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-primary-subtle">
-        <div class="container">
-          <a class="navbar-brand mx-auto text-primary" href="#">Projeto Saude</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link text-primary" href="login.html">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-primary" href="#about">Conheça o Projeto</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-primary" href="#team">Quem Somos</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+  <body class="bg-info-subtle">
     <div class="container">
-      <div class="row">
+      <div class="row justify-content-center">
         <div class="col-md-6">
-          <div class="card mt-5">
+          <div class="card">
             <div class="card-header">
-              <h2>Login</h2>
+              <h2>Bem-vindo!</h2>
+              <div class="logo-text text-primary">Por favor insira suas informações para acessar</div>
             </div>
             <div class="card-body">
               <form>
-                <div class="form-group">
-                  <label for="email" class="form-label">Email:</label>
-                  <input type="email" class="form-control mb-2" id="email" placeholder="Insira seu e-mail">
-                </div>
                 <div class="form-group mb-2">
                     <span>Método:</span>
                     <input type="radio" id="rademail" name="metodo">
                     <label for="rademail">E-mail</label>
                     <input type="radio" id="radcartao" name="metodo">
                     <label for="radcartao">Cartão SUS</label>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="form-label">Email:</label>
+                  <input type="email" class="form-control mb-2" id="email" placeholder="Insira seu e-mail">
                 </div>
                 <div class="form-group">
                   <label for="senha" class="form-label">Senha:</label>
