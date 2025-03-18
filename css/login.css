@@ -2,6 +2,11 @@
    margin-top: 35%;
 }
 
-input{
-    margin-bottom: 3%;
+.form-group{
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+#metodo{
+    margin-top: 0;
 }
