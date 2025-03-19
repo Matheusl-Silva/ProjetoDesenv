@@ -12,3 +12,23 @@
 .navbar-nav .nav-link {
   font-size: 1.25rem; 
 }
+
+.trocaCor {
+  background-color: rgb(188, 206, 251);
+  border: 3px solid #0d6efd;
+  border-radius: 5px;
+  margin: 3px;
+  font-size: 1.25rem;
+  color: #0D6EFD
+  }
+
+  .trocaCor:hover {
+    background-color: #0D6EFD;
+    transition-duration: 1s;
+    color: white;
+  }
+
+  .imagemSize {
+    width: 100px;
+    height: 100px;
+  }

@@ -11,34 +11,34 @@
     <div class="container">
       <div class="row justify-content-center">  
         <div class="col-md-6">
-          <div class="card">
-            <div class="card-header">
+          <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
+            <div class="card-header bg-body-tertiary text-center">
               <h2>Bem-vindo!</h2>
               <div class="logo-text text-primary">Por favor insira suas informações para acessar</div>
             </div>
-            <div class="card-body">
+            <div class="card-body bg-body-tertiary">
               <form>
                 <div class="form-group mb-2" id="metodo">
                     <span>Método:</span>
-                    <input type="radio" id="rademail" name="metodo">
+                    <input class="m-1" type="radio" id="rademail" name="metodo">
                     <label for="rademail">E-mail</label>
-                    <input type="radio" id="radcartao" name="metodo">
+                    <input class="m-1" type="radio" id="radcartao" name="metodo">
                     <label for="radcartao">Cartão SUS</label>
                 </div>
-                <div class="form-group">
-                  <label for="email" class="form-label">Email:</label>
-                  <input type="email" class="form-control mb-2" id="email" placeholder="Insira seu e-mail">
+                <div class="form-group">  
+                  <label for="email" class="form-label">Email: <span style="color: red;">*</span></label>
+                  <input type="email" class="form-control mb-2" id="email" placeholder="Insira seu e-mail" required>
                 </div>
                 <div class="form-group">
-                  <label for="senha" class="form-label">Senha:</label>
-                  <input type="password" class="form-control mb-2" placeholder="Insira sua senha">
+                  <label for="senha" class="form-label">Senha: <span style="color: red;">*</span></label>
+                  <input type="password" class="form-control mb-2" placeholder="Insira sua senha" required minlength="8">
                 </div>
                 <div class="col-12">
                   <span>Esqueceu a senha?</span>
                   <a href="recover.html">Recuperação de senha</a>
                 </div>
                 <button type="submit" class="btn btn-primary col-12 mt-3 mb-2">Entrar</button>
-                <div class="d-flex justify-content-center">
+                <div class="card-footer bg-body-tertiary d-flex justify-content-center">
                   <a href="index.html">Voltar para a tela inicial</a>
                 </div>
               </form>
