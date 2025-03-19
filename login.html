@@ -17,21 +17,21 @@
               <div class="logo-text text-primary">Por favor insira suas informações para acessar</div>
             </div>
             <div class="card-body bg-body-tertiary">
-              <form>
+              <form action="login.php" method="get">
                 <div class="form-group mb-2" id="metodo">
                     <span>Método:</span>
-                    <input class="m-1" type="radio" id="rademail" name="metodo">
+                    <input class="m-1" type="radio" id="rademail" name="metodo" checked>
                     <label for="rademail">E-mail</label>
                     <input class="m-1" type="radio" id="radcartao" name="metodo">
                     <label for="radcartao">Cartão SUS</label>
                 </div>
                 <div class="form-group">  
                   <label for="email" class="form-label">Email: <span style="color: red;">*</span></label>
-                  <input type="email" class="form-control mb-2" id="email" placeholder="Insira seu e-mail" required>
+                  <input type="email" class="form-control mb-2" name="email" id="email" placeholder="Insira seu e-mail" required>
                 </div>
                 <div class="form-group">
                   <label for="senha" class="form-label">Senha: <span style="color: red;">*</span></label>
-                  <input type="password" class="form-control mb-2" placeholder="Insira sua senha" required minlength="8">
+                  <input type="password" class="form-control mb-2" name="senha" placeholder="Insira sua senha" required minlength="8">
                 </div>
                 <div class="col-12">
                   <span>Esqueceu a senha?</span>
