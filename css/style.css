@@ -24,7 +24,7 @@
 
   .trocaCor:hover {
     background-color: #0D6EFD;
-    transition-duration: 1s;
+    transition-duration: 0.5s;
     color: white;
   }
 
