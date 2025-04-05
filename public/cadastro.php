@@ -1,19 +1,73 @@
+<?php
+include '../bd/conexao.php';
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cadastro</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/cadastro.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Cadastro de Usuário</title>
 </head>
-<body>
-    <?php
-    echo $_GET['nomeUsuario'];
-    echo $_GET['nascimento'];
-    echo $_GET['email'];
-    echo $_GET['senha'];
-    echo $_GET['senhaConfirma'];
-    echo $_GET['cartaoSus'];
-    echo $_GET['cpf'];
-    ?>
+
+<body class="bg-info-subtle">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
+                    <div class="card-header bg-body-tertiary text-center">
+                        <h2>Cadastro de Usuário</h2>
+                        <div class="logo-text text-primary">Insira suas informações de cadastro</div>
+                    </div>
+                    <div class="card-body bg-body-tertiary">
+                        <form action="cadastro.php" method="get">
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="nomeCompleto" class="form-label">Nome Completo: <span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control mb-2" name="nomeUsuario" id="nomeUsuario" placeholder="Insira seu nome completo" required>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="nascimento" class="form-label">Data de Nascimento <span style="color: red;">*</span></label>
+                                    <input type="date" class="form-control mb-2" name="nascimento" id="nascimento" required>
+                                </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="cpf" class="form-label">CPF: <span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control mb-2" placeholder="Informe seu CPF" name="cpf" id="cpf" required minlength="11">
+                                </div>
+                            </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-label">E-mail: <span style="color: red;">*</span></label>
+                                    <input type="email" class="form-control mb-2" name="email" id="email" placeholder="Insira um e-mail válido" required>
+                                </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="senha" class="form-label">Senha: <span style="color: red;">*</span></label>
+                                    <input type="password" class="form-control mb-2" name="senha" placeholder="Insira sua senha" required minlength="8">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="senhaConfirma" class="form-label">Confirmar senha: <span style="color: red;">*</span></label>
+                                    <input type="password" class="form-control mb-2" name="senhaConfirma" placeholder="Insira sua senha novamente" required minlength="8">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary col-12 mt-3 mb-2 ">Cadastrar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer bg-body-tertiary d-flex justify-content-center">
+                        <a href="index.html">Voltar para a tela inicial</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 </body>
+
 </html>
