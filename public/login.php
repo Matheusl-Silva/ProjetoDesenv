@@ -4,15 +4,15 @@ include '../bd/conexao.php';
 if (isset($_POST['email']) && isset($_POST['senha'])) {
 
     if (strlen($_POST['senha']) < 8) {
-        echo "<script>alert('A senha deve ter no mínimo 8 caracteres!')</script>";
+        echo "<script>alert('A senha deve contar no minímo 8 caracteres!')</script>";
         return;
-    } elseif (strlen($_POST['senha']) == 0) {
-        echo "<script>alert('Preencha a senha!!')</script>";
+    } elseif (strlen($_POST['email']) == 0) {
+        echo "<script>alert('Preencha o email para entrar!')</script>";
         return;
     }
 
-    if (strlen($_POST['email']) == 0) {
-        echo "<script>alert('O campo email é obrigatório!')</script>";
+    if (strlen($_POST['senha']) == 0) {
+        echo "<script>alert('O campo de senha é obrigatório!')</script>";
         return;
     } else {
 
