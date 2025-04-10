@@ -12,7 +12,11 @@
 <body class="bg-info-subtle">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-6 card shadow p-3 mb-5 bg-body-tertiary rounded">
+            <div class="card-header bg-body-tertiary text-center">
+                        <h2>Cadastro de Paciente</h2>
+                        <div class="logo-text text-primary">Insira as informações de cadastro do paciente</div>
+                    </div>
                 <form action="#">
                     <div class="form-group">
                         <label for="registro" class="form-label">Registro:</label>
@@ -91,6 +95,10 @@
                                 <input type="text" class="form-control" id="medicamento" name="medicamento" placeholder="Insira a patologia">
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary col-12 mt-3 mb-2">Cadastrar</button>
+                        <a href="">Voltar para a tela de usuário</a>
                     </div>
                 </form>
             </div>
