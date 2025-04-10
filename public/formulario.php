@@ -1,3 +1,15 @@
+<?php
+include '../bd/conexao.php';
+
+$recebe_email = $_POST['email'];
+
+$consultaEmail = mysqli_query(($mysqli), "SELECT * FROM usuarios WHERE email = '$recebe_email'");
+
+if (mysqli_num_rows($consultaEmail) == 0) {
+    header("location: formulario.php?email=$recebe_email&erro=1");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
