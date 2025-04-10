@@ -6,3 +6,7 @@
 .form-label{
     display:block;
 }
+
+p, .form-group{
+    margin-bottom: 2%;
+}
