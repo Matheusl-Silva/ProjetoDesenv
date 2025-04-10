@@ -8,6 +8,8 @@ $consultaEmail = mysqli_query(($mysqli), "SELECT * FROM usuarios WHERE email = '
 if (mysqli_num_rows($consultaEmail) == 0) {
     header("location: formulario.php?email=$recebe_email&erro=1");
     exit;
+} else {
+    echo 'Este email está cadastro no banco de dados!';
 }
 ?>
 <!DOCTYPE html>
