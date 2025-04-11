@@ -112,29 +112,25 @@
     </div>
 </body>
 <script>
-    let medSim = document.getElementById("medSim");
-    let medNao = document.getElementById("medNao");
-    let caixaMedicamento = document.getElementById("medicamento");
-    let patSim = document.getElementById("patSim");
-    let patNao = document.getElementById("patNao");
-    let caixaPatologia = document.getElementById("patologia");
+        function configurarCaixaDeTexto(idSim, idNao, idCaixa){
+        let sim = document.getElementById(idSim);
+        let nao = document.getElementById(idNao);
+        let caixa = document.getElementById(idCaixa);
+        
+        caixa.disabled = true;
 
-    caixaMedicamento.disabled = true;
-    caixaPatologia.disabled = true;
-
-    function habilitarCaixa(caixaSim, caixaNao, caixaTexto){
-        if(caixaSim.checked){
-            caixaTexto.disabled = false;
-        }else if(caixaNao.checked){
-            caixaTexto.disabled = true;
+        let alterarEstado = () =>{
+            caixa.disabled = !sim.checked;
         }
+
+        sim.addEventListener('change', alterarEstado);
+        nao.addEventListener('change', alterarEstado);
+
     }
 
-    medSim.addEventListener('change', () => habilitarCaixa(medSim, medNao, medicamento));
-    medNao.addEventListener('change', () =>  habilitarCaixa(medSim, medNao, medicamento));
-    patSim.addEventListener("change", () =>  habilitarCaixa(patSim, patNao, patologia));
-    patNao.addEventListener("change", () =>  habilitarCaixa(patSim, patNao, patologia));
-
+    configurarCaixaDeTexto("medSim", "medNao", "medicamento");
+    configurarCaixaDeTexto("patSim", "patNao", "patologia");
+    
 </script>
 
 </html>
