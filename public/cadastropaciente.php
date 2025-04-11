@@ -94,7 +94,7 @@
                                 <label for="patSim" class="form-check-label">Sim:</label>
                             </div>
                             <div class="col-md" style="padding:0">
-                                <input type="text" class="form-control" id="medicamento" name="medicamento" placeholder="Insira a patologia">
+                                <input type="text" class="form-control" id="patologia" name="patologia" placeholder="Insira a patologia">
                             </div>
                         </div>
                     </div>
@@ -110,5 +110,30 @@
         </div>
     </div>
 </body>
+<script>
+    let medSim = document.getElementById("medSim");
+    let medNao = document.getElementById("medNao");
+    let caixaMedicamento = document.getElementById("medicamento");
+    let patSim = document.getElementById("patSim");
+    let patNao = document.getElementById("patNao");
+    let caixaPatologia = document.getElementById("patologia");
+
+    caixaMedicamento.disabled = true;
+    caixaPatologia.disabled = true;
+
+    function habilitarCaixa(caixaSim, caixaNao, caixaTexto){
+        if(caixaSim.checked){
+            caixaTexto.disabled = false;
+        }else if(caixaNao.checked){
+            caixaTexto.disabled = true;
+        }
+    }
+
+    medSim.addEventListener('change', () => habilitarCaixa(medSim, medNao, medicamento));
+    medNao.addEventListener('change', () =>  habilitarCaixa(medSim, medNao, medicamento));
+    patSim.addEventListener("change", () =>  habilitarCaixa(patSim, patNao, patologia));
+    patNao.addEventListener("change", () =>  habilitarCaixa(patSim, patNao, patologia));
+    
+</script>
 
 </html>
