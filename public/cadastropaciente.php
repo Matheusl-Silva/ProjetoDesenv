@@ -12,9 +12,13 @@
 <body class="bg-info-subtle">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-6 card shadow p-3 my-5 bg-body-tertiary rounded">
+                <div class="card-header bg-body-tertiary text-center">
+                    <h2>Cadastro de Paciente</h2>
+                    <div class="logo-text text-primary">Insira as informações de cadastro do paciente</div>
+                </div>
                 <form action="#">
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="registro" class="form-label">Registro:</label>
                         <input type="text" id="registro" name="registro" class="form-control">
                     </div>
@@ -24,14 +28,16 @@
                         <input type="date" class="form-control" id="data">
                     </div>
 
-                    <p class="form-label">Período:</p>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" id="matutino" class="form-check-input" name="periodo" value="matutino" checked>
-                        <label for="matutino" class="form-check-label">Matutino</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" id="noturno" class="form-check-input" name="periodo" value="noturno">
-                        <label for="noturno" class="form-check-label">Noturno</label>
+                    <div class="form-group">
+                        <p class="form-label">Período:</p>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="matutino" class="form-check-input" name="periodo" value="matutino" checked>
+                            <label for="matutino" class="form-check-label">Matutino</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="noturno" class="form-check-input" name="periodo" value="noturno">
+                            <label for="noturno" class="form-check-label">Noturno</label>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -65,7 +71,7 @@
                         <label for="medNao" class="form-check-label">Não</label>
                     </div>
                     <div class="form-check container">
-                        <div class="row">
+                        <div class="row d-flex align-items-center">
                             <div class="col-md-2">
                                 <input type="radio" id="medSim" class="form-check-input" name="tomaMedicamento" value="medSim">
                                 <label for="medSim" class="form-check-label">Sim:</label>
@@ -82,20 +88,52 @@
                         <label for="patNao" class="form-check-label">Não</label>
                     </div>
                     <div class="form-check container">
-                        <div class="row">
+                        <div class="row d-flex align-items-center">
                             <div class="col-md-2">
                                 <input type="radio" id="patSim" class="form-check-input" name="trataPatologia" value="patSim">
                                 <label for="patSim" class="form-check-label">Sim:</label>
                             </div>
                             <div class="col-md" style="padding:0">
-                                <input type="text" class="form-control" id="medicamento" name="medicamento" placeholder="Insira a patologia">
+                                <input type="text" class="form-control" id="patologia" name="patologia" placeholder="Insira a patologia">
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary col-12 mt-3 mb-2">Cadastrar</button>
+                    </div>
+
+                    <div class="card-footer bg-body-tertiary d-flex justify-content-center">
+                        <a href="home.php">Voltar para a tela de usuário</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </body>
+<script>
+    let medSim = document.getElementById("medSim");
+    let medNao = document.getElementById("medNao");
+    let caixaMedicamento = document.getElementById("medicamento");
+    let patSim = document.getElementById("patSim");
+    let patNao = document.getElementById("patNao");
+    let caixaPatologia = document.getElementById("patologia");
+
+    caixaMedicamento.disabled = true;
+    caixaPatologia.disabled = true;
+
+    function habilitarCaixa(caixaSim, caixaNao, caixaTexto){
+        if(caixaSim.checked){
+            caixaTexto.disabled = false;
+        }else if(caixaNao.checked){
+            caixaTexto.disabled = true;
+        }
+    }
+
+    medSim.addEventListener('change', () => habilitarCaixa(medSim, medNao, medicamento));
+    medNao.addEventListener('change', () =>  habilitarCaixa(medSim, medNao, medicamento));
+    patSim.addEventListener("change", () =>  habilitarCaixa(patSim, patNao, patologia));
+    patNao.addEventListener("change", () =>  habilitarCaixa(patSim, patNao, patologia));
+    
+</script>
 
 </html>
