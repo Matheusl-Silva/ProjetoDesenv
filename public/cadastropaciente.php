@@ -25,11 +25,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="data" class="form-label">Data:</label>
-                        <input type="date" class="form-control" id="data">
-                    </div>
-
-                    <div class="form-group">
                         <p class="form-label">Período:</p>
                         <div class="form-check form-check-inline">
                             <input type="radio" id="matutino" class="form-check-input" name="periodo" value="matutino" checked>
