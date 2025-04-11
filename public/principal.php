@@ -134,41 +134,11 @@ if (!$logado) {
             </div>
         </div>
 
-        <!-- Funcionalidades secundárias -->
-        <h3 class="text-center mt-5 mb-4">Outras Funcionalidades</h3>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card card-menu h-100 text-center p-3">
-                    <div class="card-body">
-                        <h4 class="card-title">Buscar Paciente</h4>
-                        <p class="card-text">Localize pacientes cadastrados no sistema</p>
-                        <a href="#" class="btn btn-outline-primary">Buscar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-menu h-100 text-center p-3">
-                    <div class="card-body">
-                        <h4 class="card-title">Agendar Exame</h4>
-                        <p class="card-text">Agende novos exames para pacientes</p>
-                        <a href="#" class="btn btn-outline-primary">Agendar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-menu h-100 text-center p-3">
-                    <div class="card-body">
-                        <h4 class="card-title">Histórico</h4>
-                        <p class="card-text">Acesse o histórico de exames realizados</p>
-                        <a href="#" class="btn btn-outline-primary">Ver Histórico</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         <!-- Footer -->
         <footer class="footer text-center">
-            <p class="text-muted">&copy; <?php echo date('Y'); ?> Sistema de Gerenciamento Laboratorial. Todos os direitos reservados.</p>
+            <p class="text-muted">&copy; <?php echo date('Y'); ?> Sistema de Saude - hematológicos.</p>
         </footer>
     </div>
 
