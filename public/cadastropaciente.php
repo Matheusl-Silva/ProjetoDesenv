@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -17,7 +18,7 @@
                     <h2>Cadastro de Paciente</h2>
                     <div class="logo-text text-primary">Insira as informações de cadastro do paciente</div>
                 </div>
-                <form action="#">
+                <form action="../public/cadastro_paciente.php" method="post">
                     <div class="form-group mt-2">
                         <label for="registro" class="form-label">Registro:</label>
                         <input type="text" id="registro" name="registro" class="form-control">
@@ -133,7 +134,7 @@
     medNao.addEventListener('change', () =>  habilitarCaixa(medSim, medNao, medicamento));
     patSim.addEventListener("change", () =>  habilitarCaixa(patSim, patNao, patologia));
     patNao.addEventListener("change", () =>  habilitarCaixa(patSim, patNao, patologia));
-    
+
 </script>
 
 </html>
