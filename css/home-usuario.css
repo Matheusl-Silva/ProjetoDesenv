@@ -1,3 +1,15 @@
 .row1{
-    margin-top: 10%;
+    margin-top: 25vh;
+}
+
+h1{
+    font-size: 15vh;
+}
+
+.card{
+    border-radius: 20px;
+}
+
+.nav-link{
+    font-size: 3vh;
 }
