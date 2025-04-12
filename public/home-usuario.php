@@ -21,22 +21,26 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">                      
                         <li class="nav-item">
-                            <a class="nav-link text-danger" href="#"><button class="btn btn-outline-danger">Sair</button></a>
+                            <a class="nav-link text-danger" href="#"><button class="btn btn-outline-danger"> Sair</button></a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="container">
+            <div class="row text-center banner mt-5">
+                <h1>Bem-vindo!</h1>
+                <h2>Bem vindo ao sistema laboratorial. Selecione uma das opções abaixo!</h2>
+            </div>
             <div class="row justify-content-evenly row1">
                 <div class="card col-md-5 text-center round shadow">
-                    <h1>👤</h1>
+                    <h1 class="icone">👤</h1>
                     <h2>Cadastro de paciente</h2>
                     <p>Cadastrar novos pacientes</p>
-                    <a href="cadastropaciente.php"><butt    on class="col-12 btn btn-primary mb-3">Acessar</button></a>
+                    <a href="cadastropaciente.php"><button class="col-12 btn btn-primary mb-3">Acessar</button></a>
                 </div>
                 <div class="card col-md-5 text-center shadow">
-                    <h1>🔬</h1>
+                    <h1 class="icone">🔬</h1>
                     <h2>Visualizar exames</h2>
                     <p>Verificar os exames já feitos pelos pacientes</p>
                     <a href="home.php"><button class="col-12 btn btn-primary mb-3">Acessar</button></a>
