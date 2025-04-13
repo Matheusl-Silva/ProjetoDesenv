@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                        <a href="home.php">Voltar para a tela de usuário</a>
+                        <a href="home-usuario.php">Voltar para a tela de usuário</a>
                     </div>
                 </form>
             </div>
@@ -111,7 +111,7 @@
         let sim = document.getElementById(idSim);
         let nao = document.getElementById(idNao);
         let caixa = document.getElementById(idCaixa);
-        
+
         caixa.disabled = true;
 
         let alterarEstado = () =>{
@@ -125,7 +125,7 @@
 
     configurarCaixaDeTexto("medSim", "medNao", "medicamento");
     configurarCaixaDeTexto("patSim", "patNao", "patologia");
-    
+
 </script>
 
 </html>
