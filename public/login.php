@@ -41,7 +41,7 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
 
             //redirect para a pagina principal
 
-            header("Location: principal.php");
+            header("Location: home-usuario.php"); 
 
         } else {
             echo "Falha ao logar!! E-mail ou senha incorretos!";
