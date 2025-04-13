@@ -1,3 +1,20 @@
+<?php
+include_once "../bd/conexao.php";
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+// Verifica se o usuário está logado
+$logado       = isset($_SESSION['id']) && isset($_SESSION['nome']);
+$nome_usuario = $logado ? $_SESSION['nome'] : '';
+
+// Redireciona para a página de login se não estiver logado
+if (!$logado) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -19,18 +36,19 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">                      
-                        <li class="nav-item">
-                            <a class="nav-link text-danger" href="#"><button class="btn btn-outline-danger"> Sair</button></a>
-                        </li>
+                    <ul class="navbar-nav">
+                    <div class="d-flex align-items-center">
+                       <span class="me-3">Olá, <?php echo htmlspecialchars($nome_usuario); ?></span>
+                       <a href="logout.php" class="btn btn-outline-danger btn-sm">Sair</a>
+                    </div>
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="container">
             <div class="row text-center banner mt-5">
-                <h1>Bem-vindo!</h1>
-                <h2>Bem vindo ao sistema laboratorial. Selecione uma das opções abaixo!</h2>
+                <h1>Bem-vindo, <?php echo htmlspecialchars($nome_usuario); ?></h1>
+                <h2>Selecione uma das opções abaixo para poder iniciar!</h2>
             </div>
             <div class="row justify-content-evenly row1">
                 <div class="card col-md-5 text-center round shadow">
