@@ -1,56 +1,16 @@
 <?php
 include '../bd/conexao.php';
 
+require_once '../comum/Funcao.php';
+
+$auth = new Autenticacao();
+
 if (isset($_POST['email']) && isset($_POST['senha'])) {
-
-    if (strlen($_POST['senha']) < 8) {
-        echo "<script>alert('A senha deve contar no minímo 8 caracteres!')</script>";
-        return;
-    } elseif (strlen($_POST['email']) == 0) {
-        echo "<script>alert('Preencha o email para entrar!')</script>";
-        return;
-    }
-
-    if (strlen($_POST['senha']) == 0) {
-        echo "<script>alert('O campo de senha é obrigatório!')</script>";
-        return;
-    } else {
-
-        //funcao para limpar string SQL injection
-        $email = $mysqli->real_escape_string($_POST['email']);
-        $senha = $mysqli->real_escape_string($_POST['senha']);
-
-        $sql_code = "SELECT * FROM usuarios WHERE email = '$email' AND senha = '$senha'";
-        // se der algum problema o mesmo vai dar um die e mostrar o erro
-        ($sql_query = $mysqli->query($sql_code)) || die("Erro na consulta: " . $mysqli->error);
-
-        $quantidade = $sql_query->num_rows;
-
-        //Session utilizada pois continua valida por um determinado tempo, sem que precise ficar relogando
-
-        if ($quantidade == 1) {
-
-            $usuarios = $sql_query->fetch_assoc();
-
-            if (!isset($_SESSION)) {
-                session_start();
-            }
-
-            $_SESSION['id']   = $usuarios['id'];
-            $_SESSION['nome'] = $usuarios['nome'];
-
-            //redirect para a pagina principal
-
-            header("Location: home-usuario.php"); 
-
-        } else {
-            echo "Falha ao logar!! E-mail ou senha incorretos!";
-        }
-
-    }
+    $auth->fazerLogin($_POST['email'], $_POST['senha']);
 
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">

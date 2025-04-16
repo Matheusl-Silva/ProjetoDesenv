@@ -1,3 +1,9 @@
+<?php
+require_once '../comum/Funcao.php';
+
+$auth = new Autenticacao();
+$auth->verificarLogin();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 

@@ -1,4 +1,10 @@
+<?php
+require_once '../comum/Funcao.php';
 
+$auth = new Autenticacao();
+$auth->verificarLogin();
+$nome_usuario = $auth->getNomeUsuario();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -19,11 +25,12 @@
                     <div class="logo-text text-primary">Insira as informações de cadastro do paciente</div>
                 </div>
                 <form action="../public/cadastro_paciente.php" method="post">
-                    <div class="form-group mt-2">
-                        <label for="registro" class="form-label">Registro:</label>
-                        <input type="text" id="registro" name="registro" class="form-control">
-                    </div>
 
+
+                    <div class="form-group">
+                        <label for="nome" class="form-label">Nome completo:</label>
+                        <input type="text" class="form-control" id="nome" name="nome">
+                    </div>
                     <div class="form-group">
                         <p class="form-label">Período:</p>
                         <div class="form-check form-check-inline">
@@ -34,11 +41,6 @@
                             <input type="radio" id="noturno" class="form-check-input" name="periodo" value="noturno">
                             <label for="noturno" class="form-check-label">Noturno</label>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nome" class="form-label">Nome completo:</label>
-                        <input type="text" class="form-control" id="nome" name="nome">
                     </div>
 
                     <div class="form-group">

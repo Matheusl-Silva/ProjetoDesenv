@@ -1,18 +1,10 @@
 <?php
-include_once "../bd/conexao.php";
-if (!isset($_SESSION)) {
-    session_start();
-}
 
-// Verifica se o usuário está logado
-$logado       = isset($_SESSION['id']) && isset($_SESSION['nome']);
-$nome_usuario = $logado ? $_SESSION['nome'] : '';
+require_once '../comum/Funcao.php';
 
-// Redireciona para a página de login se não estiver logado
-if (!$logado) {
-    header("Location: login.php");
-    exit;
-}
+$auth = new Autenticacao();
+$auth->verificarLogin();
+$nome_usuario = $auth->getNomeUsuario();
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +53,7 @@ if (!$logado) {
                     <h1 class="icone">🔬</h1>
                     <h2>Visualizar exames</h2>
                     <p>Verificar os exames já feitos pelos pacientes</p>
-                    <a href="home.php"><button class="col-12 btn btn-primary mb-3">Acessar</button></a>
+                    <a href="examePrincipal.php"><button class="col-12 btn btn-primary mb-3">Acessar</button></a>
                 </div>
             </div>
         </div>

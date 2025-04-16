@@ -26,8 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $sql = "INSERT INTO pacientes (
-                registro,
-                data,
                 periodo,
                 nome,
                 data_nascimento,
@@ -39,8 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 trata_patologia,
                 patologia
             ) VALUES (
-                '$registro',
-                '$data',
                 '$periodo',
                 '$nome',
                 '$datanasc',
@@ -55,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($mysqli->query($sql)) {
 
-        echo "<script>alert('Paciente cadastrado com sucesso!'); window.location.href='home.php';</script>";
+        echo "<script>alert('Paciente cadastrado com sucesso!'); window.location.href='home-usuario.php';</script>";
     } else {
 
         echo "<script>alert('Erro ao cadastrar paciente: " . $mysqli->error . "');</script>";
