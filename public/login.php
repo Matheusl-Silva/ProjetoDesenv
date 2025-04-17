@@ -27,6 +27,7 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6">
+        <div id="alert"></div>
         <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
           <div class="card-header bg-body-tertiary text-center">
             <h2>Bem-vindo!</h2>
@@ -48,7 +49,7 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
                 <span>Esqueceu a senha?</span>
                 <a href="recover.html">Recuperação de senha</a>
               </div>
-              <button type="submit" class="btn btn-primary col-12 mt-3 mb-2">Entrar</button>
+              <button type="submit" class="btn btn-primary col-12 mt-3 mb-2" id="submit">Entrar</button>
               <div class="card-footer bg-body-tertiary d-flex justify-content-center">
                 <a href="../index.html">Voltar para a tela inicial</a>
               </div>
@@ -59,5 +60,25 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
     </div>
   </div>
 </body>
+<script>
+  const alertLogin = (idDiv, idBotao) => {
+    let espaco = document.getElementById(idDiv);
+    let div = document.createElement("div");
+    let botao = document.getElementById(idBotao);
 
+    div.classList.add("alert");
+    div.classList.add("alert-danger");
+
+
+    let alert = document.createElement('p');
+    alert.innerHTML = "Login ou senha inválidos!";
+
+    let alertModal = new bootstrap.Modal(div);
+
+    
+  }
+ 
+  alertLogin("alert", "submit");
+  
+</script>
 </html>
