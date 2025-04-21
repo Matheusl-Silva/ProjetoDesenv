@@ -63,7 +63,7 @@ class Autenticacao
             $_SESSION['nome'] = $usuarios['nome'];
 
             // Redireciona para a página principal
-            header("Location: home-usuario.php");
+            header("Location: homeUsuario.php");
             exit;
 
             return true;

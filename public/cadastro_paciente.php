@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($mysqli->query($sql)) {
 
-        echo "<script>alert('Paciente cadastrado com sucesso!'); window.location.href='home-usuario.php';</script>";
+        echo "<script>alert('Paciente cadastrado com sucesso!'); window.location.href='homeUsuario.php';</script>";
     } else {
 
         echo "<script>alert('Erro ao cadastrar paciente: " . $mysqli->error . "');</script>";
