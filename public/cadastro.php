@@ -1,5 +1,9 @@
 <?php
-include '../bd/conexao.php';
+include '../bd/conexaoClass.php';
+
+$db     = new Conexao();
+$mysqli = $db->getConexao();
+
 $mensagem    = "";
 $tipo_alerta = "";
 
@@ -49,9 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt_verificar->close();
     }
 }
-
-// Fecha a conexão com o banco
-$mysqli->close();
+$db->fecharConexao();
 ?>
 
 

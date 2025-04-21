@@ -1,6 +1,10 @@
 <?php
 
-include_once "../bd/conexao.php";
+include_once "../bd/conexaoClass.php";
+
+$bd = new Conexao();
+$bd->conectar();
+$mysqli = $bd->getConexao();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // mysqli_real_escape_string previnir sql injection no PHP
@@ -57,3 +61,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('Erro ao cadastrar paciente: " . $mysqli->error . "');</script>";
     }
 }
+
+$bd->fecharConexao();

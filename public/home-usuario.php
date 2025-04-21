@@ -1,6 +1,6 @@
 <?php
 
-require_once '../comum/Funcao.php';
+require_once '../comum/AutenticacaoClass.php';
 
 $auth = new Autenticacao();
 $auth->verificarLogin();
