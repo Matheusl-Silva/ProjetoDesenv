@@ -1,5 +1,5 @@
 <?php
-require_once '../comum/Funcao.php';
+require_once '../comum/AutenticacaoClass.php';
 
 $auth = new Autenticacao();
 $auth->verificarLogin();
@@ -101,7 +101,7 @@ $nome_usuario = $auth->getNomeUsuario();
                     </div>
 
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                        <a href="home-usuario.php">Voltar para a tela de usuário</a>
+                        <a href="homeUsuario.php">Voltar para a tela de usuário</a>
                     </div>
                 </form>
             </div>

@@ -1,5 +1,8 @@
 <?php
-include '../bd/conexao.php';
+include '../bd/conexaoClass.php';
+
+$db     = new Conexao();
+$mysqli = $db->getConexao();
 
 $recebe_email = $_POST['email'];
 
@@ -11,7 +14,9 @@ if (mysqli_num_rows($consultaEmail) == 0) {
 } else {
     echo 'Este email está cadastro no banco de dados!';
 }
+$db->fecharConexao();
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
