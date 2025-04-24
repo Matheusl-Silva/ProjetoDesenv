@@ -54,10 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             )";
 
     if ($mysqli->query($sql)) {
-
-        echo "<script>alert('Paciente cadastrado com sucesso!'); window.location.href='homeUsuario.php';</script>";
+        $ultimo_id = $mysqli->insert_id;
+        echo "<script>alert('Paciente cadastrado com sucesso! Número do Paciente Cadastrado: " . $ultimo_id . "'); window.location.href='../public/homeUsuario.php';</script>";
     } else {
-
         echo "<script>alert('Erro ao cadastrar paciente: " . $mysqli->error . "');</script>";
     }
 }
