@@ -6,8 +6,7 @@ require_once '../comum/Funcao.php';
 $auth = new Autenticacao();
 
 if (isset($_POST['email']) && isset($_POST['senha'])) {
-    $auth->fazerLogin($_POST['email'], $_POST['senha']);
-
+  $auth->fazerLogin($_POST['email'], $_POST['senha']);
 }
 ?>
 
@@ -24,6 +23,25 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
 </head>
 
 <body class="bg-info-subtle">
+
+  <div class="modal fade" id="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title">Login inválido!</h1>
+          <button class="btn btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>O email ou a senha são inválidos! Por favor tente novamente ou redefina a senha.</a></p>
+        </div>
+        <div class="modal-footer">
+          <a href="recover.html"><button type="button" class="btn btn-secondary">Redefinir a senha</button></a>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tentar novamente</button>
+        </div>
+      </div>
+      </div>
+  </div>
+
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -50,6 +68,7 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
                 <a href="recover.html">Recuperação de senha</a>
               </div>
               <button type="submit" class="btn btn-primary col-12 mt-3 mb-2" id="submit">Entrar</button>
+              <button type="button" class="btn btn-primary col-12 mt-3 mb-2" data-bs-toggle="modal" data-bs-target="#modal">ModalTeste</button>
               <div class="card-footer bg-body-tertiary d-flex justify-content-center">
                 <a href="../index.html">Voltar para a tela inicial</a>
               </div>
@@ -60,25 +79,5 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
     </div>
   </div>
 </body>
-<script>
-  const alertLogin = (idDiv, idBotao) => {
-    let espaco = document.getElementById(idDiv);
-    let div = document.createElement("div");
-    let botao = document.getElementById(idBotao);
-
-    div.classList.add("alert");
-    div.classList.add("alert-danger");
-
-
-    let alert = document.createElement('p');
-    alert.innerHTML = "Login ou senha inválidos!";
-
-    let alertModal = new bootstrap.Modal(div);
-
-    
-  }
- 
-  alertLogin("alert", "submit");
-  
-</script>
+<script src="../js/bootstrap.min.js"></script>
 </html>
