@@ -6,9 +6,11 @@
   justify-content: center;
   text-align: center;
 }
+
 .hero h1 {
   font-size: 4rem;
 }
+
 .navbar-nav .nav-link {
   font-size: 1.25rem; 
 }
@@ -19,16 +21,16 @@
   border-radius: 5px;
   margin: 3px;
   font-size: 1.25rem;
-  color: #0D6EFD
-  }
+  color: #0D6EFD;
+}
 
-  .trocaCor:hover {
-    background-color: #0D6EFD;
-    transition-duration: 0.5s;
-    color: white;
-  }
+.trocaCor:hover {
+  background-color: #0D6EFD;
+  transition-duration: 0.5s;
+  color: white;
+}
 
-  .imagemSize {
-    width: 100px;
-    height: 100px;
-  }
+.imagemSize {
+  width: 100px;
+  height: 100px;
+}

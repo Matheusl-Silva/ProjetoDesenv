@@ -1,6 +1,10 @@
 <?php
 
-include_once "../bd/conexao.php";
+include_once "../bd/conexaoClass.php";
+
+$bd = new Conexao();
+$bd->conectar();
+$mysqli = $bd->getConexao();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // mysqli_real_escape_string previnir sql injection no PHP
@@ -50,10 +54,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             )";
 
     if ($mysqli->query($sql)) {
-
-        echo "<script>alert('Paciente cadastrado com sucesso!'); window.location.href='home-usuario.php';</script>";
+        $ultimo_id = $mysqli->insert_id;
+        echo "<script>alert('Paciente cadastrado com sucesso! Número do Paciente Cadastrado: " . $ultimo_id . "'); window.location.href='../public/homeUsuario.php';</script>";
     } else {
-
         echo "<script>alert('Erro ao cadastrar paciente: " . $mysqli->error . "');</script>";
     }
 }
+
+$bd->fecharConexao();

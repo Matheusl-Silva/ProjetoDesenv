@@ -1,5 +1,5 @@
 <?php
-require_once '../comum/Funcao.php';
+require_once '../comum/AutenticacaoClass.php';
 
 $auth = new Autenticacao();
 $auth->verificarLogin();
@@ -24,12 +24,11 @@ $nome_usuario = $auth->getNomeUsuario();
                     <h2>Cadastro de Paciente</h2>
                     <div class="logo-text text-primary">Insira as informações de cadastro do paciente</div>
                 </div>
-                <form action="../public/cadastro_paciente.php" method="post">
-
+                <form action="../comum/validarPaciente.php" method="post">
 
                     <div class="form-group">
                         <label for="nome" class="form-label">Nome completo:</label>
-                        <input type="text" class="form-control" id="nome" name="nome">
+                        <input type="text" class="form-control" id="nome" name="nome" required>
                     </div>
                     <div class="form-group">
                         <p class="form-label">Período:</p>
@@ -45,27 +44,27 @@ $nome_usuario = $auth->getNomeUsuario();
 
                     <div class="form-group">
                         <label for="datanasc" class="form-label">Data de nascimento:</label>
-                        <input type="date" class="form-control" id="datanasc" name="datanasc">
+                        <input type="date" class="form-control" id="datanasc" name="datanasc" required>
                     </div>
 
                     <div class="form-group">
                         <label for="fone" class="form-label">Telefone para contato:</label>
-                        <input type="tel" id="fone" class="form-control" name="fone">
+                        <input type="tel" id="fone" class="form-control" name="fone" required>
                     </div>
 
                     <div class="form-group">
                         <label for="email" class="form-label">E-mail para contato:</label>
-                        <input type="email" id="email" class="form-control" name="email">
+                        <input type="email" id="email" class="form-control" name="email" required>
                     </div>
 
                     <div>
                         <label for="nomeMae" class="form-label">Nome da mãe:</label>
-                        <input type="text" class="form-control" id="nomeMae" name="nomeMae">
+                        <input type="text" class="form-control" id="nomeMae" name="nomeMae" required>
                     </div>
 
                     <p class="form-label">Toma algum medicamento contínuo? Se sim, qual?</p>
                     <div class="form-check">
-                        <input type="radio" id="medNao" class="form-check-input" name="tomaMedicamento" value="medNao">
+                        <input type="radio" id="medNao" class="form-check-input" name="tomaMedicamento" value="medNao" checked>
                         <label for="medNao" class="form-check-label">Não</label>
                     </div>
                     <div class="form-check container">
@@ -82,7 +81,7 @@ $nome_usuario = $auth->getNomeUsuario();
 
                     <p class="form-label">Trata alguma patologia? Se sim, qual?</p>
                     <div class="form-check">
-                        <input type="radio" id="patNao" class="form-check-input" name="trataPatologia" value="patNao">
+                        <input type="radio" id="patNao" class="form-check-input" name="trataPatologia" value="patNao" checked>
                         <label for="patNao" class="form-check-label">Não</label>
                     </div>
                     <div class="form-check container">
@@ -101,7 +100,7 @@ $nome_usuario = $auth->getNomeUsuario();
                     </div>
 
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                        <a href="home-usuario.php">Voltar para a tela de usuário</a>
+                        <a href="homeUsuario.php">Voltar para a tela de usuário</a>
                     </div>
                 </form>
             </div>

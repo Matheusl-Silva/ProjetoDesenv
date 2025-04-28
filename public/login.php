@@ -1,13 +1,17 @@
 <?php
-include '../bd/conexao.php';
+include '../bd/conexaoClass.php';
+require_once '../comum/AutenticacaoClass.php';
 
-require_once '../comum/Funcao.php';
+$db     = new Conexao();
+$mysqli = $db->getConexao();
 
 $auth = new Autenticacao();
 
 if (isset($_POST['email']) && isset($_POST['senha'])) {
   $auth->fazerLogin($_POST['email'], $_POST['senha']);
 }
+
+$db->fecharConexao();
 ?>
 
 
