@@ -31,18 +31,6 @@ class Autenticacao
 
     public function fazerLogin($email, $senha)
     {
-        // Validações
-        if (strlen($senha) < 8) {
-            echo "<script>alert('A senha deve contar no minímo 8 caracteres!')</script>";
-            return false;
-        } elseif (strlen($email) == 0) {
-            echo "<script>alert('Preencha o email para entrar!')</script>";
-            return false;
-        } elseif (strlen($senha) == 0) {
-            echo "<script>alert('O campo de senha é obrigatório!')</script>";
-            return false;
-        }
-
         // Limpar strings para evitar SQL injection
         $email = $this->mysqli->real_escape_string($email);
         $senha = $this->mysqli->real_escape_string($senha);
