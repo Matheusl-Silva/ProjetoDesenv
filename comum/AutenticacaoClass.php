@@ -68,7 +68,6 @@ class Autenticacao
 
             return true;
         } else {
-            echo "Falha ao logar!! E-mail ou senha incorretos!";
             return false;
         }
     }

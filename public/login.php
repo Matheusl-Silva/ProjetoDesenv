@@ -43,13 +43,12 @@ $db->fecharConexao();
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tentar novamente</button>
         </div>
       </div>
-      </div>
+    </div>
   </div>
 
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <div id="alert"></div>
         <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
           <div class="card-header bg-body-tertiary text-center">
             <h2>Bem-vindo!</h2>
@@ -84,4 +83,9 @@ $db->fecharConexao();
   </div>
 </body>
 <script src="../js/bootstrap.min.js"></script>
+<script>
+  const modal = new bootstrap.Modal(document.getElementById("modal"));
+  modal.show();
+</script>
+
 </html>
