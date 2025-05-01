@@ -21,69 +21,6 @@ $nome_usuario = $auth->getNomeUsuario();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/home-usuario.css">
     <title>Página principal</title>
-    <style>
-        :root {
-            --dark-primary: #0d6efd;
-            --medium-primary: #3a8afd;
-            --light-primary: #5c9aff;
-            --dark-bg: #f8f9fa;
-            --medium-bg: #e9ecef;
-            --light-bg: #dee2e6;
-        }
-
-        body {
-            background: #6991b9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .navbar {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 10px 0;
-        }
-
-        .navbar-brand {
-            font-weight: 600;
-            font-size: 1.4rem;
-        }
-
-        .imagemSize {
-            width: 50px;
-            height: 50px;
-            margin-right: 15px;
-        }
-
-        .welcome-banner {
-            background: linear-gradient(135deg, #e6f0ff 0%, #cce4ff 100%);
-            border-radius: 15px;
-            padding: 40px 20px;
-            margin: 30px 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-primary {
-            background-color: var(--dark-primary);
-            border-color: var(--dark-primary);
-            padding: 10px 20px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: #0b5ed7;
-            border-color: #0b5ed7;
-            transform: translateY(-2px);
-        }
-
-        .user-greeting {
-            font-weight: 500;
-            color: #495057;
-        }
-
-        .btn-outline-danger {
-            border-width: 2px;
-            font-weight: 500;
-        }
-    </style>
 </head>
 
 <body>
@@ -139,6 +76,7 @@ $nome_usuario = $auth->getNomeUsuario();
                     </div>
                 </div>
             </div>
+
         </div>
     </header>
 
