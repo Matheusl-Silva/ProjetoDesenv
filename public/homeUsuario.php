@@ -76,7 +76,17 @@ $nome_usuario = $auth->getNomeUsuario();
                     </div>
                 </div>
             </div>
-
+            <div class="row justify-content-evenly row2">
+                <div class="col-md-12">
+                    <div class="card shadow-sm h-100">
+                        <div class="icone">
+                            <i class="bi bi-pen"></i>
+                            <h2>Editar dados</h2>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
