@@ -50,7 +50,7 @@ $nome_usuario = $auth->getNomeUsuario();
             </div>
 
             <div class="row justify-content-evenly row1">
-                <div class="col-md-5">
+                <div class="col-md-5 mb-4">
                     <div class="card text-center shadow-sm h-100">
                         <div class="icone">
                             <i class="bi bi-person-plus text-primary"></i>
@@ -63,7 +63,7 @@ $nome_usuario = $auth->getNomeUsuario();
                     </div>
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-md-5 mb-4">
                     <div class="card text-center shadow-sm h-100">
                         <div class="icone">
                             <i class="bi bi-clipboard2-pulse text-primary"></i>
@@ -76,14 +76,31 @@ $nome_usuario = $auth->getNomeUsuario();
                     </div>
                 </div>
             </div>
+
             <div class="row justify-content-evenly row2">
-                <div class="col-md-12">
-                    <div class="card shadow-sm h-100">
+                <div class="col-md-5 mb-4">
+                    <div class="card text-center shadow-sm h-100">
                         <div class="icone">
-                            <i class="bi bi-pen"></i>
-                            <h2>Editar dados</h2>
+                            <i class="bi bi-person-gear text-primary"></i>
                         </div>
-                        
+                        <h2>Editar usuário</h2>
+                        <p>Atualizar informações de usuários do sistema</p>
+                        <a href="editarUsuario.php" class="mt-auto">
+                            <button class="col-12 btn btn-primary">Acessar</button>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-5 mb-4">
+                    <div class="card text-center shadow-sm h-100">
+                        <div class="icone">
+                            <i class="bi bi-person-vcard text-primary"></i>
+                        </div>
+                        <h2>Editar paciente</h2>
+                        <p>Modificar dados cadastrais dos pacientes</p>
+                        <a href="editarPaciente.php" class="mt-auto">
+                            <button class="col-12 btn btn-primary">Acessar</button>
+                        </a>
                     </div>
                 </div>
             </div>
