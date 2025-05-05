@@ -103,10 +103,10 @@ $db->fecharConexao();
                                 </div>
                                 <div class="form-group col">
                                     <label for="senhaConfirma" class="form-label">Confirmar senha: <span style="color: red;">*</span></label>
-                                    <input type="password" class="form-control mb-2" name="senhaConfirma" id="senhaConfirma" placeholder="Insira sua senha novamente" required minlength="8">
+                                    <input type="password" class="form-control mb-2" name="senhaConfirma" id="senhaConfirma" required minlength="8">
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary col-12 mt-3 mb-2 ">Cadastrar</button>
+                            <button type="submit" class="btn btn-primary col-12 mt-3 mb-2 ">Salvar Alterações</button>
                             </div>
                         </form>
                     </div>
