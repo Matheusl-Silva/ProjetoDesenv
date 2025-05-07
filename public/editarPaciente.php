@@ -1,6 +1,6 @@
 <?php
 require_once '../database/ConexaoClass.php';
-require_once '../comum/AutenticacaoClass.php';
+require_once '../models/AutenticacaoClass.php';
 
 $bd     = new Conexao();
 $mysqli = $bd->getConexao();

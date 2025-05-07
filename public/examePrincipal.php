@@ -1,5 +1,5 @@
 <?php
-require_once '../comum/AutenticacaoClass.php';
+require_once '../models/AutenticacaoClass.php';
 
 $auth = new Autenticacao();
 $auth->verificarLogin();
