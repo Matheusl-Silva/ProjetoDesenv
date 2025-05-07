@@ -1,6 +1,6 @@
 <?php
 
-include_once "../bd/conexaoClass.php";
+include_once "../database/conexaoClass.php";
 
 $bd = new Conexao();
 $bd->conectar();

@@ -1,5 +1,5 @@
 <?php
-include '../bd/conexaoClass.php';
+include '../database/conexaoClass.php';
 
 $db     = new Conexao();
 $mysqli = $db->getConexao();

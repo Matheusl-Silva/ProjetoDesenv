@@ -1,5 +1,5 @@
 <?php
-include '../bd/conexaoClass.php';
+include '../database/conexaoClass.php';
 require_once '../comum/AutenticacaoClass.php';
 
 $db     = new Conexao();
@@ -9,14 +9,13 @@ $auth = new Autenticacao();
 
 $loginInvalido;
 if (isset($_POST['email']) && isset($_POST['senha'])) {
-  $resultado = $auth->fazerLogin($_POST['email'], $_POST['senha']);
-  if($resultado === false){
-    $loginInvalido = true;
-  }else{
-    $loginInvalido = false;
-  }
+    $resultado = $auth->fazerLogin($_POST['email'], $_POST['senha']);
+    if ($resultado === false) {
+        $loginInvalido = true;
+    } else {
+        $loginInvalido = false;
+    }
 }
-
 
 $db->fecharConexao();
 ?>

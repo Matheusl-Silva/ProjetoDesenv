@@ -1,5 +1,5 @@
 <?php
-require_once '../bd/ConexaoClass.php';
+require_once '../database/ConexaoClass.php';
 require_once '../comum/AutenticacaoClass.php';
 
 $bd     = new Conexao();
@@ -10,7 +10,7 @@ $auth->verificarLogin();
 $nome_usuario = $auth->getNomeUsuario();
 
 $mensagem = '';
-$usuario = null;
+$usuario  = null;
 
 if (isset($_POST['buscar_usuario']) && !empty($_POST['email'])) {
     $email = $mysqli->real_escape_string($_POST['email']);
@@ -28,9 +28,9 @@ if (isset($_POST['buscar_usuario']) && !empty($_POST['email'])) {
 
 if (isset($_POST['atualizar_usuario'])) {
 
-    $nome                   = $mysqli->real_escape_string($_POST['nomeUsuario']);
-    $email                  = $mysqli->real_escape_string($_POST['email']);
-    $senha                  = $mysqli->real_escape_string($_POST['senha']);
+    $nome  = $mysqli->real_escape_string($_POST['nomeUsuario']);
+    $email = $mysqli->real_escape_string($_POST['email']);
+    $senha = $mysqli->real_escape_string($_POST['senha']);
 
     $sql = "UPDATE usuarios SET
             nome = '$nome',
@@ -130,7 +130,7 @@ if (isset($_POST['atualizar_usuario'])) {
                                     <input type="email" class="form-control mb-2" name="email" id="email" placeholder="Insira um e-mail válido" value="<?php echo htmlspecialchars($usuario['email']); ?>" required>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="senha" class="form-label">Nova senha:</label>

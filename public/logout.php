@@ -1,5 +1,5 @@
 <?php
-include_once "../bd/conexaoClass.php";
+include_once "../database/conexaoClass.php";
 // Inicia a sessão
 session_start();
 

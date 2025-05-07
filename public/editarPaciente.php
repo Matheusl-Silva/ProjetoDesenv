@@ -1,5 +1,5 @@
 <?php
-require_once '../bd/ConexaoClass.php';
+require_once '../database/ConexaoClass.php';
 require_once '../comum/AutenticacaoClass.php';
 
 $bd     = new Conexao();
