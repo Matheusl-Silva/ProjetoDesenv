@@ -45,7 +45,7 @@ $db->fecharConexao();
           <p>O email ou a senha são inválidos! Por favor tente novamente ou redefina a senha.</a></p>
         </div>
         <div class="modal-footer">
-          <a href="/ProjetoDesenv/public/recover.html"><button type="button" class="btn btn-secondary">Redefinir a senha</button></a>
+          <a href="/ProjetoDesenv/views/Auth/recover.html"><button type="button" class="btn btn-secondary">Redefinir a senha</button></a>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tentar novamente</button>
         </div>
       </div>
@@ -73,7 +73,7 @@ $db->fecharConexao();
               </div>
               <div class="col-12">
                 <span>Esqueceu a senha?</span>
-                <a href="/ProjetoDesenv/public/recover.html">Recuperação de senha</a>
+                <a href="/ProjetoDesenv/views/Auth/recover.html">Recuperação de senha</a>
               </div>
               <button type="submit" class="btn btn-primary col-12 mt-3 mb-2" id="submit">Entrar</button>
               <div class="card-footer bg-body-tertiary d-flex justify-content-center">

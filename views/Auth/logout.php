@@ -1,5 +1,5 @@
 <?php
-include_once "../database/conexaoClass.php";
+include_once "../../database/conexaoClass.php";
 // Inicia a sessão
 session_start();
 
@@ -10,5 +10,5 @@ $_SESSION = array();
 session_destroy();
 
 // Redireciona para a página de login
-header("Location: ../views/Auth/login.php");
+header("Location: login.php");
 exit;
