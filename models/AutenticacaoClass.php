@@ -10,7 +10,7 @@ class Autenticacao
         }
 
         // Incluindo arquivo de conexão
-        require_once "../database/conexaoClass.php";
+        require_once __DIR__ . "/../database/conexaoClass.php";
         global $mysqli;
         $this->mysqli = $mysqli;
     }
@@ -22,7 +22,7 @@ class Autenticacao
 
         // Redireciona para a página de login se não estiver logado
         if (!$logado) {
-            header("Location: login.php");
+            header("Location: ../views/Auth/login.php");
             exit;
         }
 
@@ -51,7 +51,7 @@ class Autenticacao
             $_SESSION['nome'] = $usuarios['nome'];
 
             // Redireciona para a página principal
-            header("Location: homeUsuario.php");
+            header("Location: /ProjetoDesenv/public/homeUsuario.php");
             exit;
 
             return true;
@@ -74,7 +74,7 @@ class Autenticacao
     {
         session_unset();
         session_destroy();
-        header("Location: login.php");
+        header("Location: ../views/Auth/login.php");
         exit;
     }
 }

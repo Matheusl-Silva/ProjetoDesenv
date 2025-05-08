@@ -1,6 +1,6 @@
 <?php
-include '../database/conexaoClass.php';
-require_once '../models/AutenticacaoClass.php';
+include '../../database/conexaoClass.php';
+require_once '../../models/AutenticacaoClass.php';
 
 $db     = new Conexao();
 $mysqli = $db->getConexao();
@@ -27,8 +27,8 @@ $db->fecharConexao();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../css/login.css">
   <title>Login</title>
 </head>
 
@@ -73,11 +73,11 @@ $db->fecharConexao();
               </div>
               <div class="col-12">
                 <span>Esqueceu a senha?</span>
-                <a href="recover.html">Recuperação de senha</a>
+                <a href="/ProjetoDesenv/public/recover.html">Recuperação de senha</a>
               </div>
               <button type="submit" class="btn btn-primary col-12 mt-3 mb-2" id="submit">Entrar</button>
               <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                <a href="../index.html">Voltar para a tela inicial</a>
+                <a href="/ProjetoDesenv/index.html">Voltar para a tela inicial</a>
               </div>
             </form>
           </div>
