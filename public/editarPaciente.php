@@ -7,6 +7,7 @@ $mysqli = $bd->getConexao();
 
 $auth = new Autenticacao();
 $auth->verificarLogin();
+$auth->verificarAcessoAdmin();
 $nome_usuario = $auth->getNomeUsuario();
 
 $mensagem = '';

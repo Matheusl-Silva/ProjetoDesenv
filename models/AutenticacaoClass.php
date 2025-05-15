@@ -47,8 +47,9 @@ class Autenticacao
         if ($quantidade == 1) {
             $usuarios = $sql_query->fetch_assoc();
 
-            $_SESSION['id']   = $usuarios['id'];
-            $_SESSION['nome'] = $usuarios['nome'];
+            $_SESSION['id']    = $usuarios['id'];
+            $_SESSION['nome']  = $usuarios['nome'];
+            $_SESSION['admin'] = $usuarios['adm'];
 
             // Redireciona para a página principal
             header("Location: /ProjetoDesenv/public/homeUsuario.php");
@@ -76,5 +77,18 @@ class Autenticacao
         session_destroy();
         header("Location: ../views/Auth/login.php");
         exit;
+    }
+
+    public function isAdmin()
+    {
+        return isset($_SESSION['admin']) && $_SESSION['admin'] === 'S';
+    }
+
+    public function verificarAcessoAdmin()
+    {
+        if (!$this->isAdmin()) {
+            header("Location: homeUsuario.php");
+            exit;
+        }
     }
 }

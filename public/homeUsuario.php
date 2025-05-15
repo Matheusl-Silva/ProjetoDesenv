@@ -9,6 +9,7 @@ $mysqli = $bd->getConexao();
 $auth = new Autenticacao();
 $auth->verificarLogin();
 $nome_usuario = $auth->getNomeUsuario();
+
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +50,8 @@ $nome_usuario = $auth->getNomeUsuario();
                 <h2>Selecione uma das opções abaixo para poder iniciar!</h2>
             </div>
 
+            <?php if ($auth->isAdmin()): ?>
+            <!-- Menu completo para administradores -->
             <div class="row justify-content-evenly row1">
                 <div class="col-md-5 mb-4">
                     <div class="card text-center shadow-sm h-100">
@@ -104,6 +107,23 @@ $nome_usuario = $auth->getNomeUsuario();
                     </div>
                 </div>
             </div>
+            <?php else: ?>
+            <!-- Menu limitado para usuários não adm -->
+            <div class="row justify-content-center">
+                <div class="col-md-5 mb-4">
+                    <div class="card text-center shadow-sm h-100">
+                        <div class="icone">
+                            <i class="bi bi-clipboard2-pulse text-primary"></i>
+                        </div>
+                        <h2>Visualizar exames</h2>
+                        <p>Verificar os exames já realizados pelos pacientes</p>
+                        <a href="examePrincipal.php" class="mt-auto">
+                            <button class="col-12 btn btn-primary">Acessar</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
         </div>
     </header>
 

@@ -106,7 +106,7 @@ $db->fecharConexao();
                                     <input type="password" class="form-control mb-2" name="senhaConfirma" id="senhaConfirma" required minlength="8">
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary col-12 mt-3 mb-2 ">Salvar Alterações</button>
+                            <button type="submit" class="btn btn-primary col-12 mt-3 mb-2 ">Cadastrar Usuario</button>
                             </div>
                         </form>
                     </div>

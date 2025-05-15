@@ -7,6 +7,7 @@ $mysqli = $bd->getConexao();
 
 $auth = new Autenticacao();
 $auth->verificarLogin();
+$auth->verificarAcessoAdmin();
 $nome_usuario = $auth->getNomeUsuario();
 
 $mensagem = '';
@@ -31,11 +32,13 @@ if (isset($_POST['atualizar_usuario'])) {
     $nome  = $mysqli->real_escape_string($_POST['nomeUsuario']);
     $email = $mysqli->real_escape_string($_POST['email']);
     $senha = $mysqli->real_escape_string($_POST['senha']);
+    $admin = $mysqli->real_escape_string($_POST['admin']);
 
     $sql = "UPDATE usuarios SET
             nome = '$nome',
             email = '$email',
-            senha = '$senha'
+            senha = '$senha',
+            adm = '$admin'
             WHERE email = '$email'";
 
     if ($mysqli->query($sql)) {
@@ -133,20 +136,33 @@ if (isset($_POST['atualizar_usuario'])) {
 
                             <div class="row">
                                 <div class="form-group col">
-                                    <label for="senha" class="form-label">Nova senha:</label>
+                                    <label for="senha" class="form-label">Senha Atual:</label>
                                     <input type="password" class="form-control mb-2" name="senha"id="senha" value="<?php echo htmlspecialchars($usuario['senha']); ?>">
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="admin" class="form-label">Administrador:</label>
+                                    <select class="form-select mb-2" name="admin" id="admin">
+                                        <option value="N" <?php echo($usuario['adm'] === 'N') ? 'selected' : ''; ?>>Não</option>
+                                        <option value="S" <?php echo($usuario['adm'] === 'S') ? 'selected' : ''; ?>>Sim</option>
+                                    </select>
+                                </div>
+                            </div>
+
 
                             <div class="form-group">
                                 <button type="submit" name="atualizar_usuario" class="btn btn-primary col-12 mt-3 mb-2">Atualizar</button>
                             </div>
 
+
                         </form>
                     </div>
 
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                        <a href="editarUsuario.php">Selecionar outro Usuario</a>
+                        <a href="editarUsuario.php" class="me-3">Nova Pesquisa</a>
+                        <a href="homeUsuario.php">Voltar para a tela de usuário</a>
                     </div>
                 <?php endif; ?>
             </div>
