@@ -1,59 +1,45 @@
 <?php
 require_once '../database/ConexaoClass.php';
 require_once '../models/AutenticacaoClass.php';
-
-$bd     = new Conexao();
-$mysqli = $bd->getConexao();
+require_once '../models/PessoaClass.php';
+require_once '../models/UsuarioClass.php';
 
 $auth = new Autenticacao();
 $auth->verificarLogin();
 $auth->verificarAcessoAdmin();
 $nome_usuario = $auth->getNomeUsuario();
 
-$mensagem = '';
-$usuario  = null;
+$usuarioObj = new Usuario();
+$mensagem   = '';
+$usuario    = null;
 
 if (isset($_POST['buscar_usuario']) && !empty($_POST['email'])) {
-    $email = $mysqli->real_escape_string($_POST['email']);
-
-    // Consulta para buscar o paciente pelo ID
-    $sql       = "SELECT * FROM usuarios WHERE email = '$email'";
-    $resultado = $mysqli->query($sql);
-
-    if ($resultado && $resultado->num_rows > 0) {
-        $usuario = $resultado->fetch_assoc();
-    } else {
+    $usuario = $usuarioObj->buscarUsuarioPorEmail($_POST['email']);
+    if (!$usuario) {
         $mensagem = "Usuario não encontrado.";
     }
 }
 
 if (isset($_POST['atualizar_usuario'])) {
+    $nome  = $_POST['nomeUsuario'];
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+    $admin = $_POST['admin'];
 
-    $nome  = $mysqli->real_escape_string($_POST['nomeUsuario']);
-    $email = $mysqli->real_escape_string($_POST['email']);
-    $senha = $mysqli->real_escape_string($_POST['senha']);
-    $admin = $mysqli->real_escape_string($_POST['admin']);
-
-    $sql = "UPDATE usuarios SET
-            nome = '$nome',
-            email = '$email',
-            senha = '$senha',
-            adm = '$admin'
-            WHERE email = '$email'";
-
-    if ($mysqli->query($sql)) {
+    if ($usuarioObj->atualizarUsuario($nome, $email, $senha, $admin)) {
         $mensagem = "Usuario atualizado com sucesso!";
-
-        $sql       = "SELECT * FROM usuarios WHERE email = '$email'";
-        $resultado = $mysqli->query($sql);
-
-        if ($resultado && $resultado->num_rows > 0) {
-            $usuario = $resultado->fetch_assoc();
-
-            header("refresh:2;url=homeUsuario.php");
-        }
+        header("refresh:2;url=editarUsuario.php");
     } else {
-        $mensagem = "Erro ao atualizar usuario: " . $mysqli->error;
+        $mensagem = "Erro ao atualizar usuario.";
+    }
+}
+
+if (isset($_POST['excluir_usuario'])) {
+    if ($usuarioObj->excluirUsuario($_POST['email'])) {
+        $mensagem = "Usuario excluído com sucesso!";
+        header("refresh:2;url=editarUsuario.php");
+    } else {
+        $mensagem = "Erro ao excluir usuario.";
     }
 }
 ?>
@@ -71,33 +57,10 @@ if (isset($_POST['atualizar_usuario'])) {
 
 <body class="bg-info-subtle">
     <div class="container">
-
-        <div class="modal fade" id="pesquisaModal" tabindex="-1" aria-labelledby="pesquisaModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="pesquisaModalLabel">Pesquisar Usuario</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="editarUsuario.php" method="post">
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email do usuario:</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
-                            <div class="d-grid">
-                                <button type="submit" name="buscar_usuario" class="btn btn-primary">Pesquisar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="row justify-content-center">
-            <div class="col-md-6 card shadow p-3 my-5 bg-body-tertiary rounded">
+            <div class="col-md-10 card shadow p-3 my-5 bg-body-tertiary rounded">
                 <div class="card-header bg-body-tertiary text-center">
-                    <h2>Editar Usuario</h2>
+                    <h2>Gerenciar Usuários</h2>
                 </div>
 
                 <?php if (!empty($mensagem)): ?>
@@ -107,61 +70,14 @@ if (isset($_POST['atualizar_usuario'])) {
                 <?php endif; ?>
 
                 <?php if (!$usuario): ?>
-
-                <div class="d-grid gap-2 mt-3">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pesquisaModal">
-                        Pesquisar Usuario
-                    </button>
-                </div>
-                <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-3">
-                    <a href="homeUsuario.php">Voltar para a tela de usuário</a>
-                </div>
-                <?php else: ?>
-
-                    <div class="card-body bg-body-tertiary">
-                        <form action="editarUsuario.php" method="POST">
-                            <div class="row">
-                                <div class="form-group col">
-                                    <label for="nomeCompleto" class="form-label">Nome Completo:</label>
-                                    <input type="text" class="form-control mb-2" name="nomeUsuario" id="nomeUsuario" placeholder="Insira seu nome completo" value="<?php echo htmlspecialchars($usuario['nome']); ?>" required>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group">
-                                    <label for="email" class="form-label">E-mail:</label>
-                                    <input type="email" class="form-control mb-2" name="email" id="email" placeholder="Insira um e-mail válido" value="<?php echo htmlspecialchars($usuario['email']); ?>" required>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group col">
-                                    <label for="senha" class="form-label">Senha Atual:</label>
-                                    <input type="password" class="form-control mb-2" name="senha"id="senha" value="<?php echo htmlspecialchars($usuario['senha']); ?>">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group">
-                                    <label for="admin" class="form-label">Administrador:</label>
-                                    <select class="form-select mb-2" name="admin" id="admin">
-                                        <option value="N" <?php echo($usuario['adm'] === 'N') ? 'selected' : ''; ?>>Não</option>
-                                        <option value="S" <?php echo($usuario['adm'] === 'S') ? 'selected' : ''; ?>>Sim</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <button type="submit" name="atualizar_usuario" class="btn btn-primary col-12 mt-3 mb-2">Atualizar</button>
-                            </div>
-
-
-                        </form>
+                    <?php echo $usuarioObj->renderizarTabelaUsuarios(); ?>
+                    <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-3">
+                        <a href="homeUsuario.php">Voltar para a tela de usuário</a>
                     </div>
-
+                <?php else: ?>
+                    <?php echo $usuarioObj->renderizarFormularioEdicao($usuario); ?>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                        <a href="editarUsuario.php" class="me-3">Nova Pesquisa</a>
+                        <a href="editarUsuario.php" class="me-3">Voltar para a lista</a>
                         <a href="homeUsuario.php">Voltar para a tela de usuário</a>
                     </div>
                 <?php endif; ?>
@@ -170,15 +86,5 @@ if (isset($_POST['atualizar_usuario'])) {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-
-        <?php if (!$usuario && !isset($_POST['buscar_usuario'])): ?>
-        document.addEventListener('DOMContentLoaded', function() {
-            var myModal = new bootstrap.Modal(document.getElementById('pesquisaModal'));
-            myModal.show();
-        });
-        <?php endif; ?>
-        src="../js/script.js"
-    </script>
 </body>
 </html>
