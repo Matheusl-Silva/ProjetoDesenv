@@ -71,8 +71,8 @@ $nome_usuario = $auth->getNomeUsuario();
                         <div class="icone">
                             <i class="bi bi-clipboard2-pulse text-primary"></i>
                         </div>
-                        <h2>Visualizar exames</h2>
-                        <p>Verificar os exames já realizados pelos pacientes</p>
+                        <h2>Exames</h2>
+                        <p>Verificar os exames já realizados pelos pacientes e cadastrar novos</p>
                         <a href="examePrincipal.php" class="mt-auto">
                             <button class="col-12 btn btn-primary">Acessar</button>
                         </a>
@@ -81,6 +81,19 @@ $nome_usuario = $auth->getNomeUsuario();
             </div>
 
             <div class="row justify-content-evenly row2">
+              <div class="col-md-5 mb-4">
+                    <div class="card text-center shadow-sm h-100">
+                        <div class="icone">
+                            <i class="bi bi-person-vcard text-primary"></i>
+                        </div>
+                        <h2>Editar paciente</h2>
+                        <p>Modificar dados cadastrais dos pacientes</p>
+                        <a href="editarPaciente.php" class="mt-auto">
+                            <button class="col-12 btn btn-primary">Acessar</button>
+                        </a>
+                    </div>
+                </div>
+
                 <div class="col-md-5 mb-4">
                     <div class="card text-center shadow-sm h-100">
                         <div class="icone">
@@ -94,18 +107,6 @@ $nome_usuario = $auth->getNomeUsuario();
                     </div>
                 </div>
 
-                <div class="col-md-5 mb-4">
-                    <div class="card text-center shadow-sm h-100">
-                        <div class="icone">
-                            <i class="bi bi-person-vcard text-primary"></i>
-                        </div>
-                        <h2>Editar paciente</h2>
-                        <p>Modificar dados cadastrais dos pacientes</p>
-                        <a href="editarPaciente.php" class="mt-auto">
-                            <button class="col-12 btn btn-primary">Acessar</button>
-                        </a>
-                    </div>
-                </div>
             </div>
             <?php else: ?>
             <!-- Menu limitado para usuários não adm -->
@@ -115,8 +116,8 @@ $nome_usuario = $auth->getNomeUsuario();
                         <div class="icone">
                             <i class="bi bi-clipboard2-pulse text-primary"></i>
                         </div>
-                        <h2>Visualizar exames</h2>
-                        <p>Verificar os exames já realizados pelos pacientes</p>
+                        <h2>Exames</h2>
+                        <p>Verificar os exames já realizados pelos pacientes e cadastrar novos</p>
                         <a href="examePrincipal.php" class="mt-auto">
                             <button class="col-12 btn btn-primary">Acessar</button>
                         </a>
