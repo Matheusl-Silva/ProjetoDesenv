@@ -40,19 +40,6 @@ class Usuario extends Pessoa
         return $usuarios;
     }
 
-    public function buscarUsuarioPorEmail($email)
-    {
-        $email     = $this->mysqli->real_escape_string($email);
-        $sql       = "SELECT * FROM usuarios WHERE email = '$email'";
-        $resultado = $this->mysqli->query($sql);
-
-        if ($resultado && $resultado->num_rows > 0) {
-            return $resultado->fetch_assoc();
-        }
-
-        return null;
-    }
-
     public function atualizarUsuario($nome, $email, $senha, $admin)
     {
         $nome  = $this->mysqli->real_escape_string($nome);

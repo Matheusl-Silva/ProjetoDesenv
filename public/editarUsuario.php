@@ -13,13 +13,6 @@ $usuarioObj = new Usuario();
 $mensagem   = '';
 $usuario    = null;
 
-if (isset($_POST['buscar_usuario']) && !empty($_POST['email'])) {
-    $usuario = $usuarioObj->buscarUsuarioPorEmail($_POST['email']);
-    if (!$usuario) {
-        $mensagem = "Usuario não encontrado.";
-    }
-}
-
 if (isset($_POST['atualizar_usuario'])) {
     $nome  = $_POST['nomeUsuario'];
     $email = $_POST['email'];
