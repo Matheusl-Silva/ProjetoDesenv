@@ -1,6 +1,7 @@
 <?php
 require_once '../database/ConexaoClass.php';
 require_once '../models/AutenticacaoClass.php';
+require_once '../models/PessoaClass.php';
 require_once '../models/PacienteClass.php';
 
 $bd     = new Conexao();
@@ -12,22 +13,8 @@ $auth->verificarAcessoAdmin();
 $nome_usuario = $auth->getNomeUsuario();
 
 $pacienteObj = new Paciente();
-$mensagem = '';
-$paciente = null;
-
-if (isset($_POST['buscar_paciente']) && !empty($_POST['numero_paciente'])) {
-    $id_paciente = $mysqli->real_escape_string($_POST['numero_paciente']);
-
-    // Consulta para buscar o paciente pelo ID
-    $sql       = "SELECT * FROM pacientes WHERE id = '$id_paciente'";
-    $resultado = $mysqli->query($sql);
-
-    if ($resultado && $resultado->num_rows > 0) {
-        $paciente = $resultado->fetch_assoc();
-    } else {
-        $mensagem = "Paciente não encontrado.";
-    }
-}
+$mensagem    = '';
+$paciente    = null;
 
 if (isset($_POST['atualizar_paciente']) && !empty($_POST['id_paciente'])) {
     $id_paciente     = $mysqli->real_escape_string($_POST['id_paciente']);
@@ -85,51 +72,38 @@ if (isset($_POST['atualizar_paciente']) && !empty($_POST['id_paciente'])) {
 
 <body class="bg-info-subtle">
     <div class="container">
-
-        <div class="modal fade" id="pesquisaModal" tabindex="-1" aria-labelledby="pesquisaModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="pesquisaModalLabel">Pesquisar Paciente</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="editarPaciente.php" method="post">
-                            <div class="mb-3">
-                                <label for="numero_paciente" class="form-label">Número do Paciente:</label>
-                                <input type="text" class="form-control" id="numero_paciente" name="numero_paciente" required>
-                            </div>
-                            <div class="d-grid">
-                                <button type="submit" name="buscar_paciente" class="btn btn-primary">Pesquisar</button>
-                            </div>
-                        </form>
-                    </div>
+        <div class="row justify-content-center">
+            <div class="col-md-10 card shadow p-3 my-5 bg-body-tertiary rounded">
+                <div class="card-header bg-body-tertiary text-center">
+                    <h2>Gerenciar Pacientes</h2>
                 </div>
-            </div>
-        </div>
 
-        <?php if(!$paciente): ?>
-            <?php echo $pacienteObj->renderizarTabelaPaciente();?>
+                <!--Gera a mensagem no topo se $mensagem não for vazio-->
+                <?php if (!empty($mensagem)): ?>
+                <div class="alert <?php echo strpos($mensagem, 'sucesso') !== false ? 'alert-success' : 'alert-danger'; ?> mt-3">
+                    <?php echo $mensagem; ?>
+                </div>
+                <?php endif; ?>
+
+                <!--Decide se gera a tabela com usuários ou o formulário para edição-->
+                <?php if (!$paciente): ?>
+                    <?php echo $pacienteObj->renderizarTabelaPaciente(); ?>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-3">
                         <a href="homeUsuario.php">Voltar para a tela de usuário</a>
                     </div>
-        <?php else: ?>
-            <?php echo $pacienteObj->renderizarFormularioEdicao($paciente);?>
+                <?php else: ?>
+                    <?php echo $pacienteObj->renderizarFormularioEdicao($paciente); ?>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center">
                         <a href="editarUsuario.php" class="me-3">Voltar para a lista</a>
                         <a href="homeUsuario.php">Voltar para a tela de usuário</a>
                     </div>
-        <?php endif; ?>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        <?php if (!$paciente && !isset($_POST['buscar_paciente'])): ?>
-            document.addEventListener('DOMContentLoaded', function() {
-                var myModal = new bootstrap.Modal(document.getElementById('pesquisaModal'));
-                myModal.show();
-            });
-        <?php endif; ?>
 
         function configurarCaixaDeTexto(idSim, idNao, idCaixa) {
             let sim = document.getElementById(idSim);

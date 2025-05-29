@@ -1,97 +1,97 @@
 <?php
 class Paciente extends Pessoa
 {
-	private $registro;
-	private $periodo;
-	private $dataNasc;
-	private $fone;
-	private $nomeMae;
+    private $registro;
+    private $periodo;
+    private $dataNasc;
+    private $fone;
+    private $nomeMae;
 
-	private $mysqli;
+    private $mysqli;
 
-	public function __construct($nome=null, $email=null, $registro=null, $periodo=null, $dataNasc=null, $fone=null, $nomeMae=null)
-	{
-		parent::__construct($nome, $email);
-		$this->registro = $registro;
-		$this->periodo = $periodo;
-		$this->dataNasc = $dataNasc;
-		$this->fone = $fone;
-		$this->nomeMae = $nomeMae;
+    public function __construct($nome = null, $email = null, $registro = null, $periodo = null, $dataNasc = null, $fone = null, $nomeMae = null)
+    {
+        parent::__construct($nome, $email);
+        $this->registro = $registro;
+        $this->periodo  = $periodo;
+        $this->dataNasc = $dataNasc;
+        $this->fone     = $fone;
+        $this->nomeMae  = $nomeMae;
 
-		require_once __DIR__ . "/../database/conexaoClass.php";
-		$bd = new Conexao();
-		$this->mysqli = $bd->getConexao();
-	}
+        require_once __DIR__ . "/../database/conexaoClass.php";
+        $bd           = new Conexao();
+        $this->mysqli = $bd->getConexao();
+    }
 
-	public function getRegistro()
-	{
-		return $this->registro;
-	}
+    public function getRegistro()
+    {
+        return $this->registro;
+    }
 
-	public function setRegistro($valor)
-	{
-		$this->registro = $valor;
-	}
+    public function setRegistro($valor)
+    {
+        $this->registro = $valor;
+    }
 
-	public function getPeriodo()
-	{
-		return $this->periodo;
-	}
+    public function getPeriodo()
+    {
+        return $this->periodo;
+    }
 
-	public function setPeriodo($valor)
-	{
-		$this->periodo = $valor;
-	}
+    public function setPeriodo($valor)
+    {
+        $this->periodo = $valor;
+    }
 
-	public function getDataNasc()
-	{
-		return $this->dataNasc;
-	}
+    public function getDataNasc()
+    {
+        return $this->dataNasc;
+    }
 
-	public function setDataNasc($valor)
-	{
-		$this->dataNasc = $valor;
-	}
+    public function setDataNasc($valor)
+    {
+        $this->dataNasc = $valor;
+    }
 
-	public function getFone()
-	{
-		return $this->fone;
-	}
+    public function getFone()
+    {
+        return $this->fone;
+    }
 
-	public function setFone($valor)
-	{
-		$this->fone = $valor;
-	}
+    public function setFone($valor)
+    {
+        $this->fone = $valor;
+    }
 
-	public function getNomeMae()
-	{
-		return $this->nomeMae;
-	}
+    public function getNomeMae()
+    {
+        return $this->nomeMae;
+    }
 
-	public function setNomeMae($valor)
-	{
-		$this->nomeMae = $valor;
-	}
+    public function setNomeMae($valor)
+    {
+        $this->nomeMae = $valor;
+    }
 
-	public function listarPacientes()
-	{
-		$sql = "SELECT * FROM pacientes ORDER BY id";
-		$resultado = $this->mysqli->query($sql);
-		$pacientes = [];
+    public function listarPacientes()
+    {
+        $sql       = "SELECT * FROM pacientes ORDER BY id";
+        $resultado = $this->mysqli->query($sql);
+        $pacientes = [];
 
-		if ($resultado) {
-			while ($linha = $resultado->fetch_assoc()) {
-				$pacientes[] = $linha;
-			}
-		}
+        if ($resultado) {
+            while ($row = $resultado->fetch_assoc()) {
+                $pacientes[] = $row;
+            }
+        }
 
-		return $pacientes;
-	}
+        return $pacientes;
+    }
 
-	public function renderizarTabelaPaciente()
-	{
-		$listaPacientes = $this->listarPacientes();
-		$html = '<div class="table-responsive mt-3">
+    public function renderizarTabelaPaciente()
+    {
+        $listaPacientes = $this->listarPacientes();
+        $html           = '<div class="table-responsive mt-3">
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -106,18 +106,19 @@ class Paciente extends Pessoa
                         </thead>
                         <tbody>';
 
-		foreach ($listaPacientes as $paciente) {
-			$html .= '<td>' . htmlspecialchars($paciente["id"]) . '</td>
+        foreach ($listaPacientes as $paciente) {
+            $html .= '<td>' . htmlspecialchars($paciente["id"]) . '</td>
 					<td>' . htmlspecialchars($paciente["nome"]) . '</td>
 					<td>' . htmlspecialchars($paciente["periodo"]) . '</td>
 					<td>' . htmlspecialchars($paciente["data_nascimento"]) . '</td>
 					<td>' . htmlspecialchars($paciente["telefone"]) . '</td>
 					<td>' . htmlspecialchars($paciente["nome_mae"]);
-		}
-	}
+        }
+    }
 
-	public function renderizarFormularioEdicao($paciente) {
-		$html = '<div class="card-body bg-body-tertiary">
+    public function renderizarFormularioEdicao($paciente)
+    {
+        $html = '<div class="card-body bg-body-tertiary">
 					<form action="../comum/validarPaciente.php" method="post">
 
                     <div class="form-group">
@@ -198,5 +199,5 @@ class Paciente extends Pessoa
                     </div>
                 </form>
 				</div>';
-	}
+    }
 }
