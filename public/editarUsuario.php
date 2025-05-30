@@ -13,6 +13,31 @@ $usuarioObj = new Usuario();
 $mensagem   = '';
 $usuario    = null;
 
+if (isset($_POST['buscar_usuario']) && !empty($_POST['email'])) {
+    $email    = $_POST['email'];
+    $usuarios = $usuarioObj->listarUsuarios();
+
+    foreach ($usuarios as $user) {
+        if ($user['email'] === $email) {
+            $usuario = $user;
+            break;
+        }
+    }
+
+    if (!$usuario) {
+        $mensagem = "Usuário não encontrado.";
+    }
+}
+
+if (isset($_POST['excluir_usuario']) && !empty($_POST['email'])) {
+    if ($usuarioObj->excluirUsuario($_POST['email'])) {
+        $mensagem = "Usuário excluído com sucesso!";
+        header("refresh:2;url=editarUsuario.php");
+    } else {
+        $mensagem = "Erro ao excluir usuário.";
+    }
+}
+
 if (isset($_POST['atualizar_usuario'])) {
     $nome  = $_POST['nomeUsuario'];
     $email = $_POST['email'];
@@ -20,19 +45,10 @@ if (isset($_POST['atualizar_usuario'])) {
     $admin = $_POST['admin'];
 
     if ($usuarioObj->atualizarUsuario($nome, $email, $senha, $admin)) {
-        $mensagem = "Usuario atualizado com sucesso!";
+        $mensagem = "Usuário atualizado com sucesso!";
         header("refresh:2;url=editarUsuario.php");
     } else {
-        $mensagem = "Erro ao atualizar usuario.";
-    }
-}
-
-if (isset($_POST['excluir_usuario'])) {
-    if ($usuarioObj->excluirUsuario($_POST['email'])) {
-        $mensagem = "Usuario excluído com sucesso!";
-        header("refresh:2;url=editarUsuario.php");
-    } else {
-        $mensagem = "Erro ao excluir usuario.";
+        $mensagem = "Erro ao atualizar usuário.";
     }
 }
 ?>
@@ -62,7 +78,7 @@ if (isset($_POST['excluir_usuario'])) {
                     <?php echo $mensagem; ?>
                 </div>
                 <?php endif; ?>
-                
+
                 <!--Decide se gera a tabela com usuários ou o formulário para edição-->
                 <?php if (!$usuario): ?>
                     <?php echo $usuarioObj->renderizarTabelaUsuarios(); ?>

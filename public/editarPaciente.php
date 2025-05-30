@@ -16,45 +16,44 @@ $pacienteObj = new Paciente();
 $mensagem    = '';
 $paciente    = null;
 
-if (isset($_POST['atualizar_paciente']) && !empty($_POST['id_paciente'])) {
-    $id_paciente     = $mysqli->real_escape_string($_POST['id_paciente']);
-    $nome            = $mysqli->real_escape_string($_POST['nome']);
-    $periodo         = $mysqli->real_escape_string($_POST['periodo']);
-    $data_nascimento = $mysqli->real_escape_string($_POST['data_nascimento']);
-    $telefone        = $mysqli->real_escape_string($_POST['telefone']);
-    $email           = $mysqli->real_escape_string($_POST['email']);
-    $nome_mae        = $mysqli->real_escape_string($_POST['nome_mae']);
+if (isset($_POST['buscar_paciente']) && !empty($_POST['email'])) {
+    $email     = $mysqli->real_escape_string($_POST['email']);
+    $sql       = "SELECT * FROM pacientes WHERE email = '$email'";
+    $resultado = $mysqli->query($sql);
 
-    $toma_medicamento = $mysqli->real_escape_string($_POST['toma_medicamento']);
-    $medicamento      = ($toma_medicamento == 'medSim') ? $mysqli->real_escape_string($_POST['medicamento']) : '';
-
-    $trata_patologia = $mysqli->real_escape_string($_POST['trata_patologia']);
-    $patologia       = ($trata_patologia == 'patSim') ? $mysqli->real_escape_string($_POST['patologia']) : '';
-
-    $sql = "UPDATE pacientes SET
-            nome = '$nome',
-            periodo = '$periodo',
-            data_nascimento = '$data_nascimento',
-            telefone = '$telefone',
-            email = '$email',
-            nome_mae = '$nome_mae',
-            toma_medicamento = '$toma_medicamento',
-            medicamento = '$medicamento',
-            trata_patologia = '$trata_patologia',
-            patologia = '$patologia'
-            WHERE id = '$id_paciente'";
-
-    if ($mysqli->query($sql)) {
-        $mensagem = "Paciente atualizado com sucesso!";
-
-        $sql       = "SELECT * FROM pacientes WHERE id = '$id_paciente'";
-        $resultado = $mysqli->query($sql);
-
-        if ($resultado && $resultado->num_rows > 0) {
-            $paciente = $resultado->fetch_assoc();
-        }
+    if ($resultado && $resultado->num_rows > 0) {
+        $paciente = $resultado->fetch_assoc();
     } else {
-        $mensagem = "Erro ao atualizar paciente: " . $mysqli->error;
+        $mensagem = "Paciente não encontrado.";
+    }
+}
+
+if (isset($_POST['excluir_paciente']) && !empty($_POST['email'])) {
+    if ($pacienteObj->excluirPaciente($_POST['email'])) {
+        $mensagem = "Paciente excluído com sucesso!";
+        header("refresh:2;url=editarPaciente.php");
+    } else {
+        $mensagem = "Erro ao excluir paciente.";
+    }
+}
+
+if (isset($_POST['atualizar_paciente'])) {
+    $nome             = $_POST['nome'];
+    $email            = $_POST['email'];
+    $periodo          = $_POST['periodo'];
+    $data_nascimento  = $_POST['data_nascimento'];
+    $telefone         = $_POST['telefone'];
+    $nome_mae         = $_POST['nome_mae'];
+    $toma_medicamento = $_POST['toma_medicamento'];
+    $medicamento      = $_POST['medicamento'];
+    $trata_patologia  = $_POST['trata_patologia'];
+    $patologia        = $_POST['patologia'];
+
+    if ($pacienteObj->atualizarPacientes($nome, $email, $periodo, $data_nascimento, $telefone, $nome_mae, $toma_medicamento, $medicamento, $trata_patologia, $patologia)) {
+        $mensagem = "Paciente atualizado com sucesso!";
+        header("refresh:2;url=editarPaciente.php");
+    } else {
+        $mensagem = "Erro ao atualizar paciente.";
     }
 }
 ?>
@@ -104,29 +103,35 @@ if (isset($_POST['atualizar_paciente']) && !empty($_POST['id_paciente'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
 
-        function configurarCaixaDeTexto(idSim, idNao, idCaixa) {
-            let sim = document.getElementById(idSim);
-            let nao = document.getElementById(idNao);
-            let caixa = document.getElementById(idCaixa);
 
-            if (!sim || !nao || !caixa) return;
+            function controlarCampos(radioSim, radioNao, container) {
+                const containerElement = document.getElementById(container);
+                if (!containerElement) return;
 
-            caixa.disabled = !sim.checked;
+                function atualizarVisibilidade() {
+                    containerElement.style.display = radioSim.checked ? 'block' : 'none';
+                }
 
-            let alterarEstado = () => {
-                caixa.disabled = !sim.checked;
+                radioSim.addEventListener('change', atualizarVisibilidade);
+                radioNao.addEventListener('change', atualizarVisibilidade);
+                atualizarVisibilidade(); // Executa uma vez para definir o estado inicial
             }
 
-            sim.addEventListener('change', alterarEstado);
-            nao.addEventListener('change', alterarEstado);
-        }
+            // Configurar campos de medicamento
+            const medSim = document.getElementById('medSim');
+            const medNao = document.getElementById('medNao');
+            if (medSim && medNao) {
+                controlarCampos(medSim, medNao, 'medicamentoContainer');
+            }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            <?php if ($paciente): ?>
-                configurarCaixaDeTexto("medSim", "medNao", "medicamento");
-                configurarCaixaDeTexto("patSim", "patNao", "patologia");
-            <?php endif; ?>
+            // Configurar campos de patologia
+            const patSim = document.getElementById('patSim');
+            const patNao = document.getElementById('patNao');
+            if (patSim && patNao) {
+                controlarCampos(patSim, patNao, 'patologiaContainer');
+            }
         });
     </script>
 </body>
