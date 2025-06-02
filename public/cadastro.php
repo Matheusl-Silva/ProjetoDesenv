@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $tipo_alerta = "success";
 
                 // Redireciona após 2 segundos (opcional)
-                header("refresh:2;url=login.php");
+                header("refresh:2;url=../views/Auth/login.php");
             } else {
                 $mensagem    = "Erro ao cadastrar: " . $stmt->error;
                 $tipo_alerta = "danger";
@@ -63,8 +63,8 @@ $db->fecharConexao();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/cadastro.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/cadastro.css">
     <title>Cadastro de Usuário</title>
 </head>
 
@@ -118,6 +118,6 @@ $db->fecharConexao();
         </div>
     </div>
 </body>
-<script src="../js/script.js"></script>
+<script src="../assets/js/script.js"></script>
 
 </html>

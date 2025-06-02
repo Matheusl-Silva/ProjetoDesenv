@@ -69,6 +69,17 @@ class Usuario extends Pessoa
         return $this->mysqli->query($sql);
     }
 
+    public function cadastrarUsuario($nome, $email, $senha, $admin)
+    {
+        $nome  = $this->mysqli->real_escape_string($nome);
+        $email = $this->mysqli->real_escape_string($email);
+        $senha = $this->mysqli->real_escape_string($senha);
+        $admin = $this->mysqli->real_escape_string($admin);
+
+        $sql = "INSERT INTO usuarios (nome, email, senha, adm) VALUES ('$nome', '$email', '$senha', '$admin')";
+        return $this->mysqli->query($sql);
+    }
+
     public function renderizarTabelaUsuarios()
     {
         $usuarios = $this->listarUsuarios();
