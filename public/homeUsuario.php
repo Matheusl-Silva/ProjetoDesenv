@@ -18,9 +18,9 @@ $nome_usuario = $auth->getNomeUsuario();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../css/home-usuario.css">
+    <link rel="stylesheet" href="../assets/css/home-usuario.css">
     <title>Página principal</title>
 </head>
 
@@ -29,7 +29,7 @@ $nome_usuario = $auth->getNomeUsuario();
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <div class="container">
                 <div class="d-flex align-items-center">
-                    <img src="../img/health.png" class="imagemSize" alt="Logo Saúde">
+                    <img src="../assets/img/health.png" class="imagemSize" alt="Logo Saúde">
                     <a class="navbar-brand text-primary" href="../index.html">Portal hematológico</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

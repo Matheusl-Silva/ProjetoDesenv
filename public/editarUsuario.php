@@ -14,9 +14,27 @@ $mensagem   = '';
 $usuario    = null;
 
 if (isset($_POST['buscar_usuario']) && !empty($_POST['email'])) {
-    $usuario = $usuarioObj->buscarUsuarioPorEmail($_POST['email']);
+    $email    = $_POST['email'];
+    $usuarios = $usuarioObj->listarUsuarios();
+
+    foreach ($usuarios as $user) {
+        if ($user['email'] === $email) {
+            $usuario = $user;
+            break;
+        }
+    }
+
     if (!$usuario) {
-        $mensagem = "Usuario não encontrado.";
+        $mensagem = "Usuário não encontrado.";
+    }
+}
+
+if (isset($_POST['excluir_usuario']) && !empty($_POST['email'])) {
+    if ($usuarioObj->excluirUsuario($_POST['email'])) {
+        $mensagem = "Usuário excluído com sucesso!";
+        header("refresh:2;url=editarUsuario.php");
+    } else {
+        $mensagem = "Erro ao excluir usuário.";
     }
 }
 
@@ -27,19 +45,10 @@ if (isset($_POST['atualizar_usuario'])) {
     $admin = $_POST['admin'];
 
     if ($usuarioObj->atualizarUsuario($nome, $email, $senha, $admin)) {
-        $mensagem = "Usuario atualizado com sucesso!";
+        $mensagem = "Usuário atualizado com sucesso!";
         header("refresh:2;url=editarUsuario.php");
     } else {
-        $mensagem = "Erro ao atualizar usuario.";
-    }
-}
-
-if (isset($_POST['excluir_usuario'])) {
-    if ($usuarioObj->excluirUsuario($_POST['email'])) {
-        $mensagem = "Usuario excluído com sucesso!";
-        header("refresh:2;url=editarUsuario.php");
-    } else {
-        $mensagem = "Erro ao excluir usuario.";
+        $mensagem = "Erro ao atualizar usuário.";
     }
 }
 ?>
@@ -63,12 +72,14 @@ if (isset($_POST['excluir_usuario'])) {
                     <h2>Gerenciar Usuários</h2>
                 </div>
 
+                <!--Gera a mensagem no topo se $mensagem não for vazio-->
                 <?php if (!empty($mensagem)): ?>
                 <div class="alert <?php echo strpos($mensagem, 'sucesso') !== false ? 'alert-success' : 'alert-danger'; ?> mt-3">
                     <?php echo $mensagem; ?>
                 </div>
                 <?php endif; ?>
 
+                <!--Decide se gera a tabela com usuários ou o formulário para edição-->
                 <?php if (!$usuario): ?>
                     <?php echo $usuarioObj->renderizarTabelaUsuarios(); ?>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-3">
