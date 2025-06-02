@@ -27,8 +27,8 @@ $db->fecharConexao();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../../css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../../css/login.css">
+  <link rel="stylesheet" href="/ProjetoDesenv/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/ProjetoDesenv/assets/css/login.css">
   <title>Login</title>
 </head>
 
@@ -86,7 +86,7 @@ $db->fecharConexao();
     </div>
   </div>
 </body>
-<script src="/ProjetoDesenv/js/bootstrap.min.js"></script>
+<script src="/ProjetoDesenv/assets/js/bootstrap.min.js"></script>
 <script>
   const loginInvalido = <?php echo $loginInvalido ? 'true' : 'false'; ?>;
 
