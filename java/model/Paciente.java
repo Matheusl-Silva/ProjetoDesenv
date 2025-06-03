@@ -1,0 +1,70 @@
+package model;
+
+public class Paciente  extends Pessoa{
+    private String periodo;
+    private String dataNasc;
+    private String fone;
+    private String nomeMae;
+    private boolean tomaMedicamento;
+    private String medicamento;
+    private boolean trataPatologia;
+    private String patologia;
+    private String dataCadastro;
+    
+    public String getPeriodo() {
+        return periodo;
+    }
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+    public String getDataNasc() {
+        return dataNasc;
+    }
+    public void setDataNasc(String dataNasc) {
+        this.dataNasc = dataNasc;
+    }
+    public String getFone() {
+        return fone;
+    }
+    public void setFone(String fone) {
+        this.fone = fone;
+    }
+    public String getNomeMae() {
+        return nomeMae;
+    }
+    public void setNomeMae(String nomeMae) {
+        this.nomeMae = nomeMae;
+    }
+    public boolean getTomaMedicamento() {
+        return tomaMedicamento;
+    }
+    public void setTomaMedicamento(boolean tomaMedicamento) {
+        this.tomaMedicamento = tomaMedicamento;
+    }
+    public String getMedicamento() {
+        return medicamento;
+    }
+    public void setMedicamento(String medicamento) {
+        this.medicamento = medicamento;
+    }
+    public boolean getTrataPatologia() {
+        return trataPatologia;
+    }
+    public void setTrataPatologia(boolean trataPatologia) {
+        this.trataPatologia = trataPatologia;
+    }
+    public String getPatologia() {
+        return patologia;
+    }
+    public void setPatologia(String patologia) {
+        this.patologia = patologia;
+    }
+    public String getDataCadastro() {
+        return dataCadastro;
+    }
+    public void setDataCadastro(String dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    
+}
