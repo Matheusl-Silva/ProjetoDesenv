@@ -3,16 +3,20 @@ package view;
 import java.util.Scanner;
 
 public class Menu {
-    private Scanner scan;
+    private static Scanner scan = new Scanner(System.in);
 
-    public Menu(Scanner scan){
-        this.scan = scan;
-    }
-
-    public void exibirMenuPrincipal(){
+    public static int exibirMenuPrincipal(){
         String textoMenu = "1. Inserir usuário" + 
                             "\n2. Inserir paciente" + 
-                            "3. Sair";
+                            "\n3. Inserir exame" +
+                            "\n4. Sair" + 
+                            "\n-----------------------" + 
+                            "\nSelecione uma opção:";
         System.out.println(textoMenu);
+        return scan.nextInt();
+    }
+
+    public void fecharScanner(){
+        Menu.scan.close();
     }
 }

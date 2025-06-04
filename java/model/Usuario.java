@@ -2,7 +2,7 @@ package model;
 
 public class Usuario extends Pessoa {
     private String senha;
-    private char admin;
+    private boolean admin;
 
     public Usuario() {
     }
@@ -10,7 +10,13 @@ public class Usuario extends Pessoa {
     public Usuario(String nome, String email, String senha) {
         super(nome, email);
         this.senha = senha;
-        this.admin = 'N';
+        this.admin = false;
+    }
+
+    public Usuario(String nome, String email, String senha, boolean admin) {
+        super(nome, email);
+        this.senha = senha;
+        this.admin = admin;
     }
 
     public String getSenha() {
@@ -21,11 +27,11 @@ public class Usuario extends Pessoa {
         this.senha = senha;
     }
 
-    public char getAdmin() {
+    public boolean getAdmin() {
         return admin;
     }
 
-    public void setAdmin(char admin) {
+    public void setAdmin(boolean admin) {
         this.admin = admin;
     }
 }

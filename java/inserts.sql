@@ -1,1 +1,3 @@
-INSERT INTO usuarios (nome, email, senha, admin) VALUES (matheus, matheus@gmail, matheussenha, N);
+INSERT INTO usuarios (nome, email, senha, admin) VALUES (mathus, mkudlake@gmail, pass, S);
+INSERT INTO pacientes (periodo, nome, data_nascimento, telefone, email, nome_mae, toma_medicamento, medicamento, trata_patalogia, patologia, data_cadastro) VALUES ('agr', 'mat', '0301', '43', 'mkud', 'cleia', 'medNao', null, 'patNao', null, '1305');
+INSERT INTO exames (dataEntrada, dataEntrega, data, vcm, chcm, segmentados, rdw, hemacia, blastos, promielocitos, metamielocitos, bastonetes, volPlaquetarioMedio, hcm, hematocrito, plaquetas, leucocitos, neutrofilos, hemoglobina, mielocitos, basofilos, eosinofilos) VALUES ('agr', 'ontem', 'amanha', 4.0, 6.0, 15.0, 7.0, 1.0, 10.0, 11.0, 13.0, 14.0, 18.0, 5.0, 3.0, 7.0, 8.0, 9.0, 2.0, 12.0, 1.0, 16.0);

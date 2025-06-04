@@ -1,5 +1,7 @@
 package model;
 
+//import java.util.HashMap;
+
 public class Paciente  extends Pessoa{
     private String periodo;
     private String dataNasc;
@@ -10,7 +12,29 @@ public class Paciente  extends Pessoa{
     private boolean trataPatologia;
     private String patologia;
     private String dataCadastro;
+
+    //private HashMap<String, String> dados = new HashMap<>();
+
+    public Paciente(){}
     
+    
+    public Paciente(String nome, String email, String periodo, String dataNasc, String fone, String nomeMae,
+            boolean tomaMedicamento, String medicamento, boolean trataPatologia, String patologia,
+            String dataCadastro) {
+        super(nome, email);
+        this.periodo = periodo;
+        this.dataNasc = dataNasc;
+        this.fone = fone;
+        this.nomeMae = nomeMae;
+        this.tomaMedicamento = tomaMedicamento;
+        this.medicamento = medicamento;
+        this.trataPatologia = trataPatologia;
+        this.patologia = patologia;
+        this.dataCadastro = dataCadastro;
+        
+    }
+
+
     public String getPeriodo() {
         return periodo;
     }
