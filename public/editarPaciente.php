@@ -1,7 +1,7 @@
 <?php
 require_once '../database/ConexaoClass.php';
 require_once '../models/AutenticacaoClass.php';
-require_once '../models/PessoaClass.php';
+require_once '../models/PessoaModel.php';
 require_once '../models/PacienteModel.php';
 require_once '../dao/PacienteDAO.php';
 require_once '../views/PacienteView.php';
