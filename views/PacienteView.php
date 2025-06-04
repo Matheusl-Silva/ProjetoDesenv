@@ -1,173 +1,12 @@
 <?php
-class Paciente extends Pessoa
+require_once '../dao/PacienteDAO.php';
+class PacienteView
 {
-    private $periodo;
-    private $dataNasc;
-    private $fone;
-    private $nomeMae;
-    private $tomaMedicamento;
-    private $medicamento;
-    private $trataPatologia;
-    private $patologia;
-
-    private $mysqli;
-
-    public function __construct($nome = null, $email = null, $periodo = null, $dataNasc = null, $fone = null, $nomeMae = null, $tomaMedicamento = null, $medicamento = null, $trataPatologia = null, $patologia = null)
+    public static function renderizarTabelaPaciente()
     {
-        parent::__construct($nome, $email);
-        $this->periodo         = $periodo;
-        $this->dataNasc        = $dataNasc;
-        $this->fone            = $fone;
-        $this->nomeMae         = $nomeMae;
-        $this->tomaMedicamento = $tomaMedicamento;
-        $this->medicamento     = $medicamento;
-        $this->trataPatologia  = $trataPatologia;
-        $this->patologia       = $patologia;
+        $pDao = new PacienteDAO();
 
-        require_once __DIR__ . "/../database/conexaoClass.php";
-        $bd           = new Conexao();
-        $this->mysqli = $bd->getConexao();
-    }
-
-    public function getPeriodo()
-    {
-        return $this->periodo;
-    }
-
-    public function setPeriodo($valor)
-    {
-        $this->periodo = $valor;
-    }
-
-    public function getDataNasc()
-    {
-        return $this->dataNasc;
-    }
-
-    public function setDataNasc($valor)
-    {
-        $this->dataNasc = $valor;
-    }
-
-    public function getFone()
-    {
-        return $this->fone;
-    }
-
-    public function setFone($valor)
-    {
-        $this->fone = $valor;
-    }
-
-    public function getNomeMae()
-    {
-        return $this->nomeMae;
-    }
-
-    public function setNomeMae($valor)
-    {
-        $this->nomeMae = $valor;
-    }
-
-    public function getTomaMedicamento()
-    {
-        return $this->tomaMedicamento;
-    }
-
-    public function setTomaMedicamento($valor)
-    {
-        $this->tomaMedicamento = $valor;
-    }
-
-    public function getMedicamento()
-    {
-        return $this->medicamento;
-    }
-
-    public function setMedicamento($valor)
-    {
-        $this->medicamento = $valor;
-    }
-
-    public function getTrataPatologia()
-    {
-        return $this->trataPatologia;
-    }
-
-    public function setTrataPatologia($valor)
-    {
-        $this->trataPatologia = $valor;
-    }
-
-    public function getPatologia()
-    {
-        return $this->patologia;
-    }
-
-    public function setPatologia($valor)
-    {
-        $this->patologia = $valor;
-    }
-
-    public function listarPacientes()
-    {
-        $sql       = "SELECT * FROM pacientes ORDER BY id";
-        $resultado = $this->mysqli->query($sql);
-        $pacientes = [];
-
-        if ($resultado) {
-            while ($row = $resultado->fetch_assoc()) {
-                $pacientes[] = $row;
-            }
-        }
-
-        return $pacientes;
-    }
-
-    public function atualizarPacientes($nome, $email, $periodo, $data_nascimento, $telefone, $nome_mae, $toma_medicamento, $medicamento, $trata_patologia, $patologia)
-    {
-        $nome             = $this->mysqli->real_escape_string($nome);
-        $email            = $this->mysqli->real_escape_string($email);
-        $periodo          = $this->mysqli->real_escape_string($periodo);
-        $data_nascimento  = $this->mysqli->real_escape_string($data_nascimento);
-        $telefone         = $this->mysqli->real_escape_string($telefone);
-        $nome_mae         = $this->mysqli->real_escape_string($nome_mae);
-        $toma_medicamento = $this->mysqli->real_escape_string($toma_medicamento);
-        $medicamento      = $this->mysqli->real_escape_string($medicamento);
-        $trata_patologia  = $this->mysqli->real_escape_string($trata_patologia);
-        $patologia        = $this->mysqli->real_escape_string($patologia);
-
-        $sql = "UPDATE pacientes SET
-                nome = '$nome',
-                email = '$email',
-                periodo = '$periodo',
-                data_nascimento = '$data_nascimento',
-                telefone = '$telefone',
-                nome_mae = '$nome_mae',
-                toma_medicamento = '$toma_medicamento',
-                medicamento = '$medicamento',
-                trata_patologia = '$trata_patologia',
-                patologia = '$patologia'
-                WHERE email = '$email'";
-
-        if ($this->mysqli->query($sql)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function excluirPaciente($email)
-    {
-        $email = $this->mysqli->real_escape_string($email);
-        $sql   = "DELETE FROM pacientes WHERE email = '$email'";
-
-        return $this->mysqli->query($sql);
-    }
-
-    public function renderizarTabelaPaciente()
-    {
-        $listaPacientes = $this->listarPacientes();
+        $listaPacientes = $pDao->listarPacientes();
         $html           = '<div class="table-responsive mt-3">
                     <table class="table table-striped">
                         <thead>
@@ -217,7 +56,7 @@ class Paciente extends Pessoa
         return $html;
     }
 
-    public function renderizarFormularioEdicao($paciente)
+    public static function renderizarFormularioEdicao($paciente)
     {
         $html = '<div class="card-body bg-body-tertiary">
                     <form action="editarPaciente.php" method="POST">
