@@ -15,36 +15,7 @@ public class Exame {
         this.data = data;
         this.dados = dados;
     }
-    public Exame(String dataEntrada, String dataEntrega, String data, double hemacia, double hemoglobina,
-            double hematocrito, double vcm, double hcm, double chcm, double rdw, double leucocitos, double neutrofilos,
-            double blastos, double promielocitos, double mielocitos, double metamielocitos, double bastonetes,
-            double segmentados, double eosinofilos, double basofilos, double plaquetas, double volPlaquetarioMedio) {
-
-        this.dataEntrada = dataEntrada;
-        this.dataEntrega = dataEntrega;
-        this.data = data;
-
-        this.dados.put("hemacia", hemacia);
-        this.dados.put("hemoglobina", hemoglobina);
-        this.dados.put("hematocrito", hematocrito);
-        this.dados.put("vcm", vcm);
-        this.dados.put("hcm", hcm);
-        this.dados.put("chcm", chcm);
-        this.dados.put("rdw", rdw);
-        this.dados.put("leucocitos", leucocitos);
-        this.dados.put("neutrofilos", neutrofilos);
-        this.dados.put("blastos", blastos);
-        this.dados.put("promielocitos", promielocitos);
-        this.dados.put("mielocitos", mielocitos);
-        this.dados.put("metamielocitos", metamielocitos);
-        this.dados.put("bastonetes", bastonetes);
-        this.dados.put("segmentados", segmentados);
-        this.dados.put("eosinofilos", eosinofilos);
-        this.dados.put("basofilos", basofilos);
-        this.dados.put("plaquetas", plaquetas);
-        this.dados.put("volPlaquetarioMedio", volPlaquetarioMedio);
-        
-    }
+    
 
     public String getDataEntrada() {
         return dataEntrada;

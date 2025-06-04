@@ -91,7 +91,6 @@ public class SistemaController {
 
     }
 
-
     private boolean receberSimNao(){
         char entrada;
         do{
