@@ -11,7 +11,7 @@ class UsuarioView{
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Número</th>
                                 <th>Nome</th>
                                 <th>Email</th>
                                 <th>Administrador</th>
