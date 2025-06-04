@@ -1,15 +1,15 @@
 package model;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Exame {
     private String dataEntrada, dataEntrega, data;
-    private HashMap<String, Double> dados = new HashMap<>();
+    private LinkedHashMap<String, Double> dados = new LinkedHashMap<>();
 
     public static final String[] NOME_DADOS = {"hemacia", "hemoglobina", "hematocrito", "vcm", "hcm", "chcm", "rdw", "leucocitos", "neutrofilos", "blastos", "promielocitos", "mielocitos", "metamielocitos", "bastonetes", "segmentados", "eosinofilos", "basofilos", "plaquetas", "volPlaquetarioMedio"};
 
     public Exame(){}
-    public Exame(String dataEntrada, String dataEntrega, String data, HashMap<String, Double> dados){
+    public Exame(String dataEntrada, String dataEntrega, String data, LinkedHashMap<String, Double> dados){
         this.dataEntrada = dataEntrada;
         this.dataEntrega = dataEntrega;
         this.data = data;
@@ -41,7 +41,7 @@ public class Exame {
         this.data = data;
     }
 
-    public HashMap<String, Double> getListaDados(){
+    public LinkedHashMap<String, Double> getListaDados(){
         return this.dados;
     }
 

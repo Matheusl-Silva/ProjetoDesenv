@@ -1,7 +1,6 @@
 package controller;
-
 import java.util.Scanner;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import model.Exame;
 import model.Paciente;
 import model.Usuario;
@@ -82,8 +81,8 @@ public class SistemaController {
             valores[i] = scan.nextDouble();
             i++;
         }
-        HashMap<String, Double> dados = new HashMap<>();
-        for(i = 0; i < valores.length; i++){ //Coloca todos os valores no hashmap 
+        LinkedHashMap<String, Double> dados = new LinkedHashMap<>();
+        for(i = 0; i < valores.length; i++){ //Coloca todos os valores no LinkedHashMap 
             dados.put(Exame.NOME_DADOS[i], valores[i]);
         }
         Exame e = new Exame(dataEntrada, dataEntrega, data, dados);

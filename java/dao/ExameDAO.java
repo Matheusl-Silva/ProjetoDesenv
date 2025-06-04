@@ -1,7 +1,7 @@
 package dao;
 
 import model.Exame;
-import java.util.HashMap;
+import java.util.Map;
 
 public class ExameDAO {
     public void salvarExame(Exame e){ // precisa adicionar o paciente, responsavel e preceptor, mas como faz isso se a classe não tem ID?
@@ -9,7 +9,7 @@ public class ExameDAO {
         StringBuilder dados = new StringBuilder();
         StringBuilder valores = new StringBuilder();
 
-        for(HashMap.Entry<String, Double> entry : e.getListaDados().entrySet()){
+        for(Map.Entry<String, Double> entry : e.getListaDados().entrySet()){
             dados.append(entry.getKey()).append(", ");
             valores.append(entry.getValue()).append(", ");
         }
