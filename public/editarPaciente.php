@@ -1,8 +1,10 @@
 <?php
 require_once '../database/ConexaoClass.php';
 require_once '../models/AutenticacaoClass.php';
-require_once '../models/PessoaClass.php';
-require_once '../models/PacienteClass.php';
+require_once '../models/PessoaModel.php';
+require_once '../models/PacienteModel.php';
+require_once '../dao/PacienteDAO.php';
+require_once '../views/PacienteView.php';
 
 $bd     = new Conexao();
 $mysqli = $bd->getConexao();
@@ -12,7 +14,7 @@ $auth->verificarLogin();
 $auth->verificarAcessoAdmin();
 $nome_usuario = $auth->getNomeUsuario();
 
-$pacienteObj = new Paciente();
+$pacienteObj = new PacienteDAO();
 $mensagem    = '';
 $paciente    = null;
 
@@ -86,12 +88,12 @@ if (isset($_POST['atualizar_paciente'])) {
 
                 <!--Decide se gera a tabela com usuários ou o formulário para edição-->
                 <?php if (!$paciente): ?>
-                    <?php echo $pacienteObj->renderizarTabelaPaciente(); ?>
+                    <?php echo PacienteView::renderizarTabelaPaciente(); ?>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-3">
                         <a href="homeUsuario.php">Voltar para a tela de usuário</a>
                     </div>
                 <?php else: ?>
-                    <?php echo $pacienteObj->renderizarFormularioEdicao($paciente); ?>
+                    <?php echo PacienteView::renderizarFormularioEdicao($paciente); ?>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center">
                         <a href="editarUsuario.php" class="me-3">Voltar para a lista</a>
                         <a href="homeUsuario.php">Voltar para a tela de usuário</a>

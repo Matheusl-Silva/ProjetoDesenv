@@ -1,15 +1,17 @@
 <?php
 require_once '../database/ConexaoClass.php';
 require_once '../models/AutenticacaoClass.php';
-require_once '../models/PessoaClass.php';
-require_once '../models/UsuarioClass.php';
+require_once '../models/PessoaModel.php';
+require_once '../models/UsuarioModel.php';
+require_once '../dao/UsuarioDAO.php';
+require_once '../views/UsuarioView.php';
 
 $auth = new Autenticacao();
 $auth->verificarLogin();
 $auth->verificarAcessoAdmin();
 $nome_usuario = $auth->getNomeUsuario();
 
-$usuarioObj = new Usuario();
+$usuarioObj = new UsuarioDAO();
 $mensagem   = '';
 $usuario    = null;
 
@@ -81,12 +83,12 @@ if (isset($_POST['atualizar_usuario'])) {
 
                 <!--Decide se gera a tabela com usuários ou o formulário para edição-->
                 <?php if (!$usuario): ?>
-                    <?php echo $usuarioObj->renderizarTabelaUsuarios(); ?>
+                    <?php echo UsuarioView::renderizarTabelaUsuarios(); ?>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-3">
                         <a href="homeUsuario.php">Voltar para a tela de usuário</a>
                     </div>
                 <?php else: ?>
-                    <?php echo $usuarioObj->renderizarFormularioEdicao($usuario); ?>
+                    <?php echo UsuarioView::renderizarFormularioEdicao($usuario); ?>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center">
                         <a href="editarUsuario.php" class="me-3">Voltar para a lista</a>
                         <a href="homeUsuario.php">Voltar para a tela de usuário</a>
