@@ -11,9 +11,9 @@ public class PacienteDAO {
         p.getFone(),
         p.getEmail(),
         p.getNomeMae(),
-        p.getTomaMedicamento() ? "medSim" : "medNao",
+        p.getTomaMedicamento() ? 'S' : 'N',
         p.getTomaMedicamento() ? "'" + p.getMedicamento() + "'" : "null",
-        p.getTrataPatologia() ? "patSim" : "patNao",
+        p.getTrataPatologia() ? 'S' : 'N',
         p.getTrataPatologia() ? "'" + p.getPatologia() + "'" : "null",
         p.getDataCadastro());
 
