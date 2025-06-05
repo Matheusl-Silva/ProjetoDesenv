@@ -24,13 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $tomaMedicamento = mysqli_real_escape_string($mysqli, $_POST['tomaMedicamento']);
     $medicamento     = "";
-    if ($tomaMedicamento == "medSim") {
+    if ($tomaMedicamento == "S") {
         $medicamento = mysqli_real_escape_string($mysqli, $_POST['medicamento']);
     }
 
     $trataPatologia = mysqli_real_escape_string($mysqli, $_POST['trataPatologia']);
     $patologia      = "";
-    if ($trataPatologia == "patSim") {
+    if ($trataPatologia == "S") {
         $patologia = mysqli_real_escape_string($mysqli, $_POST['patologia']);
     }
 
@@ -127,13 +127,13 @@ $bd->fecharConexao();
 
                     <p class="form-label">Toma algum medicamento contínuo? Se sim, qual?</p>
                     <div class="form-check">
-                        <input type="radio" id="medNao" class="form-check-input" name="tomaMedicamento" value="medNao" checked>
+                        <input type="radio" id="medNao" class="form-check-input" name="tomaMedicamento" value="N" checked>
                         <label for="medNao" class="form-check-label">Não</label>
                     </div>
                     <div class="form-check container">
                         <div class="row d-flex align-items-center">
                             <div class="col-md-2">
-                                <input type="radio" id="medSim" class="form-check-input" name="tomaMedicamento" value="medSim">
+                                <input type="radio" id="medSim" class="form-check-input" name="tomaMedicamento" value="S">
                                 <label for="medSim" class="form-check-label">Sim:</label>
                             </div>
                             <div class="col-md" style="padding:0">
@@ -144,13 +144,13 @@ $bd->fecharConexao();
 
                     <p class="form-label">Trata alguma patologia? Se sim, qual?</p>
                     <div class="form-check">
-                        <input type="radio" id="patNao" class="form-check-input" name="trataPatologia" value="patNao" checked>
+                        <input type="radio" id="patNao" class="form-check-input" name="trataPatologia" value="N" checked>
                         <label for="patNao" class="form-check-label">Não</label>
                     </div>
                     <div class="form-check container">
                         <div class="row d-flex align-items-center">
                             <div class="col-md-2">
-                                <input type="radio" id="patSim" class="form-check-input" name="trataPatologia" value="patSim">
+                                <input type="radio" id="patSim" class="form-check-input" name="trataPatologia" value="S">
                                 <label for="patSim" class="form-check-label">Sim:</label>
                             </div>
                             <div class="col-md" style="padding:0">

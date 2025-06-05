@@ -34,8 +34,8 @@ class PacienteView
                         <td>' . htmlspecialchars($paciente["data_nascimento"]) . '</td>
                         <td>' . htmlspecialchars($paciente["telefone"]) . '</td>
                         <td>' . htmlspecialchars($paciente["nome_mae"]) . '</td>
-                        <td>' . ($paciente["toma_medicamento"] === "medSim" ? htmlspecialchars($paciente["medicamento"]) : "Não") . '</td>
-                        <td>' . ($paciente["trata_patologia"] === "patSim" ? htmlspecialchars($paciente["patologia"]) : "Não") . '</td>
+                        <td>' . ($paciente["toma_medicamento"] === "S" ? htmlspecialchars($paciente["medicamento"]) : "Não") . '</td>
+                        <td>' . ($paciente["trata_patologia"] === "S" ? htmlspecialchars($paciente["patologia"]) : "Não") . '</td>
                         <td>
                             <div class="d-flex gap-2">
                                 <form action="editarPaciente.php" method="POST" style="display: inline;">
@@ -118,17 +118,17 @@ class PacienteView
                             <div class="form-group col">
                                 <label class="form-label">Toma algum medicamento contínuo?</label>
                                 <div class="form-check">
-                                    <input type="radio" id="medNao" class="form-check-input" name="toma_medicamento" value="medNao" ' . ($paciente["toma_medicamento"] === "medNao" ? "checked" : "") . '>
+                                    <input type="radio" id="medNao" class="form-check-input" name="toma_medicamento" value="N" ' . ($paciente["toma_medicamento"] === "N" ? "checked" : "") . '>
                                     <label for="medNao" class="form-check-label">Não</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="radio" id="medSim" class="form-check-input" name="toma_medicamento" value="medSim" ' . ($paciente["toma_medicamento"] === "medSim" ? "checked" : "") . '>
+                                    <input type="radio" id="medSim" class="form-check-input" name="toma_medicamento" value="S" ' . ($paciente["toma_medicamento"] === "S" ? "checked" : "") . '>
                                     <label for="medSim" class="form-check-label">Sim</label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row" id="medicamentoContainer" style="display: ' . ($paciente["toma_medicamento"] === "medSim" ? "block" : "none") . ';">
+                        <div class="row" id="medicamentoContainer" style="display: ' . ($paciente["toma_medicamento"] === "S" ? "block" : "none") . ';">
                             <div class="form-group col">
                                 <label for="medicamento" class="form-label">Qual medicamento?</label>
                                 <input type="text" class="form-control mb-2" name="medicamento" id="medicamento"
@@ -140,17 +140,17 @@ class PacienteView
                             <div class="form-group col">
                                 <label class="form-label">Trata alguma patologia?</label>
                                 <div class="form-check">
-                                    <input type="radio" id="patNao" class="form-check-input" name="trata_patologia" value="patNao" ' . ($paciente["trata_patologia"] === "patNao" ? "checked" : "") . '>
+                                    <input type="radio" id="patNao" class="form-check-input" name="trata_patologia" value="N" ' . ($paciente["trata_patologia"] === "N" ? "checked" : "") . '>
                                     <label for="patNao" class="form-check-label">Não</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="radio" id="patSim" class="form-check-input" name="trata_patologia" value="patSim" ' . ($paciente["trata_patologia"] === "patSim" ? "checked" : "") . '>
+                                    <input type="radio" id="patSim" class="form-check-input" name="trata_patologia" value="S" ' . ($paciente["trata_patologia"] === "S" ? "checked" : "") . '>
                                     <label for="patSim" class="form-check-label">Sim</label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row" id="patologiaContainer" style="display: ' . ($paciente["trata_patologia"] === "patSim" ? "block" : "none") . ';">
+                        <div class="row" id="patologiaContainer" style="display: ' . ($paciente["trata_patologia"] === "S" ? "block" : "none") . ';">
                             <div class="form-group col">
                                 <label for="patologia" class="form-label">Qual patologia?</label>
                                 <input type="text" class="form-control mb-2" name="patologia" id="patologia"
