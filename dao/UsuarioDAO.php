@@ -1,4 +1,5 @@
 <?php
+
 class UsuarioDAO
 {
     private $mysqli;
@@ -62,5 +63,34 @@ class UsuarioDAO
 
         $sql = "INSERT INTO usuarios (nome, email, senha, adm) VALUES ('$nome', '$email', '$senha', '$admin')";
         return $this->mysqli->query($sql);
+    }
+
+    public function buscarUsuario($email)
+    {
+        $email = $this->mysqli->real_escape_string($email);
+
+        $sql       = "SELECT * FROM usuarios WHERE email = '$email'";
+        $resultado = $this->mysqli->query($sql);
+
+        if ($resultado && $resultado->num_rows > 0) {
+            return $resultado->fetch_assoc();
+        }
+
+        return null;
+    }
+
+    public function atualizarSenha($email, $novaSenha)
+    {
+        $sql  = "UPDATE usuarios SET senha = ? WHERE email = ?";
+        $stmt = $this->mysqli->prepare($sql);
+        return $stmt->execute([$novaSenha, $email]);
+    }
+
+    public function updatePassword($email, $novaSenhaRec): bool
+    {
+        $sql  = "UPDATE usuarios SET senha = ? WHERE email = ?";
+        $stmt = $this->mysqli->prepare($sql);
+        $stmt->bind_param("ss", $novaSenhaRec, $email);
+        return $stmt->execute();
     }
 }
