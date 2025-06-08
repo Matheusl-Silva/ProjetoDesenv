@@ -1,0 +1,27 @@
+{
+  "name": "projetodesenv",
+  "version": "1.0.0",
+  "description": "Projeto Integrado",
+  "homepage": "https://github.com/Matheusl-Silva/ProjetoDesenv#readme",
+  "bugs": {
+    "url": "https://github.com/Matheusl-Silva/ProjetoDesenv/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matheusl-Silva/ProjetoDesenv.git"
+  },
+  "license": "ISC",
+  "author": "Matheus,Kudlake,Pedro",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  }
+}
