@@ -80,7 +80,7 @@ if (isset($_POST['reset'])) {
             ";
 
             if ($mail->send()) {
-                header("Location: ../views/Auth/login.php?msg=senha_enviada");
+                header("Location: ../views/Auth/recover.php?msg=senha_enviada");
                 exit;
             } else {
                 header("Location: ../views/Auth/recover.php?error=email_error");
