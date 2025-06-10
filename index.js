@@ -6,7 +6,7 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Configurando o diretório de views para servir arquivos PHP
+// Acessar os phps, alterado o caminho pois o padrão vai para o views
 app.use(express.static("views"));
 
 // Rotas de Autenticação
@@ -16,16 +16,15 @@ app.get("/login", (req, res) => {
 
 app.post("/login", (req, res) => {
   const { email, senha } = req.body;
-
-  res.redirect("/dashboard");
+  res.redirect("/homeUsuario.php");
 });
 
-app.get("/usuarios", (req, res) => {
-  res.sendFile(__dirname + "/views/UsuarioView.php");
+app.get("/homeUsuario.php", (req, res) => {
+  res.sendFile(__dirname + "/public/homeUsuario.php");
 });
 
 app.post("/usuario/cadastrar", (req, res) => {
-  const { nome, email, senha, tipo } = req.body;
+  const { nome, email, senha } = req.body;
 
   res.send("Usuário cadastrado com sucesso");
 });
