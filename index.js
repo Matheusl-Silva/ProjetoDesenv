@@ -49,11 +49,17 @@ app.get("/paciente/editar/:id", (req, res) => {
   res.sendFile(__dirname + "/views/PacienteView.php");
 });
 
-app.post("/paciente/atualizar/:id", (req, res) => {
+app.put("/paciente/atualizar/:id", (req, res) => {
   const idPaciente = req.params.id;
   const { nome, cpf, dataNascimento, endereco } = req.body;
 
   res.send("Paciente atualizado com sucesso");
+});
+
+app.delete("/paciente/deletar/:id", (req, res) => {
+  const idPaciente = req.params.id;
+
+  res.send("Paciente deletado com sucesso");
 });
 
 app.get("/", (req, res) => {
