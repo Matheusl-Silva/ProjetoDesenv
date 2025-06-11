@@ -67,7 +67,7 @@ if (isset($_POST['buscar_paciente']) && !empty($_POST['numero_paciente'])) {
         </div>
 
         <!-- modal para id não encontrado -->
-        <?php if (!empty($mensagem)) : ?>
+        <?php if (!empty($mensagem)): ?>
             <div class="modal fade" id="mensagemModal" tabindex="-1" aria-labelledby="mensagemModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -89,7 +89,7 @@ if (isset($_POST['buscar_paciente']) && !empty($_POST['numero_paciente'])) {
         <?php endif; ?>
 
         <!-- buscar pelo id-->
-        <?php if (!$paciente) : ?>
+        <?php if (!$paciente): ?>
             <div class="d-flex align-items-center justify-content-center min-vh-100">
                 <div class="col-md-6 card shadow p-4 bg-body-tertiary rounded">
                     <div class="card-header bg-body-tertiary text-center mb-3">
@@ -107,7 +107,7 @@ if (isset($_POST['buscar_paciente']) && !empty($_POST['numero_paciente'])) {
                     </div>
                 </div>
             </div>
-        <?php else : ?>
+        <?php else: ?>
 
             <div class="row justify-content-center">
                 <div class="col-12">
@@ -147,19 +147,19 @@ if (isset($_POST['buscar_paciente']) && !empty($_POST['numero_paciente'])) {
                                 <div class="col-md-2">
                                     <label for="entradaPaciente" class="form-label">Entrada</label>
                                     <input type="date" class="form-control" name="entradaPaciente" id="entradaPaciente"
-                                        value="<?php echo date('Y-m-d'); ?>" />
+                                        value="" />
                                 </div>
 
                                 <div class="col-md-3">
                                     <label for="dataHora" class="form-label">Exame realizado em</label>
                                     <input type="datetime-local" class="form-control" name="dataHora" id="dataHora"
-                                        value="<?php echo date('Y-m-d\TH:i'); ?>" />
+                                        value="" />
                                 </div>
 
                                 <div class="col-md-2">
                                     <label for="dataPrevista" class="form-label">Entrega</label>
                                     <input type="date" class="form-control" name="dataPrevista" id="dataPrevista"
-                                        value="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" />
+                                        value="" />
                                 </div>
                             </div>
 
@@ -336,7 +336,7 @@ if (isset($_POST['buscar_paciente']) && !empty($_POST['numero_paciente'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- script da modal de id não encontrado -->
-    <?php if (!empty($mensagem)) : ?>
+    <?php if (!empty($mensagem)): ?>
             <script>
                 var mensagemModal = new bootstrap.Modal(document.getElementById('mensagemModal'));
                 mensagemModal.show();
@@ -345,7 +345,7 @@ if (isset($_POST['buscar_paciente']) && !empty($_POST['numero_paciente'])) {
     <script>
 
     //script da modal de busca pelo id
-        <?php if (!$paciente && !isset($_POST['buscar_paciente'])) : ?>
+        <?php if (!$paciente && !isset($_POST['buscar_paciente'])): ?>
             document.addEventListener('DOMContentLoaded', function() {
                 var myModal = new bootstrap.Modal(document.getElementById('pesquisaModal'));
                 myModal.show();
