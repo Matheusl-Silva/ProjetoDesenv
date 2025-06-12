@@ -1,66 +1,81 @@
 <?php
-class PacienteDAO{
-    private $mysqli;
-
-    public function __construct(){
-        require_once __DIR__ . "/../database/conexaoClass.php";
-        $bd           = new Conexao();
-        $this->mysqli = $bd->getConexao();
-    }
-
+class PacienteDAO
+{
     public function listarPacientes()
     {
-        $sql       = "SELECT * FROM pacientes ORDER BY id";
-        $resultado = $this->mysqli->query($sql);
+        $url = "http://localhost:3000/pacientes";
+        $result = file_get_contents($url);
+        $lista = json_decode($result, true);
         $pacientes = [];
-
-        if ($resultado) {
-            while ($row = $resultado->fetch_assoc()) {
-                $pacientes[] = $row;
-            }
+        foreach ($lista as $p) {
+            $pacientes[] = $this->converterParaObj($p);
         }
-
         return $pacientes;
     }
 
-    public function atualizarPacientes($nome, $email, $periodo, $data_nascimento, $telefone, $nome_mae, $toma_medicamento, $medicamento, $trata_patologia, $patologia)
+    private function converterParaObj($row)
     {
-        $nome             = $this->mysqli->real_escape_string($nome);
-        $email            = $this->mysqli->real_escape_string($email);
-        $periodo          = $this->mysqli->real_escape_string($periodo);
-        $data_nascimento  = $this->mysqli->real_escape_string($data_nascimento);
-        $telefone         = $this->mysqli->real_escape_string($telefone);
-        $nome_mae         = $this->mysqli->real_escape_string($nome_mae);
-        $toma_medicamento = $this->mysqli->real_escape_string($toma_medicamento);
-        $medicamento      = $this->mysqli->real_escape_string($medicamento);
-        $trata_patologia  = $this->mysqli->real_escape_string($trata_patologia);
-        $patologia        = $this->mysqli->real_escape_string($patologia);
+        $p = new Paciente();
+        $p->setNome($row['nome']);
+        $p->setEmail($row['email']);
+        $p->setPeriodo($row['$periodo']);
+        $p->setDataNasc($row['dataNasc']);
+        $p->setFone($row['fone']);
+        $p->setNomeMae($row['nomeMae']);
+        $p->setTomaMedicamento($row['tomaMedicamento']);
+        $p->setMedicamento($row['medicamento']);
+        $p->setTrataPatologia($row['trataPatologia']);
+        $p->setPatologia($row['patologia']);
+    }
 
-        $sql = "UPDATE pacientes SET
-                nome = '$nome',
-                email = '$email',
-                periodo = '$periodo',
-                data_nascimento = '$data_nascimento',
-                telefone = '$telefone',
-                nome_mae = '$nome_mae',
-                toma_medicamento = '$toma_medicamento',
-                medicamento = '$medicamento',
-                trata_patologia = '$trata_patologia',
-                patologia = '$patologia'
-                WHERE email = '$email'";
+    public function atualizarPacientes($nome, $email, $periodo, $dataNasc, $telefone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia)
+    {
+        $url = "http://localhost:3000/pacientes" . $email;
+        $dados = [
+            "nome" => $nome,
+            "email" => $email,
+            "periodo" => $periodo,
+            "dataNasc" => $dataNasc,
+            "telefone" => $telefone,
+            "nomeMae" => $nomeMae,
+            "tomaMedicamento" => $tomaMedicamento,
+            "medicamento" => $medicamento,
+            "trataPatologia" => $trataPatologia,
+            "patologia" => $patologia
+        ];
 
-        if ($this->mysqli->query($sql)) {
-            return true;
+        $options = [
+            "http" => [
+                "header" => "Content-Type: application/json\r\n",
+                "method" => "PUT",
+                "content" => json_encode($dados)
+            ]
+        ];
+
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+
+        if ($result === FALSE) {
+            return ["erro" => "Falha na requisição PUT"];
         }
-
-        return false;
+        return json_decode($result);
     }
 
     public function excluirPaciente($email)
     {
-        $email = $this->mysqli->real_escape_string($email);
-        $sql   = "DELETE FROM pacientes WHERE email = '$email'";
+        $url = "http://localhost:3000/pacientes" . $email;
+        $options = [
+            "http" => [
+                "header" => "Content-Type: application/json\r\n",
+                "method" => "DELETE"
+            ]
+        ];
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
 
-        return $this->mysqli->query($sql);
+        if($result === FALSE){
+            return ["erro" => "Erro ao excluir paciente"];
+        }
+        return json_decode($result);
     }
 }

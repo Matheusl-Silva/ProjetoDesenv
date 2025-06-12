@@ -1,96 +1,115 @@
 <?php
-
 class UsuarioDAO
 {
-    private $mysqli;
-
-    public function __construct()
+    //CREATE
+    public function cadastrarUsuario($nome, $email, $senha, $admin)
     {
-        require_once __DIR__ . "/../database/conexaoClass.php";
-        $bd           = new Conexao();
-        $this->mysqli = $bd->getConexao();
+        $url = "http://localhost:3000/usuarios";
+        $dados = [
+            "nome" => $nome,
+            "endereco" => $email,
+            "senha" => $senha,
+            "admin" => $admin
+        ];
+
+        $options = [
+            "http" => [
+                "header" => "Content-Type: application/json\r\n",
+                "method" => "POST",
+                "content" => json_encode($dados)
+            ]
+        ];
+
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context); //Faz a requisição
+        return $result ? json_decode($result, true) : false;
     }
+
+    //READ
     public function listarUsuarios()
     {
-        $sql       = "SELECT * FROM usuarios ORDER BY id";
-        $resultado = $this->mysqli->query($sql);
-        $usuarios  = [];
-
-        if ($resultado) {
-            while ($row = $resultado->fetch_assoc()) {
-                $usuarios[] = $row;
-            }
+        $url = "http://localhost:3000/usuarios";
+        $result = file_get_contents($url);
+        $lista = json_decode($result);
+        $usuarios = [];
+        foreach ($lista as $users) {
+            $usuarios[] = $this->converterParaObj($users);
         }
-
         return $usuarios;
     }
 
+    private function converterParaObj($row)
+    {
+        $u = new Usuario();
+        $u->setNome(htmlspecialchars($row['nome']));
+        $u->setEmail(htmlspecialchars($row['email']));
+        $u->setSenha(htmlspecialchars($row['senha']));
+        $u->setAdmin(htmlspecialchars($row['admin']));
+        return $u;
+    }
+
+    //UPDATE
     public function atualizarUsuario($nome, $email, $senha, $admin)
     {
-        $nome  = $this->mysqli->real_escape_string($nome);
-        $email = $this->mysqli->real_escape_string($email);
-        $senha = $this->mysqli->real_escape_string($senha);
-        $admin = $this->mysqli->real_escape_string($admin);
+        $url = "http://localhost:3000/usuarios/" . urlencode($email);
+        $dados = [
+            "nome" => $nome,
+            "endereco" => $email,
+            "senha" => $senha,
+            "admin" => $admin
+        ];
 
-        $sql = "UPDATE usuarios SET
-                nome = '$nome',
-                email = '$email',
-                senha = '$senha',
-                adm = '$admin'
-                WHERE email = '$email'";
+        $options = [
+            "http" => [
+                "header" => "Content-Type: application/json\r\n",
+                "method" => "PUT",
+                "content" => json_encode($dados)
+            ]
+        ];
 
-        if ($this->mysqli->query($sql)) {
-            return true;
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+
+        if ($result === FALSE) {
+            return ["erro" => "Falha na requisição PUT"];
         }
 
-        return false;
+        return json_decode($result, true);
     }
 
-    public function excluirUsuario($email)
-    {
-        $email = $this->mysqli->real_escape_string($email);
-        $sql   = "DELETE FROM usuarios WHERE email = '$email'";
-
-        return $this->mysqli->query($sql);
-    }
-
-    public function cadastrarUsuario($nome, $email, $senha, $admin)
-    {
-        $nome  = $this->mysqli->real_escape_string($nome);
-        $email = $this->mysqli->real_escape_string($email);
-        $senha = $this->mysqli->real_escape_string($senha);
-        $admin = $this->mysqli->real_escape_string($admin);
-
-        $sql = "INSERT INTO usuarios (nome, email, senha, adm) VALUES ('$nome', '$email', '$senha', '$admin')";
-        return $this->mysqli->query($sql);
-    }
-
-    public function buscarUsuario($email)
-    {
-        $email = $this->mysqli->real_escape_string($email);
-
-        $sql       = "SELECT * FROM usuarios WHERE email = '$email'";
-        $resultado = $this->mysqli->query($sql);
-
-        if ($resultado && $resultado->num_rows > 0) {
-            return $resultado->fetch_assoc();
+    //BUSCAR POR EMAIL
+    public function buscarUsuario($email){
+        $url = "http://localhost:3000/usuarios/" . urlencode($email);
+        try{
+            $response = @file_get_contents($url);
+            if($response === FALSE) return null;
+            $data = json_decode($response, true);
+            if($data){
+                return $this->converterParaObj($data);
+            }
+            return null;
+        }catch(Exception $e){
+            echo "Erro ao buscar usuário: {$e->getMessage()}";
+            return null;
         }
-
-        return null;
     }
 
-    public function atualizarSenha($email, $novaSenha)
-    {
-        $sql  = "UPDATE usuarios SET senha = ? WHERE email = ?";
-        $stmt = $this->mysqli->prepare($sql);
-        return $stmt->execute([$novaSenha, $email]);
-    }
+    //DELETE
+    public function excluirUsuario($email){
+        $url = "http://localhost:3000/usuarios/" . urlencode($email);
 
-    public function updatePassword($email, $novaSenhaRec): bool
-    {
-        $sql  = "UPDATE usuarios SET senha = ? WHERE email = ?";
-        $stmt = $this->mysqli->prepare($sql);
-        $stmt->bind_param("ss", $novaSenhaRec, $email);
-        return $stmt->execute();
+        $options = [
+            "http" => [
+                "header" => "Content-Type: application/json\r\n",
+                "method" => "DELETE"
+            ]
+            ];
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+
+        if($result === FALSE){
+            echo ["erro" => "Erro ao excluir usuário"];
+        }
+        return json_decode($result);
     }
 }
