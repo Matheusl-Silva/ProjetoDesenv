@@ -10,7 +10,6 @@ $auth = new Autenticacao();
 $auth->verificarLogin();
 $auth->verificarAcessoAdmin();
 $nome_usuario = $auth->getNomeUsuario();
-
 $usuarioObj = new UsuarioDAO();
 $mensagem   = '';
 $usuario    = null;

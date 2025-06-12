@@ -1,8 +1,11 @@
 <?php
-include '../database/conexaoClass.php';
+require_once '../database/conexaoClass.php';
+require_once '../dao/UsuarioDAO.php';
 
 $db     = new Conexao();
 $mysqli = $db->getConexao();
+
+$usuarioDAO = new UsuarioDAO();
 
 $mensagem    = "";
 $tipo_alerta = "";
@@ -30,14 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mensagem    = "Este e-mail já está cadastrado!";
             $tipo_alerta = "warning";
         } else {
-
-            // Prepara a query para inserção
-            $sql  = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
-            $stmt = $mysqli->prepare($sql);
-            $stmt->bind_param("sss", $nome, $email, $senha);
-
+            
             // Executa a query
-            if ($stmt->execute()) {
+            $result = $usuarioDAO->cadastrarUsuario($nome, $email, $senha, $admin);
+            
+            if ($result) {
                 $mensagem    = "Usuário cadastrado com sucesso!";
                 $tipo_alerta = "success";
 

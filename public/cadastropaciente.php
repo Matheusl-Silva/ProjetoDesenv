@@ -1,9 +1,12 @@
 <?php
 require_once '../models/AutenticacaoClass.php';
+require_once '../dao/PacienteDAO.php';
 
 $auth = new Autenticacao();
 $auth->verificarLogin();
 $nome_usuario = $auth->getNomeUsuario();
+
+$pacienteDAO = new PacienteDAO();
 
 include_once "../database/conexaoClass.php";
 
@@ -34,31 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $patologia = mysqli_real_escape_string($mysqli, $_POST['patologia']);
     }
 
-    $sql = "INSERT INTO pacientes (
-                periodo,
-                nome,
-                data_nascimento,
-                telefone,
-                email,
-                nome_mae,
-                toma_medicamento,
-                medicamento,
-                trata_patologia,
-                patologia
-            ) VALUES (
-                '$periodo',
-                '$nome',
-                '$datanasc',
-                '$fone',
-                '$email',
-                '$nomeMae',
-                '$tomaMedicamento',
-                '$medicamento',
-                '$trataPatologia',
-                '$patologia'
-            )";
+    $result = $pacienteDAO->cadastrarPaciente($nome, $email, $periodo, $dataNasc, $fone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia);
 
-    if ($mysqli->query($sql)) {
+    if ($result) {
         $ultimo_id = $mysqli->insert_id;
         echo "<script>alert('Paciente cadastrado com sucesso! Número do Paciente Cadastrado: " . $ultimo_id . "'); window.location.href='../public/homeUsuario.php';</script>";
     } else {
