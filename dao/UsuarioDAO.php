@@ -110,6 +110,6 @@ class UsuarioDAO
         if($result === FALSE){
             echo ["erro" => "Erro ao excluir usuário"];
         }
-        return json_decode($result);
+        return json_decode($result, true);
     }
 }

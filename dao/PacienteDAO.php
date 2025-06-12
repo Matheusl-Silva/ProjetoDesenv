@@ -1,6 +1,34 @@
 <?php
 class PacienteDAO
 {
+
+    public function cadastrarPaciente($nome, $email, $periodo, $dataNasc, $telefone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia){
+        $url = "https://localhost:3000/pacientes";
+        $dados = [
+            "nome" => $nome,
+            "email" => $email,
+            "periodo" => $periodo,
+            "dataNasc" => $dataNasc,
+            "telefone" => $telefone,
+            "nomeMae" => $nomeMae,
+            "tomaMedicamento" => $tomaMedicamento,
+            "medicamento" => $medicamento,
+            "trataPatologia" => $trataPatologia,
+            "patologia" => $patologia
+        ];
+        $options = [
+            "http" => [
+                "header" => "Content-Type: application/json\r\n",
+                "method" => "POST",
+                "content" => json_encode($dados)
+            ]
+        ];
+
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        return $result ? json_decode($result, true) : false;
+    }
+
     public function listarPacientes()
     {
         $url = "http://localhost:3000/pacientes";
@@ -26,6 +54,8 @@ class PacienteDAO
         $p->setMedicamento($row['medicamento']);
         $p->setTrataPatologia($row['trataPatologia']);
         $p->setPatologia($row['patologia']);
+
+        return $p;
     }
 
     public function atualizarPacientes($nome, $email, $periodo, $dataNasc, $telefone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia)
@@ -58,7 +88,7 @@ class PacienteDAO
         if ($result === FALSE) {
             return ["erro" => "Falha na requisição PUT"];
         }
-        return json_decode($result);
+        return json_decode($result, true);
     }
 
     public function excluirPaciente($email)
@@ -76,6 +106,6 @@ class PacienteDAO
         if($result === FALSE){
             return ["erro" => "Erro ao excluir paciente"];
         }
-        return json_decode($result);
+        return json_decode($result, true);
     }
 }
