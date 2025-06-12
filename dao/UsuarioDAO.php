@@ -2,14 +2,13 @@
 class UsuarioDAO
 {
     //CREATE
-    public function cadastrarUsuario($nome, $email, $senha, $admin)
+    public function cadastrarUsuario($nome, $email, $senha)
     {
         $url = "http://localhost:3000/usuarios";
         $dados = [
             "nome" => $nome,
             "endereco" => $email,
-            "senha" => $senha,
-            "admin" => $admin
+            "senha" => $senha
         ];
 
         $options = [

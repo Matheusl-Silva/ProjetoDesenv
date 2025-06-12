@@ -35,20 +35,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             
             // Executa a query
-            $result = $usuarioDAO->cadastrarUsuario($nome, $email, $senha, $admin);
+            $result = $usuarioDAO->cadastrarUsuario($nome, $email, $senha);
             
             if ($result) {
                 $mensagem    = "Usuário cadastrado com sucesso!";
                 $tipo_alerta = "success";
 
                 // Redireciona após 2 segundos (opcional)
-                header("refresh:2;url=../views/Auth/login.php");
+                //header("refresh:2;url=../views/Auth/login.php");
             } else {
-                $mensagem    = "Erro ao cadastrar: " . $stmt->error;
+                $mensagem    = "Erro ao cadastrar";
                 $tipo_alerta = "danger";
             }
-
-            $stmt->close();
         }
         $stmt_verificar->close();
     }

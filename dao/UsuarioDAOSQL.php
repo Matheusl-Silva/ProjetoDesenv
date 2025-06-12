@@ -54,14 +54,13 @@ class UsuarioDAO
         return $this->mysqli->query($sql);
     }
 
-    public function cadastrarUsuario($nome, $email, $senha, $admin)
+    public function cadastrarUsuario($nome, $email, $senha)
     {
         $nome  = $this->mysqli->real_escape_string($nome);
         $email = $this->mysqli->real_escape_string($email);
         $senha = $this->mysqli->real_escape_string($senha);
-        $admin = $this->mysqli->real_escape_string($admin);
 
-        $sql = "INSERT INTO usuarios (nome, email, senha, adm) VALUES ('$nome', '$email', '$senha', '$admin')";
+        $sql = "INSERT INTO usuarios (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
         return $this->mysqli->query($sql);
     }
 

@@ -16,8 +16,6 @@ $mysqli = $bd->getConexao();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // mysqli_real_escape_string previnir sql injection no PHP
-    $registro = mysqli_real_escape_string($mysqli, $_POST['registro']);
-    $data     = mysqli_real_escape_string($mysqli, $_POST['data']);
     $periodo  = mysqli_real_escape_string($mysqli, $_POST['periodo']);
     $nome     = mysqli_real_escape_string($mysqli, $_POST['nome']);
     $datanasc = mysqli_real_escape_string($mysqli, $_POST['datanasc']);
