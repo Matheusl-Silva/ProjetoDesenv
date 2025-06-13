@@ -35,13 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $patologia = mysqli_real_escape_string($mysqli, $_POST['patologia']);
     }
 
-    $result = $pacienteDAO->cadastrarPaciente($nome, $email, $periodo, $dataNasc, $fone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia);
+    $result = $pacienteDAO->cadastrarPaciente($nome, $email, $periodo, $datanasc, $fone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia);
 
     if ($result) {
-        $ultimo_id = $mysqli->insert_id;
-        echo "<script>alert('Paciente cadastrado com sucesso! Número do Paciente Cadastrado: " . $ultimo_id . "'); window.location.href='../public/homeUsuario.php';</script>";
+        echo "<script>alert('Paciente cadastrado com sucesso! Número do Paciente Cadastrado: " . $result . "'); window.location.href='homeUsuario.php';</script>";
     } else {
-        echo "<script>alert('Erro ao cadastrar paciente: " . $mysqli->error . "');</script>";
+        echo "<script>alert('Erro ao cadastrar paciente.');</script>";
     }
 }
 
