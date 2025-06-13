@@ -34,11 +34,8 @@ class PacienteDAO
         $url = "http://localhost:3000/pacientes";
         $result = file_get_contents($url);
         $lista = json_decode($result, true);
-        $pacientes = [];
-        foreach ($lista as $p) {
-            $pacientes[] = $this->converterParaObj($p);
-        }
-        return $pacientes;
+       
+        return $lista;
     }
 
     private function converterParaObj($row)

@@ -95,7 +95,7 @@ if (isset($_POST['atualizar_paciente'])) {
                 <?php else: ?>
                     <?php echo PacienteView::renderizarFormularioEdicao($paciente); ?>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                        <a href="editarUsuario.php" class="me-3">Voltar para a lista</a>
+                        <a href="editarPaciente.php" class="me-3">Voltar para a lista</a>
                         <a href="homeUsuario.php">Voltar para a tela de usuário</a>
                     </div>
                 <?php endif; ?>
