@@ -1,10 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2");
+const http = require ('http');
+const ejs = require("ejs");
 
 const app = express();
+app.use(express.static(__dirname + "/assets"));
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({encoded: true}));
+
+app.set("view engine", "ejs");
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -23,8 +29,5 @@ db.connect((err) => {
 
 app.listen(3000, () => {
     console.log("Servidor rodando na porta 3000.");
-});
-
-app.get('/', (req, res) => {
-
 })
+
