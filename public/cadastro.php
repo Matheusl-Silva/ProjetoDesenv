@@ -1,8 +1,11 @@
 <?php
-include '../database/conexaoClass.php';
+require_once '../database/conexaoClass.php';
+require_once '../dao/UsuarioDAO.php';
 
 $db     = new Conexao();
 $mysqli = $db->getConexao();
+
+$usuarioDAO = new UsuarioDAO();
 
 $mensagem    = "";
 $tipo_alerta = "";
@@ -31,24 +34,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $tipo_alerta = "warning";
         } else {
 
-            // Prepara a query para inserção
-            $sql  = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
-            $stmt = $mysqli->prepare($sql);
-            $stmt->bind_param("sss", $nome, $email, $senha);
-
             // Executa a query
-            if ($stmt->execute()) {
+            $result = $usuarioDAO->cadastrarUsuario($nome, $email, $senha);
+
+            if ($result) {
                 $mensagem    = "Usuário cadastrado com sucesso!";
                 $tipo_alerta = "success";
 
                 // Redireciona após 2 segundos (opcional)
                 header("refresh:2;url=../views/Auth/login.php");
             } else {
-                $mensagem    = "Erro ao cadastrar: " . $stmt->error;
+                $mensagem    = "Erro ao cadastrar";
                 $tipo_alerta = "danger";
             }
-
-            $stmt->close();
         }
         $stmt_verificar->close();
     }

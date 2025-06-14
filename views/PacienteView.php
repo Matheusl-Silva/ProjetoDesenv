@@ -42,9 +42,10 @@ class PacienteView
                                     <input type="hidden" name="email" value="' . ($paciente["email"]) . '">
                                     <button type="submit" name="buscar_paciente" class="btn btn-primary btn-sm" style="width: 60px;">Editar</button>
                                 </form>
-                                <form action="editarPaciente.php" method="POST" style="display: inline;" onsubmit="return confirm(\'Tem certeza que deseja excluir este paciente?\');">
-                                    <input type="hidden" name="email" value="' . ($paciente["email"]) . '">
-                                    <button type="submit" name="excluir_paciente" class="btn btn-danger btn-sm" style="width: 60px;">Excluir</button>
+                                <form action="editarPaciente.php" method="POST" style="display: inline;" id="formExcluir_' . $paciente["email"] . '">
+                                    <input type="hidden" name="email" value="' . $paciente["email"] . '">
+                                    <input type="hidden" name="excluir_paciente" value="1">
+                                    <button type="button" class="btn btn-danger btn-sm" style="width: 60px;" onclick="confirmarExclusao(\'' . $paciente["email"] . '\')">Excluir</button>
                                 </form>
                             </div>
                         </td>
@@ -53,11 +54,47 @@ class PacienteView
 
         $html .= '</tbody></table></div>';
 
+        $html .= '
+        <!-- Modal de Confirmação de Exclusão -->
+        <div class="modal fade" id="modalConfirmacao" tabindex="-1" aria-labelledby="modalConfirmacaoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalConfirmacaoLabel">Confirmar Exclusão</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Tem certeza que deseja excluir este paciente?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" id="btnConfirmarExclusao">Confirmar Exclusão</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        function confirmarExclusao(email) {
+            const modal = new bootstrap.Modal(document.getElementById("modalConfirmacao"));
+            const btnConfirmar = document.getElementById("btnConfirmarExclusao");
+
+            btnConfirmar.onclick = function() {
+                document.getElementById("formExcluir_" + email).submit();
+            };
+
+            modal.show();
+        }
+        </script>';
+
         return $html;
     }
 
     public static function renderizarFormularioEdicao($paciente)
     {
+        $data           = new DateTime($paciente["data_nascimento"]);
+        $data_formatada = $data->format('d/m/Y');
+
         $html = '<div class="card-body bg-body-tertiary">
                     <form action="editarPaciente.php" method="POST">
                         <div class="row">
@@ -93,8 +130,8 @@ class PacienteView
                         <div class="row">
                             <div class="form-group col">
                                 <label for="data_nascimento" class="form-label">Data de Nascimento:</label>
-                                <input type="date" class="form-control mb-2" name="data_nascimento" id="data_nascimento"
-                                    value="' . ($paciente["data_nascimento"]) . '" required>
+                                <input type="text" class="form-control mb-2" name="data_nascimento" id="data_nascimento"
+                                    value="' . $data_formatada . '" placeholder="DD/MM/AAAA" required>
                             </div>
                         </div>
 

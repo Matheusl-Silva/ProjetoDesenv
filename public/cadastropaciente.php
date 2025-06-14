@@ -1,9 +1,12 @@
 <?php
 require_once '../models/AutenticacaoClass.php';
+require_once '../dao/PacienteDAO.php';
 
 $auth = new Autenticacao();
 $auth->verificarLogin();
 $nome_usuario = $auth->getNomeUsuario();
+
+$pacienteDAO = new PacienteDAO();
 
 include_once "../database/conexaoClass.php";
 
@@ -11,10 +14,10 @@ $bd = new Conexao();
 $bd->conectar();
 $mysqli = $bd->getConexao();
 
+$result = null;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // mysqli_real_escape_string previnir sql injection no PHP
-    $registro = mysqli_real_escape_string($mysqli, $_POST['registro']);
-    $data     = mysqli_real_escape_string($mysqli, $_POST['data']);
     $periodo  = mysqli_real_escape_string($mysqli, $_POST['periodo']);
     $nome     = mysqli_real_escape_string($mysqli, $_POST['nome']);
     $datanasc = mysqli_real_escape_string($mysqli, $_POST['datanasc']);
@@ -34,36 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $patologia = mysqli_real_escape_string($mysqli, $_POST['patologia']);
     }
 
-    $sql = "INSERT INTO pacientes (
-                periodo,
-                nome,
-                data_nascimento,
-                telefone,
-                email,
-                nome_mae,
-                toma_medicamento,
-                medicamento,
-                trata_patologia,
-                patologia
-            ) VALUES (
-                '$periodo',
-                '$nome',
-                '$datanasc',
-                '$fone',
-                '$email',
-                '$nomeMae',
-                '$tomaMedicamento',
-                '$medicamento',
-                '$trataPatologia',
-                '$patologia'
-            )";
-
-    if ($mysqli->query($sql)) {
-        $ultimo_id = $mysqli->insert_id;
-        echo "<script>alert('Paciente cadastrado com sucesso! Número do Paciente Cadastrado: " . $ultimo_id . "'); window.location.href='../public/homeUsuario.php';</script>";
-    } else {
-        echo "<script>alert('Erro ao cadastrar paciente: " . $mysqli->error . "');</script>";
-    }
+    $result = $pacienteDAO->cadastrarPaciente($nome, $email, $periodo, $datanasc, $fone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia);
 }
 
 $bd->fecharConexao();
@@ -80,6 +54,42 @@ $bd->fecharConexao();
 </head>
 
 <body class="bg-info-subtle">
+    <!-- Modal de Sucesso -->
+    <div class="modal fade" id="modalSucesso" tabindex="-1" aria-labelledby="modalSucessoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSucessoLabel">Sucesso!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="mensagemSucesso"></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="homeUsuario.php" class="btn btn-primary">Ir para Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Erro -->
+    <div class="modal fade" id="modalErro" tabindex="-1" aria-labelledby="modalErroLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalErroLabel">Erro!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Erro ao cadastrar paciente.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 card shadow p-3 my-5 bg-body-tertiary rounded">
@@ -170,8 +180,9 @@ $bd->fecharConexao();
         </div>
     </div>
 </body>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script>
-        function configurarCaixaDeTexto(idSim, idNao, idCaixa){
+    function configurarCaixaDeTexto(idSim, idNao, idCaixa){
         let sim = document.getElementById(idSim);
         let nao = document.getElementById(idNao);
         let caixa = document.getElementById(idCaixa);
@@ -184,12 +195,19 @@ $bd->fecharConexao();
 
         sim.addEventListener('change', alterarEstado);
         nao.addEventListener('change', alterarEstado);
-
     }
 
     configurarCaixaDeTexto("medSim", "medNao", "medicamento");
     configurarCaixaDeTexto("patSim", "patNao", "patologia");
 
+    <?php if ($result): ?>
+        const modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'));
+        document.getElementById('mensagemSucesso').textContent = 'Paciente cadastrado com sucesso! Número do Paciente Cadastrado: <?php echo $result; ?>';
+        modalSucesso.show();
+    <?php elseif (isset($result)): ?>
+        const modalErro = new bootstrap.Modal(document.getElementById('modalErro'));
+        modalErro.show();
+    <?php endif; ?>
 </script>
 
 </html>

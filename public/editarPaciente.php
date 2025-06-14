@@ -31,7 +31,8 @@ if (isset($_POST['buscar_paciente']) && !empty($_POST['email'])) {
 }
 
 if (isset($_POST['excluir_paciente']) && !empty($_POST['email'])) {
-    if ($pacienteObj->excluirPaciente($_POST['email'])) {
+    $resultado = $pacienteObj->excluirPaciente($_POST['email']);
+    if (!isset($resultado['erro'])) {
         $mensagem = "Paciente excluído com sucesso!";
         header("refresh:2;url=editarPaciente.php");
     } else {
@@ -43,7 +44,7 @@ if (isset($_POST['atualizar_paciente'])) {
     $nome             = $_POST['nome'];
     $email            = $_POST['email'];
     $periodo          = $_POST['periodo'];
-    $data_nascimento  = $_POST['data_nascimento'];
+    $data_nascimento  = DateTime::createFromFormat('d/m/Y', $_POST['data_nascimento'])->format('Y-m-d');
     $telefone         = $_POST['telefone'];
     $nome_mae         = $_POST['nome_mae'];
     $toma_medicamento = $_POST['toma_medicamento'];
@@ -95,7 +96,7 @@ if (isset($_POST['atualizar_paciente'])) {
                 <?php else: ?>
                     <?php echo PacienteView::renderizarFormularioEdicao($paciente); ?>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                        <a href="editarUsuario.php" class="me-3">Voltar para a lista</a>
+                        <a href="editarPaciente.php" class="me-3">Voltar para a lista</a>
                         <a href="homeUsuario.php">Voltar para a tela de usuário</a>
                     </div>
                 <?php endif; ?>
@@ -118,17 +119,17 @@ if (isset($_POST['atualizar_paciente'])) {
 
                 radioSim.addEventListener('change', atualizarVisibilidade);
                 radioNao.addEventListener('change', atualizarVisibilidade);
-                atualizarVisibilidade(); // Executa uma vez para definir o estado inicial
+                atualizarVisibilidade();
             }
 
-            // Configurar campos de medicamento
+
             const medSim = document.getElementById('medSim');
             const medNao = document.getElementById('medNao');
             if (medSim && medNao) {
                 controlarCampos(medSim, medNao, 'medicamentoContainer');
             }
 
-            // Configurar campos de patologia
+
             const patSim = document.getElementById('patSim');
             const patNao = document.getElementById('patNao');
             if (patSim && patNao) {
