@@ -42,6 +42,13 @@ class PacienteDAO
         $result = file_get_contents($url);
         $lista  = json_decode($result, true);
 
+        foreach ($lista as &$paciente) {
+            if (isset($paciente['data_nascimento'])) {
+                $data                        = new DateTime($paciente['data_nascimento']);
+                $paciente['data_nascimento'] = $data->format('Y-m-d');
+            }
+        }
+
         return $lista;
     }
 

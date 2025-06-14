@@ -33,16 +33,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mensagem    = "Este e-mail já está cadastrado!";
             $tipo_alerta = "warning";
         } else {
-            
+
             // Executa a query
             $result = $usuarioDAO->cadastrarUsuario($nome, $email, $senha);
-            
+
             if ($result) {
                 $mensagem    = "Usuário cadastrado com sucesso!";
                 $tipo_alerta = "success";
 
                 // Redireciona após 2 segundos (opcional)
-                //header("refresh:2;url=../views/Auth/login.php");
+                header("refresh:2;url=../views/Auth/login.php");
             } else {
                 $mensagem    = "Erro ao cadastrar";
                 $tipo_alerta = "danger";

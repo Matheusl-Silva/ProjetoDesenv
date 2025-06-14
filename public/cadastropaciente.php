@@ -14,6 +14,8 @@ $bd = new Conexao();
 $bd->conectar();
 $mysqli = $bd->getConexao();
 
+$result = null;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // mysqli_real_escape_string previnir sql injection no PHP
     $periodo  = mysqli_real_escape_string($mysqli, $_POST['periodo']);
@@ -36,12 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $result = $pacienteDAO->cadastrarPaciente($nome, $email, $periodo, $datanasc, $fone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia);
-
-    if ($result) {
-        echo "<script>alert('Paciente cadastrado com sucesso! Número do Paciente Cadastrado: " . $result . "'); window.location.href='homeUsuario.php';</script>";
-    } else {
-        echo "<script>alert('Erro ao cadastrar paciente.');</script>";
-    }
 }
 
 $bd->fecharConexao();
@@ -58,6 +54,42 @@ $bd->fecharConexao();
 </head>
 
 <body class="bg-info-subtle">
+    <!-- Modal de Sucesso -->
+    <div class="modal fade" id="modalSucesso" tabindex="-1" aria-labelledby="modalSucessoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSucessoLabel">Sucesso!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="mensagemSucesso"></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="homeUsuario.php" class="btn btn-primary">Ir para Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Erro -->
+    <div class="modal fade" id="modalErro" tabindex="-1" aria-labelledby="modalErroLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalErroLabel">Erro!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Erro ao cadastrar paciente.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 card shadow p-3 my-5 bg-body-tertiary rounded">
@@ -148,8 +180,9 @@ $bd->fecharConexao();
         </div>
     </div>
 </body>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script>
-        function configurarCaixaDeTexto(idSim, idNao, idCaixa){
+    function configurarCaixaDeTexto(idSim, idNao, idCaixa){
         let sim = document.getElementById(idSim);
         let nao = document.getElementById(idNao);
         let caixa = document.getElementById(idCaixa);
@@ -162,12 +195,19 @@ $bd->fecharConexao();
 
         sim.addEventListener('change', alterarEstado);
         nao.addEventListener('change', alterarEstado);
-
     }
 
     configurarCaixaDeTexto("medSim", "medNao", "medicamento");
     configurarCaixaDeTexto("patSim", "patNao", "patologia");
 
+    <?php if ($result): ?>
+        const modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'));
+        document.getElementById('mensagemSucesso').textContent = 'Paciente cadastrado com sucesso! Número do Paciente Cadastrado: <?php echo $result; ?>';
+        modalSucesso.show();
+    <?php elseif (isset($result)): ?>
+        const modalErro = new bootstrap.Modal(document.getElementById('modalErro'));
+        modalErro.show();
+    <?php endif; ?>
 </script>
 
 </html>

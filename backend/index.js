@@ -3,12 +3,9 @@ const bodyParser = require("body-parser");
 const mysql = require("mysql2");
 
 const app = express();
-app.use(express.static(__dirname + "/assets"));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ encoded: true }));
-
-app.set("view engine", "ejs");
 
 const db = mysql.createConnection({
   host: "localhost",
