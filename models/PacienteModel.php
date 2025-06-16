@@ -10,8 +10,6 @@ class Paciente extends Pessoa
     private $trataPatologia;
     private $patologia;
 
-    private $mysqli;
-
     public function __construct($nome = null, $email = null, $periodo = null, $dataNasc = null, $fone = null, $nomeMae = null, $tomaMedicamento = null, $medicamento = null, $trataPatologia = null, $patologia = null)
     {
         parent::__construct($nome, $email);
@@ -24,7 +22,6 @@ class Paciente extends Pessoa
         $this->trataPatologia  = $trataPatologia;
         $this->patologia       = $patologia;
 
-        
     }
 
     public function getPeriodo()

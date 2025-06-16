@@ -27,24 +27,25 @@ class PacienteView
 
         foreach ($listaPacientes as $paciente) {
             $html .= '<tr>
-                        <td>' . htmlspecialchars($paciente["id"]) . '</td>
-                        <td>' . htmlspecialchars($paciente["nome"]) . '</td>
-                        <td>' . htmlspecialchars($paciente["email"]) . '</td>
-                        <td>' . htmlspecialchars($paciente["periodo"]) . '</td>
-                        <td>' . htmlspecialchars($paciente["data_nascimento"]) . '</td>
-                        <td>' . htmlspecialchars($paciente["telefone"]) . '</td>
-                        <td>' . htmlspecialchars($paciente["nome_mae"]) . '</td>
-                        <td>' . ($paciente["toma_medicamento"] === "S" ? htmlspecialchars($paciente["medicamento"]) : "Não") . '</td>
-                        <td>' . ($paciente["trata_patologia"] === "S" ? htmlspecialchars($paciente["patologia"]) : "Não") . '</td>
+                        <td>' . ($paciente["id"]) . '</td>
+                        <td>' . ($paciente["nome"]) . '</td>
+                        <td>' . ($paciente["email"]) . '</td>
+                        <td>' . ($paciente["periodo"]) . '</td>
+                        <td>' . ($paciente["data_nascimento"]) . '</td>
+                        <td>' . ($paciente["telefone"]) . '</td>
+                        <td>' . ($paciente["nome_mae"]) . '</td>
+                        <td>' . ($paciente["toma_medicamento"] === "S" ? ($paciente["medicamento"]) : "Não") . '</td>
+                        <td>' . ($paciente["trata_patologia"] === "S" ? ($paciente["patologia"]) : "Não") . '</td>
                         <td>
                             <div class="d-flex gap-2">
                                 <form action="editarPaciente.php" method="POST" style="display: inline;">
-                                    <input type="hidden" name="email" value="' . htmlspecialchars($paciente["email"]) . '">
+                                    <input type="hidden" name="email" value="' . ($paciente["email"]) . '">
                                     <button type="submit" name="buscar_paciente" class="btn btn-primary btn-sm" style="width: 60px;">Editar</button>
                                 </form>
-                                <form action="editarPaciente.php" method="POST" style="display: inline;" onsubmit="return confirm(\'Tem certeza que deseja excluir este paciente?\');">
-                                    <input type="hidden" name="email" value="' . htmlspecialchars($paciente["email"]) . '">
-                                    <button type="submit" name="excluir_paciente" class="btn btn-danger btn-sm" style="width: 60px;">Excluir</button>
+                                <form action="editarPaciente.php" method="POST" style="display: inline;" id="formExcluir_' . $paciente["email"] . '">
+                                    <input type="hidden" name="email" value="' . $paciente["email"] . '">
+                                    <input type="hidden" name="excluir_paciente" value="1">
+                                    <button type="button" class="btn btn-danger btn-sm" style="width: 60px;" onclick="confirmarExclusao(\'' . $paciente["email"] . '\')">Excluir</button>
                                 </form>
                             </div>
                         </td>
@@ -53,18 +54,54 @@ class PacienteView
 
         $html .= '</tbody></table></div>';
 
+        $html .= '
+        <!-- Modal de Confirmação de Exclusão -->
+        <div class="modal fade" id="modalConfirmacao" tabindex="-1" aria-labelledby="modalConfirmacaoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalConfirmacaoLabel">Confirmar Exclusão</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Tem certeza que deseja excluir este paciente?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" id="btnConfirmarExclusao">Confirmar Exclusão</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        function confirmarExclusao(email) {
+            const modal = new bootstrap.Modal(document.getElementById("modalConfirmacao"));
+            const btnConfirmar = document.getElementById("btnConfirmarExclusao");
+
+            btnConfirmar.onclick = function() {
+                document.getElementById("formExcluir_" + email).submit();
+            };
+
+            modal.show();
+        }
+        </script>';
+
         return $html;
     }
 
     public static function renderizarFormularioEdicao($paciente)
     {
+        $data           = new DateTime($paciente["data_nascimento"]);
+        $data_formatada = $data->format('d/m/Y');
+
         $html = '<div class="card-body bg-body-tertiary">
                     <form action="editarPaciente.php" method="POST">
                         <div class="row">
                             <div class="form-group col">
                                 <label for="nome" class="form-label">Nome Completo:</label>
                                 <input type="text" class="form-control mb-2" name="nome" id="nome"
-                                    value="' . htmlspecialchars($paciente["nome"]) . '" required>
+                                    value="' . ($paciente["nome"]) . '" required>
                             </div>
                         </div>
 
@@ -72,7 +109,7 @@ class PacienteView
                             <div class="form-group col">
                                 <label for="email" class="form-label">E-mail:</label>
                                 <input type="email" class="form-control mb-2" name="email" id="email"
-                                    value="' . htmlspecialchars($paciente["email"]) . '" required>
+                                    value="' . ($paciente["email"]) . '" required>
                             </div>
                         </div>
 
@@ -93,8 +130,8 @@ class PacienteView
                         <div class="row">
                             <div class="form-group col">
                                 <label for="data_nascimento" class="form-label">Data de Nascimento:</label>
-                                <input type="date" class="form-control mb-2" name="data_nascimento" id="data_nascimento"
-                                    value="' . htmlspecialchars($paciente["data_nascimento"]) . '" required>
+                                <input type="text" class="form-control mb-2" name="data_nascimento" id="data_nascimento"
+                                    value="' . $data_formatada . '" placeholder="DD/MM/AAAA" required>
                             </div>
                         </div>
 
@@ -102,7 +139,7 @@ class PacienteView
                             <div class="form-group col">
                                 <label for="telefone" class="form-label">Telefone:</label>
                                 <input type="tel" class="form-control mb-2" name="telefone" id="telefone"
-                                    value="' . htmlspecialchars($paciente["telefone"]) . '" required>
+                                    value="' . ($paciente["telefone"]) . '" required>
                             </div>
                         </div>
 
@@ -110,7 +147,7 @@ class PacienteView
                             <div class="form-group col">
                                 <label for="nome_mae" class="form-label">Nome da Mãe:</label>
                                 <input type="text" class="form-control mb-2" name="nome_mae" id="nome_mae"
-                                    value="' . htmlspecialchars($paciente["nome_mae"]) . '" required>
+                                    value="' . ($paciente["nome_mae"]) . '" required>
                             </div>
                         </div>
 
@@ -132,7 +169,7 @@ class PacienteView
                             <div class="form-group col">
                                 <label for="medicamento" class="form-label">Qual medicamento?</label>
                                 <input type="text" class="form-control mb-2" name="medicamento" id="medicamento"
-                                    value="' . htmlspecialchars($paciente["medicamento"]) . '">
+                                    value="' . ($paciente["medicamento"]) . '">
                             </div>
                         </div>
 
@@ -154,7 +191,7 @@ class PacienteView
                             <div class="form-group col">
                                 <label for="patologia" class="form-label">Qual patologia?</label>
                                 <input type="text" class="form-control mb-2" name="patologia" id="patologia"
-                                    value="' . htmlspecialchars($paciente["patologia"]) . '">
+                                    value="' . ($paciente["patologia"]) . '">
                             </div>
                         </div>
 

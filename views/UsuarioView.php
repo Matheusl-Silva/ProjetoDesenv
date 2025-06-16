@@ -2,10 +2,11 @@
 
 require_once '../dao/UsuarioDAO.php';
 
-class UsuarioView{
+class UsuarioView
+{
     public static function renderizarTabelaUsuarios()
     {
-        $uDao = new UsuarioDAO();
+        $uDao     = new UsuarioDAO();
         $usuarios = $uDao->listarUsuarios();
         $html     = '<div class="table-responsive mt-3">
                     <table class="table table-striped">
@@ -22,17 +23,17 @@ class UsuarioView{
 
         foreach ($usuarios as $user) {
             $html .= '<tr>
-                        <td>' . htmlspecialchars($user['id']) . '</td>
-                        <td>' . htmlspecialchars($user['nome']) . '</td>
-                        <td>' . htmlspecialchars($user['email']) . '</td>
+                        <td>' . ($user['id']) . '</td>
+                        <td>' . ($user['nome']) . '</td>
+                        <td>' . ($user['email']) . '</td>
                         <td>' . ($user['adm'] === 'S' ? 'Sim' : 'Não') . '</td>
                         <td>
                             <form action="editarUsuario.php" method="POST" style="display: inline;">
-                                <input type="hidden" name="email" value="' . htmlspecialchars($user['email']) . '">
+                                <input type="hidden" name="email" value="' . ($user['email']) . '">
                                 <button type="submit" name="buscar_usuario" class="btn btn-primary btn-sm">Editar</button>
                             </form>
                             <form action="editarUsuario.php" method="POST" style="display: inline;" onsubmit="return confirm(\'Tem certeza que deseja excluir este usuário?\');">
-                                <input type="hidden" name="email" value="' . htmlspecialchars($user['email']) . '">
+                                <input type="hidden" name="email" value="' . ($user['email']) . '">
                                 <button type="submit" name="excluir_usuario" class="btn btn-danger btn-sm">Excluir</button>
                             </form>
                         </td>
@@ -52,7 +53,7 @@ class UsuarioView{
                             <div class="form-group col">
                                 <label for="nomeCompleto" class="form-label">Nome Completo:</label>
                                 <input type="text" class="form-control mb-2" name="nomeUsuario" id="nomeUsuario"
-                                    placeholder="Insira seu nome completo" value="' . htmlspecialchars($usuario['nome']) . '" required>
+                                    placeholder="Insira seu nome completo" value="' . ($usuario['nome']) . '" required>
                             </div>
                         </div>
 
@@ -60,7 +61,7 @@ class UsuarioView{
                             <div class="form-group">
                                 <label for="email" class="form-label">E-mail:</label>
                                 <input type="email" class="form-control mb-2" name="email" id="email"
-                                    placeholder="Insira um e-mail válido" value="' . htmlspecialchars($usuario['email']) . '" required>
+                                    placeholder="Insira um e-mail válido" value="' . ($usuario['email']) . '" required>
                             </div>
                         </div>
 
@@ -68,7 +69,7 @@ class UsuarioView{
                             <div class="form-group col">
                                 <label for="senha" class="form-label">Senha Atual:</label>
                                 <input type="password" class="form-control mb-2" name="senha" id="senha"
-                                    value="' . htmlspecialchars($usuario['senha']) . '">
+                                    value="' . ($usuario['senha']) . '">
                             </div>
                         </div>
 
