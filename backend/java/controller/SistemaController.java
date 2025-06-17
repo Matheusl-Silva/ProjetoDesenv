@@ -66,6 +66,13 @@ public class SistemaController {
     public void cadastrarExame(){
         ExameDAO eDao = new ExameDAO();
 
+        System.out.println("Insira o ID do responsável:");
+        int idResponsavel = scan.nextInt();
+        System.out.println("Insira o ID do preceptor:");
+        int idPreceptor = scan.nextInt();
+        System.out.println("Insira o registro do paciente:");
+        int idPaciente = scan.nextInt();
+        scan.nextLine(); //Limpar buffer
         System.out.println("Insira a data de entrada:");
         String dataEntrada = scan.nextLine();
         System.out.println("Insira a data de entrega:");
@@ -85,7 +92,7 @@ public class SistemaController {
         for(i = 0; i < valores.length; i++){ //Coloca todos os valores no LinkedHashMap 
             dados.put(Exame.NOME_DADOS[i], valores[i]);
         }
-        Exame e = new Exame(dataEntrada, dataEntrega, data, dados);
+        Exame e = new Exame(idResponsavel, idPreceptor, idPaciente, dataEntrada, dataEntrega, data, dados);
         eDao.salvarExame(e);
 
     }
