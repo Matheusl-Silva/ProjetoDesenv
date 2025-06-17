@@ -1,6 +1,8 @@
 <?php
+
 require_once '../database/ConexaoClass.php';
 require_once '../models/AutenticacaoClass.php';
+require_once '../dao/ExameDAO.php';
 
 $bd     = new Conexao();
 $mysqli = $bd->getConexao();
@@ -9,51 +11,78 @@ $auth = new Autenticacao();
 $auth->verificarLogin();
 $nome_usuario = $auth->getNomeUsuario();
 
-$mensagem = '';
-$paciente = null;
+$id_usuario = $auth->getIdUsuario();
 
-if (isset($_POST['buscar_paciente']) && !empty($_POST['numero_paciente'])) {
-    $id_paciente = $mysqli->real_escape_string($_POST['numero_paciente']);
+$mensagem                  = '';
+$paciente                  = null;
+$exames                    = [];
+$usuarios_para_preceptores = [];
 
-    // Consulta para buscar o paciente pelo ID
+$sql_usuarios = "SELECT id, nome FROM usuarios ORDER BY nome ASC";
+$res_usuarios = $mysqli->query($sql_usuarios);
+if ($res_usuarios) {
+    $usuarios_para_preceptores = $res_usuarios->fetch_all(MYSQLI_ASSOC);
+}
+
+$preceptores_map = array_column($usuarios_para_preceptores, 'nome', 'id');
+
+if (isset($_GET['numero_paciente']) && !empty($_GET['numero_paciente'])) {
+    $id_paciente = $mysqli->real_escape_string($_GET['numero_paciente']);
+
     $sql       = "SELECT * FROM pacientes WHERE id = '$id_paciente'";
     $resultado = $mysqli->query($sql);
 
     if ($resultado && $resultado->num_rows > 0) {
         $paciente = $resultado->fetch_assoc();
+
+        $exameDAO = new ExameDAO($mysqli);
+        $exames   = $exameDAO->buscarPorPacienteId($paciente['id']);
     } else {
         $mensagem = "Paciente não encontrado.";
     }
 }
+
+if (isset($_GET['status'])) {
+    if ($_GET['status'] == 'sucesso') {
+        $mensagem = "Exame salvo com sucesso!";
+    } elseif ($_GET['status'] == 'erro') {
+        $mensagem = "Ocorreu um erro ao salvar o exame.";
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/home.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/examePrincipal.css" />
     <title>Cadastro Hematológico</title>
 </head>
 
 <body class="bg-info-subtle">
-    <div class="container">
+    <div class="container my-5">
         <div class="modal fade" id="pesquisaModal" tabindex="-1" aria-labelledby="pesquisaModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
+                <div class="modal-content shadow">
+                    <div class="modal-header bg-primary text-white">
                         <h5 class="modal-title" id="pesquisaModalLabel">Pesquisar Paciente</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="examePrincipal.php" method="post">
+                        <form action="examePrincipal.php" method="get">
                             <div class="mb-3">
                                 <label for="numero_paciente" class="form-label">Número do Paciente:</label>
-                                <input type="text" class="form-control" id="numero_paciente" name="numero_paciente" required>
+                                <input type="text" class="form-control" id="numero_paciente" name="numero_paciente"
+                                    required autofocus />
                             </div>
                             <div class="d-grid">
-                                <button type="submit" name="buscar_paciente" class="btn btn-primary">Pesquisar</button>
+                                <button type="submit" class="btn btn-primary">
+                                    Pesquisar
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -62,349 +91,232 @@ if (isset($_POST['buscar_paciente']) && !empty($_POST['numero_paciente'])) {
         </div>
 
         <?php if (!empty($mensagem)): ?>
-        <div class="alert <?php echo strpos($mensagem, 'sucesso') !== false ? 'alert-success' : 'alert-danger'; ?> mt-3">
-            <?php echo $mensagem; ?>
-        </div>
+            <div class="modal fade" id="mensagemModal" tabindex="-1" aria-labelledby="mensagemModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header <?php echo(strpos($mensagem, 'sucesso') !== false) ? 'bg-success text-white' : 'bg-danger text-white'; ?>">
+                            <h5 class="modal-title" id="mensagemModalLabel">
+                                <?php echo(strpos($mensagem, 'sucesso') !== false) ? 'Sucesso' : 'Aviso'; ?>
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <?php echo htmlspecialchars($mensagem); ?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <?php endif; ?>
 
         <?php if (!$paciente): ?>
-        <div class="row justify-content-center">
-            <div class="col-md-6 card shadow p-3 my-5 bg-body-tertiary rounded">
-                <div class="card-header bg-body-tertiary text-center">
-                    <h2>Cadastro Hematológico</h2>
-                    <div class="logo-text text-primary">
-                        Clique no botão abaixo para pesquisar o paciente
+            <div class="d-flex align-items-center justify-content-center min-vh-100">
+                <div class="col-md-6 card shadow p-4 bg-body-tertiary rounded">
+                    <div class="card-header bg-body-tertiary text-center mb-3">
+                        <h2>Cadastro Hematológico</h2>
+                        <small class="text-primary">Clique no botão abaixo para pesquisar o paciente</small>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
+                            data-bs-target="#pesquisaModal">
+                            Pesquisar Paciente
+                        </button>
+                    </div>
+                    <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-4">
+                        <a href="homeUsuario.php" class="link-secondary text-decoration-none">Voltar para a tela de usuário</a>
                     </div>
                 </div>
-                <div class="d-grid gap-2 mt-3">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pesquisaModal">
-                        Pesquisar Paciente
-                    </button>
-                </div>
-                <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-3">
-                    <a href="homeUsuario.php">Voltar para a tela de usuário</a>
-                </div>
             </div>
-        </div>
         <?php else: ?>
-        <div class="row justify-content-center">
-            <div class="col-md-12 card shadow p-3 my-5 bg-body-tertiary rounded">
-                <div class="card-header bg-body-tertiary text-center">
-                    <h2>Cadastro Hematológico</h2>
-                    <div class="logo-text text-primary">
-                        Número do paciente: <?php echo htmlspecialchars($paciente['id']); ?>
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card shadow p-4 bg-body-tertiary rounded">
+                        <div class="card-header bg-body-tertiary text-center mb-4">
+                            <h2>Cadastro Hematológico</h2>
+                            <small class="text-primary">Paciente: <?php echo htmlspecialchars($paciente['nome']); ?> (N° de Registro: <?php echo htmlspecialchars($paciente['id']); ?>)</small>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Histórico de Exames</h5>
+                            </div>
+                            <div class="card-body">
+                                <?php if (!empty($exames)): ?>
+                                    <table class="table table-hover table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>ID Exame</th>
+                                                <th>Data do Exame</th>
+                                                <th>Preceptor Responsável</th>
+                                                <th>Ação</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($exames as $exame): ?>
+                                            <tr>
+                                                <td><?php echo htmlspecialchars($exame['id']); ?></td>
+                                                <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($exame['data']))); ?></td>
+                                                <td><?php echo isset($preceptores_map[$exame['id_preceptor']]) ? htmlspecialchars($preceptores_map[$exame['id_preceptor']]) : 'ID: ' . $exame['id_preceptor']; ?></td>
+                                                <td>
+                                                    <a href="visualizarExame.php?id=<?php echo $exame['id']; ?>" class="btn btn-sm btn-info">Visualizar</a>
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                <?php else: ?>
+                                    <p class="text-center text-muted">Nenhum exame encontrado para este paciente.</p>
+                                    <p class="text-center">Preencha o formulário abaixo para <strong>cadastrar um novo exame</strong>.</p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                        <form action="salvar_exame.php" method="POST">
+                            <input type="hidden" name="registro_paciente" value="<?php echo htmlspecialchars($paciente['id']); ?>">
+                            <input type="hidden" name="id_responsavel" value="<?php echo htmlspecialchars($id_usuario); ?>">
+
+                            <div class="section-title text-uppercase text-secondary fw-bold">
+                                Responsáveis
+                            </div>
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-3">
+                                    <label for="responsavelExame" class="form-label">Responsável pelo exame</label>
+                                    <input type="text" class="form-control" name="responsavelExame" id="responsavelExame"
+                                        value="<?php echo htmlspecialchars($nome_usuario); ?>" disabled />
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="preceptor" class="form-label">Preceptor responsável</label>
+                                    <select class="form-select" name="id_preceptor" id="preceptor" required>
+                                        <option value="">Selecione um preceptor</option>
+                                        <?php foreach ($usuarios_para_preceptores as $u): ?>
+                                            <option value="<?php echo htmlspecialchars($u['id']); ?>">
+                                                <?php echo htmlspecialchars($u['nome']); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="section-title text-uppercase text-secondary fw-bold">
+                                Informações do paciente
+                            </div>
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-2">
+                                    <label for="registroPaciente" class="form-label">N° de Registro</label>
+                                    <input type="text" class="form-control" id="registroPaciente"
+                                        value="<?php echo htmlspecialchars($paciente['id']); ?>" disabled />
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="entradaPaciente" class="form-label">Entrada</label>
+                                    <input type="date" class="form-control" name="dentrada" id="entradaPaciente"
+                                        value="<?php echo date('Y-m-d'); ?>" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="dataHora" class="form-label">Exame realizado em</label>
+                                    <input type="datetime-local" class="form-control" name="data" id="dataHora"
+                                        value="<?php echo date('Y-m-d\TH:i'); ?>" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="dataPrevista" class="form-label">Entrega</label>
+                                     <input type="date" class="form-control" name="dentrega" id="dataPrevista"
+                                        value="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" />
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 shadow-sm">
+                                <div class="card-header bg-light fw-bold text-uppercase border-bottom">Eritrograma</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-2"><label class="form-label">Hemácias</label><input type="number" step="0.01" class="form-control" name="hemacia"></div>
+                                        <div class="col-md-2"><label class="form-label">Hemoglobina</label><input type="number" step="0.1" class="form-control" name="hemoglobina"></div>
+                                        <div class="col-md-2"><label class="form-label">Hematócrito</label><input type="number" step="0.1" class="form-control" name="hematocrito"></div>
+                                        <div class="col-md-2"><label class="form-label">VCM</label><input type="number" step="0.1" class="form-control" name="vcm"></div>
+                                        <div class="col-md-2"><label class="form-label">HCM</label><input type="number" step="0.1" class="form-control" name="hcm"></div>
+                                        <div class="col-md-2"><label class="form-label">CHCM</label><input type="number" step="0.1" class="form-control" name="chcm"></div>
+                                        <div class="col-md-2"><label class="form-label">RDW</label><input type="number" step="0.1" class="form-control" name="rdw"></div>
+                                        <div class="col-md-2"><label class="form-label">Leucócitos</label><input type="number" step="0.01" class="form-control" name="leucocitos"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 shadow-sm">
+                                <div class="card-header bg-light fw-bold text-uppercase border-bottom">Células Mieloides</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-2"><label class="form-label">Blastos</label><input type="number" class="form-control" name="blastos" id="blastos"><div class="form-text">Ref.: 0 /µL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Prómielócitos</label><input type="number" class="form-control" name="promielocitos" id="promielocitos"><div class="form-text">Ref.: 0 /µL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Mielócitos</label><input type="number" class="form-control" name="mielocitos" id="mielocitos"><div class="form-text">Ref.: 0 /µL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Metamielócitos</label><input type="number" class="form-control" name="metamielocitos" id="metamielocitos"><div class="form-text">Ref.: 0 /µL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Bastonetes</label><input type="number" class="form-control" name="bastonetes" id="bastonetes"><div class="form-text">Ref.: 0 - 840 /µL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Segmentados</label><input type="number" class="form-control" name="segmentados" id="segmentados"><div class="form-text">Ref.: 1.700 - 8.000 /µL</div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 shadow-sm">
+                                <div class="card-header bg-light fw-bold text-uppercase border-bottom">Outras Células e Plaquetas</div>
+                                <div class="card-body">
+                                     <div class="row g-3">
+                                        <div class="col-md-2"><label class="form-label">Linfócitos</label><input type="number" class="form-control" name="linfocitos"><div class="form-text">Ref.: 900 - 2.900 /µL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Monócitos</label><input type="number" class="form-control" name="monocitos"><div class="form-text">Ref.: 300 - 900 /µL</div></div>
+                                        <div class="col-md-3"><label class="form-label">Plaquetas</label><input type="number" class="form-control" name="plaquetas" id="plaquetas"><div class="form-text">Ref.: 150.000 - 450.000 /µL</div></div>
+                                        <div class="col-md-3"><label class="form-label">Volume Plaquetário Médio</label><input type="number" step="0.1" class="form-control" name="plaquetarioMedio" id="plaquetarioMedio"><div class="form-text">Ref.: 6,5 - 15,0 fL</div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                             <div class="card mb-5 shadow-sm">
+                                <div class="card-header bg-light fw-bold text-uppercase border-bottom">Contagem Diferencial (%)</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-2"><label class="form-label">Neutrófilos</label><input type="number" class="form-control" name="contagemNeutrofilos"></div>
+                                        <div class="col-md-2"><label class="form-label">Linfócitos</label><input type="number" class="form-control" name="contagemLinfocitos"></div>
+                                        <div class="col-md-2"><label class="form-label">Eosinófilos</label><input type="number" class="form-control" name="contagemEosinofilos"></div>
+                                        <div class="col-md-2"><label class="form-label">Monócitos</label><input type="number" class="form-control" name="contagemMonocitos"></div>
+                                        <div class="col-md-2"><label class="form-label">Basófilos</label><input type="number" class="form-control" name="contagemBasofilos"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                             <div class="mb-5">
+                                <label class="form-label fw-bold">Lote do corante utilizado</label>
+                                <input type="text" class="form-control" name="loteCorante">
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                               <button type="submit" class="btn btn-success btn-lg">Salvar Novo Exame</button>
+                            </div>
+
+                        </form> <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-4">
+                            <a href="examePrincipal.php" class="btn btn-outline-primary me-3">Nova Pesquisa</a>
+                            <a href="homeUsuario.php" class="btn btn-outline-secondary">Voltar para a tela de usuário</a>
+                        </div>
                     </div>
                 </div>
-
-                <form>
-                    <div class="mt-4 mb-2 fw-bold text-uppercase text-secondary">Responsáveis</div>
-                    <div class="row pt-3 pb-3">
-                        <div class="col-md-2">
-                            <label for="responsavelExame" class="form-label">Responsável pelo exame</label>
-                            <input type="text" class="form-control" name="responsavelExame" id="responsavelExame" value="<?php echo htmlspecialchars($nome_usuario); ?>" disabled>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="preceptor" class="form-label">Preceptor responsável</label>
-                            <input type="text" class="form-control" name="preceptor" id="preceptor" >
-                        </div>
-                    </div>
-
-                    <div class="mt-4 mb-2 fw-bold text-uppercase text-secondary">Informações do paciente</div>
-                    <div class="row g-3">
-                        <div class="col-md-2">
-                            <label for="registroPaciente" class="form-label">N° de Registro</label>
-                            <input type="text" class="form-control mb-2" name="registroPaciente" id="registroPaciente" value="<?php echo htmlspecialchars($paciente['id']); ?>" disabled>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="entradaPaciente" class="form-label">Entrada: </label>
-                            <input type="date" class="form-control mb-2" name="entradaPaciente" id="entradaPaciente" value="<?php echo date('Y-m-d'); ?>" >
-                        </div>
-                        <div class="col-md-2">
-                            <label for="dataHora" class="form-label">Exame realizado em: </label>
-                            <input type="datetime-local" class="form-control mb-2" name="dataHora" id="dataHora" value="<?php echo date('Y-m-d\TH:i'); ?>" >
-                        </div>
-                        <div class="col-md-2">
-                            <label for="dataPrevista" class="form-label">Entrega: </label>
-                            <input type="date" class="form-control mb-2" name="dataPrevista" id="dataPrevista" value="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" >
-                        </div>
-                    </div>
-
-                    <div class="mt-4 mb-2 fw-bold text-uppercase text-secondary">ERITROGRAMA</div>
-                    <div class="row g-3">
-                        <div class="col-md-2">
-                            <label for="hemacia" class="form-label">Hemacia</label>
-                            <input type="text" class="form-control mb-2" name="hemacia" id="hemacia" >
-                            <div class="form-text">Valor de ref.: 3,9 - 5,0 x106/µL</div>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="hemoglobina" class="form-label">Hemoglobina</label>
-                            <input type="text" class="form-control mb-2" name="hemoglobina" id="hemoglobina" >
-                            <div class="form-text">Valor de ref.: 12,0- 15,5g/dL</div>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="hematocrito" class="form-label">Hematócrito</label>
-                            <input type="text" class="form-control mb-2" name="hematocrito" id="hematocrito" >
-                            <div class="form-text">Valor de ref.: 35% - 45%</div>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="vcm" class="form-label">VCM</label>
-                            <input type="text" class="form-control mb-2" name="vcm" id="vcm" >
-                            <div class="form-text">Valor de ref.: 82 - 98 fL</div>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="hcm" class="form-label">HCM</label>
-                            <input type="text" class="form-control mb-2" name="hcm" id="hcm" >
-                            <div class="form-text">Valor de ref.: 26pg - 34pg</div>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="chcm" class="form-label">CHCM</label>
-                            <input type="text" class="form-control mb-2" name="chcm" id="chcm" >
-                            <div class="form-text">Valor de ref.: 31g/dL - 36g/dL</div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 mb-2 fw-bold text-uppercase text-secondary">LEUCOGRAMA</div>
-                    <div class="row g-3">
-                        <div class="col-md-2">
-                            <label for="rdw" class="form-label">RDW</label>
-                            <input type="text" class="form-control mb-2" name="rdw" id="rdw" >
-                            <div class="form-text mb-2">Valor de ref.: 11,5% - 16,5%</div>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="leucocitos" class="form-label">Leucócitos</label>
-                            <input type="text" class="form-control mb-2" name="leucocitos" id="leucocitos" >
-                            <div class="form-text mb-2">Valor de ref.: 3.500 - 10.500 /µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="neutrofilos" class="form-label">Neutrófilos</label>
-                            <input type="text" class="form-control mb-2" name="neutrofilos" id="neutrofilos" >
-                            <div class="form-text mb-2">Valor de ref.: 1.700 - 8.000 /µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="blastos" class="form-label">Blastos </label>
-                            <input type="text" class="form-control mb-2" name="blastos" id="blastos" >
-                            <div class="form-text mb-2">Valor de ref.: 0 /µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="promielocitos" class="form-label">Prómielócitos</label>
-                            <input type="text" class="form-control mb-2" name="promielocitos" id="promielocitos" >
-                            <div class="form-text mb-2">Valor de ref.: 0 /µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="mielocitos" class="form-label">Mielócitos</label>
-                            <input type="text" class="form-control mb-2" name="mielocitos" id="mielocitos" >
-                            <div class="form-text mb-2">Valor de ref.: 0 /µL</div>
-                        </div>
-                    </div>
-
-                    <div class="row g-3">
-                        <div class="col-md-2">
-                            <label for="metamielocitos" class="form-label">Metamielócitos</label>
-                            <input type="text" class="form-control mb-2" name="metamielocitos" id="metamielocitos" >
-                            <div class="form-text mb-2">Valor de ref.: 0 /µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="bastonetes" class="form-label">Bastonetes</label>
-                            <input type="text" class="form-control mb-2" name="bastonetes" id="bastonetes" >
-                            <div class="form-text mb-2">Valor de ref.: 0 - 840 /µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="segmentados" class="form-label">Segmentados</label>
-                            <input type="text" class="form-control mb-2" name="segmentados" id="segmentados" >
-                            <div class="form-text mb-2">Valor de ref.: 1.700 - 8.000 /µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="eosinofilos" class="form-label">Eosinófilos</label>
-                            <input type="text" class="form-control mb-2" name="eosinofilos" id="eosinofilos" >
-                            <div class="form-text mb-2">Valor de ref.: 50 - 500 /µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="basofilos" class="form-label">Basófilos</label>
-                            <input type="text" class="form-control mb-2" name="basofilos" id="basofilos" >
-                            <div class="form-text mb-2">Valor de ref.: 0 - 100 /µL</div>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="linfocitos" class="form-label">Linfócitos</label>
-                            <input type="text" class="form-control mb-2" name="linfocitos" id="linfocitos" >
-                            <div class="form-text mb-2">Valor de ref.: 900 - 2.900 /µL</div>
-                        </div>
-                    </div>
-
-                    <div class="row g-3">
-                        <div class="col-md-2">
-                            <label for="linfAtipicos" class="form-label">Linfócitos Atípicos</label>
-                            <input type="text" class="form-control mb-2" name="linfAtipicos" id="linfAtipicos" >
-                            <div class="form-text mb-2">Valor de ref.: 0 /µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="monocitos" class="form-label">Monócitos</label>
-                            <input type="text" class="form-control mb-2" name="monocitos" id="monocitos" >
-                            <div class="form-text mb-2">Valor de ref.: 300 - 900 /µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="mieloblastos" class="form-label">Mieloblastos</label>
-                            <input type="text" class="form-control mb-2" name="mieloblastos" id="mieloblastos" >
-                            <div class="form-text mb-2">Valor de ref.: 0 /µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="outrasCelulas" class="form-label">Outras células</label>
-                            <input type="text" class="form-control mb-2" name="outrasCelulas" id="outrasCelulas" >
-                            <div class="form-text mb-2">Valor de ref.: 0 /µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="celLinfoides" class="form-label">Células Linfóides</label>
-                            <input type="text" class="form-control mb-2" name="celLinfoides" id="celLinfoides" >
-                            <div class="form-text mb-2">Valor de ref.: 0 /µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="celMonocitoides" class="form-label">Células Monocitóides</label>
-                            <input type="text" class="form-control mb-2" name="celMonocitoides" id="celMonocitoides" >
-                            <div class="form-text mb-2">Valor de ref.: 0 /µL</div>
-                        </div>
-                    </div>
-
-                    <div class="row g-3">
-                        <div class="col-md-2">
-                            <label for="plaquetas" class="form-label">Plaquetas</label>
-                            <input type="text" class="form-control mb-2" name="plaquetas" id="plaquetas" >
-                            <div class="form-text mb-2">Valor de ref.: 150 - 450 x103/µL</div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="plaquetarioMedio" class="form-label">Volume Plaquetário Médio</label>
-                            <input type="text" class="form-control mb-2" name="plaquetarioMedio" id="plaquetarioMedio" >
-                            <div class="form-text mb-2">Valor de ref.: 6,5 - 15,0 fL</div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 mb-2 fw-bold text-uppercase text-secondary">CONTAGEM DIFERENCIAL</div>
-                    <div class="row g-3">
-                        <div class="col-md-2">
-                            <label for="contagemNeutrofilos" class="form-label">Neutrófilos</label>
-                            <input type="text" class="form-control mb-2" name="contagemNeutrofilos" id="contagemNeutrofilos"
-                                >
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="contagemLinfocitos" class="form-label">Linfócitos</label>
-                            <input type="text" class="form-control mb-2" name="contagemLinfocitos" id="contagemLinfocitos"
-                                >
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="contagemEosinofilos" class="form-label">Eosinófilos</label>
-                            <input type="text" class="form-control mb-2" name="contagemEosinofilos" id="contagemEosinofilos"
-                                >
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="contagemMonocitos" class="form-label">Monócitos</label>
-                            <input type="text" class="form-control mb-2" name="contagemMonocitos" id="contagemMonocitos"
-                                >
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="contagemBasofilos" class="form-label">Basófilos</label>
-                            <input type="text" class="form-control mb-2" name="contagemBasofilos" id="contagemBasofilos"
-                                >
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="contagemBlastos" class="form-label">Blastos</label>
-                            <input type="text" class="form-control mb-2" name="contagemBlastos" id="contagemBlastos" >
-                        </div>
-                    </div>
-
-                    <div class="row g-3">
-                        <div class="col-md-2">
-                            <label for="contagemPromielocitos" class="form-label">Prómielócitos</label>
-                            <input type="text" class="form-control mb-2" name="contagemPromielocitos" id="contagemPromielocitos"
-                                >
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="contagemMielocitos" class="form-label">Mielócitos</label>
-                            <input type="text" class="form-control mb-2" name="contagemMielocitos" id="contagemMielocitos"
-                                >
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="contagemMetamielocitos" class="form-label">Metamielócitos</label>
-                            <input type="text" class="form-control mb-2" name="contagemMetamielocitos"
-                                id="contagemMetamielocitos" >
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="contagemBastonetes" class="form-label">Bastonetes</label>
-                            <input type="text" class="form-control" name="contagemBastonetes" id="contagemBastonetes" >
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="contagemLinfatipicos" class="form-label">Linfócitos Atípicos</label>
-                            <input type="text" class="form-control mb-2" name="contagemLinfatipicos" id="contagemLinfatipicos"
-                                >
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="contagemMonocitos" class="form-label">Monócitos</label>
-                            <input type="text" class="form-control mb-2" name="contagemMonocitos" id="contagemMonocitos"
-                                >
-                        </div>
-                    </div>
-
-                    <div class="row g-3 pb-3">
-                        <div class="col-md-2">
-                            <label for="contagemPlasmaticos" class="form-label">Plasmócitos</label>
-                            <input type="text" class="form-control mb-2" name="contagemPlasmaticos" id="contagemPlasmaticos"
-                                >
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="contagemMieloblastos" class="form-label">Mieloblastos</label>
-                            <input type="text" class="form-control mb-2" name="contagemMieloblastos" id="contagemMieloblastos"
-                                >
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="loteCorante" class="form-label">Lote do corante utilizado:</label>
-                            <input type="text" class="form-control mb-2" name="loteCorante" id="loteCorante" >
-                        </div>
-                    </div>
-
-                    <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-3">
-                        <a href="examePrincipal.php" class="me-3">Nova Pesquisa</a>
-                        <a href="homeUsuario.php">Voltar para a tela de usuário</a>
-                    </div>
-                </form>
             </div>
-        </div>
         <?php endif; ?>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        <?php if (!$paciente && !isset($_POST['buscar_paciente'])): ?>
-        document.addEventListener('DOMContentLoaded', function() {
-            var myModal = new bootstrap.Modal(document.getElementById('pesquisaModal'));
-            myModal.show();
-        });
+        <?php if (!empty($mensagem)): ?>
+            document.addEventListener('DOMContentLoaded', function() {
+                var mensagemModal = new bootstrap.Modal(document.getElementById('mensagemModal'));
+                mensagemModal.show();
+            });
+        <?php endif; ?>
+
+        <?php if (!$paciente && !isset($_GET['numero_paciente'])): ?>
+            document.addEventListener('DOMContentLoaded', function() {
+                var myModal = new bootstrap.Modal(document.getElementById('pesquisaModal'));
+                myModal.show();
+            });
         <?php endif; ?>
     </script>
-</body>
 
+</body>
 </html>
