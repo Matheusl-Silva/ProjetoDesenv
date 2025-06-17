@@ -227,7 +227,7 @@ app.get("/exames/principal/:idExame", (req, res) => {
   });
 });
 
-app.post("/exames/inserir", (req, res) => {
+app.post("/exames/", (req, res) => {
   const {
     id_responsavel,
     id_preceptor,
