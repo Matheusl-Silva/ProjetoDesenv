@@ -10,9 +10,9 @@ $auth = new Autenticacao();
 $auth->verificarLogin();
 $auth->verificarAcessoAdmin();
 $nome_usuario = $auth->getNomeUsuario();
-$usuarioObj = new UsuarioDAO();
-$mensagem   = '';
-$usuario    = null;
+$usuarioObj   = new UsuarioDAO();
+$mensagem     = '';
+$usuario      = null;
 
 if (isset($_POST['buscar_usuario']) && !empty($_POST['email'])) {
     $email    = $_POST['email'];
