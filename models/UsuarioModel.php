@@ -50,7 +50,7 @@ if (isset($_POST['reset'])) {
 
     if ($usuario) {
         $nome             = $usuario['nome'];
-        $senha_provisoria = trim("NOVASENHA@" . $nome);
+        $senha_provisoria = "NOVASENHA@";
         $senha_hash       = $senha_provisoria;
 
         if ($usuarioDao->updatePassword($email, $senha_hash)) {
