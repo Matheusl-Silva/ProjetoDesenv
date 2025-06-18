@@ -230,14 +230,14 @@ if (isset($_GET['status'])) {
                                 <div class="card-header bg-light fw-bold text-uppercase border-bottom">Eritrograma</div>
                                 <div class="card-body">
                                     <div class="row g-3">
-                                        <div class="col-md-2"><label class="form-label">Hemácias</label><input type="number" step="0.01" class="form-control" name="hemacia"></div>
+                                        <div class="col-md-2"><label class="form-label">Hemácias</label><input type="number" step ="0.01" class="form-control" name="hemacia"></div>
                                         <div class="col-md-2"><label class="form-label">Hemoglobina</label><input type="number" step="0.1" class="form-control" name="hemoglobina"></div>
                                         <div class="col-md-2"><label class="form-label">Hematócrito</label><input type="number" step="0.1" class="form-control" name="hematocrito"></div>
                                         <div class="col-md-2"><label class="form-label">VCM</label><input type="number" step="0.1" class="form-control" name="vcm"></div>
                                         <div class="col-md-2"><label class="form-label">HCM</label><input type="number" step="0.1" class="form-control" name="hcm"></div>
                                         <div class="col-md-2"><label class="form-label">CHCM</label><input type="number" step="0.1" class="form-control" name="chcm"></div>
                                         <div class="col-md-2"><label class="form-label">RDW</label><input type="number" step="0.1" class="form-control" name="rdw"></div>
-                                        <div class="col-md-2"><label class="form-label">Leucócitos</label><input type="number" step="0.01" class="form-control" name="leucocitos"></div>
+                                        <div class="col-md-2"><label class="form-label">Leucócitos</label><input type="number" step ="0.01" class="form-control" name="leucocitos"></div>
                                     </div>
                                 </div>
                             </div>
