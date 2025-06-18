@@ -230,14 +230,14 @@ if (isset($_GET['status'])) {
                                 <div class="card-header bg-light fw-bold text-uppercase border-bottom">Eritrograma</div>
                                 <div class="card-body">
                                     <div class="row g-3">
-                                        <div class="col-md-2"><label class="form-label">Hemácias</label><input type="number" step ="0.01" class="form-control" name="hemacia"></div>
-                                        <div class="col-md-2"><label class="form-label">Hemoglobina</label><input type="number" step="0.1" class="form-control" name="hemoglobina"></div>
-                                        <div class="col-md-2"><label class="form-label">Hematócrito</label><input type="number" step="0.1" class="form-control" name="hematocrito"></div>
-                                        <div class="col-md-2"><label class="form-label">VCM</label><input type="number" step="0.1" class="form-control" name="vcm"></div>
-                                        <div class="col-md-2"><label class="form-label">HCM</label><input type="number" step="0.1" class="form-control" name="hcm"></div>
-                                        <div class="col-md-2"><label class="form-label">CHCM</label><input type="number" step="0.1" class="form-control" name="chcm"></div>
-                                        <div class="col-md-2"><label class="form-label">RDW</label><input type="number" step="0.1" class="form-control" name="rdw"></div>
-                                        <div class="col-md-2"><label class="form-label">Leucócitos</label><input type="number" step ="0.01" class="form-control" name="leucocitos"></div>
+                                        <div class="col-md-2"><label class="form-label">Hemácias</label><input type="number" step ="0.01" class="form-control" name="hemacia" required></div>
+                                        <div class="col-md-2"><label class="form-label">Hemoglobina</label><input type="number" step="0.1" class="form-control" name="hemoglobina" required></div>
+                                        <div class="col-md-2"><label class="form-label">Hematócrito</label><input type="number" step="0.1" class="form-control" name="hematocrito" required></div>
+                                        <div class="col-md-2"><label class="form-label">VCM</label><input type="number" step="0.1" class="form-control" name="vcm" required></div>
+                                        <div class="col-md-2"><label class="form-label">HCM</label><input type="number" step="0.1" class="form-control" name="hcm" required></div>
+                                        <div class="col-md-2"><label class="form-label">CHCM</label><input type="number" step="0.1" class="form-control" name="chcm" required></div>
+                                        <div class="col-md-2"><label class="form-label">RDW</label><input type="number" step="0.1" class="form-control" name="rdw" required></div>
+                                        <div class="col-md-2"><label class="form-label">Leucócitos</label><input type="number" step ="0.01" class="form-control" name="leucocitos" required></div>
                                     </div>
                                 </div>
                             </div>
@@ -246,12 +246,12 @@ if (isset($_GET['status'])) {
                                 <div class="card-header bg-light fw-bold text-uppercase border-bottom">Células Mieloides</div>
                                 <div class="card-body">
                                     <div class="row g-3">
-                                        <div class="col-md-2"><label class="form-label">Blastos</label><input type="number" class="form-control" name="blastos" id="blastos"><div class="form-text">Ref.: 0 /µL</div></div>
-                                        <div class="col-md-2"><label class="form-label">Prómielócitos</label><input type="number" class="form-control" name="promielocitos" id="promielocitos"><div class="form-text">Ref.: 0 /µL</div></div>
-                                        <div class="col-md-2"><label class="form-label">Mielócitos</label><input type="number" class="form-control" name="mielocitos" id="mielocitos"><div class="form-text">Ref.: 0 /µL</div></div>
-                                        <div class="col-md-2"><label class="form-label">Metamielócitos</label><input type="number" class="form-control" name="metamielocitos" id="metamielocitos"><div class="form-text">Ref.: 0 /µL</div></div>
-                                        <div class="col-md-2"><label class="form-label">Bastonetes</label><input type="number" class="form-control" name="bastonetes" id="bastonetes"><div class="form-text">Ref.: 0 - 840 /µL</div></div>
-                                        <div class="col-md-2"><label class="form-label">Segmentados</label><input type="number" class="form-control" name="segmentados" id="segmentados"><div class="form-text">Ref.: 1.700 - 8.000 /µL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Blastos</label><input type="number" class="form-control" name="blastos" id="blastos" required><div class="form-text">Ref.: 0 /µL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Prómielócitos</label><input type="number" class="form-control" name="promielocitos" id="promielocitos" required><div class="form-text">Ref.: 0 /µL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Mielócitos</label><input type="number" class="form-control" name="mielocitos" id="mielocitos" required><div class="form-text">Ref.: 0 /µL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Metamielócitos</label><input type="number" class="form-control" name="metamielocitos" id="metamielocitos" required><div class="form-text">Ref.: 0 /µL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Bastonetes</label><input type="number" class="form-control" name="bastonetes" id="bastonetes" required><div class="form-text">Ref.: 0 - 840 /µL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Segmentados</label><input type="number" class="form-control" name="segmentados" id="segmentados" required><div class="form-text">Ref.: 1.700 - 8.000 /µL</div></div>
                                     </div>
                                 </div>
                             </div>
@@ -260,10 +260,10 @@ if (isset($_GET['status'])) {
                                 <div class="card-header bg-light fw-bold text-uppercase border-bottom">Outras Células e Plaquetas</div>
                                 <div class="card-body">
                                      <div class="row g-3">
-                                        <div class="col-md-2"><label class="form-label">Linfócitos</label><input type="number" class="form-control" name="linfocitos"><div class="form-text">Ref.: 900 - 2.900 /µL</div></div>
-                                        <div class="col-md-2"><label class="form-label">Monócitos</label><input type="number" class="form-control" name="monocitos"><div class="form-text">Ref.: 300 - 900 /µL</div></div>
-                                        <div class="col-md-3"><label class="form-label">Plaquetas</label><input type="number" class="form-control" name="plaquetas" id="plaquetas"><div class="form-text">Ref.: 150.000 - 450.000 /µL</div></div>
-                                        <div class="col-md-3"><label class="form-label">Volume Plaquetário Médio</label><input type="number" step="0.1" class="form-control" name="plaquetarioMedio" id="plaquetarioMedio"><div class="form-text">Ref.: 6,5 - 15,0 fL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Linfócitos</label><input type="number" class="form-control" name="linfocitos" required><div class="form-text">Ref.: 900 - 2.900 /µL</div></div>
+                                        <div class="col-md-2"><label class="form-label">Monócitos</label><input type="number" class="form-control" name="monocitos" required><div class="form-text">Ref.: 300 - 900 /µL</div></div>
+                                        <div class="col-md-3"><label class="form-label">Plaquetas</label><input type="number" class="form-control" name="plaquetas" id="plaquetas" required><div class="form-text">Ref.: 150.000 - 450.000 /µL</div></div>
+                                        <div class="col-md-3"><label class="form-label">Volume Plaquetário Médio</label><input type="number" step="0.1" class="form-control" name="plaquetarioMedio" id="plaquetarioMedio" required><div class="form-text">Ref.: 6,5 - 15,0 fL</div></div>
                                     </div>
                                 </div>
                             </div>
@@ -272,11 +272,11 @@ if (isset($_GET['status'])) {
                                 <div class="card-header bg-light fw-bold text-uppercase border-bottom">Contagem Diferencial (%)</div>
                                 <div class="card-body">
                                     <div class="row g-3">
-                                        <div class="col-md-2"><label class="form-label">Neutrófilos</label><input type="number" class="form-control" name="contagemNeutrofilos"></div>
-                                        <div class="col-md-2"><label class="form-label">Linfócitos</label><input type="number" class="form-control" name="contagemLinfocitos"></div>
-                                        <div class="col-md-2"><label class="form-label">Eosinófilos</label><input type="number" class="form-control" name="contagemEosinofilos"></div>
-                                        <div class="col-md-2"><label class="form-label">Monócitos</label><input type="number" class="form-control" name="contagemMonocitos"></div>
-                                        <div class="col-md-2"><label class="form-label">Basófilos</label><input type="number" class="form-control" name="contagemBasofilos"></div>
+                                        <div class="col-md-2"><label class="form-label">Neutrófilos</label><input type="number" class="form-control" name="contagemNeutrofilos" required></div>
+                                        <div class="col-md-2"><label class="form-label">Linfócitos</label><input type="number" class="form-control" name="contagemLinfocitos" required></div>
+                                        <div class="col-md-2"><label class="form-label">Eosinófilos</label><input type="number" class="form-control" name="contagemEosinofilos" required></div>
+                                        <div class="col-md-2"><label class="form-label">Monócitos</label><input type="number" class="form-control" name="contagemMonocitos" required></div>
+                                        <div class="col-md-2"><label class="form-label">Basófilos</label><input type="number" class="form-control" name="contagemBasofilos" required></div>
                                     </div>
                                 </div>
                             </div>
