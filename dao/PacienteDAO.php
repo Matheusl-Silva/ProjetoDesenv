@@ -2,6 +2,30 @@
 class PacienteDAO
 {
 
+    public function verificarEmailExistente($email)
+    {
+        $url   = "http://localhost:3000/pacientes/verificar-email";
+        $dados = ["email" => $email];
+
+        $options = [
+            "http" => [
+                "header"  => "Content-Type: application/json\r\n",
+                "method"  => "POST",
+                "content" => json_encode($dados),
+            ],
+        ];
+
+        $context = stream_context_create($options);
+        $result  = file_get_contents($url, false, $context);
+
+        if ($result === false) {
+            return false;
+        }
+
+        $response = json_decode($result, true);
+        return isset($response['existe']) ? $response['existe'] : false;
+    }
+
     public function cadastrarPaciente($nome, $email, $periodo, $dataNasc, $telefone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia)
     {
         $url   = "http://localhost:3000/pacientes";
@@ -33,6 +57,12 @@ class PacienteDAO
         }
 
         $response = json_decode($result, true);
+
+        // Verificar se houve erro de email duplicado
+        if (isset($response['error']) && strpos($response['error'], 'Email já cadastrado') !== false) {
+            return "EMAIL_DUPLICADO";
+        }
+
         return isset($response['id']) ? $response['id'] : false;
     }
 

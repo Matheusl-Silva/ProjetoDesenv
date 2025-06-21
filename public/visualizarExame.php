@@ -8,10 +8,10 @@ $auth->verificarLogin();
 
 $exame = null;
 if (isset($_GET['id'])) {
-    $bd = new Conexao();
-    $mysqli = $bd->getConexao();
+    $bd       = new Conexao();
+    $mysqli   = $bd->getConexao();
     $exameDAO = new ExameDAO($mysqli);
-    $exame = $exameDAO->buscarExameCompletoPorId($_GET['id']);
+    $exame    = $exameDAO->buscarExameCompletoPorId($_GET['id']);
 }
 
 if (!$exame) {
@@ -42,7 +42,11 @@ if (!$exame) {
                             <div class="row g-3 mb-4">
                                 <div class="col-md-6">
                                     <label class="form-label">Paciente</label>
+                                    <?php if ($auth->isAdmin()): ?>
                                     <input type="text" class="form-control" value="<?php echo htmlspecialchars($exame['nome_paciente']); ?> (Reg: <?php echo htmlspecialchars($exame['registro_paciente']); ?>)">
+                                    <?php else: ?>
+                                    <input type="text" class="form-control" value="*****">
+                                    <?php endif; ?>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Exame realizado em</label>
@@ -62,9 +66,9 @@ if (!$exame) {
                         <fieldset disabled>
                             <legend class="h5 mt-4">Eritrograma</legend>
                             <div class="row g-3 mb-4">
-                                <?php 
-                                $camposEritrograma = ['hemacia' => 'Hemácias', 'hemoglobina' => 'Hemoglobina', 'hematocrito' => 'Hematócrito', 'vcm' => 'VCM', 'hcm' => 'HCM', 'chcm' => 'CHCM', 'rdw' => 'RDW'];
-                                foreach($camposEritrograma as $key => $label): ?>
+                                <?php
+$camposEritrograma = ['hemacia' => 'Hemácias', 'hemoglobina' => 'Hemoglobina', 'hematocrito' => 'Hematócrito', 'vcm' => 'VCM', 'hcm' => 'HCM', 'chcm' => 'CHCM', 'rdw' => 'RDW'];
+foreach ($camposEritrograma as $key => $label): ?>
                                 <div class="col-md-3">
                                     <label class="form-label"><?php echo $label; ?></label>
                                     <input type="text" class="form-control" value="<?php echo htmlspecialchars($exame[$key] ?? 'N/A'); ?>">
@@ -107,4 +111,4 @@ if (!$exame) {
         </div>
     </div>
 </body>
-</html>  
+</html>

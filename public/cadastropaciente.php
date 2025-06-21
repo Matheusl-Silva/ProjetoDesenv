@@ -14,7 +14,8 @@ $bd = new Conexao();
 $bd->conectar();
 $mysqli = $bd->getConexao();
 
-$result = null;
+$result          = null;
+$email_duplicado = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // mysqli_real_escape_string previnir sql injection no PHP
@@ -37,7 +38,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $patologia = mysqli_real_escape_string($mysqli, $_POST['patologia']);
     }
 
-    $result = $pacienteDAO->cadastrarPaciente($nome, $email, $periodo, $datanasc, $fone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia);
+    // Verificar se o email já existe
+    $email_existe = $pacienteDAO->verificarEmailExistente($email);
+
+    if ($email_existe) {
+        $email_duplicado = true;
+    } else {
+        $result = $pacienteDAO->cadastrarPaciente($nome, $email, $periodo, $datanasc, $fone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia);
+
+        // Verificar se o resultado indica email duplicado
+        if ($result === "EMAIL_DUPLICADO") {
+            $email_duplicado = true;
+            $result          = null;
+        }
+    }
 }
 
 $bd->fecharConexao();
@@ -82,6 +96,23 @@ $bd->fecharConexao();
                 </div>
                 <div class="modal-body">
                     <p>Erro ao cadastrar paciente.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEmailDuplicado" tabindex="-1" aria-labelledby="modalEmailDuplicadoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEmailDuplicadoLabel">Email Já Cadastrado!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>O email informado já está cadastrado no sistema. Por favor, utilize um email diferente.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -204,6 +235,9 @@ $bd->fecharConexao();
         const modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'));
         document.getElementById('mensagemSucesso').textContent = 'Paciente cadastrado com sucesso! Número do Paciente Cadastrado: <?php echo $result; ?>';
         modalSucesso.show();
+    <?php elseif ($email_duplicado): ?>
+        const modalEmailDuplicado = new bootstrap.Modal(document.getElementById('modalEmailDuplicado'));
+        modalEmailDuplicado.show();
     <?php elseif (isset($result)): ?>
         const modalErro = new bootstrap.Modal(document.getElementById('modalErro'));
         modalErro.show();
