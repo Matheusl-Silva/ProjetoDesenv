@@ -102,6 +102,7 @@ foreach ($camposEritrograma as $key => $label): ?>
                         </fieldset>
 
                         <div class="card-footer bg-light text-center mt-4">
+                            <a href="../views/laudo.html" class="btn btn-primary">Imprimir</a>
                             <a href="examePrincipal.php?numero_paciente=<?php echo $exame['registro_paciente']; ?>" class="btn btn-primary">Voltar para o Paciente</a>
                             <a href="homeUsuario.php" class="btn btn-secondary">Voltar para Home</a>
                         </div>
