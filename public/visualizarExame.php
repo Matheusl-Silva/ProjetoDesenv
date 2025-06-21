@@ -102,7 +102,9 @@ foreach ($camposEritrograma as $key => $label): ?>
                         </fieldset>
 
                         <div class="card-footer bg-light text-center mt-4">
-                            <a href="laudo.php?id=<?php echo $exame["id"] ?>" class="btn btn-primary">Imprimir</a>
+                            <?php if ($auth->isAdmin()): ?>
+                                <button onclick="imprimirLaudo(<?php echo $exame['id']; ?>)" class="btn btn-primary">Imprimir</button>
+                            <?php endif; ?>
                             <a href="examePrincipal.php?numero_paciente=<?php echo $exame['registro_paciente']; ?>" class="btn btn-primary">Voltar para o Paciente</a>
                             <a href="homeUsuario.php" class="btn btn-secondary">Voltar para Home</a>
                         </div>
@@ -111,5 +113,41 @@ foreach ($camposEritrograma as $key => $label): ?>
             </div>
         </div>
     </div>
+    <script>
+        function imprimirLaudo(idExame) {
+            //iframe serve para criar outra pagina dentro dessa pagina
+            const iframe = document.createElement('iframe');
+            // Oculta o iframe
+            iframe.style.position = 'absolute';
+            iframe.style.width = '0';
+            iframe.style.height = '0';
+            iframe.style.border = '0';
+            iframe.style.display = 'none';
+            //deixar o iframe escondido pois aqui so queremos que ele carregue a pagina de laudo
+            iframe.src = `laudo.php?id=${idExame}`;
+            document.body.appendChild(iframe);
+            //depois que o iframe carrega ele lança a função para abrir a janela de imprimri e deixa o focus nela
+            iframe.onload = function() {
+                try {
+                    iframe.contentWindow.focus();
+                    iframe.contentWindow.print();
+                    // Remove o iframe depois que a impressão for concluída ou cancelada
+                    iframe.contentWindow.onafterprint = function () {
+                        document.body.removeChild(iframe);
+                    }
+                } catch (error) {
+                    console.error("Erro ao tentar imprimir o laudo:", error);
+                    alert("Não foi possível abrir a janela de impressão.");
+                    document.body.removeChild(iframe);
+                }
+            };
+
+            iframe.onerror = function() {
+                console.error("Erro ao carregar o iframe do laudo.");
+                alert("Não foi possível carregar o laudo para impressão.");
+                document.body.removeChild(iframe);
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1,15 +1,15 @@
 <?php
-  include '../views/LaudoView.php';
-  require_once '../dao/ExameDAO.php';
+include '../views/LaudoView.php';
+require_once '../dao/ExameDAO.php';
 
-  if(isset($_GET["id"])){
+if (isset($_GET["id"])) {
     $exameDAO = new ExameDAO();
-    $exame = $exameDAO->buscarExameCompletoPorId($_GET["id"]);
-  }
-  
-  if(!$exame){
+    $exame    = $exameDAO->buscarExameCompletoPorId($_GET["id"]);
+}
+
+if (!$exame) {
     die("Exame não encontrado.");
-  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -64,10 +64,32 @@
       padding-bottom: 5px;
       margin-bottom: 15px;
     }
+
+    /* utilizado o @mdia print para qunado for dar o ctrl +p*/
+    @media print {
+      body {
+        margin: 20px;
+        font-size: 10pt;
+      }
+      .header-logo {
+        max-width: 250px;
+        margin-bottom: 10px;
+      }
+      .secao {
+        margin-bottom: 15px;
+      }
+      .secao h3 {
+        margin-bottom: 10px;
+      }
+      .elemento {
+        grid-template-columns: 150px 1fr 80px 120px;
+        font-size: 9pt;
+      }
+    }
   </style>
   <body>
     <?php
-      echo LaudoView::renderizarLaudo($exame);
-    ?>
+echo LaudoView::renderizarLaudo($exame);
+?>
   </body>
 </html>
