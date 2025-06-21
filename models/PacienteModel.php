@@ -1,6 +1,7 @@
 <?php
 class Paciente extends Pessoa
 {
+    private $id;
     private $periodo;
     private $dataNasc;
     private $fone;
@@ -10,9 +11,10 @@ class Paciente extends Pessoa
     private $trataPatologia;
     private $patologia;
 
-    public function __construct($nome = null, $email = null, $periodo = null, $dataNasc = null, $fone = null, $nomeMae = null, $tomaMedicamento = null, $medicamento = null, $trataPatologia = null, $patologia = null)
+    public function __construct($id = null, $nome = null, $email = null, $periodo = null, $dataNasc = null, $fone = null, $nomeMae = null, $tomaMedicamento = null, $medicamento = null, $trataPatologia = null, $patologia = null)
     {
         parent::__construct($nome, $email);
+        $this->id              = $id;
         $this->periodo         = $periodo;
         $this->dataNasc        = $dataNasc;
         $this->fone            = $fone;
@@ -22,6 +24,16 @@ class Paciente extends Pessoa
         $this->trataPatologia  = $trataPatologia;
         $this->patologia       = $patologia;
 
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($valor)
+    {
+        $this->id = $valor;
     }
 
     public function getPeriodo()
@@ -104,7 +116,4 @@ class Paciente extends Pessoa
         $this->patologia = $valor;
     }
 
-    
-
-    
 }

@@ -97,6 +97,7 @@ class PacienteView
 
         $html = '<div class="card-body bg-body-tertiary">
                     <form action="editarPaciente.php" method="POST">
+                        <input type="hidden" name="id" value="' . ($paciente["id"]) . '">
                         <div class="row">
                             <div class="form-group col">
                                 <label for="nome" class="form-label">Nome Completo:</label>

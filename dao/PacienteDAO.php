@@ -58,7 +58,6 @@ class PacienteDAO
 
         $response = json_decode($result, true);
 
-        // Verificar se houve erro de email duplicado
         if (isset($response['error']) && strpos($response['error'], 'Email já cadastrado') !== false) {
             return "EMAIL_DUPLICADO";
         }
@@ -82,10 +81,11 @@ class PacienteDAO
         return $lista;
     }
 
-    public function atualizarPacientes($nome, $email, $periodo, $dataNasc, $telefone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia)
+    public function atualizarPacientes($id, $nome, $email, $periodo, $dataNasc, $telefone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia)
     {
-        $url   = "http://localhost:3000/pacientes/" . $email;
+        $url   = "http://localhost:3000/pacientes/" . $id;
         $dados = [
+            "id"               => $id,
             "nome"             => $nome,
             "email"            => $email,
             "periodo"          => $periodo,
