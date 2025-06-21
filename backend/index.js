@@ -53,9 +53,10 @@ app.post("/pacientes/verificar-email", (req, res) => {
 
     res.json({ existe: results.length > 0 });
   });
+  return res.status(200);
 });
 
-//rota para deletar os usuarios
+//rota para deletar os pacientes
 
 app.delete("/pacientes/:email", (req, res) => {
   const email = req.params.email;
