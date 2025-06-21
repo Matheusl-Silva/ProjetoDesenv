@@ -5,49 +5,198 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <style>
-    .elemento {
-      display: flex;
-      align-items: center;
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      margin: 40px;
+      line-height: 1.6;
     }
-    .traco {
-      flex-grow: 1;
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .header h1 {
+      margin-bottom: 10px;
+    }
+    .elemento {
+      display: grid;
+      grid-template-columns: 200px 1fr 100px 150px;
+      align-items: baseline;
+      margin-bottom: 2px;
+      font-size: 14px;
+    }
+    .elemento .traco {
       border-bottom: 1px dotted black;
-      margin: 0 10px;
+      margin: 0 5px;
+    }
+    .elemento .valor-unidade {
+      text-align: right;
+    }
+    .elemento .referencia {
+      text-align: right;
+      padding-left: 15px;
+      white-space: nowrap;
+    }
+    .header-logo {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 400px;
+      margin-bottom: 20px;
+    }
+    .secao {
+      margin-bottom: 25px;
+    }
+    .secao h3 {
+      padding-bottom: 5px;
+      margin-bottom: 15px;
     }
   </style>
   <body>
-    <div>
+    <div class="header">
+      <img class="header-logo" src="../assets/img/LogoPositivo.png" alt="Logo Universidade Positivo">
       <h1>HEMOGRAMA</h1>
       <p>
-        Material: Sangue Coletado em: Método: Automatizado - Citometria de
-        fluxo, contagem a laser, impedância
+        <strong>Material:</strong> Sangue <strong>Coletado em:</strong> <span id="data-coleta"></span> <strong>Método:</strong> Automatizado - Citometria de fluxo, contagem a laser, impedância
       </p>
     </div>
-    <div style="width: 40%;">
+
+    <div class="secao">
+      <h3>ERITROGRAMA</h3>
       <div class="elemento">
-        <span>Hemácias: (milhões)</span>
+        <span>Hemácias (milhões)</span>
         <div class="traco"></div>
-        <span> /mm3</span>
+        <span class="valor-unidade"><span id="hemacia"></span> /mm³</span>
+        <span class="referencia">3,90 a 5,03 /mm³</span>
       </div>
       <div class="elemento">
         <span>Hemoglobina</span>
         <div class="traco"></div>
-        <span> g/dL</span>
+        <span class="valor-unidade"><span id="hemoglobina"></span> g/dL</span>
+        <span class="referencia">12,0 a 15,5 g/dL</span>
       </div>
       <div class="elemento">
         <span>Hematócrito</span>
         <div class="traco"></div>
-        <span>%</span>
+        <span class="valor-unidade"><span id="hematocrito"></span> %</span>
+        <span class="referencia">34,9 a 44,5 %</span>
       </div>
       <div class="elemento">
         <span>V.C.M.</span>
         <div class="traco"></div>
-        <span>fL</span>
+        <span class="valor-unidade"><span id="vcm"></span> fL</span>
+        <span class="referencia">81,6 a 98,3 fL</span>
       </div>
       <div class="elemento">
         <span>H.C.M.</span>
         <div class="traco"></div>
-        <span>pg</span>
+        <span class="valor-unidade"><span id="hcm"></span> pg</span>
+        <span class="referencia">26,0 a 34,0 pg</span>
+      </div>
+      <div class="elemento">
+        <span>C.H.C.M.</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="chcm"></span> g/dL</span>
+        <span class="referencia">31,0 a 36,0 g/dL</span>
+      </div>
+       <div class="elemento">
+        <span>RDW</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="rdw"></span> %</span>
+        <span class="referencia">11,8 a 15,5 %</span>
+      </div>
+       <div class="elemento">
+        <span>Eritroblastos</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="eritroblastos"></span> %</span>
+        <span class="referencia">0 %</span>
+      </div>
+    </div>
+
+    <div class="secao">
+      <h3>LEUCOGRAMA</h3>
+      <div class="elemento">
+        <span>Leucócitos totais</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="leucocitos"></span> /mm³</span>
+        <span class="referencia">3.500 a 10.500/mm³</span>
+      </div>
+      <div class="elemento">
+        <span>Blastos</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="blastos_p"></span> %</span>
+        <span class="referencia">0 %</span>
+      </div>
+       <div class="elemento">
+        <span>Prómielócitos</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="promielocitos_p"></span> %</span>
+        <span class="referencia">0 %</span>
+      </div>
+      <div class="elemento">
+        <span>Mielócitos</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="mielocitos_p"></span> %</span>
+        <span class="referencia">0 %</span>
+      </div>
+      <div class="elemento">
+        <span>Metamielócitos</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="metamielocitos_p"></span> %</span>
+        <span class="referencia">0 a %</span>
+      </div>
+      <div class="elemento">
+        <span>Bastonetes</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="bastonetes_p"></span> %</span>
+        <span class="referencia">0 a 8%</span>
+      </div>
+      <div class="elemento">
+        <span>Segmentados</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="segmentados_p"></span> %</span>
+        <span class="referencia">40 a 80%</span>
+      </div>
+      <div class="elemento">
+        <span>Eosinófilos</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="eosinofilos_p"></span> %</span>
+        <span class="referencia">1 a 5%</span>
+      </div>
+      <div class="elemento">
+        <span>Basófilos</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="basofilos_p"></span> %</span>
+        <span class="referencia">0 a 1%</span>
+      </div>
+      <div class="elemento">
+        <span>Prolinfócitos</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="prolinfocitos"></span> %</span>
+        <span class="referencia">0 %</span>
+      </div>
+      <div class="elemento">
+        <span>Linfócitos</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="linfocitos"></span> %</span>
+        <span class="referencia">20 a 30%</span>
+      </div>
+       <div class="elemento">
+        <span>Linfócitos atípicos</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="linfocitos_atipicos"></span> %</span>
+        <span class="referencia">0 a 1%</span>
+      </div>
+      <div class="elemento">
+        <span>Monócitos</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="monocitos"></span> %</span>
+        <span class="referencia">3 a 9%</span>
+      </div>
+      <div class="elemento">
+        <span>Plaquetas</span>
+        <div class="traco"></div>
+        <span class="valor-unidade"><span id="plaquetas"></span> mil/mm³</span>
+        <span class="referencia">150 a 400 mil/mm³</span>
       </div>
     </div>
   </body>
