@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <style>
+    .elemento {
+      display: flex;
+      align-items: center;
+    }
+    .traco {
+      flex-grow: 1;
+      border-bottom: 1px dotted black;
+      margin: 0 10px;
+    }
+  </style>
+  <body>
+    <div>
+      <h1>HEMOGRAMA</h1>
+      <p>
+        Material: Sangue Coletado em: Método: Automatizado - Citometria de
+        fluxo, contagem a laser, impedância
+      </p>
+    </div>
+    <div style="width: 40%;">
+      <div class="elemento">
+        <span>Hemácias: (milhões)</span>
+        <div class="traco"></div>
+        <span> /mm3</span>
+      </div>
+      <div class="elemento">
+        <span>Hemoglobina</span>
+        <div class="traco"></div>
+        <span> g/dL</span>
+      </div>
+      <div class="elemento">
+        <span>Hematócrito</span>
+        <div class="traco"></div>
+        <span>%</span>
+      </div>
+      <div class="elemento">
+        <span>V.C.M.</span>
+        <div class="traco"></div>
+        <span>fL</span>
+      </div>
+      <div class="elemento">
+        <span>H.C.M.</span>
+        <div class="traco"></div>
+        <span>pg</span>
+      </div>
+    </div>
+  </body>
+</html>
