@@ -53,9 +53,10 @@ app.post("/pacientes/verificar-email", (req, res) => {
 
     res.json({ existe: results.length > 0 });
   });
+  return res.status(200);
 });
 
-//rota para deletar os usuarios
+//rota para deletar os pacientes
 
 app.delete("/pacientes/:email", (req, res) => {
   const email = req.params.email;
@@ -78,10 +79,12 @@ app.delete("/pacientes/:email", (req, res) => {
 });
 
 //rota para atualizar o paciente
-app.put("/pacientes/:email", (req, res) => {
-  const email = req.params.email;
+app.put("/pacientes/:idPaciente", (req, res) => {
+  const idPaciente = req.params.idPaciente;
   const {
+    id,
     nome,
+    email,
     periodo,
     data_nascimento,
     telefone,
@@ -93,12 +96,13 @@ app.put("/pacientes/:email", (req, res) => {
   } = req.body;
 
   const query =
-    "UPDATE pacientes SET nome = ?, periodo = ?, data_nascimento = ?, telefone = ?, nome_mae = ?, toma_medicamento = ?, medicamento = ?, trata_patologia = ?, patologia = ? WHERE email = ?";
+    "UPDATE pacientes SET nome = ?, email = ?, periodo = ?, data_nascimento = ?, telefone = ?, nome_mae = ?, toma_medicamento = ?, medicamento = ?, trata_patologia = ?, patologia = ? WHERE id = ?";
 
   db.query(
     query,
     [
       nome,
+      email,
       periodo,
       data_nascimento,
       telefone,
@@ -107,7 +111,7 @@ app.put("/pacientes/:email", (req, res) => {
       medicamento,
       trata_patologia,
       patologia,
-      email,
+      idPaciente,
     ],
     (err, results) => {
       if (err) {

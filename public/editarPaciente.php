@@ -41,10 +41,11 @@ if (isset($_POST['excluir_paciente']) && !empty($_POST['email'])) {
 }
 
 if (isset($_POST['atualizar_paciente'])) {
+    $id               = $_POST['id'];
     $nome             = $_POST['nome'];
     $email            = $_POST['email'];
     $periodo          = $_POST['periodo'];
-    $data_nascimento  = DateTime::createFromFormat('d/m/Y', $_POST['data_nascimento'])->format('Y-m-d');
+    $data_nascimento  = $_POST['data_nascimento'];
     $telefone         = $_POST['telefone'];
     $nome_mae         = $_POST['nome_mae'];
     $toma_medicamento = $_POST['toma_medicamento'];
@@ -52,7 +53,7 @@ if (isset($_POST['atualizar_paciente'])) {
     $trata_patologia  = $_POST['trata_patologia'];
     $patologia        = $_POST['patologia'];
 
-    if ($pacienteObj->atualizarPacientes($nome, $email, $periodo, $data_nascimento, $telefone, $nome_mae, $toma_medicamento, $medicamento, $trata_patologia, $patologia)) {
+    if ($pacienteObj->atualizarPacientes($id, $nome, $email, $periodo, $data_nascimento, $telefone, $nome_mae, $toma_medicamento, $medicamento, $trata_patologia, $patologia)) {
         $mensagem = "Paciente atualizado com sucesso!";
         header("refresh:2;url=editarPaciente.php");
     } else {
