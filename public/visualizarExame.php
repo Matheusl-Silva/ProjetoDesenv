@@ -6,14 +6,22 @@ require_once '../dao/ExameDAO.php';
 $auth = new Autenticacao();
 $auth->verificarLogin();
 
-$exame = null;
+//busca dos dados do exame
+$exame = null; //iniciada como null
+
+//verifica se o id de exame foi passado na url
 if (isset($_GET['id'])) {
+
+    //conexão ao banco e instanciação da exameDAO
     $bd       = new Conexao();
     $mysqli   = $bd->getConexao();
     $exameDAO = new ExameDAO($mysqli);
+
+    //usa a DAO e pra chamar a API e buscar os dados completos do exame em questão
     $exame    = $exameDAO->buscarExameCompletoPorId($_GET['id']);
 }
 
+//após a busca, caso a variavel $exame ainda for nula, para a execução e exibe uma mensagem de erro
 if (!$exame) {
     die("Exame não encontrado ou ID inválido.");
 }
