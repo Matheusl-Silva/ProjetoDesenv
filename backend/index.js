@@ -355,3 +355,62 @@ app.post("/exames/", (req, res) => {
 app.listen(3000, () => {
   console.log("Servidor rodando na porta 3000.");
 });
+
+/*
+app.post("/usuarios/cadastrar", (req, res) => {
+  const { nomeUsuario, email, senha, senhaConfirma } = req.body;
+
+  if (!nomeUsuario || !email || !senha || !senhaConfirma) {
+    return res.status(400).json({ 
+        tipo_alerta: "danger", 
+        mensagem: "Todos os campos são obrigatórios." 
+    });
+  }
+
+  if (senha !== senhaConfirma) {
+    return res.status(400).json({ 
+        tipo_alerta: "danger", 
+        mensagem: "As senhas não conferem! Por favor, digite novamente." 
+    });
+  }
+
+  //verifica se o e-mail já existe no banco
+  const checkEmailQuery = "SELECT id FROM usuarios WHERE email = ?";
+  
+  db.query(checkEmailQuery, [email], (err, results) => {
+    if (err) {
+      console.error("Erro ao verificar e-mail:", err);
+      return res.status(500).json({ 
+          tipo_alerta: "danger", 
+          mensagem: "Erro interno no servidor ao verificar o e-mail." 
+      });
+    }
+
+    //se `results` tiver algum item, o e-mail já existe
+    if (results.length > 0) {
+      return res.status(409).json({
+          tipo_alerta: "warning", 
+          mensagem: "Este e-mail já está cadastrado!" 
+      });
+    }
+
+    const insertQuery = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
+    
+    db.query(insertQuery, [nomeUsuario, email, senha], (err, result) => {
+      if (err) {
+        console.error("Erro ao cadastrar usuário:", err);
+        return res.status(500).json({ 
+            tipo_alerta: "danger", 
+            mensagem: "Erro ao cadastrar." 
+        });
+      }
+
+      res.status(201).json({
+          tipo_alerta: "success", 
+          mensagem: "Usuário cadastrado com sucesso!",
+          userId: result.insertId //envia o ID do novo usuário criado
+      });
+    });
+  });
+});
+*/
