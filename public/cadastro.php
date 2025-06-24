@@ -63,6 +63,7 @@ $db->fecharConexao();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/css/cadastro.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <title>Cadastro de Usuário</title>
 </head>
 
@@ -97,11 +98,18 @@ $db->fecharConexao();
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="senha" class="form-label">Senha: <span style="color: red;">*</span></label>
-                                    <input type="password" class="form-control mb-2" name="senha"id="senha" placeholder="Insira sua senha" required minlength="8">
+                                    <div class="input-group mb-2">
+                                        <input type="password" class="form-control" name="senha" id="senha" placeholder="Insira sua senha" required minlength="8">
+                                    </div>
                                 </div>
                                 <div class="form-group col">
                                     <label for="senhaConfirma" class="form-label">Confirmar senha: <span style="color: red;">*</span></label>
-                                    <input type="password" class="form-control mb-2" name="senhaConfirma" id="senhaConfirma" required minlength="8">
+                                    <div class="input-group mb-2">
+                                        <input type="password" class="form-control" name="senhaConfirma" id="senhaConfirma" required minlength="8">
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleSenhas" tabindex="0" aria-label="Mostrar senhas" title="Mostrar senhas">
+                                            <span id="iconSenhas" class="bi bi-eye"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary col-12 mt-3 mb-2 ">Cadastrar Usuario</button>
@@ -117,5 +125,30 @@ $db->fecharConexao();
     </div>
 </body>
 <script src="../assets/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const senhaInput = document.getElementById('senha');
+    const senhaConfirmaInput = document.getElementById('senhaConfirma');
+    const toggleBtn = document.getElementById('toggleSenhas');
+    const iconSenhas = document.getElementById('iconSenhas');
+    if (toggleBtn && senhaInput && senhaConfirmaInput) {
+        toggleBtn.addEventListener('click', function() {
+            const mostrar = senhaInput.type === 'password' || senhaConfirmaInput.type === 'password';
+            senhaInput.type = mostrar ? 'text' : 'password';
+            senhaConfirmaInput.type = mostrar ? 'text' : 'password';
+            if (mostrar) {
+                if (iconSenhas) iconSenhas.className = 'bi bi-eye-slash';
+                toggleBtn.setAttribute('title', 'Ocultar senhas');
+                toggleBtn.setAttribute('aria-label', 'Ocultar senhas');
+            } else {
+                if (iconSenhas) iconSenhas.className = 'bi bi-eye';
+                toggleBtn.setAttribute('title', 'Mostrar senhas');
+                toggleBtn.setAttribute('aria-label', 'Mostrar senhas');
+            }
+        });
+    }
+});
+</script>
 
 </html>

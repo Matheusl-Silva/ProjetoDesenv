@@ -40,7 +40,7 @@ if (isset($_POST['excluir_usuario']) && !empty($_POST['email'])) {
 }
 
 if (isset($_POST['atualizar_usuario'])) {
-    $id = $_POST['id'];
+    $id    = $_POST['id'];
     $nome  = $_POST['nomeUsuario'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
@@ -63,6 +63,7 @@ if (isset($_POST['atualizar_usuario'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/cadastropaciente.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <title>Editar Usuario</title>
 </head>
 
@@ -99,5 +100,29 @@ if (isset($_POST['atualizar_usuario'])) {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const senhaInput = document.getElementById('senha');
+        const toggleBtn = document.getElementById('toggleSenha');
+        const iconSenha = document.getElementById('iconSenha');
+
+        if (toggleBtn && senhaInput) {
+            toggleBtn.addEventListener('click', function() {
+                if (senhaInput.type === 'password') {
+                    senhaInput.type = 'text';
+                    if (iconSenha) iconSenha.className = 'bi bi-eye-slash';
+                    toggleBtn.setAttribute('title', 'Ocultar senha');
+                    toggleBtn.setAttribute('aria-label', 'Ocultar senha');
+                } else {
+                    senhaInput.type = 'password';
+                    if (iconSenha) iconSenha.className = 'bi bi-eye';
+                    toggleBtn.setAttribute('title', 'Mostrar senha');
+                    toggleBtn.setAttribute('aria-label', 'Mostrar senha');
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>
