@@ -18,9 +18,6 @@ class LaudoView
     <strong>Responsável:</strong> ' . htmlspecialchars($responsavel) . ' |
     <strong>Preceptor:</strong> ' . htmlspecialchars($preceptor) . '
   </p>
-  <p>
-    <strong>Material:</strong> Sangue <strong>Coletado em:</strong> <span id="data-coleta"></span> <strong>Método:</strong> Automatizado - Citometria de fluxo, contagem a laser, impedância
-  </p>
 </div>
 
 <div class="secao">

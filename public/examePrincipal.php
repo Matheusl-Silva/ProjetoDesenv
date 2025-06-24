@@ -135,7 +135,7 @@ if (isset($_GET['status'])) {
                     <div class="card shadow p-4 bg-body-tertiary rounded">
                         <div class="card-header bg-body-tertiary text-center mb-4">
                             <h2>Cadastro Hematológico</h2>
-                            <small class="text-primary">Paciente: <?php echo htmlspecialchars($paciente['nome']); ?> (N° de Registro: <?php echo htmlspecialchars($paciente['id']); ?>)</small>
+                            <small class="text-primary">Numero do Paciente: <?php echo htmlspecialchars($paciente['id']); ?></small>
                         </div>
 
                         <div class="card mb-4">
@@ -147,7 +147,7 @@ if (isset($_GET['status'])) {
                                     <table class="table table-hover table-sm">
                                         <thead>
                                             <tr>
-                                                <th>ID Exame</th>
+                                                <th>Número do exame</th>
                                                 <th>Data do Exame</th>
                                                 <th>Preceptor Responsável</th>
                                                 <th>Ação</th>
