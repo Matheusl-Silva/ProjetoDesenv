@@ -69,8 +69,12 @@ class UsuarioView
                         <div class="row">
                             <div class="form-group col">
                                 <label for="senha" class="form-label">Senha Atual:</label>
-                                <input type="password" class="form-control mb-2" name="senha" id="senha"
-                                    value="' . ($usuario['senha']) . '">
+                                <div class="input-group mb-2">
+                                    <input type="password" class="form-control" name="senha" id="senha" value="' . ($usuario['senha']) . '">
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleSenha" tabindex="0" aria-label="Mostrar senha" title="Mostrar senha">
+                                        <span id="iconSenha" class="bi bi-eye"></span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
