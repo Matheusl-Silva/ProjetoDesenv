@@ -1,6 +1,7 @@
 <?php
 class Pessoa
 {
+    protected $id;
     protected $nome;
     protected $email;
 
@@ -8,6 +9,16 @@ class Pessoa
     {
         $this->nome  = $nome;
         $this->email = $email;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($valor)
+    {
+        $this->id = $valor;
     }
 
     public function getNome()

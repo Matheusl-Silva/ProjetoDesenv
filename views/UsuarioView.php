@@ -49,6 +49,7 @@ class UsuarioView
     {
         $html = '<div class="card-body bg-body-tertiary">
                     <form action="editarUsuario.php" method="POST">
+                        <input type="hidden" name="id" value="' . ($usuario["id"]) . '">
                         <div class="row">
                             <div class="form-group col">
                                 <label for="nomeCompleto" class="form-label">Nome Completo:</label>

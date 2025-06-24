@@ -40,12 +40,13 @@ if (isset($_POST['excluir_usuario']) && !empty($_POST['email'])) {
 }
 
 if (isset($_POST['atualizar_usuario'])) {
+    $id = $_POST['id'];
     $nome  = $_POST['nomeUsuario'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $admin = $_POST['admin'];
 
-    if ($usuarioObj->atualizarUsuario($nome, $email, $senha, $admin)) {
+    if ($usuarioObj->atualizarUsuario($id, $nome, $email, $senha, $admin)) {
         $mensagem = "Usuário atualizado com sucesso!";
         header("refresh:2;url=editarUsuario.php");
     } else {

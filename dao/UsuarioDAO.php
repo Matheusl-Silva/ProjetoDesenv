@@ -25,8 +25,9 @@ class UsuarioDAO
         return $usuarios;
     }
 
-    public function atualizarUsuario($nome, $email, $senha, $admin)
+    public function atualizarUsuario($id, $nome, $email, $senha, $admin)
     {
+        $id  = $this->mysqli->real_escape_string($id);
         $nome  = $this->mysqli->real_escape_string($nome);
         $email = $this->mysqli->real_escape_string($email);
         $senha = $this->mysqli->real_escape_string($senha);
@@ -37,7 +38,7 @@ class UsuarioDAO
                 email = '$email',
                 senha = '$senha',
                 adm = '$admin'
-                WHERE email = '$email'";
+                WHERE id = '$id'";
 
         if ($this->mysqli->query($sql)) {
             return true;

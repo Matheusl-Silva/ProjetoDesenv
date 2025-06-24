@@ -1,7 +1,6 @@
 <?php
 class Paciente extends Pessoa
 {
-    private $id;
     private $periodo;
     private $dataNasc;
     private $fone;
@@ -24,16 +23,6 @@ class Paciente extends Pessoa
         $this->trataPatologia  = $trataPatologia;
         $this->patologia       = $patologia;
 
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($valor)
-    {
-        $this->id = $valor;
     }
 
     public function getPeriodo()
