@@ -281,11 +281,6 @@ if (isset($_GET['status'])) {
                                 </div>
                             </div>
 
-                             <div class="mb-5">
-                                <label class="form-label fw-bold">Lote do corante utilizado</label>
-                                <input type="text" class="form-control" name="loteCorante">
-                            </div>
-
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
                                <button type="submit" class="btn btn-success btn-lg">Salvar Novo Exame</button>
                             </div>

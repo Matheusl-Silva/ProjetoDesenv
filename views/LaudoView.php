@@ -3,9 +3,21 @@ class LaudoView
 {
     public static function renderizarLaudo($exame)
     {
+        // Formatar a data do exame
+        $dataExame    = isset($exame['data']) ? date('d/m/Y H:i', strtotime($exame['data'])) : 'Data não informada';
+        $nomePaciente = isset($exame['nome_paciente']) ? $exame['nome_paciente'] : 'Paciente não identificado';
+        $responsavel  = isset($exame['nome_responsavel']) ? $exame['nome_responsavel'] : 'Responsável não identificado';
+        $preceptor    = isset($exame['nome_preceptor']) ? $exame['nome_preceptor'] : 'Preceptor não identificado';
+
         $html = '<div class="header">
   <img class="header-logo" src="../assets/img/LogoPositivo.png" alt="Logo Universidade Positivo">
   <h1>HEMOGRAMA</h1>
+  <p>
+    <strong>Paciente:</strong> ' . htmlspecialchars($nomePaciente) . ' |
+    <strong>Data do Exame:</strong> ' . $dataExame . ' |
+    <strong>Responsável:</strong> ' . htmlspecialchars($responsavel) . ' |
+    <strong>Preceptor:</strong> ' . htmlspecialchars($preceptor) . '
+  </p>
   <p>
     <strong>Material:</strong> Sangue <strong>Coletado em:</strong> <span id="data-coleta"></span> <strong>Método:</strong> Automatizado - Citometria de fluxo, contagem a laser, impedância
   </p>
@@ -13,7 +25,12 @@ class LaudoView
 
 <div class="secao">
   <h3>ERITROGRAMA</h3>
-  <div style="text-align: right; font-weight: bold; margin-bottom: 5px;">Referência</div>
+  <div style="display: grid; grid-template-columns: 200px 1fr 100px 150px; font-weight: bold; font-size: 14px; margin-bottom: 5px;">
+    <span></span>
+    <span></span>
+    <span style="text-align: right;">Resultado</span>
+    <span style="text-align: right;">Referência</span>
+  </div>
   <div class="elemento">
     <span>Hemácias (milhões)</span>
     <div class="traco"></div>
@@ -60,7 +77,12 @@ class LaudoView
 
 <div class="secao">
   <h3>LEUCOGRAMA</h3>
-  <div style="text-align: right; font-weight: bold; margin-bottom: 5px;">Referência</div>
+  <div style="display: grid; grid-template-columns: 200px 1fr 100px 150px; font-weight: bold; font-size: 14px; margin-bottom: 5px;">
+    <span></span>
+    <span></span>
+    <span style="text-align: right;">Resultado</span>
+    <span style="text-align: right;">Referência</span>
+  </div>
   <div class="elemento">
     <span>Leucócitos totais</span>
     <div class="traco"></div>
@@ -121,16 +143,21 @@ class LaudoView
     <span class="valor-unidade"><span id="basofilos_p"></span><strong>' . $exame["basofilos"] . '%</strong></span>
     <span class="referencia">0 a 1%</span>
   </div>
+</div>
 <div class="secao">
     <h3>PLAQUETOGRAMA</h3>
-    <div style="text-align: right; font-weight: bold; margin-bottom: 5px;">Referência</div>
+    <div style="display: grid; grid-template-columns: 200px 1fr 100px 150px; font-weight: bold; font-size: 14px; margin-bottom: 5px;">
+      <span></span>
+      <span></span>
+      <span style="text-align: right;">Resultado</span>
+      <span style="text-align: right;">Referência</span>
+    </div>
     <div class="elemento">
       <span>Plaquetas</span>
       <div class="traco"></div>
         <span class="valor-unidade"><span id="plaquetas"></span><strong>' . $exame["plaquetas"] . 'mil/mm³</strong></span>
         <span class="referencia">150 a 400 mil/mm³</span>
       </div>
-    </div>
     <div class="elemento">
         <span>Volume plaquetário médio</span>
         <div class="traco"></div>
