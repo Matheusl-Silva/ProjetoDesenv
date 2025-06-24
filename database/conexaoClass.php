@@ -4,10 +4,10 @@ class Conexao
     private $host     = 'localhost';
     private $usuarios = 'root';
     private $senha    = '';
-    private $database = 'login';
+    private $database = 'hemato';
     private $conexao;
 
-    public function __construct($host = 'localhost', $usuarios = 'root', $senha = '', $database = 'login')
+    public function __construct($host = 'localhost', $usuarios = 'root', $senha = '', $database = 'hemato')
     {
         $this->host     = $host;
         $this->usuarios = $usuarios;
