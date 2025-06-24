@@ -18,23 +18,31 @@ $paciente                  = null;
 $exames                    = [];
 $usuarios_para_preceptores = [];
 
+//faz uma busca no banco para possíveis preceptores
 $sql_usuarios = "SELECT id, nome FROM usuarios ORDER BY nome ASC";
 $res_usuarios = $mysqli->query($sql_usuarios);
 if ($res_usuarios) {
+    //guarda esses usuários em um array
     $usuarios_para_preceptores = $res_usuarios->fetch_all(MYSQLI_ASSOC);
 }
 
+//map de chave/valor com dados de nome e id
 $preceptores_map = array_column($usuarios_para_preceptores, 'nome', 'id');
 
+//só é executado se a pagina for carregada com "numero_paciente"
 if (isset($_GET['numero_paciente']) && !empty($_GET['numero_paciente'])) {
+    //protege contra injeção de sql
     $id_paciente = $mysqli->real_escape_string($_GET['numero_paciente']);
 
+    //busca o paciente no banco
     $sql       = "SELECT * FROM pacientes WHERE id = '$id_paciente'";
     $resultado = $mysqli->query($sql);
 
     if ($resultado && $resultado->num_rows > 0) {
+        //guarda os dados, caso encontre
         $paciente = $resultado->fetch_assoc();
 
+        //utiliza exameDAO para buscar o histórico de exames
         $exameDAO = new ExameDAO($mysqli);
         $exames   = $exameDAO->buscarPorPacienteId($paciente['id']);
     } else {
@@ -42,6 +50,7 @@ if (isset($_GET['numero_paciente']) && !empty($_GET['numero_paciente'])) {
     }
 }
 
+//verifica se a página foi carregada com parâmetro de satus
 if (isset($_GET['status'])) {
     if ($_GET['status'] == 'sucesso') {
         $mensagem = "Exame salvo com sucesso!";
@@ -298,6 +307,7 @@ if (isset($_GET['status'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        //se $mensagem não estiver vazio, usa o js para mostrar o modal de mensagem
         <?php if (!empty($mensagem)): ?>
             document.addEventListener('DOMContentLoaded', function() {
                 var mensagemModal = new bootstrap.Modal(document.getElementById('mensagemModal'));
@@ -305,6 +315,7 @@ if (isset($_GET['status'])) {
             });
         <?php endif; ?>
 
+        //se nenhum usuario foi carregado e o usuário não informou nenhum id, mostra a modal de pesquisa automaticamente
         <?php if (!$paciente && !isset($_GET['numero_paciente'])): ?>
             document.addEventListener('DOMContentLoaded', function() {
                 var myModal = new bootstrap.Modal(document.getElementById('pesquisaModal'));
