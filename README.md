@@ -59,7 +59,7 @@ ProjetoDesenv/
    ```
 3. Para rodar o servidor Node.js:
    ```bash
-   node index.js
+   rpm run dev
    ```
 4. Para executar a aplicação Java:
    - Compile e execute os arquivos em `java/` conforme necessário.
