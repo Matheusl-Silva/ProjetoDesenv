@@ -68,6 +68,7 @@ if (isset($_GET['status'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../assets/css/examePrincipal.css" />
+    <link rel="icon" href="./../assets/img/favicon.png" type="image/x-icon">
     <title>Cadastro Hematológico</title>
 </head>
 

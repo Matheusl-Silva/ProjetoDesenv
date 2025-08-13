@@ -21,6 +21,7 @@ $nome_usuario = $auth->getNomeUsuario();
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/home-usuario.css">
+    <link rel="icon" href="./../assets/img/favicon.png" type="image/x-icon">
     <title>Página principal</title>
 </head>
 

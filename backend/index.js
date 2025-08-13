@@ -1,3 +1,4 @@
+// Configurando o Node
 const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2");
@@ -7,6 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ encoded: true }));
 
+//Conectando o banco
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -22,6 +24,7 @@ db.connect((err) => {
   console.log("Conexão com banco de dados estabelecida");
 });
 
+// ----------- rotas pacientes -----------
 app.get("/pacientes", (req, res) => {
   const query = "SELECT * FROM pacientes";
 
@@ -33,6 +36,85 @@ app.get("/pacientes", (req, res) => {
     res.json(results);
   });
   return res.status(200);
+});
+
+// Cadastrar um novo usuário
+app.post("/pacientes", (req, res) => {
+  console.log("Recebendo requisição POST:", req.body);
+  const {
+    nome,
+    email,
+    periodo,
+    data_nascimento,
+    telefone,
+    nome_mae,
+    toma_medicamento,
+    medicamento,
+    trata_patologia,
+    patologia,
+  } = req.body;
+
+  if (
+    !nome ||
+    !email ||
+    !periodo ||
+    !data_nascimento ||
+    !telefone ||
+    !nome_mae ||
+    !toma_medicamento ||
+    !trata_patologia
+  ) {
+    console.error("Dados incompletos:", req.body);
+    return res.status(400).json({ error: "Dados incompletos" });
+  }
+
+  // Primeiro, verificar se o email já existe
+  const checkEmailQuery = "SELECT id FROM pacientes WHERE email = ?";
+
+  db.query(checkEmailQuery, [email], (err, results) => {
+    if (err) {
+      console.error("Erro ao verificar email:", err);
+      return res.status(500).json({ error: "Erro ao verificar email" });
+    }
+
+    if (results.length > 0) {
+      console.error("Email já cadastrado:", email);
+      return res.status(409).json({ error: "Email já cadastrado no sistema" });
+    }
+
+    // Se o email não existe, prosseguir com o cadastro
+    const insertQuery =
+      "INSERT INTO pacientes (nome, email, periodo, data_nascimento, telefone, nome_mae, toma_medicamento, medicamento, trata_patologia, patologia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    db.query(
+      insertQuery,
+      [
+        nome,
+        email,
+        periodo,
+        data_nascimento,
+        telefone,
+        nome_mae,
+        toma_medicamento,
+        medicamento,
+        trata_patologia,
+        patologia,
+      ],
+      (err, results) => {
+        if (err) {
+          console.error("Erro ao cadastrar paciente:", err);
+          return res
+            .status(500)
+            .json({ error: "Erro ao cadastrar paciente: " + err.message });
+        }
+
+        res.status(201).json({
+          message: "Paciente cadastrado com sucesso",
+          id: results.insertId,
+        });
+      }
+    );
+  });
 });
 
 // Rota para verificar se um email já existe
@@ -130,84 +212,8 @@ app.put("/pacientes/:idPaciente", (req, res) => {
   return res.status(200);
 });
 
-app.post("/pacientes", (req, res) => {
-  console.log("Recebendo requisição POST:", req.body);
-  const {
-    nome,
-    email,
-    periodo,
-    data_nascimento,
-    telefone,
-    nome_mae,
-    toma_medicamento,
-    medicamento,
-    trata_patologia,
-    patologia,
-  } = req.body;
 
-  if (
-    !nome ||
-    !email ||
-    !periodo ||
-    !data_nascimento ||
-    !telefone ||
-    !nome_mae ||
-    !toma_medicamento ||
-    !trata_patologia
-  ) {
-    console.error("Dados incompletos:", req.body);
-    return res.status(400).json({ error: "Dados incompletos" });
-  }
-
-  // Primeiro, verificar se o email já existe
-  const checkEmailQuery = "SELECT id FROM pacientes WHERE email = ?";
-
-  db.query(checkEmailQuery, [email], (err, results) => {
-    if (err) {
-      console.error("Erro ao verificar email:", err);
-      return res.status(500).json({ error: "Erro ao verificar email" });
-    }
-
-    if (results.length > 0) {
-      console.error("Email já cadastrado:", email);
-      return res.status(409).json({ error: "Email já cadastrado no sistema" });
-    }
-
-    // Se o email não existe, prosseguir com o cadastro
-    const insertQuery =
-      "INSERT INTO pacientes (nome, email, periodo, data_nascimento, telefone, nome_mae, toma_medicamento, medicamento, trata_patologia, patologia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-    db.query(
-      insertQuery,
-      [
-        nome,
-        email,
-        periodo,
-        data_nascimento,
-        telefone,
-        nome_mae,
-        toma_medicamento,
-        medicamento,
-        trata_patologia,
-        patologia,
-      ],
-      (err, results) => {
-        if (err) {
-          console.error("Erro ao cadastrar paciente:", err);
-          return res
-            .status(500)
-            .json({ error: "Erro ao cadastrar paciente: " + err.message });
-        }
-
-        res.status(201).json({
-          message: "Paciente cadastrado com sucesso",
-          id: results.insertId,
-        });
-      }
-    );
-  });
-});
-
+// ----------- rotas exames -----------
 app.get("/exames/:registroPacientes", (req, res) => {
   const registroPaciente = parseInt(req.params.registroPacientes);
 
@@ -352,11 +358,7 @@ app.post("/exames/", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("Servidor rodando na porta 3000.");
-});
-
-/*
+// ----------- rotas usuários -----------
 app.post("/usuarios/cadastrar", (req, res) => {
   const { nomeUsuario, email, senha, senhaConfirma } = req.body;
 
@@ -413,4 +415,7 @@ app.post("/usuarios/cadastrar", (req, res) => {
     });
   });
 });
-*/
+
+app.listen(3000, () => {
+  console.log("Servidor rodando na porta 3000.");
+});

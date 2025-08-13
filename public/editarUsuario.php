@@ -64,6 +64,7 @@ if (isset($_POST['atualizar_usuario'])) {
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/cadastropaciente.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="icon" href="./../assets/img/favicon.png" type="image/x-icon">
     <title>Editar Usuario</title>
 </head>
 
