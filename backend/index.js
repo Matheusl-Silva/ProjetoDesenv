@@ -1,3 +1,4 @@
+// ------------ configurando NODE ------------
 const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2");
@@ -6,6 +7,8 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ encoded: true }));
+
+// ------------ conectando banco ------------
 
 const db = mysql.createConnection({
   host: "localhost",
@@ -22,6 +25,8 @@ db.connect((err) => {
   console.log("Conexão com banco de dados estabelecida");
 });
 
+
+// ------------ rotas pacientes ------------
 app.get("/pacientes", (req, res) => {
   const query = "SELECT * FROM pacientes";
 
@@ -35,101 +40,8 @@ app.get("/pacientes", (req, res) => {
   return res.status(200);
 });
 
-// Rota para verificar se um email já existe
-app.post("/pacientes/verificar-email", (req, res) => {
-  const { email } = req.body;
 
-  if (!email) {
-    return res.status(400).json({ error: "Email não fornecido" });
-  }
-
-  const query = "SELECT id FROM pacientes WHERE email = ?";
-
-  db.query(query, [email], (err, results) => {
-    if (err) {
-      console.error("Erro ao verificar email:", err);
-      return res.status(500).json({ error: "Erro ao verificar email" });
-    }
-
-    res.json({ existe: results.length > 0 });
-  });
-  return res.status(200);
-});
-
-//rota para deletar os pacientes
-
-app.delete("/pacientes/:email", (req, res) => {
-  const email = req.params.email;
-  const query = "DELETE FROM pacientes WHERE email = ?";
-
-  db.query(query, [email], (err, results) => {
-    if (err) {
-      console.error("Erro ao excluir paciente:", err);
-      return res.status(500).json({ error: "Erro ao excluir paciente" });
-    }
-
-    if (results.affectedRows === 0) {
-      return res.status(404).json({ error: "Paciente não encontrado" });
-    }
-
-    res.json({ message: "Paciente excluído com sucesso" });
-  });
-
-  return res.status(200);
-});
-
-//rota para atualizar o paciente
-app.put("/pacientes/:idPaciente", (req, res) => {
-  const idPaciente = req.params.idPaciente;
-  const {
-    id,
-    nome,
-    email,
-    periodo,
-    data_nascimento,
-    telefone,
-    nome_mae,
-    toma_medicamento,
-    medicamento,
-    trata_patologia,
-    patologia,
-  } = req.body;
-
-  const query =
-    "UPDATE pacientes SET nome = ?, email = ?, periodo = ?, data_nascimento = ?, telefone = ?, nome_mae = ?, toma_medicamento = ?, medicamento = ?, trata_patologia = ?, patologia = ? WHERE id = ?";
-
-  db.query(
-    query,
-    [
-      nome,
-      email,
-      periodo,
-      data_nascimento,
-      telefone,
-      nome_mae,
-      toma_medicamento,
-      medicamento,
-      trata_patologia,
-      patologia,
-      idPaciente,
-    ],
-    (err, results) => {
-      if (err) {
-        console.error("Erro ao atualizar paciente:", err);
-        return res.status(500).json({ error: "Erro ao atualizar paciente" });
-      }
-
-      if (results.affectedRows === 0) {
-        return res.status(404).json({ error: "Paciente não encontrado" });
-      }
-
-      res.json({ message: "Paciente atualizado com sucesso" });
-    }
-  );
-
-  return res.status(200);
-});
-
+//Cadastrar novos pacientes
 app.post("/pacientes", (req, res) => {
   console.log("Recebendo requisição POST:", req.body);
   const {
@@ -207,6 +119,103 @@ app.post("/pacientes", (req, res) => {
     );
   });
 });
+
+// Rota para verificar se um email já existe
+app.post("/pacientes/verificar-email", (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ error: "Email não fornecido" });
+  }
+
+  const query = "SELECT id FROM pacientes WHERE email = ?";
+
+  db.query(query, [email], (err, results) => {
+    if (err) {
+      console.error("Erro ao verificar email:", err);
+      return res.status(500).json({ error: "Erro ao verificar email" });
+    }
+
+    res.json({ existe: results.length > 0 });
+  });
+  return res.status(200);
+});
+
+//rota para deletar os pacientes
+app.delete("/pacientes/:email", (req, res) => {
+  const email = req.params.email;
+  const query = "DELETE FROM pacientes WHERE email = ?";
+
+  db.query(query, [email], (err, results) => {
+    if (err) {
+      console.error("Erro ao excluir paciente:", err);
+      return res.status(500).json({ error: "Erro ao excluir paciente" });
+    }
+
+    if (results.affectedRows === 0) {
+      return res.status(404).json({ error: "Paciente não encontrado" });
+    }
+
+    res.json({ message: "Paciente excluído com sucesso" });
+  });
+
+  return res.status(200);
+});
+
+//rota para atualizar o paciente
+app.put("/pacientes/:idPaciente", (req, res) => {
+  const idPaciente = req.params.idPaciente;
+  const {
+    id,
+    nome,
+    email,
+    periodo,
+    data_nascimento,
+    telefone,
+    nome_mae,
+    toma_medicamento,
+    medicamento,
+    trata_patologia,
+    patologia,
+  } = req.body;
+
+  const query =
+    "UPDATE pacientes SET nome = ?, email = ?, periodo = ?, data_nascimento = ?, telefone = ?, nome_mae = ?, toma_medicamento = ?, medicamento = ?, trata_patologia = ?, patologia = ? WHERE id = ?";
+
+  db.query(
+    query,
+    [
+      nome,
+      email,
+      periodo,
+      data_nascimento,
+      telefone,
+      nome_mae,
+      toma_medicamento,
+      medicamento,
+      trata_patologia,
+      patologia,
+      idPaciente,
+    ],
+    (err, results) => {
+      if (err) {
+        console.error("Erro ao atualizar paciente:", err);
+        return res.status(500).json({ error: "Erro ao atualizar paciente" });
+      }
+
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: "Paciente não encontrado" });
+      }
+
+      res.json({ message: "Paciente atualizado com sucesso" });
+    }
+  );
+
+  return res.status(200);
+});
+
+
+// ------------ rotas exames ------------
 
 app.get("/exames/:registroPacientes", (req, res) => {
   const registroPaciente = parseInt(req.params.registroPacientes);
@@ -352,11 +361,8 @@ app.post("/exames/", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("Servidor rodando na porta 3000.");
-});
 
-/*
+// ------------ rotas usuários ------------
 app.post("/usuarios/cadastrar", (req, res) => {
   const { nomeUsuario, email, senha, senhaConfirma } = req.body;
 
@@ -413,4 +419,7 @@ app.post("/usuarios/cadastrar", (req, res) => {
     });
   });
 });
-*/
+
+app.listen(3000, () => {
+  console.log("Servidor rodando na porta 3000.");
+});

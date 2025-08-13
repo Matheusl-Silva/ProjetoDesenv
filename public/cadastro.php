@@ -64,6 +64,7 @@ $db->fecharConexao();
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/css/cadastro.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="icon" href="./../assets/img/favicon.png" type="image/x-icon">
     <title>Cadastro de Usuário</title>
 </head>
 
