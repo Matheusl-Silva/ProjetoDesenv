@@ -1,0 +1,16 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+.form-label{
+    display:block;
+}
+
+p, .form-group{
+    margin-bottom: 2%;
+}
+
+p{
+    margin-top: 2%;
+}

@@ -202,10 +202,7 @@ $bd->fecharConexao();
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary col-12 mt-3 mb-2">Cadastrar</button>
-                    </div>
-
-                    <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                        <a href="homeUsuario.php">Voltar para a tela de usuário</a>
+                        <a href="homeUsuario.php" class="btn btn-outline-secondary col-12">Voltar para a tela de usuário</a>
                     </div>
                 </form>
             </div>

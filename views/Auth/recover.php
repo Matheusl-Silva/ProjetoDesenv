@@ -67,9 +67,7 @@ require_once '../../models/UsuarioModel.php';
                                 <input type="email" id="email" name="email" class="form-control" placeholder="Insira seu e-mail" required>
                             </div>
                             <button type="submit" name="reset" class="btn btn-primary col-12 mt-3 mb-2">Enviar</button>
-                            <div class="card-footer bg-body-tertiary justify-content-center text-center ">
-                                <a href="login.php">Voltar para a tela de login</a>
-                            </div>
+                                <a href="login.php" class="btn btn-outline-secondary col-12">Voltar para a tela de login</a>
                         </form>
                     </div>
                 </div>
