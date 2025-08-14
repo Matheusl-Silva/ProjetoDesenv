@@ -10,7 +10,6 @@ class Autenticacao
         }
 
         // Incluindo arquivo de conexão
-        require_once __DIR__ . "/../database/conexaoClass.php";
         global $mysqli;
         $this->mysqli = $mysqli;
     }

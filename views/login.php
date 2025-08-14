@@ -1,34 +1,11 @@
-<?php
-include '../../database/conexaoClass.php';
-require_once '../../models/AutenticacaoClass.php';
-
-$db     = new Conexao();
-$mysqli = $db->getConexao();
-
-$auth = new Autenticacao();
-
-$loginInvalido;
-if (isset($_POST['email']) && isset($_POST['senha'])) {
-    $resultado = $auth->fazerLogin($_POST['email'], $_POST['senha']);
-    if ($resultado === false) {
-        $loginInvalido = true;
-    } else {
-        $loginInvalido = false;
-    }
-}
-
-$db->fecharConexao();
-?>
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/ProjetoDesenv/assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/ProjetoDesenv/assets/css/login.css">
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/assets/css/login.css">
   <link rel="icon" href="./../../assets/img/favicon.png" type="image/x-icon">
   <title>Login</title>
 </head>

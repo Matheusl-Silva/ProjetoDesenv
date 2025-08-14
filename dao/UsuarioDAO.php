@@ -6,7 +6,6 @@ class UsuarioDAO
 
     public function __construct()
     {
-        require_once __DIR__ . "/../database/conexaoClass.php";
         $bd           = new Conexao();
         $this->mysqli = $bd->getConexao();
     }
