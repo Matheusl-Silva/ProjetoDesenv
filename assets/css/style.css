@@ -1,0 +1,36 @@
+.hero { 
+  background-size: cover;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 4rem;
+}
+
+.navbar-nav .nav-link {
+  font-size: 1.25rem; 
+}
+
+.trocaCor {
+  background-color: rgb(188, 206, 251);
+  border: 3px solid #0d6efd;
+  border-radius: 5px;
+  margin: 3px;
+  font-size: 1.25rem;
+  color: #0D6EFD;
+}
+
+.trocaCor:hover {
+  background-color: #0D6EFD;
+  transition-duration: 0.5s;
+  color: white;
+}
+
+.imagemSize {
+  width: 100px;
+  height: 100px;
+}

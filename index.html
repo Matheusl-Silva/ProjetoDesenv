@@ -1,131 +1,76 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Saúde</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
-    <style>
-    /* personalizar o bootstrap dessa página */
-      :root {
-        --dark-primary: #0d6efd;
-        --medium-primary: #3a8afd;
-        --light-primary: #5c9aff;
-        --dark-bg: #f8f9fa;
-        --medium-bg: #e9ecef;
-        --light-bg: #dee2e6;
-        --text-dark: #212529;
-        --text-medium: #495057;
-      }
-      
-      body {
-        background: #6991b9;
-        color: var(--text-dark);
-      }
-      
-      .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: pointer;
-        border-radius: 15px;
-        overflow: hidden;
-        height: 100%;
-        background-color: white;
-        border: 1px solid #dee2e6;
-      }
-      
-      .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      }
-      
-      .card-icon {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
-        color: var(--dark-primary);
-      }
-      
-      .welcome-section {
-        padding: 80px 0;
-        background: linear-gradient(135deg, #e6f0ff 0%, #cce4ff 100%);
-        border-radius: 15px;
-        margin-bottom: 30px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      }
-      
-      .logo-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 20px;
-      }
-      
-      .page-container {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-      
-      .card-text {
-        color: var(--text-medium);
-      }
-      
-      /* Cards centralizados */
-      .cards-container {
-        display: flex;
-        justify-content: center;
-        margin: 0 auto;
-        max-width: 800px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="page-container">
-      <div class="content container py-5">
-        <div class="logo-container">
-          <img src="assets/img/health.png" class="imagemSize me-3" alt="Logo Saúde">
-          <h2 class="text-primary mb-0">Portal hematológico</h2>
-        </div>
-        
-        <div class="welcome-section text-center shadow-sm">
-          <h1 class="display-4 text-primary fw-bold">Bem-vindo ao Portal hematológico</h1>
-          <p class="lead text-primary">Acesse para iniciar o atendimento</p>
-        </div>
-        
-        <div class="cards-container">
-          <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
-            <div class="col">
-              <div class="card h-100 shadow-sm">
-                <div class="card-body text-center">
-                  <div class="card-icon">
-                    <i class="bi bi-person-plus"></i>
-                  </div>
-                  <h5 class="card-title">Cadastrar-se</h5>
-                  <p class="card-text">Crie sua conta para poder iniciar os atendimentos.</p>
-                  <a href="public/cadastro.php" class="btn btn-outline-primary mt-2">Cadastrar</a>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col">
-              <div class="card h-100 shadow-sm">
-                <div class="card-body text-center">
-                  <div class="card-icon">
-                    <i class="bi bi-box-arrow-in-right"></i>
-                  </div>
-                  <h5 class="card-title">Login</h5>
-                  <p class="card-text">Acesse sua conta para poder iniciar no sistema hematológico.</p>
-                  <a href="views/Auth/login.php" class="btn btn-outline-primary mt-2">Entrar</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
+    <title>Portal de Saude Positivo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/index.css">
+</head>
+<body>
+
+    <div class="page-container">
+        <div class="container py-5">
+            <!-- Header Section -->
+            <div class="header-section">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="bi bi-heart-pulse"></i>
+                    </div>
+                    <h1 class="main-title">Portal de Saude Positivo</h1>
+                </div>
+            </div>
+
+            <!-- Welcome Section -->
+            <div class="welcome-section text-center">
+                <h2 class="welcome-title">Bem-vindo ao seu Portal de Saúde</h2>
+                <p class="welcome-subtitle">
+                    Acesse sua conta ou crie uma nova para iniciar seus atendimentos
+                </p>
+            </div>
+
+            <!-- Action Cards -->
+            <div class="cards-container">
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    <div class="col">
+                        <div class="action-card text-center">
+                            <div class="card-icon register">
+                                <i class="bi bi-person-plus"></i>
+                            </div>
+                            <h3 class="card-title">Criar Conta</h3>
+                            <p class="card-description">
+                                Registre-se no sistema para poder utilizar e iniciar os atendimentos
+                            </p>
+                            <a href="public/cadastro.php" class="action-btn">
+                                Cadastrar Agora
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="col">
+                        <div class="action-card text-center">
+                            <div class="card-icon login">
+                                <i class="bi bi-box-arrow-in-right"></i>
+                            </div>
+                            <h3 class="card-title">Acessar Sistema</h3>
+                            <p class="card-description">
+                                Entre com suas credenciais para acessar exames, consultas e histórico.
+                            </p>
+                            <a href="views/Auth/login.php" class="action-btn login-btn">
+                                Fazer Login
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+
+</body>
 </html>
