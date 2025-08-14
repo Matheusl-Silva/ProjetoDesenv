@@ -62,7 +62,7 @@ class UsuarioDAO
 
         $sql = "INSERT INTO usuarios (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
         return $this->mysqli->query($sql);
-    }
+    }   
 
     public function buscarUsuario($email)
     {
