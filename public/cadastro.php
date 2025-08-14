@@ -114,11 +114,9 @@ $db->fecharConexao();
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary col-12 mt-3 mb-2 ">Cadastrar Usuario</button>
+                              <a href="../index.html" class="btn btn-outline-secondary">Voltar para a tela inicial</a>
                             </div>
                         </form>
-                    </div>
-                    <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                        <a href="../index.html">Voltar para a tela inicial</a>
                     </div>
                 </div>
             </div>
