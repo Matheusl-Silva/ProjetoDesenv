@@ -29,6 +29,7 @@ $db->fecharConexao();
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/ProjetoDesenv/assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/ProjetoDesenv/assets/css/login.css">
+  <link rel="icon" href="./../../assets/img/favicon.png" type="image/x-icon">
   <title>Login</title>
 </head>
 
@@ -76,9 +77,7 @@ $db->fecharConexao();
                 <a href="/ProjetoDesenv/views/Auth/recover.php">Recuperação de senha</a>
               </div>
               <button type="submit" class="btn btn-primary col-12 mt-3 mb-2" id="submit">Entrar</button>
-              <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                <a href="/ProjetoDesenv/index.html">Voltar para a tela inicial</a>
-              </div>
+                <a href="/ProjetoDesenv/index.html" class="btn btn-outline-secondary col-12">Voltar para a tela inicial</a>
             </form>
           </div>
         </div>

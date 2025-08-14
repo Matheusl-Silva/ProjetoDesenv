@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
     $exameDAO = new ExameDAO($mysqli);
 
     //usa a DAO e pra chamar a API e buscar os dados completos do exame em questão
-    $exame    = $exameDAO->buscarExameCompletoPorId($_GET['id']);
+    $exame = $exameDAO->buscarExameCompletoPorId($_GET['id']);
 }
 
 //após a busca, caso a variavel $exame ainda for nula, para a execução e exibe uma mensagem de erro
@@ -32,6 +32,7 @@ if (!$exame) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="icon" href="./../assets/img/favicon.png" type="image/x-icon">
 </head>
 <body class="bg-light">
     <div class="container my-5">
@@ -113,7 +114,7 @@ foreach ($camposEritrograma as $key => $label): ?>
                                 <button onclick="imprimirLaudo(<?php echo $exame['id']; ?>)" class="btn btn-primary">Imprimir</button>
                             <?php endif; ?>
                             <a href="examePrincipal.php?numero_paciente=<?php echo $exame['registro_paciente']; ?>" class="btn btn-primary">Voltar para o Paciente</a>
-                            <a href="homeUsuario.php" class="btn btn-secondary">Voltar para Home</a>
+                            <a href="homeUsuario.php" class="btn btn-outline-secondary">Voltar para Home</a>
                         </div>
                     </div>
                 </div>

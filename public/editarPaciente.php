@@ -70,6 +70,7 @@ if (isset($_POST['atualizar_paciente'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/cadastropaciente.css">
+    <link rel="icon" href="./../assets/img/favicon.png" type="image/x-icon">
     <title>Editar Paciente</title>
 </head>
 
@@ -92,13 +93,13 @@ if (isset($_POST['atualizar_paciente'])) {
                 <?php if (!$paciente): ?>
                     <?php echo PacienteView::renderizarTabelaPaciente(); ?>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-3">
-                        <a href="homeUsuario.php">Voltar para a tela de usuário</a>
+                        <a href="homeUsuario.php" class="btn btn-outline-secondary">Voltar para a tela de usuário</a>
                     </div>
                 <?php else: ?>
                     <?php echo PacienteView::renderizarFormularioEdicao($paciente); ?>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                        <a href="editarPaciente.php" class="me-3">Voltar para a lista</a>
-                        <a href="homeUsuario.php">Voltar para a tela de usuário</a>
+                        <a href="editarPaciente.php" class="btn btn-outline-secondary me-3">Voltar para a lista</a>
+                        <a href="homeUsuario.php" class="btn btn-outline-secondary">Voltar para a tela de usuário</a>
                     </div>
                 <?php endif; ?>
             </div>

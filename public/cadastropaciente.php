@@ -64,6 +64,7 @@ $bd->fecharConexao();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/cadastropaciente.css">
+    <link rel="icon" href="./../assets/img/favicon.png" type="image/x-icon">
     <title>Cadastro de exame</title>
 </head>
 
@@ -201,10 +202,7 @@ $bd->fecharConexao();
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary col-12 mt-3 mb-2">Cadastrar</button>
-                    </div>
-
-                    <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                        <a href="homeUsuario.php">Voltar para a tela de usuário</a>
+                        <a href="homeUsuario.php" class="btn btn-outline-secondary col-12">Voltar para a tela de usuário</a>
                     </div>
                 </form>
             </div>

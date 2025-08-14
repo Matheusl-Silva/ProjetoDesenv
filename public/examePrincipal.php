@@ -68,6 +68,7 @@ if (isset($_GET['status'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../assets/css/examePrincipal.css" />
+    <link rel="icon" href="./../assets/img/favicon.png" type="image/x-icon">
     <title>Cadastro Hematológico</title>
 </head>
 
@@ -134,7 +135,7 @@ if (isset($_GET['status'])) {
                         </button>
                     </div>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-4">
-                        <a href="homeUsuario.php" class="link-secondary text-decoration-none">Voltar para a tela de usuário</a>
+                        <a href="homeUsuario.php" class="btn btn-outline-secondary text-decoration-none">Voltar para a tela de usuário</a>
                     </div>
                 </div>
             </div>
@@ -294,7 +295,8 @@ if (isset($_GET['status'])) {
                                <button type="submit" class="btn btn-success btn-lg">Salvar Novo Exame</button>
                             </div>
 
-                        </form> <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-4">
+                        </form>
+                        <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-4">
                             <a href="examePrincipal.php" class="btn btn-outline-primary me-3">Nova Pesquisa</a>
                             <a href="homeUsuario.php" class="btn btn-outline-secondary">Voltar para a tela de usuário</a>
                         </div>
