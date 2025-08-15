@@ -7,7 +7,7 @@ class UsuarioController
 
         $mensagem = '';
         $tipo_alerta = '';
-        
+
         if (isset($_SESSION["flash"])) {
             $mensagem = $_SESSION["flash"]["mensagem"];
             $tipo_alerta = $_SESSION["flash"]["tipo"];

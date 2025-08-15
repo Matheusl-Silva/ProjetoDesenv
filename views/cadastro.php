@@ -1,14 +1,12 @@
-<?php
-ini_set('display_errors', 1);
-ini_set('display_startup_erros', 1);
-error_reporting(E_ALL);
-?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php if ($tipo_alerta === 'success'): ?>
+        <meta http-equiv="refresh" content="1;url=/login">
+    <?php endif; ?>
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/css/cadastro.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -62,7 +60,6 @@ error_reporting(E_ALL);
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary col-12 mt-3 mb-2 ">Cadastrar Usuario</button>
-                                <?php var_dump($mensagem);die; ?>
                             </div>
                         </form>
                     </div>
@@ -74,7 +71,7 @@ error_reporting(E_ALL);
         </div>
     </div>
 </body>
-<script src="/assets/js/script.js"></script>
+<script src="../assets/js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {

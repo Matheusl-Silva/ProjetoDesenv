@@ -7,13 +7,9 @@ return function(Router $router){
 
     $router->post('/usuario', function(){
         $usuarioController = new UsuarioController();
-        $result = $usuarioController->cadastrarUsuario($_POST["nomeUsuario"], $_POST["email"], $_POST["senha"]);
+        $usuarioController->cadastrarUsuario($_POST["nomeUsuario"], $_POST["email"], $_POST["senha"]);
 
-        if($result){
-            header('Location: /login');
-        }else{
-            header('Location: /cadastrarUsuario');
-        }
+        header('Location: /cadastrarUsuario');
         exit;
     });
 };
