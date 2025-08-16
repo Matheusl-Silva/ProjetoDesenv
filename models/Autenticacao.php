@@ -8,7 +8,6 @@ class Autenticacao
         if (!isset($_SESSION)) {
             session_start();
         }
-
         // Incluindo arquivo de conexão
         global $mysqli;
         $this->mysqli = $mysqli;

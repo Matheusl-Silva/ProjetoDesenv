@@ -54,7 +54,7 @@
                 <a href="/ProjetoDesenv/views/Auth/recover.php">Recuperação de senha</a>
               </div>
               <button type="submit" class="btn btn-primary col-12 mt-3 mb-2" id="submit">Entrar</button>
-                <a href="/ProjetoDesenv/index.html" class="btn btn-outline-secondary col-12">Voltar para a tela inicial</a>
+                <a href="/" class="btn btn-outline-secondary col-12">Voltar para a tela inicial</a>
             </form>
           </div>
         </div>

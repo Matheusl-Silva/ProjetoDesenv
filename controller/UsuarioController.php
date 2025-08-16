@@ -40,21 +40,16 @@ class UsuarioController
                 ];
                 return false;
             } else {
-                // Verifica se o email já existe
-                $sql_verificar  = "SELECT * FROM usuarios WHERE email = ?";
-                $stmt_verificar = $mysqli->prepare($sql_verificar);
-                $stmt_verificar->bind_param("s", $email);
-                $stmt_verificar->execute();
-                $resultado = $stmt_verificar->get_result();
+                //Verifica se o email já existe
+                $resultado = $usuarioDAO->verificarEmail($email);
 
-                if ($resultado->num_rows > 0) {
+                if ($resultado) {
                     $_SESSION["flash"] = [
                         "mensagem" => "Este e-mail já está cadastrado!",
                         "tipo" => "warning"
                     ];
                     return false;
                 } else {
-
                     // Executa a query
                     $result = $usuarioDAO->cadastrarUsuario($nome, $email, $senha);
 
@@ -76,5 +71,22 @@ class UsuarioController
             }
         }
         //$db->fecharConexao();
+    }
+
+    public function login($email, $senha)
+    {
+        $usuarioDAO = new UsuarioDAO();
+        if(!empty($email) && !empty($senha)){
+            $usuario = $usuarioDAO->login($email, $senha);
+        }
+        if ($usuario) {
+            $_SESSION['id']    = $usuario['id'];
+            $_SESSION['nome']  = $usuario['nome'];
+            $_SESSION['admin'] = $usuario['adm'];
+            return true;
+        }
+        $loginInvalido = true;
+        require 'views/login.php';
+        return false;
     }
 }

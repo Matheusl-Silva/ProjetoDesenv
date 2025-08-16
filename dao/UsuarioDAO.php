@@ -56,13 +56,12 @@ class UsuarioDAO
 
     public function cadastrarUsuario($nome, $email, $senha)
     {
-        $nome  = $this->mysqli->real_escape_string($nome);
-        $email = $this->mysqli->real_escape_string($email);
-        $senha = $this->mysqli->real_escape_string($senha);
+        $sql = "INSERT INTO usuario (cnome, cemail, csenha) VALUES (?, ?, ?)";
+        $stmt = $this->mysqli->prepare($sql);
+        $stmt->bind_param('sss', $nome, $email, $senha);
+        return $stmt->execute();
 
-        $sql = "INSERT INTO usuarios (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
-        return $this->mysqli->query($sql);
-    }   
+    }
 
     public function buscarUsuario($email)
     {
@@ -91,5 +90,47 @@ class UsuarioDAO
         $stmt = $this->mysqli->prepare($sql);
         $stmt->bind_param("ss", $novaSenhaRec, $email);
         return $stmt->execute();
+    }
+
+    public function verificarEmail($email){
+        try{
+            $sql = "SELECT * FROM usuario WHERE cemail = ?;";
+            $stmt = $this->mysqli->prepare($sql);
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if($result->num_rows > 0) return true;
+            return false;
+        }catch(mysqli_sql_exception $erro){
+            echo "Erro ao verificar login: $erro";
+        }
+    }
+
+    public function login($email, $senha)
+    {
+        try {
+            $sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?;";
+            $stmt = $this->mysqli->prepare($sql);
+            $stmt->bind_param('ss', $email, $senha);
+            $result = $stmt->execute();
+
+            if ($result) {
+                return $this->converterParaObj($result->fetch_assoc());
+            }
+            return false;
+        } catch (mysqli_sql_exception $erro) {
+            echo "Erro ao fazer login: $erro";
+        }
+    }
+
+    private function converterParaObj($row)
+    {
+        $usuario = new Usuario();
+        $usuario->setId($row["id"]);
+        $usuario->setNome($row["cnome"]);
+        $usuario->setEmail($row["cemail"]);
+        $usuario->setSenha($row["csenha"]);
+        $usuario->setAdmin($row["cadmin"]);
+        return $usuario;
     }
 }

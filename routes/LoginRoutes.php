@@ -7,7 +7,7 @@ return function (Router $router) {
 
         $auth = new Autenticacao();
 
-        $loginInvalido;
+        $loginInvalido = '';
         if (isset($_POST['email']) && isset($_POST['senha'])) {
             $resultado = $auth->fazerLogin($_POST['email'], $_POST['senha']);
             if ($resultado === false) {
@@ -20,5 +20,14 @@ return function (Router $router) {
         $db->fecharConexao();
 
         require 'views/login.php';
+    });
+
+    $router->post('/login', function(){
+        $usuarioController = new UsuarioController();
+        $result = $usuarioController->login($_POST["email"], $_POST["senha"]);
+        if($result){
+            header('Location: /home');
+            exit;
+        }
     });
 };

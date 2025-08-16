@@ -64,7 +64,7 @@
                         </form>
                     </div>
                     <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                        <a href="../index.html">Voltar para a tela inicial</a>
+                        <a href="/">Voltar para a tela inicial</a>
                     </div>
                 </div>
             </div>
