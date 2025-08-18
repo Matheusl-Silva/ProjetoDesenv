@@ -25,7 +25,7 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <div class="d-flex align-items-center">
                         <span class="user-greeting me-3">Olá, <?php echo htmlspecialchars($nomeUsuario); ?></span>
-                        <a href="../views/Auth/logout.php" class="btn btn-outline-danger btn-sm">Sair</a>
+                        <form action="/logout" method="post"><button type="submit" class="btn btn-outline-danger btn-sm" style="display: inline">Sair</button></form>
                     </div>
                 </div>
             </div>
@@ -93,7 +93,6 @@
                         </a>
                     </div>
                 </div>
-
             </div>
             <?php else: ?>
             <!-- Menu limitado para usuários não adm -->

@@ -13,6 +13,13 @@ return function (Router $router) {
         }
     });
 
+    $router->post('/logout', function () {
+        $_SESSION = array();
+        session_destroy();
+        header("Location: /login");
+        exit;
+    });
+
     $router->get('/home', function () {
         $usuarioController = new UsuarioController();
         $usuarioController->gerarHome();
