@@ -2,7 +2,7 @@
 return function(Router $router){
     $router->get('/cadastrarUsuario', function(){
         $usuarioController = new UsuarioController();
-        $usuarioController->formCadastro();
+        $usuarioController->gerarFormCadastro();
     });
 
     $router->post('/usuario', function(){

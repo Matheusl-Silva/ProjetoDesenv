@@ -1,10 +1,8 @@
 <?php
 class UsuarioController
 {
-    public function formCadastro()
+    public function gerarFormCadastro()
     {
-        session_start();
-
         $mensagem = '';
         $tipo_alerta = '';
 
@@ -16,14 +14,19 @@ class UsuarioController
         unset($_SESSION["flash"]);
     }
 
+    public function gerarHome(){
+        $auth = new Autenticacao();
+        $auth->verificarLogin();
+        $nomeUsuario = $auth->getNomeUsuario();
+        require 'views/homeUsuario.php';
+    }
+
     public function cadastrarUsuario($nome, $email, $senha)
     {
         $db     = new Conexao();
         $mysqli = $db->getConexao();
 
         $usuarioDAO = new UsuarioDAO();
-
-        session_start();
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Recupera os dados do formulário

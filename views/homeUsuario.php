@@ -1,14 +1,3 @@
-<?php
-
-$bd     = new Conexao();
-$mysqli = $bd->getConexao();
-
-$auth = new Autenticacao();
-$auth->verificarLogin();
-$nome_usuario = $auth->getNomeUsuario();
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -35,7 +24,7 @@ $nome_usuario = $auth->getNomeUsuario();
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <div class="d-flex align-items-center">
-                        <span class="user-greeting me-3">Olá, <?php echo htmlspecialchars($nome_usuario); ?></span>
+                        <span class="user-greeting me-3">Olá, <?php echo htmlspecialchars($nomeUsuario); ?></span>
                         <a href="../views/Auth/logout.php" class="btn btn-outline-danger btn-sm">Sair</a>
                     </div>
                 </div>
@@ -44,7 +33,7 @@ $nome_usuario = $auth->getNomeUsuario();
 
         <div class="container">
             <div class="row text-center banner mt-5">
-                <h1>Bem-vindo, <?php echo htmlspecialchars($nome_usuario); ?></h1>
+                <h1>Bem-vindo, <?php echo htmlspecialchars($nomeUsuario); ?></h1>
                 <h2>Selecione uma das opções abaixo para poder iniciar!</h2>
             </div>
 

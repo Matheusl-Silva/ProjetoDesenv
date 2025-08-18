@@ -20,43 +20,11 @@ class Autenticacao
 
         // Redireciona para a página de login se não estiver logado
         if (!$logado) {
-            header("Location: ../views/Auth/login.php");
+            header("Location: /");
             exit;
         }
 
         return $logado;
-    }
-
-    public function fazerLogin($email, $senha)
-    {
-        // Limpar strings para evitar SQL injection
-        $email = $this->mysqli->real_escape_string($email);
-        $senha = $this->mysqli->real_escape_string($senha);
-
-        // Consulta SQL
-        $sql_code = "SELECT * FROM usuarios WHERE email = '$email' AND senha = '$senha'";
-
-        // Executa a consulta ou exibe erro
-        ($sql_query = $this->mysqli->query($sql_code)) || die("Erro na consulta: " . $this->mysqli->error);
-
-        $quantidade = $sql_query->num_rows;
-
-        // Se encontrou usuário
-        if ($quantidade == 1) {
-            $usuarios = $sql_query->fetch_assoc();
-
-            $_SESSION['id']    = $usuarios['id'];
-            $_SESSION['nome']  = $usuarios['nome'];
-            $_SESSION['admin'] = $usuarios['adm'];
-
-            // Redireciona para a página principal
-            header("Location: /ProjetoDesenv/public/homeUsuario.php");
-            exit;
-
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public function getNomeUsuario()
