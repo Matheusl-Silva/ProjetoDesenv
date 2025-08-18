@@ -47,7 +47,7 @@
                         </div>
                         <h2>Cadastro de paciente</h2>
                         <p>Cadastrar novos pacientes no sistema hematológico</p>
-                        <a href="cadastropaciente.php" class="mt-auto">
+                        <a href="/cadastroPaciente" class="mt-auto">
                             <button class="col-12 btn btn-primary">Acessar</button>
                         </a>
                     </div>

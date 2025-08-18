@@ -54,11 +54,11 @@ class UsuarioDAO
         return $this->mysqli->query($sql);
     }
 
-    public function cadastrarUsuario($nome, $email, $senha)
+    public function cadastrarUsuario(Usuario $usuario)
     {
         $sql = "INSERT INTO usuario (cnome, cemail, csenha) VALUES (?, ?, ?)";
         $stmt = $this->mysqli->prepare($sql);
-        $stmt->bind_param('sss', $nome, $email, $senha);
+        $stmt->bind_param('sss', $usuario->getNome(), $usuario->getEmail(), $usuario->getSenha());
         return $stmt->execute();
     }
 

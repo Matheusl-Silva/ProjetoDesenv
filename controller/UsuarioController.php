@@ -14,14 +14,15 @@ class UsuarioController
         unset($_SESSION["flash"]);
     }
 
-    public function gerarHome(){
+    public function gerarHome()
+    {
         $auth = new Autenticacao();
         $auth->verificarLogin();
         $nomeUsuario = $auth->getNomeUsuario();
         require 'views/homeUsuario.php';
     }
 
-    public function cadastrarUsuario($nome, $email, $senha)
+    public function cadastrarUsuario(Usuario $usuario)
     {
         $db     = new Conexao();
         $mysqli = $db->getConexao();
@@ -30,48 +31,39 @@ class UsuarioController
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Recupera os dados do formulário
-            $nome          = trim($_POST['nomeUsuario']);
+            /*$nome          = trim($_POST['nomeUsuario']);
             $email         = trim($_POST['email']);
             $senha         = $_POST['senha'];
-            $senhaConfirma = $_POST['senhaConfirma'];
+            $senhaConfirma = $_POST['senhaConfirma'];*/
 
-            // Valida se as senhas são iguais
-            if (strcmp($senha, $senhaConfirma) !== 0) {
+            //Verifica se o email já existe
+            $resultado = $usuarioDAO->verificarEmail($usuario->getEmail());
+
+            if ($resultado) {
                 $_SESSION["flash"] = [
-                    "mensagem" => "As senhas não conferem! Por favor, digite novamente.",
-                    "tipo" => "danger"
+                    "mensagem" => "Este e-mail já está cadastrado!",
+                    "tipo" => "warning"
                 ];
                 return false;
             } else {
-                //Verifica se o email já existe
-                $resultado = $usuarioDAO->verificarEmail($email);
+                // Executa a query
+                $result = $usuarioDAO->cadastrarUsuario($usuario);
 
-                if ($resultado) {
+                if (!$result) {
                     $_SESSION["flash"] = [
-                        "mensagem" => "Este e-mail já está cadastrado!",
-                        "tipo" => "warning"
+                        "mensagem" => "Erro ao cadastrar",
+                        "tipo" => "danger"
                     ];
                     return false;
                 } else {
-                    // Executa a query
-                    $result = $usuarioDAO->cadastrarUsuario($nome, $email, $senha);
-
-                    if (!$result) {
-                        $_SESSION["flash"] = [
-                            "mensagem" => "Erro ao cadastrar",
-                            "tipo" => "danger"
-                        ];
-                        return false;
-                    } else {
-                        $_SESSION["flash"] = [
-                            "mensagem" => "Usuário cadastrado com sucesso!",
-                            "tipo" => "success"
-                        ];
-                        return true;
-                    }
+                    $_SESSION["flash"] = [
+                        "mensagem" => "Usuário cadastrado com sucesso!",
+                        "tipo" => "success"
+                    ];
+                    return true;
                 }
-                //$stmt_verificar->close();
             }
+            //$stmt_verificar->close();
         }
         //$db->fecharConexao();
     }
@@ -79,7 +71,7 @@ class UsuarioController
     public function login($email, $senha)
     {
         $usuarioDAO = new UsuarioDAO();
-        if(!empty($email) && !empty($senha)){
+        if (!empty($email) && !empty($senha)) {
             $usuario = $usuarioDAO->login($email, $senha);
         }
         if ($usuario) {
