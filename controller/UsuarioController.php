@@ -80,9 +80,9 @@ class UsuarioController
             $usuario = $usuarioDAO->login($email, $senha);
         }
         if ($usuario) {
-            $_SESSION['id']    = $usuario['id'];
-            $_SESSION['nome']  = $usuario['nome'];
-            $_SESSION['admin'] = $usuario['adm'];
+            $_SESSION['id']    = $usuario->getId();
+            $_SESSION['nome']  = $usuario->getNome();
+            $_SESSION['admin'] = $usuario->getAdmin();
             return true;
         }
         $loginInvalido = true;

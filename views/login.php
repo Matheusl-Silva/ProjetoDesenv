@@ -39,7 +39,7 @@
             <div class="logo-text text-primary">Por favor insira suas informações para acessar</div>
           </div>
           <div class="card-body bg-body-tertiary">
-            <form action="login.php" method="POST">
+            <form action="/login" method="POST">
               <div class="form-group">
                 <label for="email" class="form-label">Email: <span style="color: red;">*</span></label>
                 <input type="email" class="form-control mb-2" name="email" id="email" placeholder="Insira seu e-mail"
@@ -62,7 +62,7 @@
     </div>
   </div>
 </body>
-<script src="/ProjetoDesenv/assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
 <script>
   const loginInvalido = <?php echo $loginInvalido ? 'true' : 'false'; ?>;
 

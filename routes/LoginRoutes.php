@@ -30,4 +30,8 @@ return function (Router $router) {
             exit;
         }
     });
+
+    $router->get('/home', function(){
+        echo 'Home!!';
+    });
 };

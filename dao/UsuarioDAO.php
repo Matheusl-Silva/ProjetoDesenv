@@ -60,7 +60,6 @@ class UsuarioDAO
         $stmt = $this->mysqli->prepare($sql);
         $stmt->bind_param('sss', $nome, $email, $senha);
         return $stmt->execute();
-
     }
 
     public function buscarUsuario($email)
@@ -92,16 +91,17 @@ class UsuarioDAO
         return $stmt->execute();
     }
 
-    public function verificarEmail($email){
-        try{
+    public function verificarEmail($email)
+    {
+        try {
             $sql = "SELECT * FROM usuario WHERE cemail = ?;";
             $stmt = $this->mysqli->prepare($sql);
             $stmt->bind_param('s', $email);
             $stmt->execute();
             $result = $stmt->get_result();
-            if($result->num_rows > 0) return true;
+            if ($result->num_rows > 0) return true;
             return false;
-        }catch(mysqli_sql_exception $erro){
+        } catch (mysqli_sql_exception $erro) {
             echo "Erro ao verificar login: $erro";
         }
     }
@@ -109,12 +109,12 @@ class UsuarioDAO
     public function login($email, $senha)
     {
         try {
-            $sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?;";
+            $sql = "SELECT * FROM usuario WHERE cemail = ? AND csenha = ?;";
             $stmt = $this->mysqli->prepare($sql);
             $stmt->bind_param('ss', $email, $senha);
-            $result = $stmt->execute();
-
-            if ($result) {
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if($result->num_rows > 0){
                 return $this->converterParaObj($result->fetch_assoc());
             }
             return false;
