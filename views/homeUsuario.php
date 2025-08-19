@@ -17,7 +17,7 @@
             <div class="container">
                 <div class="d-flex align-items-center">
                     <img src="../assets/img/health.png" class="imagemSize" alt="Logo Saúde">
-                    <a class="navbar-brand text-primary" href="../index.html">Portal hematológico</a>
+                    <a class="navbar-brand text-primary">Portal hematológico</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
