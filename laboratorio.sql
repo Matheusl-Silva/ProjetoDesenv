@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16/08/2025 às 20:18
+-- Tempo de geração: 20/08/2025 às 00:01
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -75,8 +75,21 @@ CREATE TABLE `paciente` (
   `cmedicamento` varchar(240) DEFAULT NULL,
   `cpatologia` varchar(240) DEFAULT NULL,
   `ddata_nascimento` date NOT NULL,
-  `ddata_cadastro` date NOT NULL
+  `ddata_cadastro` date NOT NULL,
+  `ctelefone` varchar(240) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `paciente`
+--
+
+INSERT INTO `paciente` (`id`, `cnome`, `cemail`, `cperiodo`, `cnome_mae`, `cmedicamento`, `cpatologia`, `ddata_nascimento`, `ddata_cadastro`, `ctelefone`) VALUES
+(1, 'nome', 'a@a.com', 'matutino', 'mae', '', '', '2025-08-12', '0000-00-00', '9999'),
+(2, 'PACIENTE2', 'a@aa.com', 'matutino', 'mae2', '', '', '2025-07-31', '0000-00-00', '99'),
+(3, 'paciente3', 'a@aaa.com', 'matutino', 'mae3', '', '', '2025-08-14', '0000-00-00', '99'),
+(4, 'pacientesla', 'a@aaaaaaaaaa.com', 'matutino', 'mae', '', '', '2025-08-22', '0000-00-00', '9'),
+(5, 'doente', 'a@aaab.com', 'matutino', 'mae', 'medicamento', 'patologia', '2025-08-14', '0000-00-00', '99'),
+(6, 'a', 'a@b.com', 'matutino', 'mae', '', '', '0111-01-01', '0000-00-00', '99');
 
 -- --------------------------------------------------------
 
@@ -89,8 +102,17 @@ CREATE TABLE `usuario` (
   `cnome` varchar(240) NOT NULL,
   `cemail` varchar(240) NOT NULL,
   `csenha` varchar(240) NOT NULL,
-  `cadmin` varchar(1) NOT NULL
+  `cadmin` varchar(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `cnome`, `cemail`, `csenha`, `cadmin`) VALUES
+(8, 'user1', 'a@a.com', '11111111', 'S'),
+(9, 'user2', 'a@aa.com', '11111111', 'N'),
+(10, 'usernovo', 'a@aaa.com', '11111111', 'N');
 
 --
 -- Índices para tabelas despejadas
@@ -132,13 +154,13 @@ ALTER TABLE `exame_hematologia`
 -- AUTO_INCREMENT de tabela `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restrições para tabelas despejadas
