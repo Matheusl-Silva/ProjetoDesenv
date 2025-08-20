@@ -70,31 +70,31 @@ class PacienteDAO
         $result = file_get_contents($url);
         $lista  = json_decode($result, true);
 
+        $listaObj = [];
         foreach ($lista as &$paciente) {
             if (isset($paciente['data_nascimento'])) {
                 $data                        = new DateTime($paciente['data_nascimento']);
                 $paciente['data_nascimento'] = $data->format('Y-m-d');
             }
+            $listaObj[] = $this->converterParaObj($paciente);
         }
 
-        return $lista;
+        return $listaObj;
     }
 
-    public function atualizarPacientes($id, $nome, $email, $periodo, $dataNasc, $telefone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia)
+    public function atualizarPacientes(Paciente $paciente)
     {
-        $url   = "http://localhost:3000/pacientes/" . $id;
+        $url   = "http://localhost:3000/pacientes/" . $paciente->getId();
         $dados = [
-            "id"               => $id,
-            "nome"             => $nome,
-            "email"            => $email,
-            "periodo"          => $periodo,
-            "data_nascimento"  => $dataNasc,
-            "telefone"         => $telefone,
-            "nome_mae"         => $nomeMae,
-            "toma_medicamento" => $tomaMedicamento,
-            "medicamento"      => $medicamento,
-            "trata_patologia"  => $trataPatologia,
-            "patologia"        => $patologia,
+            "id"               => $paciente->getId(),
+            "nome"             => $paciente->getNome(),
+            "email"            => $paciente->getEmail(),
+            "periodo"          => $paciente->getPeriodo(),
+            "data_nascimento"  => $paciente->getDataNasc(),
+            "telefone"         => $paciente->getFone(),
+            "nome_mae"         => $paciente->getNomeMae(),
+            "medicamento"      => $paciente->getMedicamento(),
+            "patologia"        => $paciente->getPatologia()
         ];
 
         $options = [
@@ -130,5 +130,21 @@ class PacienteDAO
             return ["erro" => "Erro ao excluir paciente"];
         }
         return json_decode($result, true);
+    }
+
+    private function converterParaObj($row){
+        $paciente = new Paciente();
+        $paciente->setID($row["id"]);
+        $paciente->setNome($row["cnome"]);
+        $paciente->setEmail($row["cemail"]);
+        $paciente->setPeriodo($row["cperiodo"]);
+        $paciente->setNomeMae($row["cnome_mae"]);
+        $paciente->setMedicamento($row["cmedicamento"]);
+        $paciente->setPatologia($row["cpatologia"]);
+        $paciente->setDataNasc($row["ddata_nascimento"]);
+        $paciente->setDataCadastro($row["ddata_cadastro"]);
+        $paciente->setFone($row["ctelefone"]);
+
+        return $paciente;
     }
 }

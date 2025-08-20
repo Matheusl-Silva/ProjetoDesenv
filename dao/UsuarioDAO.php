@@ -70,7 +70,7 @@ class UsuarioDAO
         $resultado = $this->mysqli->query($sql);
 
         if ($resultado && $resultado->num_rows > 0) {
-            return $resultado->fetch_assoc();
+            return $this->converterParaObj($resultado->fetch_assoc());
         }
 
         return null;

@@ -26,7 +26,7 @@ db.connect((err) => {
 
 // ----------- rotas pacientes -----------
 app.get("/pacientes", (req, res) => {
-  const query = "SELECT * FROM pacientes";
+  const query = "SELECT * FROM paciente";
 
   db.query(query, (err, results) => {
     if (err) {
@@ -48,9 +48,7 @@ app.post("/pacientes", (req, res) => {
     data_nascimento,
     telefone,
     nome_mae,
-    toma_medicamento,
     medicamento,
-    trata_patologia,
     patologia,
   } = req.body;
 
@@ -166,14 +164,12 @@ app.put("/pacientes/:idPaciente", (req, res) => {
     data_nascimento,
     telefone,
     nome_mae,
-    toma_medicamento,
     medicamento,
-    trata_patologia,
     patologia,
   } = req.body;
 
   const query =
-    "UPDATE pacientes SET nome = ?, email = ?, periodo = ?, data_nascimento = ?, telefone = ?, nome_mae = ?, toma_medicamento = ?, medicamento = ?, trata_patologia = ?, patologia = ? WHERE id = ?";
+    "UPDATE paciente SET nome = ?, email = ?, periodo = ?, data_nascimento = ?, telefone = ?, nome_mae = ?, toma_medicamento = ?, medicamento = ?, trata_patologia = ?, patologia = ? WHERE id = ?";
 
   db.query(
     query,
@@ -184,9 +180,7 @@ app.put("/pacientes/:idPaciente", (req, res) => {
       data_nascimento,
       telefone,
       nome_mae,
-      toma_medicamento,
       medicamento,
-      trata_patologia,
       patologia,
       idPaciente,
     ],

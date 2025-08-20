@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../assets/css/home-usuario.css">
-    <link rel="icon" href="./../assets/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/home-usuario.css">
+    <link rel="icon" href="assets/img/favicon.png" type="image/x-icon">
     <title>Página principal</title>
 </head>
 
@@ -75,7 +75,7 @@
                         </div>
                         <h2>Editar paciente</h2>
                         <p>Modificar dados cadastrais dos pacientes</p>
-                        <a href="editarPaciente.php" class="mt-auto">
+                        <a href="/paciente" class="mt-auto">
                             <button class="col-12 btn btn-primary">Acessar</button>
                         </a>
                     </div>

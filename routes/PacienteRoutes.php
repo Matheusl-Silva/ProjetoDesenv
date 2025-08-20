@@ -5,6 +5,11 @@ return function(Router $router){
         $pacienteController->gerarFormCadastro();
     });
 
+    $router->get('/paciente', function(){
+        $pacienteController = new PacienteController();
+        $pacienteController->gerarLista();
+    });
+    
     $router->post('/paciente', function(){
         $pacienteController = new PacienteController();
         $paciente = new Paciente();

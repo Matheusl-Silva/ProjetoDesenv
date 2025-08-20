@@ -25,10 +25,24 @@ class PacienteController
         unset($_SESSION["errocadastro"]);
     }
 
-    public function cadastrar($paciente)
+    public function gerarLista(){
+        $pacienteDAO = new PacienteDAO();
+        $listaPacientes = $pacienteDAO->listarPacientes();
+
+        require 'views/listapacientes.php';
+    }
+
+    public function cadastrar(Paciente $paciente)
     {
         $pacienteDAO = new PacienteDAO();
         $result = $pacienteDAO->cadastrarPaciente($paciente);
         return $result;
+    }
+
+    public function atualizar(Paciente $paciente){
+        $pacienteDAO = new PacienteDAO();
+        $result = $pacienteDAO->atualizarPacientes($paciente);
+        echo $result;
+        print_r($result);
     }
 }
