@@ -41,7 +41,7 @@ class Autenticacao
     {
         session_unset();
         session_destroy();
-        header("Location: ../views/Auth/login.php");
+        header("Location: /login");
         exit;
     }
 

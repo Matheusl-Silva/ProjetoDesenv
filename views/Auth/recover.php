@@ -53,7 +53,7 @@
                         <div class="logo-text text-primary">Insira seu email para recuperação de senha</div>
                     </div>
                     <div class="card-body bg-body-tertiary">
-                        <form action="models/Usuario.php" method="post">
+                        <form action="/recover" method="post">
                             <div class="form-group" id="texto">
                                 <span>Insira seu email, enviaremos um link para a alteração da senha.</span>
                             </div>
