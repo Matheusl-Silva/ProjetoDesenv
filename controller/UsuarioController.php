@@ -3,11 +3,11 @@ class UsuarioController
 {
     public function gerarFormCadastro()
     {
-        $mensagem = '';
+        $mensagem    = '';
         $tipo_alerta = '';
 
         if (isset($_SESSION["flash"])) {
-            $mensagem = $_SESSION["flash"]["mensagem"];
+            $mensagem    = $_SESSION["flash"]["mensagem"];
             $tipo_alerta = $_SESSION["flash"]["tipo"];
         }
         require 'views/cadastro.php';
@@ -36,7 +36,7 @@ class UsuarioController
             if ($resultado) {
                 $_SESSION["flash"] = [
                     "mensagem" => "Este e-mail já está cadastrado!",
-                    "tipo" => "warning"
+                    "tipo"     => "warning",
                 ];
                 return false;
             } else {
@@ -46,13 +46,13 @@ class UsuarioController
                 if (!$result) {
                     $_SESSION["flash"] = [
                         "mensagem" => "Erro ao cadastrar",
-                        "tipo" => "danger"
+                        "tipo"     => "danger",
                     ];
                     return false;
                 } else {
                     $_SESSION["flash"] = [
                         "mensagem" => "Usuário cadastrado com sucesso!",
-                        "tipo" => "success"
+                        "tipo"     => "success",
                     ];
                     return true;
                 }
@@ -75,7 +75,7 @@ class UsuarioController
             return true;
         }
         $loginInvalido = true;
-        require 'views/login.php';
+        require '/login';
         return false;
     }
 }

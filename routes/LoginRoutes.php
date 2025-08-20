@@ -29,4 +29,8 @@ return function (Router $router) {
         require 'views/Auth/recover.php';
     });
 
+    $router->post('/recover', function () {
+        $emailRecover = new RecoverController();
+        $emailRecover->RecoverEmail($_POST['email']);
+    });
 };
