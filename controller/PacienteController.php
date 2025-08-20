@@ -14,7 +14,7 @@ class PacienteController
             $idPaciente = $_SESSION["idpaciente"];
         }else if(isset($_SESSION["emailduplicado"])){
             $emailDuplicado = true;
-        }else{
+        }else if(isset($_SESSION["errocadastro"])){
             $erroCadastro = true;
         }
 
