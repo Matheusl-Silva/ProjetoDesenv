@@ -26,20 +26,19 @@ class PacienteDAO
         return isset($response['existe']) ? $response['existe'] : false;
     }
 
-    public function cadastrarPaciente($nome, $email, $periodo, $dataNasc, $telefone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia)
+    //public function cadastrarPaciente($nome, $email, $periodo, $dataNasc, $telefone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia)
+    public function cadastrarPaciente(Paciente $paciente)
     {
         $url   = "http://localhost:3000/pacientes";
         $dados = [
-            "nome"             => $nome,
-            "email"            => $email,
-            "periodo"          => $periodo,
-            "data_nascimento"  => $dataNasc,
-            "telefone"         => $telefone,
-            "nome_mae"         => $nomeMae,
-            "toma_medicamento" => $tomaMedicamento,
-            "medicamento"      => $medicamento ?: "",
-            "trata_patologia"  => $trataPatologia,
-            "patologia"        => $patologia ?: "",
+            "nome"             => $paciente->getNome(),
+            "email"            => $paciente->getEmail(),
+            "periodo"          => $paciente->getPeriodo(),
+            "data_nascimento"  => $paciente->getDataNasc(),
+            "telefone"         => $paciente->getFone(),
+            "nome_mae"         => $paciente->getNomeMae(),
+            "medicamento"      => $paciente->getMedicamento() ?: "",
+            "patologia"        => $paciente->getPatologia() ?: "",
         ];
         $options = [
             "http" => [

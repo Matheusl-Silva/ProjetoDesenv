@@ -30,12 +30,6 @@ class UsuarioController
         $usuarioDAO = new UsuarioDAO();
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Recupera os dados do formulário
-            /*$nome          = trim($_POST['nomeUsuario']);
-            $email         = trim($_POST['email']);
-            $senha         = $_POST['senha'];
-            $senhaConfirma = $_POST['senhaConfirma'];*/
-
             //Verifica se o email já existe
             $resultado = $usuarioDAO->verificarEmail($usuario->getEmail());
 
