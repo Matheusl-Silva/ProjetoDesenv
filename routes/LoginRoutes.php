@@ -6,7 +6,7 @@ return function (Router $router) {
 
     $router->post('/login', function () {
         $usuarioController = new UsuarioController();
-        $result = $usuarioController->login($_POST["email"], $_POST["senha"]);
+        $result            = $usuarioController->login($_POST["email"], $_POST["senha"]);
         if ($result) {
             header('Location: /home');
             exit;
@@ -24,4 +24,9 @@ return function (Router $router) {
         $usuarioController = new UsuarioController();
         $usuarioController->gerarHome();
     });
+
+    $router->get('/recover', function () {
+        require 'views/Auth/recover.php';
+    });
+
 };
