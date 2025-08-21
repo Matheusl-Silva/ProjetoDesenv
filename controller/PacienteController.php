@@ -25,6 +25,15 @@ class PacienteController
         unset($_SESSION["errocadastro"]);
     }
 
+    public function gerarFormEdicao($idPaciente){
+        $pacienteDAO = new PacienteDAO();
+        $paciente = $pacienteDAO->buscarPaciente($idPaciente);
+        $dateTime = new DateTime($paciente->getDataNasc());
+        $paciente->setDataNasc($dateTime->format('Y-m-d'));
+        
+        require 'views/formpaciente.php';
+    }
+
     public function gerarLista(){
         $pacienteDAO = new PacienteDAO();
         $listaPacientes = $pacienteDAO->listarPacientes();

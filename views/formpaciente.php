@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <title>Editar Paciente</title>
 </head>
 
@@ -12,12 +13,13 @@
         <div class="row justify-content-center">
             <div class="col-md-10 card shadow p-3 my-5 bg-body-tertiary rounded">
                 <div class="card-header bg-body-tertiary text-center">
-                    <h2>Gerenciar Pacientes</h2>
+                    <h2>Editar Paciente</h2>
                 </div>
 
                 <div class="card-body bg-body-tertiary">
-                    <form action="editarPaciente.php" method="POST">
+                    <form action="/paciente" method="POST">
                         <input type="hidden" name="id" value="<?= $paciente->getId() ?>">
+                        <input type="hidden" name="method" value="PUT">
                         <div class="row">
                             <div class="form-group col">
                                 <label for="nome" class="form-label">Nome Completo:</label>
@@ -51,8 +53,8 @@
                         <div class="row">
                             <div class="form-group col">
                                 <label for="data_nascimento" class="form-label">Data de Nascimento:</label>
-                                <input type="text" class="form-control mb-2" name="data_nascimento" id="data_nascimento"
-                                    value="<?= $data_formatada ?>" placeholder="DD/MM/AAAA" required>
+                                <input type="date" class="form-control mb-2" name="data_nascimento" id="data_nascimento"
+                                    value="<?= $paciente->getDataNasc() ?>" placeholder="DD/MM/AAAA" required>
                             </div>
                         </div>
 
@@ -80,7 +82,7 @@
                                     <label for="medNao" class="form-check-label">Não</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="radio" id="medSim" class="form-check-input" name="toma_medicamento" value="S" <?php if ($paciente->getMedicamento() != null) echo 'checked' ?>>>
+                                    <input type="radio" id="medSim" class="form-check-input" name="toma_medicamento" value="S" <?php if ($paciente->getMedicamento() != null) echo 'checked' ?>>
                                     <label for="medSim" class="form-check-label">Sim</label>
                                 </div>
                             </div>
@@ -96,11 +98,11 @@
                             <div class="form-group col">
                                 <label class="form-label">Trata alguma patologia?</label>
                                 <div class="form-check">
-                                    <input type="radio" id="patNao" class="form-check-input" name="trata_patologia" value="N" <?php if ($paciente->getPatologia() == null) echo 'checked' ?>>
+                                    <input type="radio" id="patNao" class="form-check-input" name="trata_patologia" value="N" <?php if ($paciente->getPatologia() == null) echo 'checked'; ?>>
                                     <label for="patNao" class="form-check-label">Não</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="radio" id="patSim" class="form-check-input" name="trata_patologia" value="S" <?php if ($paciente->getPatologia() != null) echo 'checked' ?>>
+                                    <input type="radio" id="patSim" class="form-check-input" name="trata_patologia" value="S" <?php if ($paciente->getPatologia() != null) echo 'checked'; ?>>
                                     <label for="patSim" class="form-check-label">Sim</label>
                                 </div>
                             </div>
@@ -118,8 +120,8 @@
                     </form>
                 </div>
                 <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                    <a href="editarPaciente.php" class="btn btn-outline-secondary me-3">Voltar para a lista</a>
-                    <a href="homeUsuario.php" class="btn btn-outline-secondary">Voltar para a tela de usuário</a>
+                    <a href="/paciente" class="btn btn-outline-secondary me-3">Voltar para a lista</a>
+                    <a href="/home" class="btn btn-outline-secondary">Voltar para a tela de usuário</a>
                 </div>
             </div>
         </div>

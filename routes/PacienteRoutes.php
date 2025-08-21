@@ -9,6 +9,11 @@ return function(Router $router){
         $pacienteController = new PacienteController();
         $pacienteController->gerarLista();
     });
+
+    $router->get('/paciente/{id}', function($id){
+        $pacienteController = new PacienteController();
+        $pacienteController->gerarFormEdicao($id);
+    });
     
     $router->post('/paciente', function(){
         $pacienteController = new PacienteController();

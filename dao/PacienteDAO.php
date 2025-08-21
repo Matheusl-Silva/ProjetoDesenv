@@ -26,7 +26,6 @@ class PacienteDAO
         return isset($response['existe']) ? $response['existe'] : false;
     }
 
-    //public function cadastrarPaciente($nome, $email, $periodo, $dataNasc, $telefone, $nomeMae, $tomaMedicamento, $medicamento, $trataPatologia, $patologia)
     public function cadastrarPaciente(Paciente $paciente)
     {
         $url   = "http://localhost:3000/pacientes";
@@ -82,6 +81,29 @@ class PacienteDAO
         return $listaObj;
     }
 
+    public function buscarPaciente($idPaciente)
+    {
+        $url = "http://localhost:3000/pacientes/" . $idPaciente;
+        $dados = [
+            "id" => $idPaciente
+        ];
+
+        $options = [
+            "http" => [
+                "header" => "Content-Type: application/json\r\n",
+                "content" => json_encode($dados)
+            ]
+        ];
+
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+
+        if($result == false) return false;
+
+        $resultAssoc = json_decode($result, true);
+        return $this->converterParaObj($resultAssoc[0]);
+    }
+
     public function atualizarPacientes(Paciente $paciente)
     {
         $url   = "http://localhost:3000/pacientes/" . $paciente->getId();
@@ -132,9 +154,10 @@ class PacienteDAO
         return json_decode($result, true);
     }
 
-    private function converterParaObj($row){
+    private function converterParaObj($row)
+    {
         $paciente = new Paciente();
-        $paciente->setID($row["id"]);
+        $paciente->setId($row["id"]);
         $paciente->setNome($row["cnome"]);
         $paciente->setEmail($row["cemail"]);
         $paciente->setPeriodo($row["cperiodo"]);

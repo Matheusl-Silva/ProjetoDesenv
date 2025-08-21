@@ -38,6 +38,24 @@ app.get("/pacientes", (req, res) => {
   return res.status(200);
 });
 
+app.get("/pacientes/:idPaciente", (req, res) => {
+  const id = req.params.idPaciente;
+  const query = "SELECT * FROM paciente WHERE id = ?";
+
+  db.query(query, [id], (err, results) => {
+    if(err){
+      console.error('Erro ao buscar paciente: ', err);
+      return res.json({error: 'Erro ao buscar paciente'});
+    }
+
+    if(results.affectedRows === 0){
+      return res.json({error: "Paciente não encontrado"});
+    }
+
+    return res.json(results);
+  })
+});
+
 // Cadastrar um novo usuário
 app.post("/pacientes", (req, res) => {
   console.log("Recebendo requisição POST:", req.body);
