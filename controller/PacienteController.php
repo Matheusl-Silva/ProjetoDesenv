@@ -31,7 +31,7 @@ class PacienteController
         $dateTime = new DateTime($paciente->getDataNasc());
         $paciente->setDataNasc($dateTime->format('Y-m-d'));
         
-        require 'views/formpaciente.php';
+        require 'views/editarpaciente.php';
     }
 
     public function gerarLista(){

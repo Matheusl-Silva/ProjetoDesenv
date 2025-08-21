@@ -1,67 +1,10 @@
-<?php
-/*
-$auth = new Autenticacao();
-$auth->verificarLogin();
-$auth->verificarAcessoAdmin();
-$nome_usuario = $auth->getNomeUsuario();
-
-$pacienteObj = new PacienteDAO();
-$mensagem    = '';
-$paciente    = null;
-
-if (isset($_POST['buscar_paciente']) && !empty($_POST['email'])) {
-    $email     = $mysqli->real_escape_string($_POST['email']);
-    $sql       = "SELECT * FROM pacientes WHERE email = '$email'";
-    $resultado = $mysqli->query($sql);
-
-    if ($resultado && $resultado->num_rows > 0) {
-        $paciente = $resultado->fetch_assoc();
-    } else {
-        $mensagem = "Paciente não encontrado.";
-    }
-}
-
-if (isset($_POST['excluir_paciente']) && !empty($_POST['email'])) {
-    $resultado = $pacienteObj->excluirPaciente($_POST['email']);
-    if (!isset($resultado['erro'])) {
-        $mensagem = "Paciente excluído com sucesso!";
-        header("refresh:2;url=editarPaciente.php");
-    } else {
-        $mensagem = "Erro ao excluir paciente.";
-    }
-}
-
-if (isset($_POST['atualizar_paciente'])) {
-    $id               = $_POST['id'];
-    $nome             = $_POST['nome'];
-    $email            = $_POST['email'];
-    $periodo          = $_POST['periodo'];
-    $data_nascimento  = $_POST['data_nascimento'];
-    $telefone         = $_POST['telefone'];
-    $nome_mae         = $_POST['nome_mae'];
-    $toma_medicamento = $_POST['toma_medicamento'];
-    $medicamento      = $_POST['medicamento'];
-    $trata_patologia  = $_POST['trata_patologia'];
-    $patologia        = $_POST['patologia'];
-
-    if ($pacienteObj->atualizarPacientes($id, $nome, $email, $periodo, $data_nascimento, $telefone, $nome_mae, $toma_medicamento, $medicamento, $trata_patologia, $patologia)) {
-        $mensagem = "Paciente atualizado com sucesso!";
-        header("refresh:2;url=editarPaciente.php");
-    } else {
-        $mensagem = "Erro ao atualizar paciente.";
-    }
-}*/
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/cadastropaciente.css">
-    <link rel="icon" href="./../assets/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <title>Editar Paciente</title>
 </head>
 
@@ -70,66 +13,120 @@ if (isset($_POST['atualizar_paciente'])) {
         <div class="row justify-content-center">
             <div class="col-md-10 card shadow p-3 my-5 bg-body-tertiary rounded">
                 <div class="card-header bg-body-tertiary text-center">
-                    <h2>Gerenciar Pacientes</h2>
+                    <h2>Editar Paciente</h2>
                 </div>
 
-                <!--Gera a mensagem no topo se $mensagem não for vazio-->
-                <?php if (!empty($mensagem)): ?>
-                <div class="alert <?php echo strpos($mensagem, 'sucesso') !== false ? 'alert-success' : 'alert-danger'; ?> mt-3">
-                    <?php echo $mensagem; ?>
-                </div>
-                <?php endif; ?>
+                <div class="card-body bg-body-tertiary">
+                    <form action="/paciente" method="POST">
+                        <input type="hidden" name="id" value="<?= $paciente->getId() ?>">
+                        <input type="hidden" name="method" value="PUT">
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="nome" class="form-label">Nome Completo:</label>
+                                <input type="text" class="form-control mb-2" name="nome" id="nome"
+                                    value="<?= $paciente->getNome() ?>" required>
+                            </div>
+                        </div>
 
-                <!--Decide se gera a tabela com usuários ou o formulário para edição-->
-                <?php if (!$paciente): ?>
-                    <?php echo PacienteView::renderizarTabelaPaciente(); ?>
-                    <div class="card-footer bg-body-tertiary d-flex justify-content-center mt-3">
-                        <a href="homeUsuario.php" class="btn btn-outline-secondary">Voltar para a tela de usuário</a>
-                    </div>
-                <?php else: ?>
-                    <?php echo PacienteView::renderizarFormularioEdicao($paciente); ?>
-                    <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-                        <a href="editarPaciente.php" class="btn btn-outline-secondary me-3">Voltar para a lista</a>
-                        <a href="homeUsuario.php" class="btn btn-outline-secondary">Voltar para a tela de usuário</a>
-                    </div>
-                <?php endif; ?>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="email" class="form-label">E-mail:</label>
+                                <input type="email" class="form-control mb-2" name="email" id="email"
+                                    value="<?= $paciente->getEmail() ?>" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="form-label">Período:</label>
+                                <div class="form-check">
+                                    <input type="radio" id="matutino" class="form-check-input" name="periodo" value="matutino" <?php if ($paciente->getPeriodo() === 'matutino') echo 'checked' ?>>
+                                    <label for="matutino" class="form-check-label">Matutino</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" id="noturno" class="form-check-input" name="periodo" value="noturno" <?php if ($paciente->getPeriodo() === 'noturno') echo 'checked' ?>>
+                                    <label for="noturno" class="form-check-label">Noturno</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="data_nascimento" class="form-label">Data de Nascimento:</label>
+                                <input type="date" class="form-control mb-2" name="data_nascimento" id="data_nascimento"
+                                    value="<?= $paciente->getDataNasc() ?>" placeholder="DD/MM/AAAA" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="telefone" class="form-label">Telefone:</label>
+                                <input type="tel" class="form-control mb-2" name="telefone" id="telefone"
+                                    value="<?= $paciente->getFone() ?>" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="nome_mae" class="form-label">Nome da Mãe:</label>
+                                <input type="text" class="form-control mb-2" name="nome_mae" id="nome_mae"
+                                    value="<?= $paciente->getNomeMae() ?>" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="form-label">Toma algum medicamento contínuo?</label>
+                                <div class="form-check">
+                                    <input type="radio" id="medNao" class="form-check-input" name="toma_medicamento" value="N" <?php if ($paciente->getMedicamento() == null) echo 'checked' ?>>
+                                    <label for="medNao" class="form-check-label">Não</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" id="medSim" class="form-check-input" name="toma_medicamento" value="S" <?php if ($paciente->getMedicamento() != null) echo 'checked' ?>>
+                                    <label for="medSim" class="form-check-label">Sim</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" id="medicamentoContainer" style="display: <?= $paciente->getMedicamento() ? "block;" : "none;" ?>>
+                            <div class=" form-group col">
+                            <label for="medicamento" class="form-label">Qual medicamento?</label>
+                            <input type="text" class="form-control mb-2" name="medicamento" id="medicamento"
+                                value="<?= $paciente->getMedicamento() ?>">
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="form-label">Trata alguma patologia?</label>
+                                <div class="form-check">
+                                    <input type="radio" id="patNao" class="form-check-input" name="trata_patologia" value="N" <?php if ($paciente->getPatologia() == null) echo 'checked'; ?>>
+                                    <label for="patNao" class="form-check-label">Não</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" id="patSim" class="form-check-input" name="trata_patologia" value="S" <?php if ($paciente->getPatologia() != null) echo 'checked'; ?>>
+                                    <label for="patSim" class="form-check-label">Sim</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" id="patologiaContainer" style="display: <?= $paciente->getMedicamento() ? "block;" : "none;" ?>>
+                                    <div class=" form-group col">
+                            <label for="patologia" class="form-label">Qual patologia?</label>
+                            <input type="text" class="form-control mb-2" name="patologia" id="patologia"
+                                value="<?= $paciente->getMedicamento() ?>">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="atualizar_paciente" class="btn btn-primary col-12 mt-3 mb-2">Atualizar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer bg-body-tertiary d-flex justify-content-center">
+                    <a href="/paciente" class="btn btn-outline-secondary me-3">Voltar para a lista</a>
+                    <a href="/home" class="btn btn-outline-secondary">Voltar para a tela de usuário</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-
-
-            function controlarCampos(radioSim, radioNao, container) {
-                const containerElement = document.getElementById(container);
-                if (!containerElement) return;
-
-                function atualizarVisibilidade() {
-                    containerElement.style.display = radioSim.checked ? 'block' : 'none';
-                }
-
-                radioSim.addEventListener('change', atualizarVisibilidade);
-                radioNao.addEventListener('change', atualizarVisibilidade);
-                atualizarVisibilidade();
-            }
-
-
-            const medSim = document.getElementById('medSim');
-            const medNao = document.getElementById('medNao');
-            if (medSim && medNao) {
-                controlarCampos(medSim, medNao, 'medicamentoContainer');
-            }
-
-
-            const patSim = document.getElementById('patSim');
-            const patNao = document.getElementById('patNao');
-            if (patSim && patNao) {
-                controlarCampos(patSim, patNao, 'patologiaContainer');
-            }
-        });
-    </script>
 </body>
 
 </html>

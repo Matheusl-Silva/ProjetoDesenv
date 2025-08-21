@@ -65,11 +65,6 @@
                                         <td><?= $paciente->getPatologia() ?></td>
                                         <td>
                                             <div class="d-flex gap-2">
-                                                <!--form action="/paciente" method="POST" style="display: inline;">
-                                                    <input type="hidden" name="id" value="">
-                                                    <input type="hidden" name="method" value="PUT">
-                                                    <button type="submit" class="btn btn-primary btn-sm" style="width: 60px;">Editar</button>
-                                                </form-->
                                                 <a href="/paciente/<?= $paciente->getId() ?>" class="btn btn-primary btn-sm">Editar</a>
                                                 <form action="editarPaciente.php" method="POST" style="display: inline;" id="formExcluir_<?= $paciente->getEmail() ?>">
                                                     <input type="hidden" name="email" value="<?= $paciente->getEmail() ?>">
