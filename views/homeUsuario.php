@@ -88,7 +88,7 @@
                         </div>
                         <h2>Editar usuário</h2>
                         <p>Atualizar informações de usuários do sistema</p>
-                        <a href="editarUsuario.php" class="mt-auto">
+                        <a href="/usuario" class="mt-auto">
                             <button class="col-12 btn btn-primary">Acessar</button>
                         </a>
                     </div>

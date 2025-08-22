@@ -11,13 +11,13 @@ class UsuarioDAO
     }
     public function listarUsuarios()
     {
-        $sql       = "SELECT * FROM usuarios ORDER BY id";
+        $sql       = "SELECT * FROM usuario ORDER BY id";
         $resultado = $this->mysqli->query($sql);
         $usuarios  = [];
 
         if ($resultado) {
             while ($row = $resultado->fetch_assoc()) {
-                $usuarios[] = $row;
+                $usuarios[] = $this->converterParaObj($row);
             }
         }
 
@@ -62,7 +62,7 @@ class UsuarioDAO
         return $stmt->execute();
     }
 
-    public function buscarUsuario($email)
+    /*public function buscarUsuario($email)
     {
         $email = $this->mysqli->real_escape_string($email);
 
@@ -74,6 +74,19 @@ class UsuarioDAO
         }
 
         return null;
+    }*/
+
+    public function buscarUsuario($id){
+        $sql = "SELECT * FROM usuario WHERE id = ?";
+        $stmt = $this->mysqli->prepare($sql);
+        $stmt->bind_param('i', $id);
+        $success = $stmt->execute();
+
+        if($success){
+            $result = $stmt->get_result();
+            return $this->converterParaObj($result->fetch_assoc());
+        }
+        return false;
     }
 
     public function atualizarSenha($email, $novaSenha)

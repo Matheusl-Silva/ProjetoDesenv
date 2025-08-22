@@ -5,6 +5,16 @@ return function (Router $router) {
         $usuarioController->gerarFormCadastro();
     });
 
+    $router->get('/usuario', function(){
+        $usuarioController = new UsuarioController();
+        $usuarioController ->gerarLista();
+    });
+
+    $router->get('/usuario/{id}', function($id){
+        $usuarioController = new UsuarioController();
+        $usuarioController->gerarFormEdicao($id);
+    });
+
     $router->post('/usuario', function () {
 
         if (strcmp($_POST["senha"], $_POST["senhaConfirma"]) !== 0) {

@@ -14,6 +14,20 @@ class UsuarioController
         unset($_SESSION["flash"]);
     }
 
+    public function gerarLista(){
+        $usuarioDAO = new UsuarioDAO();
+        $listaUsuarios = $usuarioDAO->listarUsuarios();
+
+        require 'views/listarusuarios.php';
+    }
+    
+    public function gerarFormEdicao($id){
+        $usuarioDAO = new UsuarioDAO();
+        $usuario = $usuarioDAO->buscarUsuario($id);
+
+        require 'views/editarusuario.php';
+    }
+
     public function gerarHome()
     {
         $auth = new Autenticacao();
