@@ -128,5 +128,38 @@
     </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+
+            function controlarCampos(radioSim, radioNao, container) {
+                const containerElement = document.getElementById(container);
+                if (!containerElement) return;
+
+                function atualizarVisibilidade() {
+                    containerElement.style.display = radioSim.checked ? 'block' : 'none';
+                }
+
+                radioSim.addEventListener('change', atualizarVisibilidade);
+                radioNao.addEventListener('change', atualizarVisibilidade);
+                atualizarVisibilidade();
+            }
+
+
+            const medSim = document.getElementById('medSim');
+            const medNao = document.getElementById('medNao');
+            if (medSim && medNao) {
+                controlarCampos(medSim, medNao, 'medicamentoContainer');
+            }
+
+
+            const patSim = document.getElementById('patSim');
+            const patNao = document.getElementById('patNao');
+            if (patSim && patNao) {
+                controlarCampos(patSim, patNao, 'patologiaContainer');
+            }
+        });
+    </script>
 
 </html>
