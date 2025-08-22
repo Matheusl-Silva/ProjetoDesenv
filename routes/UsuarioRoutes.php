@@ -5,12 +5,12 @@ return function (Router $router) {
         $usuarioController->gerarFormCadastro();
     });
 
-    $router->get('/usuario', function(){
+    $router->get('/usuario', function () {
         $usuarioController = new UsuarioController();
-        $usuarioController ->gerarLista();
+        $usuarioController->gerarLista();
     });
 
-    $router->get('/usuario/{id}', function($id){
+    $router->get('/usuario/{id}', function ($id) {
         $usuarioController = new UsuarioController();
         $usuarioController->gerarFormEdicao($id);
     });
@@ -32,6 +32,21 @@ return function (Router $router) {
         }
 
         header('Location: /cadastrarUsuario');
+        exit;
+    });
+
+    $router->put('/usuario/{id}', function ($id) {
+        $usuarioController = new UsuarioController();
+        $usuario = new Usuario();
+        $usuario->setNome($_POST["nomeUsuario"]);
+        $usuario->setEmail($_POST["email"]);
+        $usuario->setSenha($_POST["senha"]);
+        $usuario->setAdmin($_POST["admin"]);
+        $usuario->setId($_POST["id"]);
+
+        $usuarioController->editar($usuario);
+
+        header('Location: /usuario');
         exit;
     });
 };

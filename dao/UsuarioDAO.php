@@ -24,26 +24,19 @@ class UsuarioDAO
         return $usuarios;
     }
 
-    public function atualizarUsuario($id, $nome, $email, $senha, $admin)
-    {
-        $id    = $this->mysqli->real_escape_string($id);
-        $nome  = $this->mysqli->real_escape_string($nome);
-        $email = $this->mysqli->real_escape_string($email);
-        $senha = $this->mysqli->real_escape_string($senha);
-        $admin = $this->mysqli->real_escape_string($admin);
+    public function atualizarUsuario(Usuario $usuario){
+        $sql = "UPDATE usuario SET cnome = ?, cemail = ?, csenha = ?, cadmin = ? WHERE id = ?";
+        $stmt = $this->mysqli->prepare($sql);
+        
+        $nome = $usuario->getNome();
+        $email = $usuario->getEmail();
+        $senha = $usuario->getSenha();
+        $admin = $usuario->getAdmin();
+        $id = $usuario->getId();
 
-        $sql = "UPDATE usuarios SET
-                nome = '$nome',
-                email = '$email',
-                senha = '$senha',
-                adm = '$admin'
-                WHERE id = '$id'";
-
-        if ($this->mysqli->query($sql)) {
-            return true;
-        }
-
-        return false;
+        $stmt->bind_param('ssssi', $nome, $email, $senha, $admin, $id);
+        $result = $stmt->execute();
+        return $result;
     }
 
     public function excluirUsuario($email)
@@ -61,20 +54,6 @@ class UsuarioDAO
         $stmt->bind_param('sss', $usuario->getNome(), $usuario->getEmail(), $usuario->getSenha());
         return $stmt->execute();
     }
-
-    /*public function buscarUsuario($email)
-    {
-        $email = $this->mysqli->real_escape_string($email);
-
-        $sql       = "SELECT * FROM usuario WHERE cemail = '$email'";
-        $resultado = $this->mysqli->query($sql);
-
-        if ($resultado && $resultado->num_rows > 0) {
-            return $this->converterParaObj($resultado->fetch_assoc());
-        }
-
-        return null;
-    }*/
 
     public function buscarUsuario($id){
         $sql = "SELECT * FROM usuario WHERE id = ?";

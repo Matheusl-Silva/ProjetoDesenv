@@ -92,4 +92,10 @@ class UsuarioController
         require '/login';
         return false;
     }
+
+    public function editar(Usuario $usuario){
+        $usuarioDAO = new UsuarioDAO();
+        $result = $usuarioDAO->atualizarUsuario($usuario);
+        return $result;
+    }
 }
