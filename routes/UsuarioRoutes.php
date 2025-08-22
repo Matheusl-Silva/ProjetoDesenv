@@ -42,7 +42,7 @@ return function (Router $router) {
         $usuario->setEmail($_POST["email"]);
         $usuario->setSenha($_POST["senha"]);
         $usuario->setAdmin($_POST["admin"]);
-        $usuario->setId($_POST["id"]);
+        $usuario->setId($id);
 
         $usuarioController->editar($usuario);
 

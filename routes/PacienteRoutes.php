@@ -43,4 +43,24 @@ return function(Router $router){
         header('Location: /cadastroPaciente');
         exit;
     });
+
+    $router->put('/paciente/{id}', function($id){
+        $pacienteController = new PacienteController();
+        $paciente = new Paciente();
+
+        $paciente->setNome($_POST["nome"]);
+        $paciente->setPeriodo($_POST["periodo"]);
+        $paciente->setDataNasc($_POST["data_nascimento"]);
+        $paciente->setFone($_POST["telefone"]);
+        $paciente->setEmail($_POST["email"]);
+        $paciente->setNomeMae($_POST["nome_mae"]);
+        $paciente->setMedicamento($_POST["medicamento"]);
+        $paciente->setPatologia($_POST["patologia"]);
+        $paciente->setId($id);
+
+        $pacienteController->atualizar($paciente);
+        
+        header('Location: /paciente');
+        exit;
+    });
 };

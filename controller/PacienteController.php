@@ -51,7 +51,6 @@ class PacienteController
     public function atualizar(Paciente $paciente){
         $pacienteDAO = new PacienteDAO();
         $result = $pacienteDAO->atualizarPacientes($paciente);
-        echo $result;
-        print_r($result);
+        return $result;
     }
 }

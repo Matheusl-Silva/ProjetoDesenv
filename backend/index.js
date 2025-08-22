@@ -175,7 +175,6 @@ app.delete("/pacientes/:email", (req, res) => {
 app.put("/pacientes/:idPaciente", (req, res) => {
   const idPaciente = req.params.idPaciente;
   const {
-    id,
     nome,
     email,
     periodo,
@@ -187,7 +186,7 @@ app.put("/pacientes/:idPaciente", (req, res) => {
   } = req.body;
 
   const query =
-    "UPDATE paciente SET nome = ?, email = ?, periodo = ?, data_nascimento = ?, telefone = ?, nome_mae = ?, toma_medicamento = ?, medicamento = ?, trata_patologia = ?, patologia = ? WHERE id = ?";
+    "UPDATE paciente SET cnome = ?, cemail = ?, cperiodo = ?, ddata_nascimento = ?, ctelefone = ?, cnome_mae = ?, cmedicamento = ?, cpatologia = ? WHERE id = ?";
 
   db.query(
     query,

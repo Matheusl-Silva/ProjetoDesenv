@@ -17,8 +17,7 @@
                 </div>
 
                 <div class="card-body bg-body-tertiary">
-                    <form action="/paciente" method="POST">
-                        <input type="hidden" name="id" value="<?= $paciente->getId() ?>">
+                    <form action="/paciente/<?= $paciente->getId() ?>" method="POST">
                         <input type="hidden" name="method" value="PUT">
                         <div class="row">
                             <div class="form-group col">

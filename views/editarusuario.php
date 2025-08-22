@@ -18,7 +18,6 @@
                 </div>
                 <div class="card-body bg-body-tertiary">
                     <form action="/usuario/<?= $usuario->getId() ?>" method="POST">
-                        <input type="hidden" name="id" value="<?= $usuario->getId() ?>">
                         <input type="hidden" name="method" value="PUT">
                         <div class="row">
                             <div class="form-group col">
