@@ -1,15 +1,10 @@
-<?php
-require_once '../../models/PessoaModel.php';
-require_once '../../models/UsuarioModel.php';
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/ProjetoDesenv/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/ProjetoDesenv/assets/css/recover.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/recover.css">
     <title>Recuperação de senha</title>
 </head>
 <body class="bg-info-subtle">
@@ -58,7 +53,7 @@ require_once '../../models/UsuarioModel.php';
                         <div class="logo-text text-primary">Insira seu email para recuperação de senha</div>
                     </div>
                     <div class="card-body bg-body-tertiary">
-                        <form action="../../models/UsuarioModel.php" method="post">
+                        <form action="/recover" method="post">
                             <div class="form-group" id="texto">
                                 <span>Insira seu email, enviaremos um link para a alteração da senha.</span>
                             </div>
@@ -67,7 +62,7 @@ require_once '../../models/UsuarioModel.php';
                                 <input type="email" id="email" name="email" class="form-control" placeholder="Insira seu e-mail" required>
                             </div>
                             <button type="submit" name="reset" class="btn btn-primary col-12 mt-3 mb-2">Enviar</button>
-                                <a href="login.php" class="btn btn-outline-secondary col-12">Voltar para a tela de login</a>
+                                <a href="/login" class="btn btn-outline-secondary col-12">Voltar para a tela de login</a>
                         </form>
                     </div>
                 </div>
@@ -75,7 +70,7 @@ require_once '../../models/UsuarioModel.php';
         </div>
     </div>
 
-    <script src="/ProjetoDesenv/assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);

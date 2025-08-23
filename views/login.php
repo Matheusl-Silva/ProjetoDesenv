@@ -1,34 +1,11 @@
-<?php
-include '../../database/conexaoClass.php';
-require_once '../../models/AutenticacaoClass.php';
-
-$db     = new Conexao();
-$mysqli = $db->getConexao();
-
-$auth = new Autenticacao();
-
-$loginInvalido;
-if (isset($_POST['email']) && isset($_POST['senha'])) {
-    $resultado = $auth->fazerLogin($_POST['email'], $_POST['senha']);
-    if ($resultado === false) {
-        $loginInvalido = true;
-    } else {
-        $loginInvalido = false;
-    }
-}
-
-$db->fecharConexao();
-?>
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/ProjetoDesenv/assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/ProjetoDesenv/assets/css/login.css">
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/assets/css/login.css">
   <link rel="icon" href="./../../assets/img/favicon.png" type="image/x-icon">
   <title>Login</title>
 </head>
@@ -46,7 +23,7 @@ $db->fecharConexao();
           <p>O email ou a senha são inválidos! Por favor tente novamente ou redefina a senha.</a></p>
         </div>
         <div class="modal-footer">
-          <a href="/ProjetoDesenv/views/Auth/recover.php"><button type="button" class="btn btn-secondary">Redefinir a senha</button></a>
+          <a href="/recover><button type="button" class="btn btn-secondary">Redefinir a senha</button></a>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tentar novamente</button>
         </div>
       </div>
@@ -62,7 +39,7 @@ $db->fecharConexao();
             <div class="logo-text text-primary">Por favor insira suas informações para acessar</div>
           </div>
           <div class="card-body bg-body-tertiary">
-            <form action="login.php" method="POST">
+            <form action="/login" method="POST">
               <div class="form-group">
                 <label for="email" class="form-label">Email: <span style="color: red;">*</span></label>
                 <input type="email" class="form-control mb-2" name="email" id="email" placeholder="Insira seu e-mail"
@@ -74,10 +51,10 @@ $db->fecharConexao();
               </div>
               <div class="col-12">
                 <span>Esqueceu a senha?</span>
-                <a href="/ProjetoDesenv/views/Auth/recover.php">Recuperação de senha</a>
+                <a href="/recover">Recuperação de senha</a>
               </div>
               <button type="submit" class="btn btn-primary col-12 mt-3 mb-2" id="submit">Entrar</button>
-                <a href="/ProjetoDesenv/index.html" class="btn btn-outline-secondary col-12">Voltar para a tela inicial</a>
+                <a href="/" class="btn btn-outline-secondary col-12">Voltar para a tela inicial</a>
             </form>
           </div>
         </div>
@@ -85,7 +62,7 @@ $db->fecharConexao();
     </div>
   </div>
 </body>
-<script src="/ProjetoDesenv/assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
 <script>
   const loginInvalido = <?php echo $loginInvalido ? 'true' : 'false'; ?>;
 

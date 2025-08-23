@@ -13,7 +13,7 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "hemato",
+  database: "laboratorio",
 });
 
 db.connect((err) => {
@@ -26,7 +26,7 @@ db.connect((err) => {
 
 // ----------- rotas pacientes -----------
 app.get("/pacientes", (req, res) => {
-  const query = "SELECT * FROM pacientes";
+  const query = "SELECT * FROM paciente";
 
   db.query(query, (err, results) => {
     if (err) {
@@ -36,6 +36,24 @@ app.get("/pacientes", (req, res) => {
     res.json(results);
   });
   return res.status(200);
+});
+
+app.get("/pacientes/:idPaciente", (req, res) => {
+  const id = req.params.idPaciente;
+  const query = "SELECT * FROM paciente WHERE id = ?";
+
+  db.query(query, [id], (err, results) => {
+    if(err){
+      console.error('Erro ao buscar paciente: ', err);
+      return res.json({error: 'Erro ao buscar paciente'});
+    }
+
+    if(results.affectedRows === 0){
+      return res.json({error: "Paciente não encontrado"});
+    }
+
+    return res.json(results);
+  })
 });
 
 // Cadastrar um novo usuário
@@ -48,9 +66,7 @@ app.post("/pacientes", (req, res) => {
     data_nascimento,
     telefone,
     nome_mae,
-    toma_medicamento,
     medicamento,
-    trata_patologia,
     patologia,
   } = req.body;
 
@@ -60,16 +76,14 @@ app.post("/pacientes", (req, res) => {
     !periodo ||
     !data_nascimento ||
     !telefone ||
-    !nome_mae ||
-    !toma_medicamento ||
-    !trata_patologia
+    !nome_mae
   ) {
     console.error("Dados incompletos:", req.body);
     return res.status(400).json({ error: "Dados incompletos" });
   }
 
   // Primeiro, verificar se o email já existe
-  const checkEmailQuery = "SELECT id FROM pacientes WHERE email = ?";
+  const checkEmailQuery = "SELECT id FROM paciente WHERE cemail = ?";
 
   db.query(checkEmailQuery, [email], (err, results) => {
     if (err) {
@@ -79,12 +93,13 @@ app.post("/pacientes", (req, res) => {
 
     if (results.length > 0) {
       console.error("Email já cadastrado:", email);
-      return res.status(409).json({ error: "Email já cadastrado no sistema" });
+      //return res.status(409).json({ error: "Email já cadastrado no sistema" });
+      return res.json({ error: "Email já cadastrado no sistema" });
     }
 
     // Se o email não existe, prosseguir com o cadastro
     const insertQuery =
-      "INSERT INTO pacientes (nome, email, periodo, data_nascimento, telefone, nome_mae, toma_medicamento, medicamento, trata_patologia, patologia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO paciente (cnome, cemail, cperiodo, ddata_nascimento, ctelefone, cnome_mae, cmedicamento, cpatologia) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     db.query(
       insertQuery,
@@ -95,17 +110,13 @@ app.post("/pacientes", (req, res) => {
         data_nascimento,
         telefone,
         nome_mae,
-        toma_medicamento,
         medicamento,
-        trata_patologia,
         patologia,
       ],
       (err, results) => {
         if (err) {
           console.error("Erro ao cadastrar paciente:", err);
-          return res
-            .status(500)
-            .json({ error: "Erro ao cadastrar paciente: " + err.message });
+          return res.json({ error: "Erro ao cadastrar paciente: " + err.message });
         }
 
         res.status(201).json({
@@ -164,21 +175,18 @@ app.delete("/pacientes/:email", (req, res) => {
 app.put("/pacientes/:idPaciente", (req, res) => {
   const idPaciente = req.params.idPaciente;
   const {
-    id,
     nome,
     email,
     periodo,
     data_nascimento,
     telefone,
     nome_mae,
-    toma_medicamento,
     medicamento,
-    trata_patologia,
     patologia,
   } = req.body;
 
   const query =
-    "UPDATE pacientes SET nome = ?, email = ?, periodo = ?, data_nascimento = ?, telefone = ?, nome_mae = ?, toma_medicamento = ?, medicamento = ?, trata_patologia = ?, patologia = ? WHERE id = ?";
+    "UPDATE paciente SET cnome = ?, cemail = ?, cperiodo = ?, ddata_nascimento = ?, ctelefone = ?, cnome_mae = ?, cmedicamento = ?, cpatologia = ? WHERE id = ?";
 
   db.query(
     query,
@@ -189,9 +197,7 @@ app.put("/pacientes/:idPaciente", (req, res) => {
       data_nascimento,
       telefone,
       nome_mae,
-      toma_medicamento,
       medicamento,
-      trata_patologia,
       patologia,
       idPaciente,
     ],

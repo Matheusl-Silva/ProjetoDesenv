@@ -6,45 +6,37 @@ class UsuarioDAO
 
     public function __construct()
     {
-        require_once __DIR__ . "/../database/conexaoClass.php";
         $bd           = new Conexao();
         $this->mysqli = $bd->getConexao();
     }
     public function listarUsuarios()
     {
-        $sql       = "SELECT * FROM usuarios ORDER BY id";
+        $sql       = "SELECT * FROM usuario ORDER BY id";
         $resultado = $this->mysqli->query($sql);
         $usuarios  = [];
 
         if ($resultado) {
             while ($row = $resultado->fetch_assoc()) {
-                $usuarios[] = $row;
+                $usuarios[] = $this->converterParaObj($row);
             }
         }
 
         return $usuarios;
     }
 
-    public function atualizarUsuario($id, $nome, $email, $senha, $admin)
-    {
-        $id  = $this->mysqli->real_escape_string($id);
-        $nome  = $this->mysqli->real_escape_string($nome);
-        $email = $this->mysqli->real_escape_string($email);
-        $senha = $this->mysqli->real_escape_string($senha);
-        $admin = $this->mysqli->real_escape_string($admin);
+    public function atualizarUsuario(Usuario $usuario){
+        $sql = "UPDATE usuario SET cnome = ?, cemail = ?, csenha = ?, cadmin = ? WHERE id = ?";
+        $stmt = $this->mysqli->prepare($sql);
+        
+        $nome = $usuario->getNome();
+        $email = $usuario->getEmail();
+        $senha = $usuario->getSenha();
+        $admin = $usuario->getAdmin();
+        $id = $usuario->getId();
 
-        $sql = "UPDATE usuarios SET
-                nome = '$nome',
-                email = '$email',
-                senha = '$senha',
-                adm = '$admin'
-                WHERE id = '$id'";
-
-        if ($this->mysqli->query($sql)) {
-            return true;
-        }
-
-        return false;
+        $stmt->bind_param('ssssi', $nome, $email, $senha, $admin, $id);
+        $result = $stmt->execute();
+        return $result;
     }
 
     public function excluirUsuario($email)
@@ -55,42 +47,85 @@ class UsuarioDAO
         return $this->mysqli->query($sql);
     }
 
-    public function cadastrarUsuario($nome, $email, $senha)
+    public function cadastrarUsuario(Usuario $usuario)
     {
-        $nome  = $this->mysqli->real_escape_string($nome);
-        $email = $this->mysqli->real_escape_string($email);
-        $senha = $this->mysqli->real_escape_string($senha);
-
-        $sql = "INSERT INTO usuarios (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
-        return $this->mysqli->query($sql);
+        $sql  = "INSERT INTO usuario (cnome, cemail, csenha) VALUES (?, ?, ?)";
+        $stmt = $this->mysqli->prepare($sql);
+        $stmt->bind_param('sss', $usuario->getNome(), $usuario->getEmail(), $usuario->getSenha());
+        return $stmt->execute();
     }
 
-    public function buscarUsuario($email)
-    {
-        $email = $this->mysqli->real_escape_string($email);
+    public function buscarUsuario($id){
+        $sql = "SELECT * FROM usuario WHERE id = ?";
+        $stmt = $this->mysqli->prepare($sql);
+        $stmt->bind_param('i', $id);
+        $success = $stmt->execute();
 
-        $sql       = "SELECT * FROM usuarios WHERE email = '$email'";
-        $resultado = $this->mysqli->query($sql);
-
-        if ($resultado && $resultado->num_rows > 0) {
-            return $resultado->fetch_assoc();
+        if($success){
+            $result = $stmt->get_result();
+            return $this->converterParaObj($result->fetch_assoc());
         }
-
-        return null;
+        return false;
     }
 
     public function atualizarSenha($email, $novaSenha)
     {
-        $sql  = "UPDATE usuarios SET senha = ? WHERE email = ?";
+        $sql  = "UPDATE usuario SET csenha = ? WHERE cemail = ?";
         $stmt = $this->mysqli->prepare($sql);
         return $stmt->execute([$novaSenha, $email]);
     }
 
     public function updatePassword($email, $novaSenhaRec): bool
     {
-        $sql  = "UPDATE usuarios SET senha = ? WHERE email = ?";
+        $sql  = "UPDATE usuario SET csenha = ? WHERE cemail = ?";
         $stmt = $this->mysqli->prepare($sql);
         $stmt->bind_param("ss", $novaSenhaRec, $email);
         return $stmt->execute();
+    }
+
+    public function verificarEmail($email)
+    {
+        try {
+            $sql  = "SELECT * FROM usuario WHERE cemail = ?;";
+            $stmt = $this->mysqli->prepare($sql);
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                return true;
+            }
+
+            return false;
+        } catch (mysqli_sql_exception $erro) {
+            echo "Erro ao verificar login: $erro";
+        }
+    }
+
+    public function login($email, $senha)
+    {
+        try {
+            $sql  = "SELECT * FROM usuario WHERE cemail = ? AND csenha = ?;";
+            $stmt = $this->mysqli->prepare($sql);
+            $stmt->bind_param('ss', $email, $senha);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                return $this->converterParaObj($result->fetch_assoc());
+            }
+            return false;
+        } catch (mysqli_sql_exception $erro) {
+            echo "Erro ao fazer login: $erro";
+        }
+    }
+
+    private function converterParaObj($row)
+    {
+        $usuario = new Usuario();
+        $usuario->setId($row["id"]);
+        $usuario->setNome($row["cnome"]);
+        $usuario->setEmail($row["cemail"]);
+        $usuario->setSenha($row["csenha"]);
+        $usuario->setAdmin($row["cadmin"]);
+        return $usuario;
     }
 }

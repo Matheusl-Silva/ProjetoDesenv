@@ -3,6 +3,7 @@ class Paciente extends Pessoa
 {
     private $periodo;
     private $dataNasc;
+    private $dataCadastro;
     private $fone;
     private $nomeMae;
     private $tomaMedicamento;
@@ -22,7 +23,6 @@ class Paciente extends Pessoa
         $this->medicamento     = $medicamento;
         $this->trataPatologia  = $trataPatologia;
         $this->patologia       = $patologia;
-
     }
 
     public function getPeriodo()
@@ -43,6 +43,16 @@ class Paciente extends Pessoa
     public function setDataNasc($valor)
     {
         $this->dataNasc = $valor;
+    }
+
+    public function getDataCadastro()
+    {
+        return $this->dataCadastro;
+    }
+
+    public function setDataCadastro($value)
+    {
+        $this->dataCadastro = $value;
     }
 
     public function getFone()
@@ -104,5 +114,4 @@ class Paciente extends Pessoa
     {
         $this->patologia = $valor;
     }
-
 }
