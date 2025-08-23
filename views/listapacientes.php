@@ -58,7 +58,12 @@
                                         <td><?= $paciente->getNome() ?></td>
                                         <td><?= $paciente->getEmail() ?></td>
                                         <td><?= $paciente->getPeriodo() ?></td>
-                                        <td><?= $paciente->getDataNasc() ?></td>
+                                        <td>
+                                            <?php
+                                            $dateTime = new DateTime($paciente->getDataNasc());
+                                            echo $dateTime->format('d/m/Y');
+                                            ?>
+                                        </td>
                                         <td><?= $paciente->getFone() ?></td>
                                         <td><?= $paciente->getNomeMae() ?></td>
                                         <td><?= $paciente->getMedicamento() ?></td>
