@@ -16,6 +16,12 @@
                 <div class="card-header bg-body-tertiary text-center">
                     <h2>Editar Usuário</h2>
                 </div>
+                <?php if (isset($_SESSION["flash"])): ?>
+                    <div class="alert alert-<?= $_SESSION["flash"]["tipo"] ?> alert-dismissible fade show" role="alert">
+                        <?= $_SESSION["flash"]["mensagem"] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
                 <div class="card-body bg-body-tertiary">
                     <form action="/usuario/<?= $usuario->getId() ?>" method="POST">
                         <input type="hidden" name="method" value="PUT">

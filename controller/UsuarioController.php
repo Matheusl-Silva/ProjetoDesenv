@@ -98,4 +98,10 @@ class UsuarioController
         $result = $usuarioDAO->atualizarUsuario($usuario);
         return $result;
     }
+
+    public function verificarEmail($email){
+        $usuarioDAO = new UsuarioDAO();
+        $result = $usuarioDAO->verificarEmail($email);
+        return $result;
+    }
 }

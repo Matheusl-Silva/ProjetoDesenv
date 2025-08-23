@@ -38,15 +38,28 @@ return function (Router $router) {
     $router->put('/usuario/{id}', function ($id) {
         $usuarioController = new UsuarioController();
         $usuario = new Usuario();
-        $usuario->setNome($_POST["nomeUsuario"]);
-        $usuario->setEmail($_POST["email"]);
-        $usuario->setSenha($_POST["senha"]);
-        $usuario->setAdmin($_POST["admin"]);
-        $usuario->setId($id);
 
-        $usuarioController->editar($usuario);
+        if (!$usuarioController->verificarEmail($_POST["email"])) {
+            $usuario->setNome($_POST["nomeUsuario"]);
+            $usuario->setEmail($_POST["email"]);
+            $usuario->setSenha($_POST["senha"]);
+            $usuario->setAdmin($_POST["admin"]);
+            $usuario->setId($id);
 
-        header('Location: /usuario');
-        exit;
+            $usuarioController->editar($usuario);
+
+            header('Location: /usuario');
+            exit;
+        } else {
+            $_SESSION["flash"] = [
+                "mensagem" => "Este e-mail já está cadastrado!",
+                "tipo" => "warning"
+            ];
+
+            header('Location: /usuario/' . $id);
+            exit;
+
+            unset($_SESSION["flash"]);
+        }
     });
 };
