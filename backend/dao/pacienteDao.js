@@ -1,0 +1,63 @@
+const db = require("../database/connection");
+
+exports.findAll = () => {
+  return new Promise((resolve, reject) => {
+    db.query("SELECT * FROM paciente"),
+      (err, results) => {
+        err ? reject(err) : resolve(results);
+      };
+  });
+};
+
+exports.findById = (id) => {
+  return new Promise((resolve, reject) => {
+    db.query("SELECT * FROM pacientes WHERE id = ?", [id], (err, results) => {
+      err ? reject(err) : resolve(results);
+    });
+  });
+};
+
+exports.create = (data) => {
+  return new Promise((resolve, reject) => {
+    const query =
+      "INSERT INTO paciente (cnome, cemail, cperiodo, ddata_nascimento, ctelefone, cnome_mae, cmedicamento, cpatologia) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    const values = [
+      data.nome,
+      data.email,
+      data.periodo,
+      data.data_nascimento,
+      data.telefone,
+      data.nome_mae,
+      data.medicamento,
+      data.patologia,
+    ];
+
+    db.query(query, values, (err, result) => {
+      err ? reject(err) : resolve(results);
+    });
+  });
+};
+
+exports.update = (id, data) => {
+  return new Promise((resolve, reject) => {
+    const query =
+      "UPDATE paciente SET cnome = ?, cemail = ?, cperiodo = ?, ddata_nascimento = ?, ctelefone = ?, cnome_mae = ?, cmedicamento = ?, cpatologia = ? WHERE id = ?";
+
+    const values = [
+      data.nome,
+      data.email,
+      data.periodo,
+      data.data_nascimento,
+      data.telefone,
+      data.nome_mae,
+      data.medicamento,
+      data.patologia,
+      id,
+    ];
+
+    db.query(query, values, (err, result) => {
+      err ? reject(err) : resolve(results);
+    });
+  });
+};
