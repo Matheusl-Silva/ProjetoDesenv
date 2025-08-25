@@ -92,9 +92,9 @@ class UsuarioDAO
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
-                return true;
+                $usuario = $this->converterParaObj($result->fetch_assoc());
+                return $usuario->getId();
             }
-
             return false;
         } catch (mysqli_sql_exception $erro) {
             echo "Erro ao verificar login: $erro";

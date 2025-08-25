@@ -13,6 +13,8 @@ return function (Router $router) {
     $router->get('/usuario/{id}', function ($id) {
         $usuarioController = new UsuarioController();
         $usuarioController->gerarFormEdicao($id);
+
+        unset($_SESSION["flash"]);
     });
 
     $router->post('/usuario', function () {
@@ -39,12 +41,14 @@ return function (Router $router) {
         $usuarioController = new UsuarioController();
         $usuario = new Usuario();
 
-        if (!$usuarioController->verificarEmail($_POST["email"])) {
+        $idComEmailExistente = $usuarioController->verificarEmail($_POST["email"]);
+        //if (!$usuarioController->verificarEmail($_POST["email"])) {
+            if ($idComEmailExistente == $id || !$idComEmailExistente) {
             $usuario->setNome($_POST["nomeUsuario"]);
             $usuario->setEmail($_POST["email"]);
             $usuario->setSenha($_POST["senha"]);
             $usuario->setAdmin($_POST["admin"]);
-            $usuario->setId($id);
+            $usuario->setId($id);   
 
             $usuarioController->editar($usuario);
 
@@ -58,8 +62,6 @@ return function (Router $router) {
 
             header('Location: /usuario/' . $id);
             exit;
-
-            unset($_SESSION["flash"]);
         }
     });
 };
