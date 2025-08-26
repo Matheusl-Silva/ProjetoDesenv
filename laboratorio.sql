@@ -57,7 +57,8 @@ CREATE TABLE `exame_hematologia` (
   `nvolume_plaquetario_medio` decimal(10,0) NOT NULL,
   `id_responsavel` int(11) NOT NULL,
   `id_preceptor` int(11) NOT NULL,
-  `id_paciente` int(11) NOT NULL
+  `id_paciente` int(11) NOT NULL,
+  `ddata_exame` DATE NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -166,6 +167,61 @@ ALTER TABLE `usuario`
 -- Restrições para tabelas despejadas
 --
 
+
+--
+-- Estrutura para tabela `exame_bioquimica`
+--
+CREATE TABLE `exame_bioquimica` (
+    `id` INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    `nbilirrubina_total` DECIMAL(10,2),
+    `nbilirrubina_direta` DECIMAL(10,2),
+    `nproteina_total` DECIMAL(10,2),
+    `nalbumina` DECIMAL(10,2),
+    `namilase` DECIMAL(10,2),
+    `ntgo_transaminase_glutamico_oxalacetica` DECIMAL(10,2),
+    `ntgp_transaminase_glutamico_piruvica` DECIMAL(10,2),
+    `ngama_gt_glutamiltransferase` DECIMAL(10,2),
+    `nfosfatase_alcalina` DECIMAL(10,2),
+    `nreatina_quinase_ck` DECIMAL(10,2),
+    `nglicose` DECIMAL(10,2),
+    `nferro` DECIMAL(10,2),
+    `ncolesterol_total` DECIMAL(10,2),
+    `nhdl` DECIMAL(10,2),
+    `nldl` DECIMAL(10,2),
+    `ntriglicerideos` DECIMAL(10,2),
+    `nureia` DECIMAL(10,2),
+    `ncreatinina` DECIMAL(10,2),
+    `nacido_urico` DECIMAL(10,2),
+    `npcr_proteina_c_reativa` DECIMAL(10,2),
+    `ncalcio` DECIMAL(10,2),
+    `nldh` DECIMAL(10,2),
+    `nmagnesio` DECIMAL(10,2),
+    `nfosforo` DECIMAL(10,2),
+    `id_responsavel` int(11) NOT NULL,
+	  `id_preceptor` int(11) NOT NULL,
+    `id_paciente` int(11) NOT NULL,
+    `ddata_exame` DATE NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+--
+-- Índices de tabela `exame_bioquimica`
+--
+
+ALTER TABLE `exame_bioquimica`
+  ADD KEY `id_responsavel` (`id_responsavel`),
+  ADD KEY `id_preceptor` (`id_preceptor`),
+  ADD KEY `id_paciente` (`id_paciente`);
+  
+
+--
+-- Restrições para tabelas `exame_bioquimica`
+--
+
+ALTER TABLE `exame_bioquimica`
+  ADD CONSTRAINT `exame_bioquimica_ibfk_1` FOREIGN KEY (`id_responsavel`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `exame_bioquimica_ibfk_2` FOREIGN KEY (`id_preceptor`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `exame_bioquimica_ibfk_3` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 --
 -- Restrições para tabelas `exame_hematologia`
 --
