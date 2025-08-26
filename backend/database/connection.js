@@ -7,4 +7,12 @@ const db = mysql.createConnection({
   database: "laboratorio",
 });
 
-modulo.exports = db;
+db.connect((err) => {
+  if (err) {
+    console.log("Erro de conexão: " + err);
+    return;
+  }
+  console.log("Conexão com banco de dados estabelecida");
+});
+
+module.exports = db;

@@ -2,18 +2,29 @@ const db = require("../database/connection");
 
 exports.findAll = () => {
   return new Promise((resolve, reject) => {
-    db.query("SELECT * FROM paciente"),
-      (err, results) => {
-        err ? reject(err) : resolve(results);
-      };
+    db.query("SELECT * FROM paciente", (err, results) => {
+      err ? reject(err) : resolve(results);
+    });
   });
 };
 
 exports.findById = (id) => {
   return new Promise((resolve, reject) => {
-    db.query("SELECT * FROM pacientes WHERE id = ?", [id], (err, results) => {
-      err ? reject(err) : resolve(results);
+    db.query("SELECT * FROM paciente WHERE id = ?", [id], (err, result) => {
+      err ? reject(err) : resolve(result);
     });
+  });
+};
+
+exports.findByEmail = (email) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      "SELECT * FROM paciente where cemail = ?",
+      [email],
+      (err, result) => {
+        err ? reject(err) : resolve(result);
+      }
+    );
   });
 };
 
@@ -34,7 +45,7 @@ exports.create = (data) => {
     ];
 
     db.query(query, values, (err, result) => {
-      err ? reject(err) : resolve(results);
+      err ? reject(err) : resolve(result);
     });
   });
 };
@@ -57,7 +68,7 @@ exports.update = (id, data) => {
     ];
 
     db.query(query, values, (err, result) => {
-      err ? reject(err) : resolve(results);
+      err ? reject(err) : resolve(result);
     });
   });
 };
