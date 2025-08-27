@@ -72,3 +72,11 @@ exports.update = (id, data) => {
     });
   });
 };
+
+exports.delete = (id) => {
+  return new Promisse((resolve, reject) => {
+    db.query("DELETE * FROM paciente WHERE id = ?", [id], (err, result) => {
+      err ? reject(err) : resolve(result);
+    });
+  });
+};

@@ -60,3 +60,20 @@ exports.updateUsuario = async (req, res) => {
     res.status(500).json({ error: "Erro ao tentar atualizar usuario" });
   }
 };
+
+exports.deleteUsuario = async (req, res) => {
+  const id = req.params.idUsuario;
+  const dadosDeletar = req.body;
+
+  try {
+    const result = await usuarioDAO.delete(id, dadosDeletar);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "usuario não encontrado" });
+    }
+
+    res.status(200).json({ message: "Usuario deletado com suscesso" });
+  } catch (err) {
+    console.error("Erro ao tentar deletar o usuario: ", err);
+    res.status(500).json({ error: "Erro ao tentar deletar Usuario" });
+  }
+};

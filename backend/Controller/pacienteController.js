@@ -25,18 +25,18 @@ exports.getPacienteById = async (req, res) => {
 };
 
 exports.verificarEmail = async (req, res) => {
-  const {email} = req.body;
-  try{
+  const { email } = req.body;
+  try {
     const paciente = await pacienteDAO.findByEmail(email);
-    if(paciente){
+    if (paciente) {
       return res.status(200).json(paciente);
     }
     return res.status(404).json(false);
-  }catch(err){
+  } catch (err) {
     console.log("Erro ao buscar paciente por email: ", err);
-    return res.status(500).json({error: "Erro ao buscar paciente por email"});
+    return res.status(500).json({ error: "Erro ao buscar paciente por email" });
   }
-}
+};
 
 exports.createPaciente = async (req, res) => {
   const { email } = req.body;
@@ -72,5 +72,22 @@ exports.updatePaciente = async (req, res) => {
   } catch (err) {
     console.error("Erro ao tentar atualizar o paciente: ", err);
     res.status(500).json({ error: "Erro ao tentar atualizar paciente" });
+  }
+};
+
+exports.deletePaciente = async (req, res) => {
+  const id = req.params.idPaciente;
+  const dadosDeletar = req.body;
+
+  try {
+    const result = await pacienteDAO.delete(id, dadosDeletar);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Paciente não encontrado" });
+    }
+
+    res.status(200).json({ message: "Paciente deletado com suscesso" });
+  } catch (err) {
+    console.error("Erro ao tentar deletar o Paciente: ", err);
+    res.status(500).json({ error: "Erro ao tentar deletar Paciente" });
   }
 };
