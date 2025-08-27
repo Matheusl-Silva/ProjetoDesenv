@@ -22,7 +22,7 @@ exports.findByEmail = (email) => {
       "SELECT * FROM paciente where cemail = ?",
       [email],
       (err, result) => {
-        err ? reject(err) : resolve(result);
+        err ? reject(err) : resolve(result[0] ? result[0] : false);
       }
     );
   });

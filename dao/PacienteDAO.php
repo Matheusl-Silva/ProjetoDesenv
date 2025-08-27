@@ -18,12 +18,11 @@ class PacienteDAO
         $context = stream_context_create($options);
         $result  = file_get_contents($url, false, $context);
 
-        if ($result === false) {
+        $response = json_decode($result, true);
+        if ($response == false) {
             return false;
         }
-
-        $response = json_decode($result, true);
-        return isset($response['existe']) ? $response['existe'] : false;
+        return $this->converterParaObj(json_decode($result, true));
     }
 
     public function cadastrarPaciente(Paciente $paciente)
@@ -101,7 +100,7 @@ class PacienteDAO
         if($result == false) return false;
 
         $resultAssoc = json_decode($result, true);
-        return $this->converterParaObj($resultAssoc[0]);
+        return $this->converterParaObj($resultAssoc);
     }
 
     public function atualizarPacientes(Paciente $paciente)

@@ -24,6 +24,20 @@ exports.getPacienteById = async (req, res) => {
   }
 };
 
+exports.verificarEmail = async (req, res) => {
+  const {email} = req.body;
+  try{
+    const paciente = await pacienteDAO.findByEmail(email);
+    if(paciente){
+      return res.status(200).json(paciente);
+    }
+    return res.status(404).json(false);
+  }catch(err){
+    console.log("Erro ao buscar paciente por email: ", err);
+    return res.status(500).json({error: "Erro ao buscar paciente por email"});
+  }
+}
+
 exports.createPaciente = async (req, res) => {
   const { email } = req.body;
   const pacienteExiste = await pacienteDAO.findByEmail(email);

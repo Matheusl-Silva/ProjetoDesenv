@@ -32,6 +32,7 @@ class PacienteController
         $paciente->setDataNasc($dateTime->format('Y-m-d'));
         
         require 'views/editarpaciente.php';
+        unset($_SESSION["flash"]);
     }
 
     public function gerarLista(){
@@ -52,5 +53,12 @@ class PacienteController
         $pacienteDAO = new PacienteDAO();
         $result = $pacienteDAO->atualizarPacientes($paciente);
         return $result;
+    }
+
+    public function verificarEmailExistente($email){
+        $pacienteDAO = new PacienteDAO();
+        $result = $pacienteDAO->verificarEmailExistente($email);
+        if($result) return $result->getId();
+        return false;
     }
 }

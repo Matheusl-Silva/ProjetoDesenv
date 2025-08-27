@@ -42,7 +42,6 @@ return function (Router $router) {
         $usuario = new Usuario();
 
         $idComEmailExistente = $usuarioController->verificarEmail($_POST["email"]);
-        //if (!$usuarioController->verificarEmail($_POST["email"])) {
             if ($idComEmailExistente == $id || !$idComEmailExistente) {
             $usuario->setNome($_POST["nomeUsuario"]);
             $usuario->setEmail($_POST["email"]);
