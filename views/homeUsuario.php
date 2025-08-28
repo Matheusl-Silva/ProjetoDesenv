@@ -83,7 +83,7 @@
                     <div class="card-content">
                         <h3 class="card-title">Exames</h3>
                         <p class="card-description">Verificar exames realizados pelos pacientes e cadastrar novos resultados</p>
-                        <a href="examePrincipal.php" class="action-btn">
+                        <a href="/exames" class="action-btn">
                             Acessar
                             <i class="bi bi-arrow-right ms-1"></i>
                         </a>
@@ -134,7 +134,7 @@
                     <div class="card-content">
                         <h3 class="card-title">Exames</h3>
                         <p class="card-description">Verificar exames já realizados pelos pacientes e cadastrar novos resultados no sistema</p>
-                        <a href="examePrincipal.php" class="action-btn">
+                        <a href="/exames" class="action-btn">
                             Acessar
                             <i class="bi bi-arrow-right ms-1"></i>
                         </a>
