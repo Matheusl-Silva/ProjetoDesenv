@@ -99,8 +99,8 @@ class PacienteDAO
 
         if($result == false) return false;
 
-        $resultAssoc = json_decode($result, true);
-        return $this->converterParaObj($resultAssoc);
+        $response = json_decode($result, true);
+        return $this->converterParaObj($response);
     }
 
     public function atualizarPacientes(Paciente $paciente)

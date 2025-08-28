@@ -24,6 +24,33 @@ exports.getUsuariobyId = async (req, res) => {
   }
 };
 
+exports.verificarEmail = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const usuario = await usuarioDAO.findByEmail(email);
+    if (usuario) {
+      return res.status(200).json(usuario);
+    }
+    return res.status(404).json(false);
+  } catch (err) {
+    return res.status(500).json({ error: "Erro ao buscar paciente por email" });
+  }
+};
+
+exports.login = async (req, res) => {
+  const { email, senha } = req.body;
+  try {
+    const usuario = usuarioDao.login(email, senha);
+
+    if (usuario) {
+      return res.status(200).json(usuario);
+    }
+    return res.status(404).json({ error: "Usuário não encontrado" });
+  } catch (err) {
+    return res.status(500).json({ error: "Erro ao fazer login" });
+  }
+};
+
 exports.createUsuario = async (req, res) => {
   const { email } = req.body;
   const usuarioExiste = await usuarioDAO.findByEmail(email);

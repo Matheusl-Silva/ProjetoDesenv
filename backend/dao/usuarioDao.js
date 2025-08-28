@@ -2,8 +2,8 @@ const db = require("../database/connection");
 
 exports.findAll = () => {
   return new Promise((resolve, reject) => {
-    db.query("SELECT * FROM usuario", (err, results) => {
-      err ? reject(err) : resolve(results);
+    db.query("SELECT * FROM usuario", (err, result) => {
+      err ? reject(err) : resolve(result);
     });
   });
 };
@@ -11,12 +11,22 @@ exports.findAll = () => {
 exports.findByEmail = (email) => {
   return new Promise((resolve, reject) => {
     db.query(
-      "SELECT * FROM usuario where cemail = ?",
+      "SELECT * FROM usuario WHERE cemail = ?",
       [email],
       (err, result) => {
         err ? reject(err) : resolve(result);
       }
     );
+  });
+};
+
+exports.login = (email, senha) => {
+  return new Promise((resolve, reject) => {
+    db.query("SELECT * FROM usuario WHERE cemail = ? AND csenha = ?;"),
+      [email, senha],
+      (err, result) => {
+        err ? reject(err) : resolve(result);
+      };
   });
 };
 
