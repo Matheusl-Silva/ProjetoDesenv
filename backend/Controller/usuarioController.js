@@ -27,8 +27,8 @@ exports.getUsuariobyId = async (req, res) => {
 exports.verificarEmail = async (req, res) => {
   const { email } = req.body;
   try {
-    const usuario = await usuarioDAO.findByEmail(email);
-    if (usuario) {
+    const usuario = await usuarioDao.findByEmail(email);
+    if (usuario.length > 0) {
       return res.status(200).json(usuario);
     }
     return res.status(404).json(false);
@@ -40,10 +40,10 @@ exports.verificarEmail = async (req, res) => {
 exports.login = async (req, res) => {
   const { email, senha } = req.body;
   try {
-    const usuario = usuarioDao.login(email, senha);
+    const usuario = await usuarioDao.login(email, senha);
 
-    if (usuario) {
-      return res.status(200).json(usuario);
+    if (usuario.length > 0) {
+      return res.status(200).json(usuario[0]);
     }
     return res.status(404).json({ error: "Usuário não encontrado" });
   } catch (err) {

@@ -22,11 +22,11 @@ exports.findByEmail = (email) => {
 
 exports.login = (email, senha) => {
   return new Promise((resolve, reject) => {
-    db.query("SELECT * FROM usuario WHERE cemail = ? AND csenha = ?;"),
+    db.query("SELECT * FROM usuario WHERE cemail = ? AND csenha = ?;",
       [email, senha],
       (err, result) => {
         err ? reject(err) : resolve(result);
-      };
+      });
   });
 };
 

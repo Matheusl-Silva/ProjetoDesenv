@@ -89,7 +89,7 @@ class UsuarioController
             return true;
         }
         $loginInvalido = true;
-        require '/login';
+        require 'views/login.php';
         return false;
     }
 
