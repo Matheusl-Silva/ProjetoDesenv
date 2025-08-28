@@ -20,38 +20,6 @@ app.use("/exameHemato", routerHemato);
 
 // ----------- rotas exames -----------
 
-app.get("/exames/principal/:idExame", (req, res) => {
-  const idExame = parseInt(req.params.idExame);
-
-  if (isNaN(idExame)) {
-    return res.status(400).json({ error: "ID do exame inválido" });
-  }
-
-  const query = `SELECT 
-    e.*, 
-    p.nome as nome_paciente, 
-    u_resp.nome as nome_responsavel,
-    u_prec.nome as nome_preceptor
-  FROM exames e
-  JOIN pacientes p ON e.registro_paciente = p.id
-  JOIN usuarios u_resp ON e.id_responsavel = u_resp.id
-  JOIN usuarios u_prec ON e.id_preceptor = u_prec.id
-  WHERE e.id = ?`;
-
-  db.query(query, [idExame], (err, results) => {
-    if (err) {
-      console.error("Erro ao buscar exame:", err);
-      return res.status(500).json({ error: "Erro ao buscar exame" });
-    }
-
-    if (results.length === 0) {
-      return res.status(404).json({ error: "Exame não encontrado" });
-    }
-
-    res.status(200).json(results[0]);
-  });
-});
-
 app.post("/exames/", (req, res) => {
   const {
     id_responsavel,

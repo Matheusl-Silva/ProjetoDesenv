@@ -20,12 +20,14 @@ exports.getByRegistro = async (req, res) => {
 };
 
 exports.getById = async (req, res) => {
-  const idPaciente = req.params.idPaciente;
+  const idExame = req.params.idExame;
   try {
-    const exames = await hematoDao.findById(idPaciente);
+    const exames = await hematoDao.findById(idExame);
 
     if (exames.length === 0) {
-      return res.status(404).json({ error: "Exame não encontrado" });
+      return res
+        .status(404)
+        .json({ error: "Exame não encontrado para listar" });
     }
     res.json(exames[0]);
   } catch (err) {

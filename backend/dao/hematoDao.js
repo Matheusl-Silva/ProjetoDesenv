@@ -11,7 +11,7 @@ exports.findByRegistroPaciente = (registroPaciente) => {
   });
 };
 
-exports.findById = (registroPaciente) => {
+exports.findById = (idExame) => {
   return new Promise((resolve, reject) => {
     const query = `SELECT
       e.*,
@@ -29,7 +29,7 @@ exports.findById = (registroPaciente) => {
       e.id_preceptor = u_prec.id AND
       e.id = ?`;
 
-    db.query(query, [registroPaciente], (err, results) => {
+    db.query(query, [idExame], (err, results) => {
       err ? reject(err) : resolve(results);
     });
   });

@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const hematoController = require("../Controller/hematoController");
 
+//listar somente os exames na tabelinha igual antigamente
 router.get("/:idPaciente", hematoController.getByRegistro);
-router.get("/:idPaciente", hematoController.getById);
+// listar em tela o exame de um paciente por completo
+router.get("/listar/:idExame", hematoController.getById);
 
 module.exports = router;
