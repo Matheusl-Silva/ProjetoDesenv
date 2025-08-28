@@ -32,6 +32,20 @@ exports.getById = async (req, res) => {
     res.json(exames[0]);
   } catch (err) {
     console.error("Erro ao listar exame do paciente", err);
-    res.status.json({ error: "Erro interno ao listar exame do paciente" });
+    res.status(500).json({ error: "Erro interno ao listar exame do paciente" });
+  }
+};
+
+exports.CreateHemato = async (req, res) => {
+  try {
+    const novoHemato = await hematoDao.create(req.body);
+
+    res.status(201).json({
+      message: "Exame cadastrado com sucesso!",
+      id: novoHemato.insertId,
+    });
+  } catch (err) {
+    console.error("Erro ao criar novo exame", err);
+    res.status(500).json({ error: "Erro interno ao criar exame do paciente" });
   }
 };

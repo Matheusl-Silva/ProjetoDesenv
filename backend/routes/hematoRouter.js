@@ -6,5 +6,6 @@ const hematoController = require("../Controller/hematoController");
 router.get("/:idPaciente", hematoController.getByRegistro);
 // listar em tela o exame de um paciente por completo
 router.get("/listar/:idExame", hematoController.getById);
+router.post("/", hematoController.CreateHemato);
 
 module.exports = router;

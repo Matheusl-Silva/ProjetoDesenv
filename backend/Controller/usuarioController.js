@@ -53,7 +53,7 @@ exports.login = async (req, res) => {
 
 exports.createUsuario = async (req, res) => {
   const { email } = req.body;
-  const usuarioExiste = await usuarioDAO.findByEmail(email);
+  const usuarioExiste = await usuarioDao.findByEmail(email);
   try {
     if (usuarioExiste.length > 0) {
       return res
@@ -61,7 +61,7 @@ exports.createUsuario = async (req, res) => {
         .json({ error: "Já possui um usuario com o mesmo email" });
     }
 
-    const novousuario = await usuarioDAO.create(req.body);
+    const novousuario = await usuarioDao.create(req.body);
     res.status(201).json({
       message: "usuario cadastrado com sucesso!",
       id: novousuario.insertId,
@@ -76,7 +76,7 @@ exports.updateUsuario = async (req, res) => {
   const id = req.params.idUsuario;
   const dadosAtualizar = req.body;
   try {
-    const result = await usuarioDAO.update(id, dadosAtualizar);
+    const result = await usuarioDao.update(id, dadosAtualizar);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: "usuario não encontrado" });
@@ -93,7 +93,7 @@ exports.deleteUsuario = async (req, res) => {
   const dadosDeletar = req.body;
 
   try {
-    const result = await usuarioDAO.delete(id, dadosDeletar);
+    const result = await usuarioDao.delete(id, dadosDeletar);
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: "usuario não encontrado" });
     }
