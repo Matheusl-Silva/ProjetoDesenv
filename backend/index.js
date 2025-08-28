@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const routerPaciente = require("./routes/pacienteRouter");
 const routerUsuario = require("./routes/usuarioRouter");
+const routerHemato = require("./routes/hematoRouter");
 
 const app = express();
 
@@ -10,59 +11,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // rota de pacientes -> vai para PacienteRouter
 app.use("/pacientes", routerPaciente);
+
 //rota de usuario -> UsuarioRouter
 app.use("/usuarios", routerUsuario);
 
-//rota para deletar os pacientes
-
-app.delete("/pacientes/:email", (req, res) => {
-  const email = req.params.email;
-  const query = "DELETE FROM pacientes WHERE email = ?";
-
-  db.query(query, [email], (err, results) => {
-    if (err) {
-      console.error("Erro ao excluir paciente:", err);
-      return res.status(500).json({ error: "Erro ao excluir paciente" });
-    }
-
-    if (results.affectedRows === 0) {
-      return res.status(404).json({ error: "Paciente não encontrado" });
-    }
-
-    res.json({ message: "Paciente excluído com sucesso" });
-  });
-
-  return res.status(200);
-});
+//rota para exameHemato -> hematoRouter
+app.use("/exameHemato", routerHemato);
 
 // ----------- rotas exames -----------
-app.get("/exames/:registroPacientes", (req, res) => {
-  const registroPaciente = parseInt(req.params.registroPacientes);
-
-  if (isNaN(registroPaciente)) {
-    return res.status(400).json({ error: "ID do paciente inválido" });
-  }
-
-  const query =
-    "SELECT id, data, id_preceptor FROM exames WHERE registro_paciente = ? ORDER BY data DESC";
-
-  db.query(query, [registroPaciente], (err, results) => {
-    if (err) {
-      console.error("Erro ao buscar exames do paciente:", err);
-      return res
-        .status(500)
-        .json({ error: "Erro ao buscar exames do paciente" });
-    }
-
-    if (results.length === 0) {
-      return res
-        .status(404)
-        .json({ error: "Nenhum exame encontrado para este paciente" });
-    }
-
-    res.status(200).json(results);
-  });
-});
 
 app.get("/exames/principal/:idExame", (req, res) => {
   const idExame = parseInt(req.params.idExame);
