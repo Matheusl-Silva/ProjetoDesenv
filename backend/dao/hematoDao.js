@@ -39,7 +39,7 @@ exports.create = (data) => {
   return new Promise((resolve, reject) => {
     const query = `INSERT INTO exame_hematologia (
                   id_responsavel, id_preceptor, id_paciente, ddata_exame,
-                  nhemacia, nhemoblobina, nhematocrito, nvcm, nhcm, nchcm, nrdw, nleucocitos,
+                  nhemacia, nhemoglobina, nhematocrito, nvcm, nhcm, nchcm, nrdw, nleucocitos,
                   nblastos, npromielocitos, nmielocitos, nmetamielocitos, nbastonetes, nsegmentados,
                   neosinofilos, nbasofilos, nplaquetas, nvolume_plaquetario_medio, nneutrofilos
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;

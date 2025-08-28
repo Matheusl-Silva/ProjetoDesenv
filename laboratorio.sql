@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `exame_hematologia` (
   `id` int(11) NOT NULL,
   `nhemacia` decimal(10,0) NOT NULL,
-  `nhemoblobina` decimal(10,0) NOT NULL,
+  `nhemoglobina` decimal(10,0) NOT NULL,
   `nhematocrito` decimal(10,0) NOT NULL,
   `nvcm` decimal(10,0) NOT NULL,
   `nhcm` decimal(10,0) NOT NULL,
