@@ -45,13 +45,18 @@
         <div class="welcome-banner mb-4">
             <div class="welcome-content text-center">
                 <h2>Exames do Paciente</h2>
-                <p class="welcome-subtitle">Paciente Nº <?php echo htmlspecialchars($paciente['id']); ?> - <?php echo htmlspecialchars($paciente['nome']); ?></p>
+                <p class="welcome-subtitle">
+                    Paciente Nº <?php echo htmlspecialchars($paciente['id']); ?> - 
+                    <?php echo htmlspecialchars($paciente['nome']); ?>
+                </p>
             </div>
         </div>
 
         <!-- Lista de exames -->
         <div class="action-card shadow p-4">
-            <h5 class="mb-3"><i class="bi bi-file-earmark-medical me-2"></i>Histórico de Exames</h5>
+            <h3 class="mb-3">
+                <i class="bi bi-file-earmark-medical me-2"></i>Histórico de Exames
+            </h3>
             <?php if (!empty($exames)): ?>
                 <div class="table-responsive">
                     <table class="table table-hover align-middle">
@@ -93,11 +98,12 @@
 
         <!-- Botões -->
         <div class="text-center mt-4">
-            <a href="examePrincipal.php" class="btn btn-outline-primary me-2">
-                <i class="bi bi-search me-1"></i> Nova Pesquisa
+            <a href="homeUsuario.php" class="btn btn-outline-secondary me-2">
+                <i class="bi bi-arrow-left-circle me-1"></i> Voltar
             </a>
-            <a href="homeUsuario.php" class="btn btn-outline-secondary">
-                <i class="bi bi-house me-1"></i> Home
+            <a href="cadastrarExame.php?id_paciente=<?php echo $paciente['id']; ?>" 
+               class="btn btn-primary">
+                <i class="bi bi-plus-circle me-1"></i> Cadastrar Novo Exame
             </a>
         </div>
     </div>
