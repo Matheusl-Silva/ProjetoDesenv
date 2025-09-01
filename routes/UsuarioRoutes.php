@@ -13,6 +13,8 @@ return function (Router $router) {
     $router->get('/usuario/{id}', function ($id) {
         $usuarioController = new UsuarioController();
         $usuarioController->gerarFormEdicao($id);
+
+        unset($_SESSION["flash"]);
     });
 
     $router->post('/usuario', function () {
@@ -20,11 +22,11 @@ return function (Router $router) {
         if (strcmp($_POST["senha"], $_POST["senhaConfirma"]) !== 0) {
             $_SESSION["flash"] = [
                 "mensagem" => "As senhas não conferem! Por favor, digite novamente.",
-                "tipo" => "danger"
+                "tipo"     => "danger",
             ];
         } else {
             $usuarioController = new UsuarioController();
-            $usuario = new Usuario();
+            $usuario           = new Usuario();
             $usuario->setNome($_POST["nomeUsuario"]);
             $usuario->setEmail($_POST["email"]);
             $usuario->setSenha($_POST["senha"]);
@@ -37,9 +39,10 @@ return function (Router $router) {
 
     $router->put('/usuario/{id}', function ($id) {
         $usuarioController = new UsuarioController();
-        $usuario = new Usuario();
 
-        if (!$usuarioController->verificarEmail($_POST["email"])) {
+        $idComEmailExistente = $usuarioController->verificarEmail($_POST["email"]);
+        if (!$idComEmailExistente || $idComEmailExistente == $id) {
+            $usuario = new Usuario();
             $usuario->setNome($_POST["nomeUsuario"]);
             $usuario->setEmail($_POST["email"]);
             $usuario->setSenha($_POST["senha"]);
@@ -53,13 +56,21 @@ return function (Router $router) {
         } else {
             $_SESSION["flash"] = [
                 "mensagem" => "Este e-mail já está cadastrado!",
-                "tipo" => "warning"
+                "tipo"     => "warning",
             ];
 
             header('Location: /usuario/' . $id);
             exit;
-
-            unset($_SESSION["flash"]);
         }
+    });
+
+    $router->delete('/usuario/{id}', function ($id) {
+        $usuario = new Usuario();
+        $usuario->setId($id);
+        $usuarioController = new UsuarioController();
+        $usuarioController->excluir($usuario);
+
+        header('Location: /usuario');
+        exit;
     });
 };

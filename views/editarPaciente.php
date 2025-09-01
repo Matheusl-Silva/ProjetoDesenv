@@ -15,7 +15,12 @@
                 <div class="card-header bg-body-tertiary text-center">
                     <h2>Editar Paciente</h2>
                 </div>
-
+                <?php if (isset($_SESSION["flash"])): ?>
+                    <div class="alert alert-<?= $_SESSION["flash"]["tipo"] ?> alert-dismissible fade show" role="alert">
+                        <?= $_SESSION["flash"]["mensagem"] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
                 <div class="card-body bg-body-tertiary">
                     <form action="/paciente/<?= $paciente->getId() ?>" method="POST">
                         <input type="hidden" name="method" value="PUT">
@@ -129,36 +134,36 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-        document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
 
 
-            function controlarCampos(radioSim, radioNao, container) {
-                const containerElement = document.getElementById(container);
-                if (!containerElement) return;
+        function controlarCampos(radioSim, radioNao, container) {
+            const containerElement = document.getElementById(container);
+            if (!containerElement) return;
 
-                function atualizarVisibilidade() {
-                    containerElement.style.display = radioSim.checked ? 'block' : 'none';
-                }
-
-                radioSim.addEventListener('change', atualizarVisibilidade);
-                radioNao.addEventListener('change', atualizarVisibilidade);
-                atualizarVisibilidade();
+            function atualizarVisibilidade() {
+                containerElement.style.display = radioSim.checked ? 'block' : 'none';
             }
 
-
-            const medSim = document.getElementById('medSim');
-            const medNao = document.getElementById('medNao');
-            if (medSim && medNao) {
-                controlarCampos(medSim, medNao, 'medicamentoContainer');
-            }
+            radioSim.addEventListener('change', atualizarVisibilidade);
+            radioNao.addEventListener('change', atualizarVisibilidade);
+            atualizarVisibilidade();
+        }
 
 
-            const patSim = document.getElementById('patSim');
-            const patNao = document.getElementById('patNao');
-            if (patSim && patNao) {
-                controlarCampos(patSim, patNao, 'patologiaContainer');
-            }
-        });
-    </script>
+        const medSim = document.getElementById('medSim');
+        const medNao = document.getElementById('medNao');
+        if (medSim && medNao) {
+            controlarCampos(medSim, medNao, 'medicamentoContainer');
+        }
+
+
+        const patSim = document.getElementById('patSim');
+        const patNao = document.getElementById('patNao');
+        if (patSim && patNao) {
+            controlarCampos(patSim, patNao, 'patologiaContainer');
+        }
+    });
+</script>
 
 </html>

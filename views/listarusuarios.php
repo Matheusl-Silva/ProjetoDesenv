@@ -30,14 +30,14 @@
                             <tbody>
                                 <?php foreach ($listaUsuarios as $usuario): ?>
                                     <tr>
-                                        <td><?= $usuario->getId() ?></td>
-                                        <td><?= $usuario->getNome() ?></td>
-                                        <td><?= $usuario->getId() ?></td>
-                                        <td><?= ($usuario->getAdmin() === 'S' ? 'Sim' : 'Não') ?></td>
+                                        <td><?=$usuario->getId()?></td>
+                                        <td><?=$usuario->getNome()?></td>
+                                        <td><?=$usuario->getId()?></td>
+                                        <td><?=($usuario->getAdmin() === 'S' ? 'Sim' : 'Não')?></td>
                                         <td>
-                                            <a href="/usuario/<?= $usuario->getId() ?>" class="btn btn-primary btn-sm">Editar</a>
-                                            <form action="editarUsuario.php" method="POST" style="display: inline;" onsubmit='return confirm("Tem certeza que deseja excluir este usuário?");'>
-                                                <input type="hidden" name="email" value="<?= $usuario->getEmail() ?>">
+                                            <a href="/usuario/<?=$usuario->getId()?>" class="btn btn-primary btn-sm">Editar</a>
+                                            <form action="/usuario/<?=$usuario->getId()?>" method="POST" style="display: inline;" onsubmit='return confirm("Tem certeza que deseja excluir este usuário?");'>
+                                                <input type="hidden" name="method" value="DELETE">
                                                 <button type="submit" name="excluir_usuario" class="btn btn-danger btn-sm">Excluir</button>
                                             </form>
                                         </td>

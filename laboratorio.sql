@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20/08/2025 às 00:01
+-- Tempo de geração: 28/08/2025 às 02:02
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `exame_hematologia` (
   `id` int(11) NOT NULL,
   `nhemacia` decimal(10,0) NOT NULL,
-  `nhemoblobina` decimal(10,0) NOT NULL,
+  `nhemoglobina` decimal(10,0) NOT NULL,
   `nhematocrito` decimal(10,0) NOT NULL,
   `nvcm` decimal(10,0) NOT NULL,
   `nhcm` decimal(10,0) NOT NULL,
@@ -85,12 +85,13 @@ CREATE TABLE `paciente` (
 --
 
 INSERT INTO `paciente` (`id`, `cnome`, `cemail`, `cperiodo`, `cnome_mae`, `cmedicamento`, `cpatologia`, `ddata_nascimento`, `ddata_cadastro`, `ctelefone`) VALUES
-(1, 'nome', 'a@a.com', 'matutino', 'mae', '', '', '2025-08-12', '0000-00-00', '9999'),
-(2, 'PACIENTE2', 'a@aa.com', 'matutino', 'mae2', '', '', '2025-07-31', '0000-00-00', '99'),
+(1, 'João da Silva', 'a@dssd.com', '', 'Maria da Silva', 'Dipirona', 'Dipirona', '1990-05-15', '0000-00-00', '(11) 99999-8888'),
+(2, 'PACIENTE3', 'a@aa.com', 'matutino', 'mae2', '', '', '2025-07-31', '0000-00-00', '99'),
 (3, 'paciente3', 'a@aaa.com', 'matutino', 'mae3', '', '', '2025-08-14', '0000-00-00', '99'),
 (4, 'pacientesla', 'a@aaaaaaaaaa.com', 'matutino', 'mae', '', '', '2025-08-22', '0000-00-00', '9'),
 (5, 'doente', 'a@aaab.com', 'matutino', 'mae', 'medicamento', 'patologia', '2025-08-14', '0000-00-00', '99'),
-(6, 'a', 'a@b.com', 'matutino', 'mae', '', '', '0111-01-01', '0000-00-00', '99');
+(6, 'a', 'a@b.com', 'matutino', 'mae', '', '', '0111-01-01', '0000-00-00', '99'),
+(7, 'asdasd', 'a@aadasdasd.com', 'matutino', 'asdasd', '', '', '2025-08-19', '0000-00-00', 'asdasd');
 
 -- --------------------------------------------------------
 
@@ -111,8 +112,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `cnome`, `cemail`, `csenha`, `cadmin`) VALUES
-(8, 'user1', 'a@a.com', '11111111', 'S'),
-(9, 'user2', 'a@aa.com', '11111111', 'N'),
+(8, 'user10', 'a@a.com', '1', 'S'),
+(9, 'user2adasd', 'a@aa.com', '11111111', 'N'),
 (10, 'usernovo', 'a@aaa.com', '11111111', 'N');
 
 --
@@ -155,7 +156,7 @@ ALTER TABLE `exame_hematologia`
 -- AUTO_INCREMENT de tabela `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
