@@ -54,27 +54,26 @@
                             <tbody>
                                 <?php foreach ($listaPacientes as $paciente): ?>
                                     <tr>
-                                        <td><?= $paciente->getId() ?></td>
-                                        <td><?= $paciente->getNome() ?></td>
-                                        <td><?= $paciente->getEmail() ?></td>
-                                        <td><?= $paciente->getPeriodo() ?></td>
+                                        <td><?=$paciente->getId()?></td>
+                                        <td><?=$paciente->getNome()?></td>
+                                        <td><?=$paciente->getEmail()?></td>
+                                        <td><?=$paciente->getPeriodo()?></td>
                                         <td>
                                             <?php
-                                            $dateTime = new DateTime($paciente->getDataNasc());
-                                            echo $dateTime->format('d/m/Y');
-                                            ?>
+$dateTime = new DateTime($paciente->getDataNasc());
+echo $dateTime->format('d/m/Y');
+?>
                                         </td>
-                                        <td><?= $paciente->getFone() ?></td>
-                                        <td><?= $paciente->getNomeMae() ?></td>
-                                        <td><?= $paciente->getMedicamento() ?></td>
-                                        <td><?= $paciente->getPatologia() ?></td>
+                                        <td><?=$paciente->getFone()?></td>
+                                        <td><?=$paciente->getNomeMae()?></td>
+                                        <td><?=$paciente->getMedicamento()?></td>
+                                        <td><?=$paciente->getPatologia()?></td>
                                         <td>
                                             <div class="d-flex gap-2">
-                                                <a href="/paciente/<?= $paciente->getId() ?>" class="btn btn-primary btn-sm">Editar</a>
-                                                <form action="editarPaciente.php" method="POST" style="display: inline;" id="formExcluir_<?= $paciente->getEmail() ?>">
-                                                    <input type="hidden" name="email" value="<?= $paciente->getEmail() ?>">
-                                                    <input type="hidden" name="excluir_paciente" value="1">
-                                                    <button type="button" class="btn btn-danger btn-sm" style="width: 60px;" onclick='confirmarExclusao(<?= $paciente->getEmail() ?>)'>Excluir</button>
+                                                <a href="/paciente/<?=$paciente->getId()?>" class="btn btn-primary btn-sm">Editar</a>
+                                                <form action="/paciente/<?=$paciente->getId()?>" method="POST" style="display: inline;" onsubmit='return confirm("Tem certeza que deseja excluir este paciente?");'>
+                                                    <input type="hidden" name="method" value="DELETE">
+                                                    <button type="submit" name="excluir_paciente" class="btn btn-danger btn-sm">Excluir</button>
                                                 </form>
                                             </div>
                                         </td>
@@ -90,19 +89,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function confirmarExclusao(email) {
-            const modal = new bootstrap.Modal(document.getElementById("modalConfirmacao"));
-            const btnConfirmar = document.getElementById("btnConfirmarExclusao");
-
-            btnConfirmar.onclick = function() {
-                document.getElementById("formExcluir_" + email).submit();
-            };
-
-            modal.show();
-        }
-    </script>
 </body>
 
 </html>

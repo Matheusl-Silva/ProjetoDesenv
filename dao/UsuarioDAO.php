@@ -2,120 +2,161 @@
 
 class UsuarioDAO
 {
-    private $mysqli;
-
-    public function __construct()
-    {
-        $bd           = new Conexao();
-        $this->mysqli = $bd->getConexao();
-    }
     public function listarUsuarios()
     {
-        $sql       = "SELECT * FROM usuario ORDER BY id";
-        $resultado = $this->mysqli->query($sql);
-        $usuarios  = [];
+        $url = "http://localhost:3000/usuarios";
+        $result = file_get_contents($url);
+        $lista = json_decode($result, true);
 
-        if ($resultado) {
-            while ($row = $resultado->fetch_assoc()) {
-                $usuarios[] = $this->converterParaObj($row);
-            }
+        $listaObj = [];
+        foreach ($lista as $usuario) {
+            $listaObj[] = $this->converterParaObj($usuario);
         }
 
-        return $usuarios;
+        return $listaObj;
     }
 
-    public function atualizarUsuario(Usuario $usuario){
-        $sql = "UPDATE usuario SET cnome = ?, cemail = ?, csenha = ?, cadmin = ? WHERE id = ?";
-        $stmt = $this->mysqli->prepare($sql);
-        
-        $nome = $usuario->getNome();
-        $email = $usuario->getEmail();
-        $senha = $usuario->getSenha();
-        $admin = $usuario->getAdmin();
-        $id = $usuario->getId();
-
-        $stmt->bind_param('ssssi', $nome, $email, $senha, $admin, $id);
-        $result = $stmt->execute();
-        return $result;
-    }
-
-    public function excluirUsuario($email)
+    public function buscarUsuario($id) //TESTAR SE ESTÁ CERTO
     {
-        $email = $this->mysqli->real_escape_string($email);
-        $sql   = "DELETE FROM usuarios WHERE email = '$email'";
+        $url = "http://localhost:3000/usuarios/" . $id;
+        /*$options = [
+            "http" => [
+                "header" => "Content-Type: application/json\r\n",
+            ]
+        ];*/
 
-        return $this->mysqli->query($sql);
+        $result = file_get_contents($url);
+
+        if ($result == false) return false;
+
+        $response = json_decode($result, true);
+        return $this->converterParaObj($response);
     }
 
     public function cadastrarUsuario(Usuario $usuario)
     {
-        $sql  = "INSERT INTO usuario (cnome, cemail, csenha) VALUES (?, ?, ?)";
-        $stmt = $this->mysqli->prepare($sql);
-        $stmt->bind_param('sss', $usuario->getNome(), $usuario->getEmail(), $usuario->getSenha());
-        return $stmt->execute();
-    }
+        $url = "http://localhost:3000/usuarios";
+        $dados = [
+            "nome" => $usuario->getNome(),
+            "email" => $usuario->getEmail(),
+            "senha" => $usuario->getSenha(),
+            "admin" => $usuario->getAdmin()
+        ];
 
-    public function buscarUsuario($id){
-        $sql = "SELECT * FROM usuario WHERE id = ?";
-        $stmt = $this->mysqli->prepare($sql);
-        $stmt->bind_param('i', $id);
-        $success = $stmt->execute();
+        $options = [
+            "http" => [
+                "header" => "Content-Type: application/json\r\n",
+                "method" => "POST",
+                "content" => json_encode($dados)
+            ]
+        ];
 
-        if($success){
-            $result = $stmt->get_result();
-            return $this->converterParaObj($result->fetch_assoc());
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+
+        if ($result === false) return false;
+
+        $response = json_decode($result);
+
+        if (isset($response["id"]) && strpos($response["error"], 'Email já cadastrado') != false) {
+            return "EMAIL_DUPLICADO";
         }
-        return false;
-    }
 
-    public function atualizarSenha($email, $novaSenha)
-    {
-        $sql  = "UPDATE usuario SET csenha = ? WHERE cemail = ?";
-        $stmt = $this->mysqli->prepare($sql);
-        return $stmt->execute([$novaSenha, $email]);
-    }
-
-    public function updatePassword($email, $novaSenhaRec): bool
-    {
-        $sql  = "UPDATE usuario SET csenha = ? WHERE cemail = ?";
-        $stmt = $this->mysqli->prepare($sql);
-        $stmt->bind_param("ss", $novaSenhaRec, $email);
-        return $stmt->execute();
+        return isset($response["id"]) ? $response["id"] : false;
     }
 
     public function verificarEmail($email)
     {
-        try {
-            $sql  = "SELECT * FROM usuario WHERE cemail = ?;";
-            $stmt = $this->mysqli->prepare($sql);
-            $stmt->bind_param('s', $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if ($result->num_rows > 0) {
-                return true;
-            }
+        $url   = "http://localhost:3000/usuarios/verificar-email";
+        $dados = [
+            "email" => $email
+        ];
+        $options = [
+            "http" => [
+                "header"  => "Content-Type: application/json\r\n",
+                "method"  => "POST",
+                "content" => json_encode($dados),
+            ],
+        ];
 
-            return false;
-        } catch (mysqli_sql_exception $erro) {
-            echo "Erro ao verificar login: $erro";
-        }
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+
+        if ($result === false) return false;
+
+        $response = json_decode($result, true);
+
+        return $this->converterParaObj($response);
     }
 
     public function login($email, $senha)
     {
-        try {
-            $sql  = "SELECT * FROM usuario WHERE cemail = ? AND csenha = ?;";
-            $stmt = $this->mysqli->prepare($sql);
-            $stmt->bind_param('ss', $email, $senha);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if ($result->num_rows > 0) {
-                return $this->converterParaObj($result->fetch_assoc());
-            }
-            return false;
-        } catch (mysqli_sql_exception $erro) {
-            echo "Erro ao fazer login: $erro";
+        $url = "http://localhost:3000/usuarios/login";
+        $dados = [
+            "email" => $email,
+            "senha" => $senha
+        ];
+        $options = [
+            "http" => [
+                "header" => "Content-Type: application/json\r\n",
+                "method" => "POST",
+                "content" => json_encode($dados, true)
+            ]
+        ];
+        
+        $context = stream_context_create($options);
+        $result = @file_get_contents($url, false, $context);
+
+        if($result === false) return false;
+
+        return $this->converterParaObj(json_decode($result, true));
+    }
+
+    public function atualizarUsuario(Usuario $usuario)
+    {
+        $url = "http://localhost:3000/usuarios/" . $usuario->getId();
+        $dados = [
+            "nome" => $usuario->getNome(),
+            "email" => $usuario->getEmail(),
+            "senha" => $usuario->getSenha(),
+            "admin" => $usuario->getAdmin()
+        ];
+
+        $options = [
+            "http" => [
+                "header" => "Content-Type: application/json\r\n",
+                "method" => "PUT",
+                "content" => json_encode($dados)
+            ]
+        ];
+
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+
+        if ($result == false) {
+            return ["erro" => "Falha na requisição PUT"];
         }
+
+        return json_decode($result, true);
+    }
+
+    public function excluirUsuario(Usuario $usuario)
+    {
+        $url = "http://localhost:3000/usuarios/" . $usuario->getId();
+        $options = [
+            "http" => [
+                "header" => "Content-Type: application/json\r\n",
+                "method" => "DELETE"
+            ]
+        ];
+
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+
+        if ($result === false) {
+            return ["erro" => "Erro ao excluir usuário"];
+        }
+        return json_decode($result, true);
     }
 
     private function converterParaObj($row)
