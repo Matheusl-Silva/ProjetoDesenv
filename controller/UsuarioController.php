@@ -14,16 +14,18 @@ class UsuarioController
         unset($_SESSION["flash"]);
     }
 
-    public function gerarLista(){
-        $usuarioDAO = new UsuarioDAO();
+    public function gerarLista()
+    {
+        $usuarioDAO    = new UsuarioDAO();
         $listaUsuarios = $usuarioDAO->listarUsuarios();
 
         require 'views/listarusuarios.php';
     }
-    
-    public function gerarFormEdicao($id){
+
+    public function gerarFormEdicao($id)
+    {
         $usuarioDAO = new UsuarioDAO();
-        $usuario = $usuarioDAO->buscarUsuario($id);
+        $usuario    = $usuarioDAO->buscarUsuario($id);
 
         require 'views/editarusuario.php';
     }
@@ -71,9 +73,7 @@ class UsuarioController
                     return true;
                 }
             }
-            //$stmt_verificar->close();
         }
-        //$db->fecharConexao();
     }
 
     public function login($email, $senha)
@@ -93,16 +93,28 @@ class UsuarioController
         return false;
     }
 
-    public function editar(Usuario $usuario){
+    public function editar(Usuario $usuario)
+    {
         $usuarioDAO = new UsuarioDAO();
-        $result = $usuarioDAO->atualizarUsuario($usuario);
+        $result     = $usuarioDAO->atualizarUsuario($usuario);
         return $result;
     }
 
-    public function verificarEmail($email){
+    public function verificarEmail($email)
+    {
         $usuarioDAO = new UsuarioDAO();
-        $result = $usuarioDAO->verificarEmail($email);
-        if($result) return $result->getId();
+        $result     = $usuarioDAO->verificarEmail($email);
+        if ($result) {
+            return $result->getId();
+        }
+
         return false;
+    }
+
+    public function excluir($id)
+    {
+        $usuarioDAO = new UsuarioDAO();
+        $result     = $usuarioDAO->excluirUsuario($id);
+        return $result;
     }
 }

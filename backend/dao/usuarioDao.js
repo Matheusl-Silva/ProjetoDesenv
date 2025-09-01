@@ -22,11 +22,13 @@ exports.findByEmail = (email) => {
 
 exports.login = (email, senha) => {
   return new Promise((resolve, reject) => {
-    db.query("SELECT * FROM usuario WHERE cemail = ? AND csenha = ?;",
+    db.query(
+      "SELECT * FROM usuario WHERE cemail = ? AND csenha = ?;",
       [email, senha],
       (err, result) => {
         err ? reject(err) : resolve(result);
-      });
+      }
+    );
   });
 };
 
@@ -66,7 +68,7 @@ exports.update = (id, data) => {
 
 exports.delete = (id) => {
   return new Promise((resolve, reject) => {
-    db.query("DELETE * FROM usuario WHERE id = ?", [id], (err, result) => {
+    db.query("DELETE FROM usuario WHERE id = ?", [id], (err, result) => {
       err ? reject(err) : resolve(result);
     });
   });

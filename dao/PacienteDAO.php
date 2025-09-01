@@ -29,14 +29,14 @@ class PacienteDAO
     {
         $url   = "http://localhost:3000/pacientes";
         $dados = [
-            "nome"             => $paciente->getNome(),
-            "email"            => $paciente->getEmail(),
-            "periodo"          => $paciente->getPeriodo(),
-            "data_nascimento"  => $paciente->getDataNasc(),
-            "telefone"         => $paciente->getFone(),
-            "nome_mae"         => $paciente->getNomeMae(),
-            "medicamento"      => $paciente->getMedicamento() ?: "",
-            "patologia"        => $paciente->getPatologia() ?: "",
+            "nome"            => $paciente->getNome(),
+            "email"           => $paciente->getEmail(),
+            "periodo"         => $paciente->getPeriodo(),
+            "data_nascimento" => $paciente->getDataNasc(),
+            "telefone"        => $paciente->getFone(),
+            "nome_mae"        => $paciente->getNomeMae(),
+            "medicamento"     => $paciente->getMedicamento() ?: "",
+            "patologia"       => $paciente->getPatologia() ?: "",
         ];
         $options = [
             "http" => [
@@ -82,22 +82,24 @@ class PacienteDAO
 
     public function buscarPaciente($idPaciente)
     {
-        $url = "http://localhost:3000/pacientes/" . $idPaciente;
+        $url   = "http://localhost:3000/pacientes/" . $idPaciente;
         $dados = [
-            "id" => $idPaciente
+            "id" => $idPaciente,
         ];
 
         $options = [
             "http" => [
-                "header" => "Content-Type: application/json\r\n",
-                "content" => json_encode($dados)
-            ]
+                "header"  => "Content-Type: application/json\r\n",
+                "content" => json_encode($dados),
+            ],
         ];
 
         $context = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
+        $result  = file_get_contents($url, false, $context);
 
-        if($result == false) return false;
+        if ($result == false) {
+            return false;
+        }
 
         $response = json_decode($result, true);
         return $this->converterParaObj($response);
@@ -107,15 +109,15 @@ class PacienteDAO
     {
         $url   = "http://localhost:3000/pacientes/" . $paciente->getId();
         $dados = [
-            "id"               => $paciente->getId(),
-            "nome"             => $paciente->getNome(),
-            "email"            => $paciente->getEmail(),
-            "periodo"          => $paciente->getPeriodo(),
-            "data_nascimento"  => $paciente->getDataNasc(),
-            "telefone"         => $paciente->getFone(),
-            "nome_mae"         => $paciente->getNomeMae(),
-            "medicamento"      => $paciente->getMedicamento(),
-            "patologia"        => $paciente->getPatologia()
+            "id"              => $paciente->getId(),
+            "nome"            => $paciente->getNome(),
+            "email"           => $paciente->getEmail(),
+            "periodo"         => $paciente->getPeriodo(),
+            "data_nascimento" => $paciente->getDataNasc(),
+            "telefone"        => $paciente->getFone(),
+            "nome_mae"        => $paciente->getNomeMae(),
+            "medicamento"     => $paciente->getMedicamento(),
+            "patologia"       => $paciente->getPatologia(),
         ];
 
         $options = [
@@ -135,9 +137,9 @@ class PacienteDAO
         return json_decode($result, true);
     }
 
-    public function excluirPaciente($email)
+    public function excluirPaciente(Paciente $paciente)
     {
-        $url     = "http://localhost:3000/pacientes/" . $email;
+        $url     = "http://localhost:3000/pacientes/" . $paciente->getId();
         $options = [
             "http" => [
                 "header" => "Content-Type: application/json\r\n",

@@ -22,11 +22,11 @@ return function (Router $router) {
         if (strcmp($_POST["senha"], $_POST["senhaConfirma"]) !== 0) {
             $_SESSION["flash"] = [
                 "mensagem" => "As senhas não conferem! Por favor, digite novamente.",
-                "tipo" => "danger"
+                "tipo"     => "danger",
             ];
         } else {
             $usuarioController = new UsuarioController();
-            $usuario = new Usuario();
+            $usuario           = new Usuario();
             $usuario->setNome($_POST["nomeUsuario"]);
             $usuario->setEmail($_POST["email"]);
             $usuario->setSenha($_POST["senha"]);
@@ -39,8 +39,7 @@ return function (Router $router) {
 
     $router->put('/usuario/{id}', function ($id) {
         $usuarioController = new UsuarioController();
-        var_dump($id);
-        
+
         $idComEmailExistente = $usuarioController->verificarEmail($_POST["email"]);
         if (!$idComEmailExistente || $idComEmailExistente == $id) {
             $usuario = new Usuario();
@@ -48,20 +47,30 @@ return function (Router $router) {
             $usuario->setEmail($_POST["email"]);
             $usuario->setSenha($_POST["senha"]);
             $usuario->setAdmin($_POST["admin"]);
-            $usuario->setId($id);   
-            
+            $usuario->setId($id);
+
             $usuarioController->editar($usuario);
-            
+
             header('Location: /usuario');
             exit;
         } else {
             $_SESSION["flash"] = [
                 "mensagem" => "Este e-mail já está cadastrado!",
-                "tipo" => "warning"
+                "tipo"     => "warning",
             ];
 
             header('Location: /usuario/' . $id);
             exit;
         }
+    });
+
+    $router->delete('/usuario/{id}', function ($id) {
+        $usuario = new Usuario();
+        $usuario->setId($id);
+        $usuarioController = new UsuarioController();
+        $usuarioController->excluir($usuario);
+
+        header('Location: /usuario');
+        exit;
     });
 };

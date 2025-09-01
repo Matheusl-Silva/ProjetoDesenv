@@ -75,7 +75,7 @@ exports.update = (id, data) => {
 
 exports.delete = (id) => {
   return new Promise((resolve, reject) => {
-    db.query("DELETE * FROM paciente WHERE id = ?", [id], (err, result) => {
+    db.query("DELETE FROM paciente WHERE id = ?", [id], (err, result) => {
       err ? reject(err) : resolve(result);
     });
   });

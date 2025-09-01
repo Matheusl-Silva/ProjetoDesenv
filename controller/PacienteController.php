@@ -6,15 +6,15 @@ class PacienteController
         $auth = new Autenticacao();
         $auth->verificarLogin();
 
-        $idPaciente = null;
+        $idPaciente     = null;
         $emailDuplicado = false;
-        $erroCadastro = false;
+        $erroCadastro   = false;
 
         if (isset($_SESSION["idpaciente"])) {
             $idPaciente = $_SESSION["idpaciente"];
-        }else if(isset($_SESSION["emailduplicado"])){
+        } elseif (isset($_SESSION["emailduplicado"])) {
             $emailDuplicado = true;
-        }else if(isset($_SESSION["errocadastro"])){
+        } elseif (isset($_SESSION["errocadastro"])) {
             $erroCadastro = true;
         }
 
@@ -25,18 +25,20 @@ class PacienteController
         unset($_SESSION["errocadastro"]);
     }
 
-    public function gerarFormEdicao($idPaciente){
+    public function gerarFormEdicao($idPaciente)
+    {
         $pacienteDAO = new PacienteDAO();
-        $paciente = $pacienteDAO->buscarPaciente($idPaciente);
-        $dateTime = new DateTime($paciente->getDataNasc());
+        $paciente    = $pacienteDAO->buscarPaciente($idPaciente);
+        $dateTime    = new DateTime($paciente->getDataNasc());
         $paciente->setDataNasc($dateTime->format('Y-m-d'));
-        
+
         require 'views/editarpaciente.php';
         unset($_SESSION["flash"]);
     }
 
-    public function gerarLista(){
-        $pacienteDAO = new PacienteDAO();
+    public function gerarLista()
+    {
+        $pacienteDAO    = new PacienteDAO();
         $listaPacientes = $pacienteDAO->listarPacientes();
 
         require 'views/listapacientes.php';
@@ -45,20 +47,33 @@ class PacienteController
     public function cadastrar(Paciente $paciente)
     {
         $pacienteDAO = new PacienteDAO();
-        $result = $pacienteDAO->cadastrarPaciente($paciente);
+        $result      = $pacienteDAO->cadastrarPaciente($paciente);
         return $result;
     }
 
-    public function atualizar(Paciente $paciente){
+    public function atualizar(Paciente $paciente)
+    {
         $pacienteDAO = new PacienteDAO();
-        $result = $pacienteDAO->atualizarPacientes($paciente);
+        $result      = $pacienteDAO->atualizarPacientes($paciente);
         return $result;
     }
 
-    public function verificarEmailExistente($email){
+    public function verificarEmailExistente($email)
+    {
         $pacienteDAO = new PacienteDAO();
-        $result = $pacienteDAO->verificarEmailExistente($email);
-        if($result) return $result->getId();
+        $result      = $pacienteDAO->verificarEmailExistente($email);
+        if ($result) {
+            return $result->getId();
+        }
+
         return false;
     }
+
+    public function excluir($idPaciente)
+    {
+        $pacienteDAO = new PacienteDAO();
+        $result      = $pacienteDAO->excluirPaciente($idPaciente);
+        return $result;
+    }
+
 }

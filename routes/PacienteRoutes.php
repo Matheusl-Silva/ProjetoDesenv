@@ -17,7 +17,7 @@ return function (Router $router) {
 
     $router->post('/paciente', function () {
         $pacienteController = new PacienteController();
-        $paciente = new Paciente();
+        $paciente           = new Paciente();
 
         $paciente->setNome($_POST["nome"]);
         $paciente->setPeriodo($_POST["periodo"]);
@@ -34,7 +34,7 @@ return function (Router $router) {
 
         if (gettype($result) === 'integer') {
             $_SESSION["idpaciente"] = $result;
-        } else if ($result === "EMAIL_DUPLICADO") {
+        } elseif ($result === "EMAIL_DUPLICADO") {
             $_SESSION["emailduplicado"] = true;
         } else {
             $_SESSION["errocadastro"] = true;
@@ -46,7 +46,7 @@ return function (Router $router) {
 
     $router->put('/paciente/{id}', function ($id) {
         $pacienteController = new PacienteController();
-        
+
         $idEmailExistente = $pacienteController->verificarEmailExistente($_POST["email"]);
         if (!$idEmailExistente || $idEmailExistente == $id) {
             $paciente = new Paciente();
@@ -68,11 +68,21 @@ return function (Router $router) {
         } else {
             $_SESSION["flash"] = [
                 "mensagem" => "Este e-mail já está cadastrado!",
-                "tipo" => "warning"
+                "tipo"     => "warning",
             ];
 
             header('Location: /paciente/' . $id);
             exit;
         }
+    });
+
+    $router->delete('/paciente/{id}', function ($id) {
+        $paciente = new Paciente();
+        $paciente->setId($id);
+        $pacienteController = new PacienteController();
+        $pacienteController->excluir($paciente);
+
+        header('Location: /paciente');
+        exit;
     });
 };
