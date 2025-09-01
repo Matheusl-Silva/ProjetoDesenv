@@ -39,18 +39,19 @@ return function (Router $router) {
 
     $router->put('/usuario/{id}', function ($id) {
         $usuarioController = new UsuarioController();
-        $usuario = new Usuario();
-
+        var_dump($id);
+        
         $idComEmailExistente = $usuarioController->verificarEmail($_POST["email"]);
-            if ($idComEmailExistente == $id || !$idComEmailExistente) {
+        if (!$idComEmailExistente || $idComEmailExistente == $id) {
+            $usuario = new Usuario();
             $usuario->setNome($_POST["nomeUsuario"]);
             $usuario->setEmail($_POST["email"]);
             $usuario->setSenha($_POST["senha"]);
             $usuario->setAdmin($_POST["admin"]);
             $usuario->setId($id);   
-
+            
             $usuarioController->editar($usuario);
-
+            
             header('Location: /usuario');
             exit;
         } else {

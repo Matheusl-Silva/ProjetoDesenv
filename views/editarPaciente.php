@@ -20,7 +20,7 @@
                         <?= $_SESSION["flash"]["mensagem"] ?>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                <?php endif; ?>1
+                <?php endif; ?>
                 <div class="card-body bg-body-tertiary">
                     <form action="/paciente/<?= $paciente->getId() ?>" method="POST">
                         <input type="hidden" name="method" value="PUT">

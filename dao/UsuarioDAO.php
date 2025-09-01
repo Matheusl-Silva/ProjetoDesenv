@@ -84,9 +84,9 @@ class UsuarioDAO
 
         if ($result === false) return false;
 
-        $response = json_decode($result);
+        $response = json_decode($result, true);
 
-        return $this->converterParaObj($response, true);
+        return $this->converterParaObj($response);
     }
 
     public function login($email, $senha)
@@ -125,7 +125,7 @@ class UsuarioDAO
         $options = [
             "http" => [
                 "header" => "Content-Type: application/json\r\n",
-                "method" => "POST",
+                "method" => "PUT",
                 "content" => json_encode($dados)
             ]
         ];
@@ -133,7 +133,7 @@ class UsuarioDAO
         $context = stream_context_create($options);
         $result = file_get_contents($url, false, $context);
 
-        if ($result === false) {
+        if ($result == false) {
             return ["erro" => "Falha na requisição PUT"];
         }
 

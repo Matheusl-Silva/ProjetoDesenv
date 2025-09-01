@@ -102,6 +102,7 @@ class UsuarioController
     public function verificarEmail($email){
         $usuarioDAO = new UsuarioDAO();
         $result = $usuarioDAO->verificarEmail($email);
-        return $result;
+        if($result) return $result->getId();
+        return false;
     }
 }
