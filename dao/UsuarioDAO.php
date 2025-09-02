@@ -16,15 +16,9 @@ class UsuarioDAO
         return $listaObj;
     }
 
-    public function buscarUsuario($id) //TESTAR SE ESTÁ CERTO
+    public function buscarUsuario($id)
     {
         $url = "http://localhost:3000/usuarios/" . $id;
-        /*$options = [
-            "http" => [
-                "header" => "Content-Type: application/json\r\n",
-            ]
-        ];*/
-
         $result = file_get_contents($url);
 
         if ($result == false) return false;
@@ -56,7 +50,7 @@ class UsuarioDAO
 
         if ($result === false) return false;
 
-        $response = json_decode($result);
+        $response = json_decode($result, true);
 
         if (isset($response["id"]) && strpos($response["error"], 'Email já cadastrado') != false) {
             return "EMAIL_DUPLICADO";
@@ -82,7 +76,7 @@ class UsuarioDAO
         $context = stream_context_create($options);
         $result = file_get_contents($url, false, $context);
 
-        if ($result === false) return false;
+        if ($result == false) return false;
 
         $response = json_decode($result, true);
 
