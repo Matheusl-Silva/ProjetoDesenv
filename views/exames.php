@@ -18,27 +18,30 @@
     <div class="bg-decoration decoration-2"></div>
     <div class="bg-decoration decoration-3"></div>
 
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <div class="d-flex align-items-center">
-                <div class="logo-container-nav">
-                    <img src="../assets/img/LogoPositivo.png" alt="Logo Portal de Saúde Positivo" class="logo-nav">
-                </div>
-                <a class="navbar-brand">Portal de Saúde Positivo</a>
-            </div>
-            <div class="collapse navbar-collapse justify-content-end">
+            <div class="container">
                 <div class="d-flex align-items-center">
-                    <span class="user-greeting me-3">Olá, <?php echo htmlspecialchars($nome_usuario); ?></span>
-                    <form action="../logout.php" method="post">
-                        <button type="submit" class="btn-logout">
-                            <i class="bi bi-box-arrow-right me-1"></i>Sair
-                        </button>
-                    </form>
+                    <div class="logo-container-nav">
+                        <img src="assets/img/LogoPositivo.png" alt="Logo Portal de Saúde Positivo" class="logo-nav">
+                    </div>
+                    <a class="navbar-brand">Portal de Saúde Positivo</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <div class="d-flex align-items-center">
+                        <span class="user-greeting me-3">Olá, <?php echo htmlspecialchars($nomeUsuario); ?></span>
+                        <form action="/logout" method="post">
+                            <button type="submit" class="btn-logout">
+                                <i class="bi bi-box-arrow-right me-1"></i>
+                                Sair
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
     <div class="container my-5">
 
@@ -69,9 +72,9 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div
-                        class="modal-header <?php echo(strpos($mensagem,'sucesso')!==false)?'bg-success text-white':'bg-danger text-white'; ?>">
+                        class="modal-header <?php echo(strpos($mensagem, 'sucesso') !== false) ? 'bg-success text-white' : 'bg-danger text-white'; ?>">
                         <h5 class="modal-title">
-                            <?php echo(strpos($mensagem,'sucesso')!==false)?'Sucesso':'Aviso'; ?>
+                            <?php echo(strpos($mensagem, 'sucesso') !== false) ? 'Sucesso' : 'Aviso'; ?>
                         </h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
@@ -91,7 +94,7 @@
                         <i class="bi bi-search me-1"></i>Pesquisar Paciente
                     </button>
                     <div class="mt-4">
-                        <a href="homeUsuario.php" class="btn btn-outline-secondary">
+                        <a href="/home" class="btn btn-outline-secondary">
                             <i class="bi bi-arrow-left me-1"></i>Voltar
                         </a>
                     </div>
@@ -124,8 +127,8 @@
                             <?php foreach ($exames as $exame): ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($exame['id']); ?></td>
-                                <td><?php echo htmlspecialchars(date('d/m/Y',strtotime($exame['data']))); ?></td>
-                                <td><?php echo isset($preceptores_map[$exame['id_preceptor']])?htmlspecialchars($preceptores_map[$exame['id_preceptor']]):'ID: '.$exame['id_preceptor']; ?></td>
+                                <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($exame['data']))); ?></td>
+                                <td><?php echo isset($preceptores_map[$exame['id_preceptor']]) ? htmlspecialchars($preceptores_map[$exame['id_preceptor']]) : 'ID: ' . $exame['id_preceptor']; ?></td>
                                 <td><a href="visualizarExame.php?id=<?php echo $exame['id']; ?>" class="btn btn-sm btn-info">Visualizar</a></td>
                             </tr>
                             <?php endforeach; ?>
@@ -176,7 +179,7 @@
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">Entrega</label>
-                        <input type="date" class="form-control" name="dentrega" value="<?php echo date('Y-m-d',strtotime('+1 day')); ?>">
+                        <input type="date" class="form-control" name="dentrega" value="<?php echo date('Y-m-d', strtotime('+1 day')); ?>">
                     </div>
                 </div>
 
@@ -240,7 +243,7 @@
 
             <div class="text-center mt-4">
                 <a href="examePrincipal.php" class="btn btn-outline-primary me-2"><i class="bi bi-search me-1"></i>Nova Pesquisa</a>
-                <a href="homeUsuario.php" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i>Voltar</a>
+                <a href="/home" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i>Voltar</a>
             </div>
         <?php endif; ?>
     </div>
