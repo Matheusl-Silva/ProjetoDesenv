@@ -28,12 +28,12 @@ exports.verificarEmail = async (req, res) => {
   const { email } = req.body;
   try {
     const usuario = await usuarioDao.findByEmail(email);
-    if (usuario.length > 0) {
+    if (usuario) {
       return res.status(200).json(usuario[0]);
     }
     return res.status(404).json(false);
   } catch (err) {
-    return res.status(500).json({ error: "Erro ao buscar paciente por email" });
+    return res.status(500).json({ error: "Erro ao buscar paciente por email" });  
   }
 };
 

@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const routerPaciente = require("./routes/pacienteRouter");
 const routerUsuario = require("./routes/usuarioRouter");
 const routerHemato = require("./routes/hematoRouter");
+const routerBio = require("./routes/bioquimicaRouter");
 
 const app = express();
 
@@ -17,6 +18,9 @@ app.use("/usuarios", routerUsuario);
 
 //rota para exameHemato -> hematoRouter
 app.use("/exameHemato", routerHemato);
+
+//rota para exameBioquimica -> bioquimicaRouter
+app.use("/exameBio", routerBio);
 
 app.listen(3000, () => {
   console.log("Servidor rodando na porta 3000.");
