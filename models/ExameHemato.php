@@ -29,7 +29,7 @@ class ExameHemato
     private $celulasMonocitoides;
     private $plaquetas;
     private $volumePlaquetarioMedio;
-    private $dataExame;
+    private $data;
     private $idResponsavel;
     private $preceptor;
     private $paciente;
@@ -170,10 +170,10 @@ class ExameHemato
     public function setVolumePlaquetarioMedio($volumePlaquetarioMedio)
     {$this->volumePlaquetarioMedio = $volumePlaquetarioMedio;}
 
-    public function getDataExame()
-    {return $this->dataExame;}
-    public function setDataExame($dataExame)
-    {$this->dataExame = $dataExame;}
+    public function getData()
+    {return $this->data;}
+    public function setData($data)
+    {$this->data = $data;}
 
     public function getIdResponsavel()
     {return $this->idResponsavel;}

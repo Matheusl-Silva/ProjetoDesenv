@@ -8,20 +8,12 @@ class ExameHematoController
     $auth->verificarLogin();
 
     $idPHemato    = null;
-    $erroCadasdro = false;
+    $erroCadastro = false;
 
-    require 'views/cadastroexamehemato.php';
+    require 'views/cadastrarHematologia.php';  
 
     unset($_SESSION["idPHemato"]);
     unset($_SESSION["errocadastro"]);
-  }
-
-  public function gerarLista($idExame)
-  {
-    $exameHematoDAO = new ExameHematoDAO();
-    $listaExames    = $exameHematoDAO->buscarExameCompletoPorId($idExame);
-
-    require 'views/listaexameshemato.php';
   }
 
   public function cadastrar(ExameHemato $dadosExame)

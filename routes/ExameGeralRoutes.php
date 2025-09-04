@@ -1,14 +1,6 @@
 <?php
 
 return function (Router $router) {
-    $router->get('/exames', function () {
-        $auth = new Autenticacao();
-        $auth->verificarLogin();
-        $nomeUsuario = $auth->getNomeUsuario();
-
-        require 'views/exames.php';
-    });
-
     $router->get('/cadastroExameHemato', function () {
         $exameHematoController = new ExameHematoController();
         $exameHematoController->gerarFormCadastro();
@@ -49,7 +41,7 @@ return function (Router $router) {
         $dadosExame->setCelulasMonocitoides($_POST["celulasMonocitoides"]);
         $dadosExame->setPlaquetas($_POST["plaquetas"]);
         $dadosExame->setVolumePlaquetarioMedio($_POST["volumePlaquetarioMedio"]);
-        $dadosExame->setDataExame($_POST["dataExame"]);
+        $dadosExame->setData($_POST["dataExame"]);
         $dadosExame->setIdResponsavel($_POST["idResponsavel"]);
         $dadosExame->setPreceptor($_POST["preceptor"]);
         $dadosExame->setPaciente($_POST["paciente"]);

@@ -15,6 +15,11 @@ return function (Router $router) {
         $pacienteController->gerarFormEdicao($id);
     });
 
+    $router->get('/paciente/{id}/exames', function($id){
+        $pacienteController = new PacienteController();
+        $pacienteController->gerarListaExames($id);
+    });
+
     $router->post('/paciente', function () {
         $pacienteController = new PacienteController();
         $paciente           = new Paciente();

@@ -44,6 +44,19 @@ class PacienteController
         require 'views/listapacientes.php';
     }
 
+    public function gerarListaExames($idPaciente){
+        $exameDAO = new ExameDAO();
+        $pacienteDAO = new PacienteDAO();
+        $auth = new Autenticacao();
+
+        $paciente = $pacienteDAO->buscarPaciente($idPaciente);
+        $exames = $exameDAO->buscarPorPacienteId($idPaciente);
+        $nomeUsuario = $auth->getNomeUsuario();
+        
+        print_r($exames);
+        require 'views/listarExames.php';
+    }
+
     public function cadastrar(Paciente $paciente)
     {
         $pacienteDAO = new PacienteDAO();

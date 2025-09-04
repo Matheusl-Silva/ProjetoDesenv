@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 -- Estrutura para tabela `exame_hematologia`
 --
 
+
 CREATE TABLE `exame_hematologia` (
   `id` int(11) NOT NULL,
   `nhemacia` decimal(10,0) NOT NULL,
