@@ -80,3 +80,15 @@ exports.delete = (id) => {
     });
   });
 };
+
+exports.BuscaGeral = (id) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      "SELECT * FROM exame_bioquimica, exame_hematologia WHERE exame_bioquimica.id_paciente = ? AND exame_hematologia.id_paciente = ?",
+      [id, id],
+      (err, result) => {
+        err ? reject(err) : resolve(result);
+      }
+    );
+  });
+};

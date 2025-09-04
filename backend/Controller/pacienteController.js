@@ -91,3 +91,19 @@ exports.deletePaciente = async (req, res) => {
     res.status(500).json({ error: "Erro ao tentar deletar Paciente" });
   }
 };
+
+exports.BuscarGeralExames = async (req, res) => {
+  const idPaciente = req.params.idPaciente;
+  try {
+    const paciente = await pacienteDAO.BuscaGeral(idPaciente);
+    if (paciente.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "Não encontrado exames para o paciente" });
+    }
+    res.json(paciente[0]);
+  } catch (err) {
+    console.error("Erro ao buscar paciente:", err);
+    res.status(500).json({ error: "Erro ao buscar exames do paciente" });
+  }
+};

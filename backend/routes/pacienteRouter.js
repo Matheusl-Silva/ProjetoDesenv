@@ -8,5 +8,6 @@ router.post("/verificar-email", pacienteController.verificarEmail);
 router.post("/", pacienteController.createPaciente);
 router.put("/:idPaciente", pacienteController.updatePaciente);
 router.delete("/:idPaciente", pacienteController.deletePaciente);
+router.get("/buscaExames/:idPaciente", pacienteController.BuscarGeralExames);
 
 module.exports = router;
