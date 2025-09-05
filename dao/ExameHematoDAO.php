@@ -14,8 +14,12 @@ class ExameHematoDAO
             }
 
             $data = json_decode($response, true);
+            $examesObj = [];
             if ($data) {
-                return $data;
+                foreach($data as $exame){
+                    $examesObj[] = @$this->converterParaObj($exame);
+                }
+                return $examesObj;
             }
             return null;
         } catch (Exception $e) {
@@ -25,7 +29,7 @@ class ExameHematoDAO
 
     public function buscarExameCompletoPorId($idExame)
     {
-        $url = "http://localhost:3000/exameHemato/principal/" . $idExame;
+        $url = "http://localhost:3000/exameHemato/listar/" . $idExame;
         try {
             $response = @file_get_contents($url);
             if ($response === false) {
@@ -72,7 +76,7 @@ class ExameHematoDAO
             "celulasMonocitoides"    => $dadosExame->getCelulasMonocitoides(),
             "plaquetas"              => $dadosExame->getPlaquetas(),
             "volumePlaquetarioMedio" => $dadosExame->getVolumePlaquetarioMedio(),
-            "dataExame"              => $dadosExame->getDataExame(),
+            "dataExame"              => $dadosExame->getData(),
             "idResponsavel"          => $dadosExame->getIdResponsavel(),
             "preceptor"              => $dadosExame->getPreceptor(),
             "paciente"               => $dadosExame->getPaciente(),
@@ -98,41 +102,41 @@ class ExameHematoDAO
         return isset($response['id']) ? $response['id'] : false;
     }
 
-    private function converterParaObj($row)
+private function converterParaObj($row)
     {
         $exameHemato = new ExameHemato();
 
         $exameHemato->setId($row['id']);
-        $exameHemato->setHemacia($row['hemacia']);
-        $exameHemato->setHemoglobina($row['hemoglobina']);
-        $exameHemato->setHematocrito($row['hematocrito']);
-        $exameHemato->setVcm($row['vcm']);
-        $exameHemato->setHcm($row['hcm']);
-        $exameHemato->setChcm($row['chcm']);
-        $exameHemato->setRdw($row['rdw']);
-        $exameHemato->setLeucocitos($row['leucocitos']);
-        $exameHemato->setNeutrofilos($row['neutrofilos']);
-        $exameHemato->setBlastos($row['blastos']);
-        $exameHemato->setPromielocitos($row['promielocitos']);
-        $exameHemato->setMielocitos($row['mielocitos']);
-        $exameHemato->setMetamielocitos($row['metamielocitos']);
-        $exameHemato->setBastonetes($row['bastonetes']);
-        $exameHemato->setSegmentados($row['segmentados']);
-        $exameHemato->setEosinofilos($row['eosinofilos']);
-        $exameHemato->setBasofilos($row['basofilos']);
-        $exameHemato->setLinfocitos($row['linfocitos']);
-        $exameHemato->setLinfocitosAtipicos($row['linfocitosAtipicos']);
-        $exameHemato->setMonocitos($row['monocitos']);
-        $exameHemato->setMieloblastos($row['mieloblastos']);
-        $exameHemato->setOutrasCelulas($row['outrasCelulas']);
-        $exameHemato->setCelulasLinfoides($row['celulasLinfoides']);
-        $exameHemato->setCelulasMonocitoides($row['celulasMonocitoides']);
-        $exameHemato->setPlaquetas($row['plaquetas']);
-        $exameHemato->setVolumePlaquetarioMedio($row['volumePlaquetarioMedio']);
-        $exameHemato->setDataExame($row['dataExame']);
-        $exameHemato->setIdResponsavel($row['idResponsavel']);
-        $exameHemato->setPreceptor($row['preceptor']);
-        $exameHemato->setPaciente($row['paciente']);
+        $exameHemato->setHemacia($row['nhemacia']);
+        $exameHemato->setHemoglobina($row['nhemoglobina']);
+        $exameHemato->setHematocrito($row['nhematocrito']);
+        $exameHemato->setVcm($row['nvcm']);
+        $exameHemato->setHcm($row['nhcm']);
+        $exameHemato->setChcm($row['nchcm']);
+        $exameHemato->setRdw($row['nrdw']);
+        $exameHemato->setLeucocitos($row['nleucocitos']);
+        $exameHemato->setNeutrofilos($row['nneutrofilos']);
+        $exameHemato->setBlastos($row['nblastos']);
+        $exameHemato->setPromielocitos($row['npromielocitos']);
+        $exameHemato->setMielocitos($row['nmielocitos']);
+        $exameHemato->setMetamielocitos($row['nmetamielocitos']);
+        $exameHemato->setBastonetes($row['nbastonetes']);
+        $exameHemato->setSegmentados($row['nsegmentados']);
+        $exameHemato->setEosinofilos($row['neosinofilos']);
+        $exameHemato->setBasofilos($row['nbasofilos']);
+        $exameHemato->setLinfocitos($row['nlinfocitos']);
+        $exameHemato->setLinfocitosAtipicos($row['nlinfocitos_atipicos']);
+        $exameHemato->setMonocitos($row['nmonocitos']);
+        $exameHemato->setMieloblastos($row['nmieloblastos']);
+        $exameHemato->setOutrasCelulas($row['noutras_celulas']);
+        $exameHemato->setCelulasLinfoides($row['ncelulas_linfoides']);
+        $exameHemato->setCelulasMonocitoides($row['ncelulas_monocitoides']);
+        $exameHemato->setPlaquetas($row['nplaquetas']);
+        $exameHemato->setVolumePlaquetarioMedio($row['nvolume_plaquetario_medio']);
+        $exameHemato->setData($row['ddata_exame']);
+        $exameHemato->setIdResponsavel($row['id_responsavel']);
+        $exameHemato->setPreceptor($row['id_preceptor']);
+        $exameHemato->setPaciente($row['id_paciente']);
 
         return $exameHemato;
     }

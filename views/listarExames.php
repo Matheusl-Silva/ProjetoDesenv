@@ -129,7 +129,7 @@
                                 <td><?php echo htmlspecialchars($exame->getId()); ?></td>
                                 <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($exame->getData()))); ?></td>
                                 <td><?php echo isset($preceptores_map[$exame->getPreceptor()]) ? htmlspecialchars($preceptores_map[$exame->getPreceptor()]) : 'ID: ' . $exame->getPreceptor(); ?></td>
-                                <td><a href="visualizarExame.php?id=<?php echo $exame['id']; ?>" class="btn btn-sm btn-info">Visualizar</a></td>
+                                <td><a href="visualizarExame.php?id=<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a></td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>

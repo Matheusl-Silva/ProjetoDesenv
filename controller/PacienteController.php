@@ -3,9 +3,6 @@ class PacienteController
 {
     public function gerarFormCadastro()
     {
-        $auth = new Autenticacao();
-        $auth->verificarLogin();
-
         $idPaciente     = null;
         $emailDuplicado = false;
         $erroCadastro   = false;
@@ -44,16 +41,19 @@ class PacienteController
         require 'views/listapacientes.php';
     }
 
-    public function gerarListaExames($idPaciente){
-        $exameDAO = new ExameDAO();
+    public function gerarListaExames($idPaciente)
+    {
+        $hematoDAO = new ExameHematoDAO();
+        $bioDAO = new ExameBioquimicaDAO();
         $pacienteDAO = new PacienteDAO();
         $auth = new Autenticacao();
 
         $paciente = $pacienteDAO->buscarPaciente($idPaciente);
-        $exames = $exameDAO->buscarPorPacienteId($idPaciente);
+        $examesHemato = $hematoDAO->buscarPorPacienteId($idPaciente);
+        $examesBio = $bioDAO->buscarPorPacienteId($idPaciente);
+        $exames = array_merge($examesHemato ?? array(), $examesBio ?? array());
         $nomeUsuario = $auth->getNomeUsuario();
-        
-        print_r($exames);
+
         require 'views/listarExames.php';
     }
 
@@ -88,5 +88,4 @@ class PacienteController
         $result      = $pacienteDAO->excluirPaciente($idPaciente);
         return $result;
     }
-
 }

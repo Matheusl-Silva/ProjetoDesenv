@@ -21,6 +21,9 @@ return function (Router $router) {
     });
 
     $router->get('/home', function () {
+        $auth = new Autenticacao();
+        $auth->verificarLogin();
+        
         $usuarioController = new UsuarioController();
         $usuarioController->gerarHome();
     });

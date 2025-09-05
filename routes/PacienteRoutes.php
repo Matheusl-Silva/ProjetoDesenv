@@ -1,21 +1,37 @@
 <?php
 return function (Router $router) {
     $router->get('/cadastroPaciente', function () {
+        $auth = new Autenticacao();
+        $auth->verificarLogin();
+        $auth->verificarAcessoAdmin();
+
         $pacienteController = new PacienteController();
         $pacienteController->gerarFormCadastro();
     });
 
     $router->get('/paciente', function () {
+        $auth = new Autenticacao();
+        $auth->verificarLogin();
+        $auth->verificarAcessoAdmin();
+
         $pacienteController = new PacienteController();
         $pacienteController->gerarLista();
     });
 
     $router->get('/paciente/{id}', function ($id) {
+        $auth = new Autenticacao();
+        $auth->verificarLogin();
+        $auth->verificarAcessoAdmin();
+
         $pacienteController = new PacienteController();
         $pacienteController->gerarFormEdicao($id);
     });
 
-    $router->get('/paciente/{id}/exames', function($id){
+    $router->get('/paciente/{id}/exames', function ($id) {
+        $auth = new Autenticacao();
+        $auth->verificarLogin();
+        $auth->verificarAcessoAdmin();
+        
         $pacienteController = new PacienteController();
         $pacienteController->gerarListaExames($id);
     });
