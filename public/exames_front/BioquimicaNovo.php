@@ -6,30 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <style>
-    body{
-      min-height:100vh;
-      background:
-        radial-gradient(80rem 60rem at 20% -10%, rgba(66,165,245,.20), transparent 50%),
-        radial-gradient(60rem 40rem at 120% 10%, rgba(30,136,229,.18), transparent 50%),
-        linear-gradient(180deg, #f7f9fc 0%, #eef3fb 100%);
-    }
-    .card{border:0;border-radius:1rem;box-shadow:0 6px 20px rgba(16,24,40,.08)}
-    .card .card-header{background:#fff;border-bottom:1px dashed #e5e7eb;border-radius:1rem 1rem 0 0}
-    .section-title{display:flex;align-items:center;gap:.5rem;font-weight:700}
-    .muted{color:#6c757d;font-size:.85rem}
-    .sticky-actions{position:sticky;bottom:0;background:#ffffffcc;backdrop-filter:blur(6px);
-      border:1px solid #e5e7eb;border-radius:.75rem;padding:.75rem;z-index:10}
-    .pill{display:inline-block;padding:.25rem .6rem;border-radius:999px;background:#f1f5f9;font-size:.8rem}
-  </style>
+  <link href="../../assets/css/Bioquimica.css" rel="stylesheet">
 </head>
 <body>
   <header class="py-3 mb-4 shadow-sm bg-primary text-white">
     <div class="container d-flex justify-content-between align-items-center">
       <h1 class="h5 mb-0">Portal de Saúde Positivo</h1>
       <nav><ol class="breadcrumb mb-0">
-        <li class="breadcrumb-item"><a class="text-white text-decoration-none" href="index.html">Início</a></li>
-        <li class="breadcrumb-item"><a class="text-white text-decoration-none" href="index.html">Exames</a></li>
+        <li class="breadcrumb-item"><a class="text-white text-decoration-none" href="IndexExames.php">Início</a></li>
+        <li class="breadcrumb-item"><a class="text-white text-decoration-none" href="IndexExames.php">Exames</a></li>
         <li class="breadcrumb-item active text-white">Bioquímica (Novo)</li>
       </ol></nav>
     </div>
@@ -116,7 +101,7 @@
       </div>
 
       <div class="sticky-actions d-flex gap-2 justify-content-end">
-        <a href="./index.html" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Voltar</a>
+        <a href="./IndexExames.php" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Voltar</a>
         <button type="reset" class="btn btn-warning"><i class="bi bi-eraser"></i> Limpar</button>
         <button type="submit" class="btn btn-primary"><i class="bi bi-save2"></i> Salvar</button>
       </div>
