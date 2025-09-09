@@ -5,10 +5,7 @@
   <title>Exames - Índice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body{min-height:100vh;background:linear-gradient(180deg,#f7f9fc 0%, #eef3fb 100%);}
-    .card{border:0;border-radius:1rem;box-shadow:0 6px 20px rgba(16,24,40,.08);}
-  </style>
+  <link href="../../assets/css/ExamesIndex.css" rel="stylesheet">
 </head>
 <body>
   <header class="py-4 bg-primary text-white mb-4 shadow-sm">
@@ -17,6 +14,7 @@
       <span>EXAMES / Links rápidos</span>
     </div>
   </header>
+
   <main class="container pb-5">
     <div class="row g-4">
       <div class="col-md-6">
@@ -24,7 +22,7 @@
           <div class="card-body">
             <h2 class="h5">Bioquímica – Cadastro</h2>
             <p class="text-muted">Inserir resultados (POST).</p>
-            <a class="btn btn-primary" href="./bioquimica_novo.html">Abrir</a>
+            <a class="btn btn-primary" href="./BioquimicaNovo.php">Abrir</a>
           </div>
         </div>
       </div>
@@ -33,7 +31,7 @@
           <div class="card-body">
             <h2 class="h5">Bioquímica – Visualização</h2>
             <p class="text-muted">Somente leitura (mesmo layout do cadastro).</p>
-            <a class="btn btn-outline-primary" href="./bioquimica_ver.html">Abrir</a>
+            <a class="btn btn-outline-primary" href="./BioquimicaVer.php">Abrir</a>
           </div>
         </div>
       </div>
