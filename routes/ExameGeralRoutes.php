@@ -1,14 +1,14 @@
 <?php
 
 return function (Router $router) {
-    $router->get('/cadastroExameHemato', function () {
-        $exameHematoController = new ExameHematoController();
-        $exameHematoController->gerarFormCadastro();
-    });
+    $router->get('/exames', function(){
+        $auth = new Autenticacao();
+        $auth->verificarLogin();
+        $auth->verificarAcessoAdmin();
 
-    $router->get('/exameHemato/{id}', function ($id) {
-        $exameHematoController = new ExameHematoController();
-        $exameHematoController->gerarLista($id);
+        $pacienteController = new PacienteController();
+        $pacienteController->gerarListaExames($id);
+
     });
 
     $router->post('/exameHemato', function () {
