@@ -80,3 +80,19 @@ exports.delete = (id) => {
     });
   });
 };
+
+exports.BuscaGeral = (id) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `SELECT *
+         FROM exame_bioquimica eb
+         LEFT JOIN exame_hematologia eh 
+           ON eb.id_paciente = eh.id_paciente
+        WHERE eb.id_paciente = ?`,
+      [id],
+      (err, result) => {
+        err ? reject(err) : resolve(result);
+      }
+    );
+  });
+};

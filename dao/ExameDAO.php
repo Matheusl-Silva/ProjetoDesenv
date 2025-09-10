@@ -5,7 +5,7 @@ class ExameDAO
     public function buscarPorPacienteId(int $registro_paciente)
     {
         //define a url de busca por exame dos pacientes
-        $url = "http://localhost:3000/exames/" . $registro_paciente;
+        $url = "http://localhost:3000/pacientes/buscaExames/" . $registro_paciente;
 
         //trata possíveis erros.
         try {

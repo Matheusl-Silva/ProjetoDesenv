@@ -3,7 +3,7 @@ const db = require("../database/connection");
 exports.findByRegistroPaciente = (registroPaciente) => {
   return new Promise((resolve, reject) => {
     const query =
-      "SELECT id, ddata, id_preceptor FROM exame_hematologia WHERE id_paciente = ? ORDER BY ddata DESC";
+      "SELECT id, ddata_exame, id_preceptor FROM exame_hematologia WHERE id_paciente = ? ORDER BY ddata_exame DESC";
 
     db.query(query, [registroPaciente], (err, results) => {
       err ? reject(err) : resolve(results);

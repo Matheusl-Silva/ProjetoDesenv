@@ -33,7 +33,6 @@ class UsuarioController
     public function gerarHome()
     {
         $auth = new Autenticacao();
-        $auth->verificarLogin();
         $nomeUsuario = $auth->getNomeUsuario();
         require 'views/homeUsuario.php';
     }
