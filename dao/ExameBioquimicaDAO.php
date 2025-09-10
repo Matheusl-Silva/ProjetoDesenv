@@ -14,7 +14,7 @@ class ExameBioquimicaDAO{
 
             if ($data) {
                 foreach($data as $exame){
-                    $examesObj[] = $this->converterParaObj($exame);
+                    $examesObj[] = @$this->converterParaObj($exame);
                 }
                 return $examesObj;
         }
@@ -56,7 +56,7 @@ class ExameBioquimicaDAO{
         $exameBio->setMagnesio($row['nmagnesio']);
         $exameBio->setFosforo($row['nfosforo']);
         $exameBio->setIdResponsavel($row['id_responsavel']);
-        $exameBio->setIdPreceptor($row['id_preceptor']);
+        $exameBio->setPreceptor($row['id_preceptor']);
         $exameBio->setIdPaciente($row['id_paciente']);
         $exameBio->setData($row['ddata_exame']);
 

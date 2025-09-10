@@ -1,4 +1,4 @@
-<?
+<?php
 
 class ExameBioquimica
 {
@@ -28,7 +28,7 @@ class ExameBioquimica
     private $magnesio;
     private $fosforo;
     private $idResponsavel;
-    private $idPreceptor;
+    private $preceptor;
     private $idPaciente;
     private $data;
 
@@ -110,8 +110,8 @@ class ExameBioquimica
     public function getIdResponsavel() { return $this->idResponsavel; }
     public function setIdResponsavel($idResponsavel) { $this->idResponsavel = $idResponsavel; }
 
-    public function getIdPreceptor() { return $this->idPreceptor; }
-    public function setIdPreceptor($idPreceptor) { $this->idPreceptor = $idPreceptor; }
+    public function getPreceptor() { return $this->preceptor; }
+    public function setPreceptor($preceptor) { $this->preceptor = $preceptor; }
 
     public function getIdPaciente() { return $this->idPaciente; }
     public function setIdPaciente($idPaciente) { $this->idPaciente = $idPaciente; }

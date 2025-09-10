@@ -17,7 +17,7 @@ class ExameHematoDAO
             $examesObj = [];
             if ($data) {
                 foreach($data as $exame){
-                    $examesObj[] = @$this->converterParaObj($exame);
+                    $examesObj[] = @    $this->converterParaObj($exame);
                 }
                 return $examesObj;
             }
