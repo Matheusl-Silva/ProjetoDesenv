@@ -1,0 +1,26 @@
+/* Layout geral */
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(80rem 60rem at 20% -10%, rgba(66,165,245,.20), transparent 50%),
+    radial-gradient(60rem 40rem at 120% 10%, rgba(30,136,229,.18), transparent 50%),
+    linear-gradient(180deg, #f7f9fc 0%, #eef3fb 100%);
+}
+
+/* Cards e seções */
+.card{border:0;border-radius:1rem;box-shadow:0 6px 20px rgba(16,24,40,.08)}
+.card .card-header{background:#fff;border-bottom:1px dashed #e5e7eb;border-radius:1rem 1rem 0 0}
+.section-title{display:flex;align-items:center;gap:.5rem;font-weight:700}
+.muted{color:#6c757d;font-size:.85rem}
+
+/* Somente leitura (visualização) */
+.read input, .read textarea { background:#f8f9fa }
+
+/* Barra de ações */
+.sticky-actions{
+  position:sticky;bottom:0;background:#ffffffcc;backdrop-filter:blur(6px);
+  border:1px solid #e5e7eb;border-radius:.75rem;padding:.75rem;z-index:10
+}
+
+/* Pílulas (se precisar) */
+.pill{display:inline-block;padding:.25rem .6rem;border-radius:999px;background:#f1f5f9;font-size:.8rem}
