@@ -54,9 +54,9 @@
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="examePrincipal.php" method="get">
-                            <label for="numero_paciente" class="form-label">Número do Paciente:</label>
-                            <input type="text" class="form-control mb-3" id="numero_paciente" name="numero_paciente" required>
+                        <form action="/exames" method="get">
+                            <label for="paciente" class="form-label">Número do Paciente:</label>
+                            <input type="text" class="form-control mb-3" id="paciente" name="paciente" required>
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary">Pesquisar</button>
                             </div>
@@ -86,7 +86,7 @@
 
         <?php if (!$paciente): ?>
             <!-- Tela inicial -->
-            <div class="d-flex align-items-center justify-content-center min-vh-100">
+            <div class="d-flex align-items-center justify-content-center">
                 <div class="action-card p-5 text-center shadow">
                     <h2 class="mb-3">Cadastro Hematológico</h2>
                     <p class="text-primary mb-4">Clique abaixo para pesquisar um paciente</p>
@@ -104,7 +104,7 @@
             <!-- Paciente encontrado -->
             <div class="welcome-banner mb-4">
                 <div class="welcome-content text-center">
-                    <h2>Cadastro Hematológico</h2>
+                    <h2>Exames do paciente</h2>
                     <p class="welcome-subtitle">Paciente Nº <?php echo htmlspecialchars($paciente->getId()); ?></p>
                 </div>
             </div>
@@ -156,7 +156,7 @@
         });
         <?php endif; ?>
 
-        <?php if (!$paciente && !isset($_GET['numero_paciente'])): ?>
+        <?php if (!$paciente && !isset($_GET['paciente'])): ?>  
         document.addEventListener('DOMContentLoaded', () => {
             var myModal = new bootstrap.Modal(document.getElementById('pesquisaModal'));
             myModal.show();

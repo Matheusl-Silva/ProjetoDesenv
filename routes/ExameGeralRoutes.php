@@ -7,7 +7,7 @@ return function (Router $router) {
         $auth->verificarAcessoAdmin();
 
         $pacienteController = new PacienteController();
-        $pacienteController->gerarListaExames($id);
+        $pacienteController->gerarListaExames();
 
     });
 

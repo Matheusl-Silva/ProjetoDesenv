@@ -41,18 +41,23 @@ class PacienteController
         require 'views/listapacientes.php';
     }
 
-    public function gerarListaExames($idPaciente)
+    public function gerarListaExames()
     {
         $hematoDAO = new ExameHematoDAO();
         $bioDAO = new ExameBioquimicaDAO();
         $pacienteDAO = new PacienteDAO();
         $auth = new Autenticacao();
-
-        $paciente = $pacienteDAO->buscarPaciente($idPaciente);
-        $examesHemato = $hematoDAO->buscarPorPacienteId($idPaciente);
-        $examesBio = $bioDAO->buscarPorPacienteId($idPaciente);
-        $exames = array_merge($examesHemato ?? array(), $examesBio ?? array());
+        
         $nomeUsuario = $auth->getNomeUsuario();
+
+        if (isset($_GET["paciente"])) {
+            $paciente = $pacienteDAO->buscarPaciente($_GET["paciente"]);
+            $examesHemato = $hematoDAO->buscarPorPacienteId($_GET["paciente"]);
+            $examesBio = $bioDAO->buscarPorPacienteId($_GET["paciente"]);
+            $exames = array_merge($examesHemato ?? array(), $examesBio ?? array());
+        }else{
+            $paciente = '';
+        }
 
         require 'views/listarExames.php';
     }
