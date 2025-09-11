@@ -141,7 +141,7 @@
             </div>
 
             <div class="text-center mt-4">
-                <a href="examePrincipal.php" class="btn btn-outline-primary me-2"><i class="bi bi-search me-1"></i>Nova Pesquisa</a>
+                <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#pesquisaModal"><i class="bi bi-search me-1"></i>Nova Pesquisa</button>
                 <a href="/home" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i>Voltar</a>
             </div>
         <?php endif; ?>
