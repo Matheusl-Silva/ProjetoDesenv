@@ -2,9 +2,6 @@
 return function (Router $router) {
     $router->get('/cadastrarUsuario', function () {
         $auth = new Autenticacao();
-        $auth->verificarLogin();
-        $auth->verificarAcessoAdmin();
-
         $usuarioController = new UsuarioController();
         $usuarioController->gerarFormCadastro();
     });
