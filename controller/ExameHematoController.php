@@ -2,25 +2,23 @@
 
 class ExameHematoController
 {
-  public function gerarFormCadastro()
+
+  public function VisualizarExame($id)
   {
     $auth = new Autenticacao();
     $auth->verificarLogin();
 
-    $idPHemato    = null;
-    $erroCadastro = false;
-
-    require 'views/cadastrarHematologia.php';  
-
-    unset($_SESSION["idPHemato"]);
-    unset($_SESSION["errocadastro"]);
-  }
-
-  public function cadastrar(ExameHemato $dadosExame)
-  {
     $exameHematoDAO = new ExameHematoDAO();
-    $result         = $exameHematoDAO->cadastrarExame($dadosExame);
-    return $result;
-  }
+    $exame = $exameHematoDAO->buscarExameCompletoPorId($id);
 
+    if (!$exame) {
+        $mensagem = "Exame de hematologia não encontrado.";
+        header("Location: /exames?mensagem=" . urlencode($mensagem));
+        exit();
+    }
+
+    $nome_usuario = $auth->getNomeUsuario();
+
+    require 'views/visualizarExameHemato.php';
+  }
 }

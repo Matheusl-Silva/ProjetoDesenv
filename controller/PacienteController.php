@@ -43,20 +43,57 @@ class PacienteController
 
     public function gerarListaExames()
     {
-        $hematoDAO = new ExameHematoDAO();
-        $bioDAO = new ExameBioquimicaDAO();
+        $hematoDAO   = new ExameHematoDAO();
+        $bioDAO      = new ExameBioquimicaDAO();
         $pacienteDAO = new PacienteDAO();
-        $auth = new Autenticacao();
-        
+        $auth        = new Autenticacao();
+
         $nomeUsuario = $auth->getNomeUsuario();
+        $mensagem    = '';
+        $exames      = [];
+        $paciente    = null; // Inicialize $paciente como null
 
         if (isset($_GET["paciente"])) {
             $paciente = $pacienteDAO->buscarPaciente($_GET["paciente"]);
-            $examesHemato = $hematoDAO->buscarPorPacienteId($_GET["paciente"]);
-            $examesBio = $bioDAO->buscarPorPacienteId($_GET["paciente"]);
-            $exames = array_merge($examesHemato ?? array(), $examesBio ?? array());
-        }else{
-            $paciente = '';
+
+            if ($paciente) {
+                $examesHemato = $hematoDAO->buscarPorPacienteId($_GET["paciente"]);
+                $examesBio    = $bioDAO->buscarPorPacienteId($_GET["paciente"]);
+
+                // Processar exames de hematologia, adicionando a propriedade de tipo
+                if ($examesHemato && is_array($examesHemato)) {
+                    foreach ($examesHemato as $exame) {
+                        if ($exame && method_exists($exame, 'getId')) {
+                            // Adiciona a propriedade 'tipo' ao objeto do exame
+                            $exame->setTipo('hematologia'); // Você precisa adicionar este método à classe ExameHemato
+                            $exames[] = $exame;
+                        }
+                    }
+                }
+
+                // Processar exames de bioquímica, adicionando a propriedade de tipo
+                if ($examesBio && is_array($examesBio)) {
+                    foreach ($examesBio as $exame) {
+                        if ($exame && method_exists($exame, 'getId')) {
+                            // Adiciona a propriedade 'tipo' ao objeto do exame
+                            $exame->setTipo('bioquimica'); // Você precisa adicionar este método à classe ExameBioquimica
+                            $exames[] = $exame;
+                        }
+                    }
+                }
+
+                // Ordenar por data (mais recente primeiro)
+                if (!empty($exames)) {
+                    usort($exames, function ($a, $b) {
+                        if (!$a || !$b || !method_exists($a, 'getData') || !method_exists($b, 'getData')) {
+                            return 0;
+                        }
+                        return strtotime($b->getData()) - strtotime($a->getData());
+                    });
+                }
+            } else {
+                $mensagem = 'Paciente não encontrado.';
+            }
         }
 
         require 'views/listarExames.php';

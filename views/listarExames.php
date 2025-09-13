@@ -119,19 +119,43 @@
                             <tr>
                                 <th>Número</th>
                                 <th>Data</th>
+                                <th>Tipo</th>
                                 <th>Preceptor</th>
                                 <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($exames as $exame): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($exame->getId()); ?></td>
-                                <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($exame->getData()))); ?></td>
-                                <td><?php echo isset($preceptores_map[$exame->getPreceptor()]) ? htmlspecialchars($preceptores_map[$exame->getPreceptor()]) : 'ID: ' . $exame->getPreceptor(); ?></td>
-                                <td><a href="visualizarExame.php?id=<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a></td>
-                            </tr>
-                            <?php endforeach; ?>
+                        <?php foreach ($exames as $exame): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($exame->getId()); ?></td>
+                            <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($exame->getData()))); ?></td>
+                            <td>
+                                <?php
+$tipoExame = $exame->getTipo();
+if ($tipoExame === 'hematologia'):
+?>
+                                    <span class="badge bg-primary">Hematologia</span>
+                                <?php elseif ($tipoExame === 'bioquimica'): ?>
+                                    <span class="badge bg-success">Bioquímica</span>
+                                <?php else: ?>
+                                    <span class="badge bg-secondary">N/A</span>
+                                <?php endif; ?>
+                            </td>
+                            <td><?php echo isset($preceptores_map[$exame->getPreceptor()]) ? htmlspecialchars($preceptores_map[$exame->getPreceptor()]) : 'Preceptor: ' . $exame->getPreceptor(); ?></td>
+                            <td>
+                                <?php
+$tipoExame = $exame->getTipo();
+if ($tipoExame === 'hematologia'):
+?>
+                            <a href="/examesHemato/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
+                        <?php elseif ($tipoExame === 'bioquimica'): ?>
+                            <a href="visualizarExameBioquimica.php?id=<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
+                        <?php else: ?>
+                            <a href="/examesHemato/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
+                        <?php endif; ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -156,7 +180,7 @@
         });
         <?php endif; ?>
 
-        <?php if (!$paciente && !isset($_GET['paciente'])): ?>  
+        <?php if (!$paciente && !isset($_GET['paciente'])): ?>
         document.addEventListener('DOMContentLoaded', () => {
             var myModal = new bootstrap.Modal(document.getElementById('pesquisaModal'));
             myModal.show();

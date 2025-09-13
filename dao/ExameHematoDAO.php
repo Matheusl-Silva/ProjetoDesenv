@@ -13,11 +13,11 @@ class ExameHematoDAO
                 return null;
             }
 
-            $data = json_decode($response, true);
+            $data      = json_decode($response, true);
             $examesObj = [];
             if ($data) {
-                foreach($data as $exame){
-                    $examesObj[] = @    $this->converterParaObj($exame);
+                foreach ($data as $exame) {
+                    $examesObj[] = @$this->converterParaObj($exame);
                 }
                 return $examesObj;
             }
@@ -102,7 +102,7 @@ class ExameHematoDAO
         return isset($response['id']) ? $response['id'] : false;
     }
 
-private function converterParaObj($row)
+    private function converterParaObj($row)
     {
         $exameHemato = new ExameHemato();
 

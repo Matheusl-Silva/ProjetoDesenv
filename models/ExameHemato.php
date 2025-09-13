@@ -33,6 +33,7 @@ class ExameHemato
     private $idResponsavel;
     private $preceptor;
     private $paciente;
+    private $tipo;
 
     // Getters e Setters
     public function getId()
@@ -189,4 +190,10 @@ class ExameHemato
     {return $this->paciente;}
     public function setPaciente($paciente)
     {$this->paciente = $paciente;}
+
+    public function getTipo()
+    {return $this->tipo;}
+
+    public function setTipo($tipo)
+    {$this->tipo = $tipo;}
 }
