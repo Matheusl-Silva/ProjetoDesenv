@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/home-usuario.css">
-    <link rel="icon" href="./../assets/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../assets/css/home-usuario.css" />
+    <link rel="icon" href="../../assets/img/favicon.png" type="image/x-icon">
     <title>Resultado do Exame</title>
 </head>
 
@@ -87,16 +87,16 @@
                     <legend class="h5 mt-4 mb-3">Eritrograma</legend>
                     <div class="row g-3 mb-4">
                         <?php
-                        $camposEritrograma = [
-                            'hemacia' => 'Hemácias',
-                            'hemoglobina' => 'Hemoglobina',
-                            'hematocrito' => 'Hematócrito',
-                            'vcm' => 'VCM',
-                            'hcm' => 'HCM',
-                            'chcm' => 'CHCM',
-                            'rdw' => 'RDW'
-                        ];
-                        foreach ($camposEritrograma as $key => $label): ?>
+$camposEritrograma = [
+    'hemacia'     => 'Hemácias',
+    'hemoglobina' => 'Hemoglobina',
+    'hematocrito' => 'Hematócrito',
+    'vcm'         => 'VCM',
+    'hcm'         => 'HCM',
+    'chcm'        => 'CHCM',
+    'rdw'         => 'RDW',
+];
+foreach ($camposEritrograma as $key => $label): ?>
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $label; ?></label>
                                 <input type="text" class="form-control"
@@ -111,19 +111,19 @@
                     <legend class="h5 mt-4 mb-3">Leucograma</legend>
                     <div class="row g-3 mb-4">
                         <?php
-                        $camposLeucograma = [
-                            'leucocitos' => 'Leucócitos',
-                            'blastos' => 'Blastos (µL)',
-                            'promielocitos' => 'Prómielócitos (µL)',
-                            'mielocitos' => 'Mielócitos (µL)',
-                            'metamielocitos' => 'Metamielócitos (µL)',
-                            'bastonetes' => 'Bastonetes (µL)',
-                            'segmentados' => 'Segmentados (µL)',
-                            'neutrofilos' => 'Neutrófilos (%)',
-                            'eosinofilos' => 'Eosinófilos (%)',
-                            'basofilos' => 'Basófilos (%)'
-                        ];
-                        foreach ($camposLeucograma as $key => $label): ?>
+$camposLeucograma = [
+    'leucocitos'     => 'Leucócitos',
+    'blastos'        => 'Blastos (µL)',
+    'promielocitos'  => 'Prómielócitos (µL)',
+    'mielocitos'     => 'Mielócitos (µL)',
+    'metamielocitos' => 'Metamielócitos (µL)',
+    'bastonetes'     => 'Bastonetes (µL)',
+    'segmentados'    => 'Segmentados (µL)',
+    'neutrofilos'    => 'Neutrófilos (%)',
+    'eosinofilos'    => 'Eosinófilos (%)',
+    'basofilos'      => 'Basófilos (%)',
+];
+foreach ($camposLeucograma as $key => $label): ?>
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $label; ?></label>
                                 <input type="text" class="form-control"

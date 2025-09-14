@@ -37,7 +37,8 @@ class ExameHematoDAO
             }
             $data = json_decode($response, true);
             if ($data) {
-                return $data;
+
+                return $this->converterParaObj($data);
             }
             return null;
         } catch (Exception $e) {
