@@ -156,7 +156,7 @@ foreach ($camposLeucograma as $metodo => $label): ?>
                         <i class="bi bi-printer"></i> Imprimir
                     </button>
                 <?php endif; ?>
-                <a href="examePrincipal.php?numero_paciente=<?php echo $exame->getPaciente(); ?>"
+                <a href="/exames?paciente=<?= $exame->getPaciente() ?>"
                     class="btn btn-primary me-2">
                     <i class="bi bi-arrow-left"></i> Voltar para o Paciente
                 </a>
