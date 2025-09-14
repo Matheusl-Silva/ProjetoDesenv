@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/home-usuario.css">
@@ -16,7 +16,7 @@
             <div class="container">
                 <div class="d-flex align-items-center">
                     <div class="logo-container-nav">
-                        <img src="../assets/img/LogoPositivo.png" alt="Logo Portal de Saúde Positivo" class="logo-nav">
+                        <img src="../../assets/img/LogoPositivo.png" alt="Logo Portal de Saúde Positivo" class="logo-nav">
                     </div>
                     <a class="navbar-brand">Portal de Saúde Positivo</a>
                 </div>
@@ -35,88 +35,168 @@
         </nav>
     </header>
 
-  <main class="container mb-5">
-    <div class="alert alert-info border-0 shadow-sm rounded-3">Paciente selecionado previamente. Abaixo, os resultados registrados.</div>
+<main class="container my-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h2 class="mb-1">Resultado do Exame - Bioquímica</h2>
+            <p class="mb-0">Número do Exame: <?php echo htmlspecialchars($exame->getId()); ?></p>
+        </div>
 
-    <!-- Painel Hepático -->
-    <div class="card mb-4">
-      <div class="card-header"><div class="section-title"><i class="bi bi-bezier2"></i> Painel Hepático</div></div>
-      <div class="card-body row g-3">
-        <div class="col-md-3"><label class="form-label">Bilirrubina Total</label><input class="form-control" value="{{BILIRRUBINA_TOTAL}}" disabled><div class="muted">Adultos: 0,1 – 1,2 mg/dL</div></div>
-        <div class="col-md-3"><label class="form-label">Bilirrubina Direta</label><input class="form-control" value="{{BILIRRUBINA_DIRETA}}" disabled><div class="muted">Adultos/Crianças: ≤ 0,1 – 1,2 mg/dL</div></div>
-        <div class="col-md-3"><label class="form-label">Proteína Total</label><input class="form-control" value="{{PROTEINA_TOTAL}}" disabled><div class="muted">3,5 – 5,2 g/dL</div></div>
-        <div class="col-md-3"><label class="form-label">Albumina</label><input class="form-control" value="{{ALBUMINA}}" disabled><div class="muted">3,5 – 5,2 g/dL</div></div>
-        <div class="col-md-3"><label class="form-label">Amilase</label><input class="form-control" value="{{AMILASE}}" disabled><div class="muted">&lt; 100 U/L</div></div>
-        <div class="col-md-3"><label class="form-label">TGO (AST)</label><input class="form-control" value="{{AST}}" disabled><div class="muted">F: &lt;31 U/L • M: &lt;35 U/L</div></div>
-        <div class="col-md-3"><label class="form-label">TGP (ALT)</label><input class="form-control" value="{{ALT}}" disabled><div class="muted">F: &lt;34 U/L • M: &lt;45 U/L</div></div>
-        <div class="col-md-3"><label class="form-label">Gama GT</label><input class="form-control" value="{{GGT}}" disabled><div class="muted">F: &lt;32 U/L • M: &lt;49 U/L</div></div>
-        <div class="col-md-3"><label class="form-label">Fosfatase Alcalina</label><input class="form-control" value="{{FA}}" disabled><div class="muted">F: 35–105 • M: 40–130 U/L</div></div>
-        <div class="col-md-3"><label class="form-label">CK (Creatina Quinase)</label><input class="form-control" value="{{CK}}" disabled><div class="muted">F: &lt;145 • M: &lt;171 U/L</div></div>
-      </div>
-    </div>
+        <div class="card-body p-4">
+            <!-- Dados Gerais -->
+            <fieldset disabled>
+                <legend class="h5 mb-3">Dados Gerais</legend>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label">Paciente</label>
+                        <?php if ($auth->isAdmin()): ?>
+                            <input type="text" class="form-control" value="<?php echo htmlspecialchars($exame->getIdPaciente()); ?>">
+                        <?php else: ?>
+                            <input type="text" class="form-control" value="*****">
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Exame realizado em</label>
+                        <input type="text" class="form-control"
+                               value="<?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($exame->getData()))); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Responsável</label>
+                        <input type="text" class="form-control"
+                               value="<?php echo htmlspecialchars($exame->getIdResponsavel()); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Preceptor</label>
+                        <input type="text" class="form-control"
+                               value="<?php echo htmlspecialchars($exame->getPreceptor()); ?>">
+                    </div>
+                </div>
+            </fieldset>
 
-    <!-- Metabólico / Outros -->
-    <div class="card mb-4">
-      <div class="card-header"><div class="section-title"><i class="bi bi-activity"></i> Metabólico / Outros</div></div>
-      <div class="card-body row g-3">
-        <div class="col-md-3"><label class="form-label">Glicose</label><input class="form-control" value="{{GLICOSE}}" disabled></div>
-        <div class="col-md-3"><label class="form-label">PCR (Proteína C Reativa)</label><input class="form-control" value="{{PCR}}" disabled></div>
-        <div class="col-md-3"><label class="form-label">LDH</label><input class="form-control" value="{{LDH}}" disabled></div>
-      </div>
-    </div>
+            <!-- Painel Hepático -->
+            <fieldset disabled>
+                <legend class="h5 mt-4 mb-3">Painel Hepático</legend>
+                <div class="row g-3 mb-4">
+                    <?php
+$camposHepatico = [
+    'getBilirrubinaTotal'                    => 'Bilirrubina Total',
+    'getBilirrubinaDireta'                   => 'Bilirrubina Direta',
+    'getProteinaTotal'                       => 'Proteína Total',
+    'getAlbumina'                            => 'Albumina',
+    'getAmilase'                             => 'Amilase',
+    'getTgoTransaminaseGlutamicoOxalacetica' => 'TGO (AST)',
+    'getTgpTransaminaseGlutamicoPiruvica'    => 'TGP (ALT)',
+    'getGamaGtGlutamiltransferase'           => 'Gama GT',
+    'getFosfataseAlcalina'                   => 'Fosfatase Alcalina',
+    'getReatinaQuinaseCk'                    => 'CK (Creatina Quinase)',
+];
+foreach ($camposHepatico as $metodo => $label): ?>
+                        <div class="col-md-3">
+                            <label class="form-label"><?php echo $label; ?></label>
+                            <input type="text" class="form-control"
+                                   value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </fieldset>
 
-    <!-- Perfil Lipídico -->
-    <div class="card mb-4">
-      <div class="card-header"><div class="section-title"><i class="bi bi-heart-pulse"></i> Perfil Lipídico</div></div>
-      <div class="card-body row g-3">
-        <div class="col-md-3"><label class="form-label">Colesterol Total</label><input class="form-control" value="{{COL_TOTAL}}" disabled></div>
-        <div class="col-md-3"><label class="form-label">HDL</label><input class="form-control" value="{{HDL}}" disabled></div>
-        <div class="col-md-3"><label class="form-label">LDL</label><input class="form-control" value="{{LDL}}" disabled></div>
-        <div class="col-md-3"><label class="form-label">Triglicerídeos</label><input class="form-control" value="{{TRIGLICERIDEOS}}" disabled></div>
-      </div>
-    </div>
+            <!-- Metabólico / Outros -->
+            <fieldset disabled>
+                <legend class="h5 mt-4 mb-3">Metabólico / Outros</legend>
+                <div class="row g-3 mb-4">
+                    <?php
+$camposMetabolico = [
+    'getGlicose'             => 'Glicose',
+    'getPcrProteinaCReativa' => 'PCR (Proteína C Reativa)',
+    'getLdh'                 => 'LDH',
+];
+foreach ($camposMetabolico as $metodo => $label): ?>
+                        <div class="col-md-3">
+                            <label class="form-label"><?php echo $label; ?></label>
+                            <input type="text" class="form-control"
+                                   value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </fieldset>
 
-    <!-- Perfil de Ferro -->
-    <div class="card mb-4">
-      <div class="card-header"><div class="section-title"><i class="bi bi-droplet-half"></i> Perfil de Ferro</div></div>
-      <div class="card-body row g-3">
-        <div class="col-md-3"><label class="form-label">Ferro</label><input class="form-control" value="{{FERRO}}" disabled></div>
-        <div class="col-md-3"><label class="form-label">Ferritina</label><input class="form-control" value="{{FERRITINA}}" disabled></div>
-        <div class="col-md-3"><label class="form-label">Transferrina</label><input class="form-control" value="{{TRANSFERRINA}}" disabled></div>
-        <div class="col-md-3"><label class="form-label">% Saturação Transferrina</label><input class="form-control" value="{{SAT_TRANSFERRINA}}" disabled></div>
-      </div>
-    </div>
+            <!-- Perfil Lipídico -->
+            <fieldset disabled>
+                <legend class="h5 mt-4 mb-3">Perfil Lipídico</legend>
+                <div class="row g-3 mb-4">
+                    <?php
+$camposLipidico = [
+    'getColesterolTotal' => 'Colesterol Total',
+    'getHdl'             => 'HDL',
+    'getLdl'             => 'LDL',
+    'getTriglicerideos'  => 'Triglicerídeos',
+];
+foreach ($camposLipidico as $metodo => $label): ?>
+                        <div class="col-md-3">
+                            <label class="form-label"><?php echo $label; ?></label>
+                            <input type="text" class="form-control"
+                                   value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </fieldset>
 
-    <!-- Renal / Metabólitos -->
-    <div class="card mb-4">
-      <div class="card-header"><div class="section-title"><i class="bi bi-droplet"></i> Renal / Metabólitos</div></div>
-      <div class="card-body row g-3">
-        <div class="col-md-3"><label class="form-label">Creatinina</label><input class="form-control" value="{{CREATININA}}" disabled></div>
-        <div class="col-md-3"><label class="form-label">Ácido Úrico</label><input class="form-control" value="{{ACIDO_URICO}}" disabled></div>
-      </div>
-    </div>
+            <!-- Renal / Metabólitos -->
+            <fieldset disabled>
+                <legend class="h5 mt-4 mb-3">Renal / Metabólitos</legend>
+                <div class="row g-3 mb-4">
+                    <?php
+$camposRenal = [
+    'getUreia'      => 'Ureia',
+    'getCreatinina' => 'Creatinina',
+    'getAcidoUrico' => 'Ácido Úrico',
+];
+foreach ($camposRenal as $metodo => $label): ?>
+                        <div class="col-md-3">
+                            <label class="form-label"><?php echo $label; ?></label>
+                            <input type="text" class="form-control"
+                                   value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </fieldset>
 
-    <!-- Eletrólitos -->
-    <div class="card mb-5">
-      <div class="card-header"><div class="section-title"><i class="bi bi-lightning-charge"></i> Eletrólitos</div></div>
-      <div class="card-body row g-3">
-        <div class="col-md-3"><label class="form-label">Cálcio</label><input class="form-control" value="{{CALCIO}}" disabled></div>
-        <div class="col-md-3"><label class="form-label">Magnésio</label><input class="form-control" value="{{MAGNESIO}}" disabled></div>
-        <div class="col-md-3"><label class="form-label">Fósforo</label><input class="form-control" value="{{FOSFORO}}" disabled></div>
-      </div>
-    </div>
+            <!-- Eletrólitos -->
+            <fieldset disabled>
+                <legend class="h5 mt-4 mb-3">Eletrólitos</legend>
+                <div class="row g-3 mb-4">
+                    <?php
+$camposEletr = [
+    'getCalcio'   => 'Cálcio',
+    'getMagnesio' => 'Magnésio',
+    'getFosforo'  => 'Fósforo',
+];
+foreach ($camposEletr as $metodo => $label): ?>
+                        <div class="col-md-3">
+                            <label class="form-label"><?php echo $label; ?></label>
+                            <input type="text" class="form-control"
+                                   value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </fieldset>
+        </div>
 
-    <!-- Observação -->
-    <div class="card mb-5">
-      <div class="card-header"><div class="section-title"><i class="bi bi-journal-text"></i> Observação</div></div>
-      <div class="card-body"><textarea class="form-control" rows="4" disabled>{{OBSERVACAO}}</textarea></div>
+        <div class="card-footer bg-light text-center py-3">
+            <?php if ($auth->isAdmin()): ?>
+                <button onclick="imprimirLaudo(<?php echo $exame->getId(); ?>)" class="btn btn-primary me-2">
+                    <i class="bi bi-printer"></i> Imprimir
+                </button>
+            <?php endif; ?>
+            <a href="examePrincipal.php?numero_paciente=<?php echo $exame->getIdPaciente(); ?>" class="btn btn-primary me-2">
+                <i class="bi bi-arrow-left"></i> Voltar para o Paciente
+            </a>
+            <a href="/home" class="btn btn-outline-secondary">
+                <i class="bi bi-house"></i> Voltar para Home
+            </a>
+        </div>
     </div>
+</main>
 
-    <div class="sticky-actions d-flex gap-2 justify-content-end">
-      <a href="./BioquimicaNovo.php" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Editar</a>
-      <button class="btn btn-outline-secondary" type="button" onclick="window.print()"><i class="bi bi-printer"></i> Imprimir</button>
-      <a href="./IndexExames.php" class="btn btn-outline-dark"><i class="bi bi-arrow-left"></i> Voltar</a>
-    </div>
-  </main>
 </body>
 </html>

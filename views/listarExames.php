@@ -149,7 +149,7 @@ if ($tipoExame === 'hematologia'):
 ?>
                             <a href="/exameHemato/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
                         <?php elseif ($tipoExame === 'bioquimica'): ?>
-                            <a href="visualizarExameBioquimica.php?id=<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
+                             <a href="/exameBio/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
                         <?php else: ?>
                             <a href="/examesHemato/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
                         <?php endif; ?>

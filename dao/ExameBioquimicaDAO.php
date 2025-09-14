@@ -1,27 +1,50 @@
 <?php
-class ExameBioquimicaDAO{
-    public function buscarPorPacienteId($registroPaciente){
+class ExameBioquimicaDAO
+{
+    public function buscarPorPacienteId($registroPaciente)
+    {
         $url = "http://localhost:3000/exameBio/" . $registroPaciente;
 
-        try{
+        try {
             $response = @file_get_contents($url);
 
-            if($response === false) return null;
+            if ($response === false) {
+                return null;
+            }
 
             $data = json_decode($response, true);
 
             $examesObj = [];
 
             if ($data) {
-                foreach($data as $exame){
+                foreach ($data as $exame) {
                     $examesObj[] = @$this->converterParaObj($exame);
                 }
                 return $examesObj;
-        }
-        return null;
-        
-    }catch(Exception $e){
+            }
+            return null;
+
+        } catch (Exception $e) {
             echo "Erro ao buscar exame de bioquímica: $e";
+            return null;
+        }
+    }
+
+    public function buscarExameCompletoPorId($idExame)
+    {
+        $url = "http://localhost:3000/exameHemato/listar/" . $idExame;
+        try {
+            $response = @file_get_contents($url);
+            if ($response === false) {
+                return null;
+            }
+            $data = json_decode($response, true);
+            if ($data) {
+
+                return @$this->converterParaObj($data);
+            }
+            return null;
+        } catch (Exception $e) {
             return null;
         }
     }
