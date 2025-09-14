@@ -1,0 +1,7 @@
+body{
+  min-height:100vh;
+  background:linear-gradient(180deg,#f7f9fc 0%, #eef3fb 100%);
+}
+.card{
+  border:0;border-radius:1rem;box-shadow:0 6px 20px rgba(16,24,40,.08);
+}
