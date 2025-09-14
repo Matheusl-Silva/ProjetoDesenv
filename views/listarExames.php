@@ -19,29 +19,29 @@
     <div class="bg-decoration decoration-3"></div>
 
     <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <div class="d-flex align-items-center">
-                    <div class="logo-container-nav">
-                        <img src="../../assets/img/LogoPositivo.png" alt="Logo Portal de Saúde Positivo" class="logo-nav">
-                    </div>
-                    <a class="navbar-brand">Portal de Saúde Positivo</a>
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <div class="logo-container-nav">
+                    <img src="../../assets/img/LogoPositivo.png" alt="Logo Portal de Saúde Positivo" class="logo-nav">
                 </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <div class="d-flex align-items-center">
-                        <span class="user-greeting me-3">Olá, <?php echo htmlspecialchars($nomeUsuario); ?></span>
-                        <form action="/logout" method="post">
-                            <button type="submit" class="btn-logout">
-                                <i class="bi bi-box-arrow-right me-1"></i>
-                                Sair
-                            </button>
-                        </form>
-                    </div>
+                <a class="navbar-brand">Portal de Saúde Positivo</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <div class="d-flex align-items-center">
+                    <span class="user-greeting me-3">Olá, <?php echo htmlspecialchars($nomeUsuario); ?></span>
+                    <form action="/logout" method="post">
+                        <button type="submit" class="btn-logout">
+                            <i class="bi bi-box-arrow-right me-1"></i>
+                            Sair
+                        </button>
+                    </form>
                 </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
     <div class="container my-5">
 
@@ -71,20 +71,55 @@
         <div class="modal fade" id="mensagemModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div
-                        class="modal-header <?php echo(strpos($mensagem, 'sucesso') !== false) ? 'bg-success text-white' : 'bg-danger text-white'; ?>">
+                    <div class="modal-header <?php echo(strpos($mensagem, 'sucesso') !== false) ? 'bg-success text-white' : 'bg-danger text-white'; ?>">
                         <h5 class="modal-title">
                             <?php echo(strpos($mensagem, 'sucesso') !== false) ? 'Sucesso' : 'Aviso'; ?>
                         </h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body"><?php echo htmlspecialchars($mensagem); ?></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#pesquisaModal">
+                            <i class="bi bi-search me-1"></i>Nova Pesquisa
+                        </button>
+                        <a href="/home" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-1"></i>Voltar ao Início
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
         <?php endif; ?>
 
-        <?php if (!$paciente): ?>
+        <!-- Modal específico para paciente não encontrado -->
+        <?php if (isset($_GET['paciente']) && !$paciente && empty($mensagem)): ?>
+        <div class="modal fade" id="pacienteNaoEncontradoModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-warning text-dark">
+                        <h5 class="modal-title">
+                            <i class="bi bi-exclamation-triangle me-2"></i>Paciente não encontrado
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="mb-3">O paciente com o número <strong><?php echo htmlspecialchars($_GET['paciente']); ?></strong> não foi encontrado no sistema.</p>
+                        <p class="text-muted mb-0">Verifique se o número foi digitado corretamente e tente novamente.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="abrirModalPesquisa()">
+                            <i class="bi bi-search me-1"></i>Nova Pesquisa
+                        </button>
+                        <a href="/home" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-1"></i>Voltar ao Início
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if (!$paciente && !isset($_GET['paciente'])): ?>
             <!-- Tela inicial -->
             <div class="d-flex align-items-center justify-content-center">
                 <div class="action-card p-5 text-center shadow">
@@ -94,6 +129,28 @@
                         <i class="bi bi-search me-1"></i>Pesquisar Paciente
                     </button>
                     <div class="mt-4">
+                        <a href="/home" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-1"></i>Voltar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php elseif (!$paciente && isset($_GET['paciente'])): ?>
+            <!-- Paciente não encontrado - tela alternativa se não usar modal -->
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="action-card p-5 text-center shadow border-warning">
+                    <div class="text-warning mb-3">
+                        <i class="bi bi-exclamation-triangle" style="font-size: 3rem;"></i>
+                    </div>
+                    <h2 class="mb-3 text-warning">Paciente não encontrado</h2>
+                    <p class="text-muted mb-4">
+                        O paciente com o número <strong><?php echo htmlspecialchars($_GET['paciente']); ?></strong> não foi encontrado no sistema.
+                        <br>Verifique se o número foi digitado corretamente.
+                    </p>
+                    <div class="d-flex gap-2 justify-content-center">
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#pesquisaModal">
+                            <i class="bi bi-search me-1"></i>Nova Pesquisa
+                        </button>
                         <a href="/home" class="btn btn-outline-secondary">
                             <i class="bi bi-arrow-left me-1"></i>Voltar
                         </a>
@@ -173,6 +230,14 @@ if ($tipoExame === 'hematologia'):
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Função para abrir modal de pesquisa
+        function abrirModalPesquisa() {
+            setTimeout(() => {
+                var pesquisaModal = new bootstrap.Modal(document.getElementById('pesquisaModal'));
+                pesquisaModal.show();
+            }, 300);
+        }
+
         <?php if (!empty($mensagem)): ?>
         document.addEventListener('DOMContentLoaded', () => {
             var mensagemModal = new bootstrap.Modal(document.getElementById('mensagemModal'));
@@ -186,6 +251,19 @@ if ($tipoExame === 'hematologia'):
             myModal.show();
         });
         <?php endif; ?>
+
+        <?php if (isset($_GET['paciente']) && !$paciente && empty($mensagem)): ?>
+        document.addEventListener('DOMContentLoaded', () => {
+            var pacienteNaoEncontradoModal = new bootstrap.Modal(document.getElementById('pacienteNaoEncontradoModal'));
+            pacienteNaoEncontradoModal.show();
+        });
+        <?php endif; ?>
+
+        // Limpar campo de pesquisa quando modal for aberto
+        document.getElementById('pesquisaModal').addEventListener('shown.bs.modal', function () {
+            document.getElementById('paciente').value = '';
+            document.getElementById('paciente').focus();
+        });
     </script>
 </body>
 </html>
