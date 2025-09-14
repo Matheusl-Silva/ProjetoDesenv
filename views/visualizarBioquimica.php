@@ -1,24 +1,39 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <title>Bioquímica - Resultado do Exame</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link href="../../assets/css/Bioquimica.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/home-usuario.css">
+    <link rel="icon" href="../../assets/img/favicon.png" type="image/x-icon">
+    <title>Resultado do Exame</title>
 </head>
 <body class="read">
-  <header class="py-3 mb-4 shadow-sm bg-primary text-white">
-    <div class="container d-flex justify-content-between align-items-center">
-      <h1 class="h5 mb-0">Portal de Saúde Positivo</h1>
-      <nav><ol class="breadcrumb mb-0">
-        <li class="breadcrumb-item"><a class="text-white text-decoration-none" href="IndexExames.php">Início</a></li>
-        <li class="breadcrumb-item"><a class="text-white text-decoration-none" href="IndexExames.php">Exames</a></li>
-        <li class="breadcrumb-item active text-white">Bioquímica (Resultado)</li>
-      </ol></nav>
-    </div>
-  </header>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <div class="d-flex align-items-center">
+                    <div class="logo-container-nav">
+                        <img src="../assets/img/LogoPositivo.png" alt="Logo Portal de Saúde Positivo" class="logo-nav">
+                    </div>
+                    <a class="navbar-brand">Portal de Saúde Positivo</a>
+                </div>
+                <div class="collapse navbar-collapse justify-content-end">
+                    <div class="d-flex align-items-center">
+                        <span class="user-greeting me-3">Olá, <?php echo htmlspecialchars($nome_usuario); ?></span>
+                        <form action="/logout" method="post">
+                            <button type="submit" class="btn-logout">
+                                <i class="bi bi-box-arrow-right me-1"></i>
+                                Sair
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
   <main class="container mb-5">
     <div class="alert alert-info border-0 shadow-sm rounded-3">Paciente selecionado previamente. Abaixo, os resultados registrados.</div>
