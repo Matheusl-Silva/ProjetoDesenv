@@ -1,0 +1,239 @@
+/* Estilos simples para a página de lista de pacientes */
+
+body {
+    background-color: #e3f2fd;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main-container {
+    padding: 2rem 0;
+}
+
+.patient-list-card {
+    background: white;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+}
+
+.card-header {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 15px 15px 0 0;
+    padding: 1.5rem;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.search-section {
+    background-color: #f5f5f5;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e0e0e0;
+}
+
+.search-input {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+    outline: none;
+}
+
+.table-container {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    color: #333;
+    border: none;
+    font-weight: 600;
+    padding: 1rem 0.75rem;
+    border-bottom: 2px solid #1976d2;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s;
+}
+
+.table tbody tr:hover {
+    background-color: #f0f8ff;
+}
+
+.table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-color: #e9ecef;
+}
+
+.btn-primary {
+    background-color: #1976d2;
+    border-color: #1976d2;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+}
+
+.btn-primary:hover {
+    background-color: #1565c0;
+    border-color: #1565c0;
+}
+
+.btn-danger {
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+}
+
+.btn-danger:hover {
+    background-color: #c62828;
+    border-color: #c62828;
+}
+
+.btn-outline-secondary {
+    border: 2px solid #757575;
+    color: #757575;
+    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 500;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #757575;
+    color: white;
+}
+
+.btn-success {
+    background-color: #388e3c;
+    border-color: #388e3c;
+    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 500;
+}
+
+.btn-success:hover {
+    background-color: #2e7d32;
+    border-color: #2e7d32;
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 0 0 15px 15px;
+    padding: 1.5rem;
+}
+
+.periodo-badge {
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.periodo-matutino {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+}
+
+.periodo-noturno {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.status-sim {
+    color: #d32f2f;
+    font-weight: 500;
+}
+
+.status-nao {
+    color: #757575;
+}
+
+/* Modal */
+.modal-content {
+    border-radius: 10px;
+    border: none;
+}
+
+.modal-header {
+    background-color: #d32f2f;
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 1rem 0;
+    }
+    
+    .patient-list-card {
+        margin: 1rem 0.5rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .search-section {
+        padding: 1rem;
+    }
+    
+    .table thead th {
+        padding: 0.5rem 0.3rem;
+        font-size: 0.85rem;
+    }
+    
+    .table td {
+        padding: 0.5rem 0.3rem;
+        font-size: 0.85rem;
+    }
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #757575;
+}
+
+.patients-counter {
+    background-color: #e3f2fd;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 500;
+    color: #1976d2;
+    border: 1px solid #bbdefb;
+}

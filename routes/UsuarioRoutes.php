@@ -1,16 +1,25 @@
 <?php
 return function (Router $router) {
     $router->get('/cadastrarUsuario', function () {
+        $auth = new Autenticacao();
         $usuarioController = new UsuarioController();
         $usuarioController->gerarFormCadastro();
     });
 
     $router->get('/usuario', function () {
+        $auth = new Autenticacao();
+        $auth->verificarLogin();
+        $auth->verificarAcessoAdmin();
+
         $usuarioController = new UsuarioController();
         $usuarioController->gerarLista();
     });
 
     $router->get('/usuario/{id}', function ($id) {
+        $auth = new Autenticacao();
+        $auth->verificarLogin();
+        $auth->verificarAcessoAdmin();
+        
         $usuarioController = new UsuarioController();
         $usuarioController->gerarFormEdicao($id);
 
