@@ -32,7 +32,7 @@ class ExameBioquimicaDAO
 
     public function buscarExameCompletoPorId($idExame)
     {
-        $url = "http://localhost:3000/exameHemato/listar/" . $idExame;
+        $url = "http://localhost:3000/exameBio/listar/" . $idExame;
         try {
             $response = @file_get_contents($url);
             if ($response === false) {
