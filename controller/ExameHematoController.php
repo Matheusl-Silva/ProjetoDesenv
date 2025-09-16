@@ -20,4 +20,22 @@ class ExameHematoController
         $nome_usuario = $auth->getNomeUsuario();
         require 'views/visualizarExameHemato.php';
     }
+
+    public function cadastrarExame($id)
+    {
+        $auth = new Autenticacao();
+        $auth->verificarLogin();
+
+        $exameHematoDAO = new ExameHematoDAO();
+        $exame          = $exameHematoDAO->cadastrarExame($id);
+
+        if (!$exame) {
+            $mensagem = "Erro ao cadastrar exame de hematologia.";
+            header("Location: /exames?mensagem=" . urlencode($mensagem));
+            exit();
+        }
+
+        $nome_usuario = $auth->getNomeUsuario();
+        require 'views/cadastrarHematologia.php';
+    }
 }

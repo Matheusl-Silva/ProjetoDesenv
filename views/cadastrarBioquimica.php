@@ -36,7 +36,6 @@
     </header>
 
   <main class="container mb-5">
-    <div class="alert alert-info border-0 shadow-sm rounded-3">Paciente já selecionado. Preencha os resultados do exame.</div>
 
     <form class="needs-validation" novalidate method="post" action="/public/exames/bioquimica/salvar">
       <input type="hidden" name="tipo_exame" value="bioquimica">
