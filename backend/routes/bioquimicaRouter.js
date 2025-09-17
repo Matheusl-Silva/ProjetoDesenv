@@ -7,5 +7,7 @@ router.get("/:idPaciente", bioquimicaController.getByRegistro);
 // listar em tela o exame de um paciente por completo
 router.get("/listar/:idExame", bioquimicaController.getById);
 router.post("/", bioquimicaController.CreateBio);
+router.put("/:idExame", bioquimicaController.updateBio);
+router.delete("/:idExame", bioquimicaController.deleteBio);
 
 module.exports = router;

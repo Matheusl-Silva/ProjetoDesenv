@@ -104,3 +104,83 @@ exports.create = (data) => {
     });
   });
 };
+
+exports.update = (id, data) => {
+  return new Promise((resolve, reject) => {
+    const query =
+      `UPDATE exame_bioquimica SET
+      nbilirrubina_total = ?,
+      nbilirrubina_direta = ?,
+      nproteina_total = ?,
+      nalbumina = ?,
+      namilase = ?,
+      ntgo_transaminase_glutamico_oxalacetica = ?,
+      ntgp_transaminase_glutamico_piruvica = ?,
+      ngama_gt_glutamiltransferase = ?,
+      nfosfatase_alcalina = ?,
+      nreatina_quinase_ck = ?,
+      nglicose = ?,
+      nferro = ?,
+      ncolesterol_total = ?,
+      nhdl = ?,
+      nldl = ?,
+      ntriglicerideos = ?,
+      nureia = ?,
+      ncreatinina = ?,
+      nacido_urico = ?,
+      npcr_proteina_c_reativa = ?,
+      ncalcio = ?,
+      nldh = ?,
+      nmagnesio = ?,
+      nfosforo = ?,
+      id_responsavel = ?,
+      id_preceptor = ?,
+      id_paciente = ?,
+      ddata_exame = ?
+    WHERE id = ?`;
+
+    const values = [
+      data.nbilirrubina_total,
+      data.nbilirrubina_direta,
+      data.nproteina_total,
+      data.nalbumina,
+      data.namilase,
+      data.ntgo_transaminase_glutamico_oxalacetica,
+      data.ntgp_transaminase_glutamico_piruvica,
+      data.ngama_gt_glutamiltransferase,
+      data.nfosfatase_alcalina,
+      data.nreatina_quinase_ck,
+      data.nglicose,
+      data.nferro,
+      data.ncolesterol_total,
+      data.nhdl,
+      data.nldl,
+      data.ntriglicerideos,
+      data.nureia,
+      data.ncreatinina,
+      data.nacido_urico,
+      data.npcr_proteina_c_reativa,
+      data.ncalcio,
+      data.nldh,
+      data.nmagnesio,
+      data.nfosforo,
+      data.id_responsavel,
+      data.id_preceptor,
+      data.id_paciente,
+      data.ddata_exame,
+      id,
+    ];
+
+    db.query(query, values, (err, result) => {
+      err ? reject(err) : resolve(result);
+    });
+  });
+};
+
+exports.delete = (id) => {
+  return new Promise((resolve, reject) => {
+    db.query("DELETE FROM exame_bioquimica WHERE id = ?", [id], (err, result) => {
+      err ? reject(err) : resolve(result);
+    });
+  });
+};
