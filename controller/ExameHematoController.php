@@ -38,4 +38,11 @@ class ExameHematoController
         $nome_usuario = $auth->getNomeUsuario();
         require 'views/cadastrarHematologia.php';
     }
+    
+    public function excluir($idExame)
+    {
+        $exameHematoDAO = new ExameHematoDAO();
+        $result = $exameHematoDAO->excluir($idExame);
+        return $result;
+    }
 }

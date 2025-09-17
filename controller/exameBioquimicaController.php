@@ -19,4 +19,11 @@ class exameBioquimicaController
         $nome_usuario = $auth->getNomeUsuario();
         require 'views/visualizarBioquimica.php';
     }
+
+    public function excluir($idExame)
+    {
+        $exameBioquimicaDao = new ExameBioquimicaDAO();
+        $result = $exameBioquimicaDao->excluir($idExame);
+        return $result;
+    }
 }

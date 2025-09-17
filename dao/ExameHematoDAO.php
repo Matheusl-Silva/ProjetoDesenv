@@ -103,6 +103,26 @@ class ExameHematoDAO
         return isset($response['id']) ? $response['id'] : false;
     }
 
+    public function excluir($idExame)
+    {
+        $url = "http://localhost:3000/exameHemato/" . $idExame;
+
+        $options = [
+            'http' => [
+                "header"  => "Content-Type: application/json\r\n",
+                "method"  => "POST"
+            ]
+        ];
+
+        $context = stream_context_create($options);
+
+        $result = @file_get_contents($url, false, $context);
+
+        if($result === false) return false;
+
+        return json_decode($result, true);
+    }
+
     private function converterParaObj($row)
     {
         $exameHemato = new ExameHemato();

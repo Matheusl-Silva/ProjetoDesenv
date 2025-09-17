@@ -7,6 +7,13 @@ return function (Router $router) {
 
         $exameHematoController = new ExameHematoController();
         $exameHematoController->VisualizarExame($id);
+    });
 
+    $router->delete('/exameHemato/{id}', function ($id) {
+        $exameHematoController = new ExameHematoController();
+        $exameHematoController->excluir($id);
+
+        header('Location: /exames?paciente=' . $id);
+        exit;
     });
 };

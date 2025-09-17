@@ -50,4 +50,4 @@ exports.CreateBio = async (req, res) => {
       .status(500)
       .json({ error: "Erro interno ao criar ExameBio do paciente" });
   }
-};
+}

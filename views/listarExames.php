@@ -68,55 +68,55 @@
 
         <!-- Modal Mensagem -->
         <?php if (!empty($mensagem)): ?>
-        <div class="modal fade" id="mensagemModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header <?php echo(strpos($mensagem, 'sucesso') !== false) ? 'bg-success text-white' : 'bg-danger text-white'; ?>">
-                        <h5 class="modal-title">
-                            <?php echo(strpos($mensagem, 'sucesso') !== false) ? 'Sucesso' : 'Aviso'; ?>
-                        </h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body"><?php echo htmlspecialchars($mensagem); ?></div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#pesquisaModal">
-                            <i class="bi bi-search me-1"></i>Nova Pesquisa
-                        </button>
-                        <a href="/home" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-left me-1"></i>Voltar ao Início
-                        </a>
+            <div class="modal fade" id="mensagemModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header <?php echo (strpos($mensagem, 'sucesso') !== false) ? 'bg-success text-white' : 'bg-danger text-white'; ?>">
+                            <h5 class="modal-title">
+                                <?php echo (strpos($mensagem, 'sucesso') !== false) ? 'Sucesso' : 'Aviso'; ?>
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body"><?php echo htmlspecialchars($mensagem); ?></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#pesquisaModal">
+                                <i class="bi bi-search me-1"></i>Nova Pesquisa
+                            </button>
+                            <a href="/home" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-1"></i>Voltar ao Início
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         <?php endif; ?>
 
         <!-- Modal específico para paciente não encontrado -->
         <?php if (isset($_GET['paciente']) && !$paciente && empty($mensagem)): ?>
-        <div class="modal fade" id="pacienteNaoEncontradoModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-warning text-dark">
-                        <h5 class="modal-title">
-                            <i class="bi bi-exclamation-triangle me-2"></i>Paciente não encontrado
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="mb-3">O paciente com o número <strong><?php echo htmlspecialchars($_GET['paciente']); ?></strong> não foi encontrado no sistema.</p>
-                        <p class="text-muted mb-0">Verifique se o número foi digitado corretamente e tente novamente.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="abrirModalPesquisa()">
-                            <i class="bi bi-search me-1"></i>Nova Pesquisa
-                        </button>
-                        <a href="/home" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-left me-1"></i>Voltar ao Início
-                        </a>
+            <div class="modal fade" id="pacienteNaoEncontradoModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning text-dark">
+                            <h5 class="modal-title">
+                                <i class="bi bi-exclamation-triangle me-2"></i>Paciente não encontrado
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="mb-3">O paciente com o número <strong><?php echo htmlspecialchars($_GET['paciente']); ?></strong> não foi encontrado no sistema.</p>
+                            <p class="text-muted mb-0">Verifique se o número foi digitado corretamente e tente novamente.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="abrirModalPesquisa()">
+                                <i class="bi bi-search me-1"></i>Nova Pesquisa
+                            </button>
+                            <a href="/home" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-1"></i>Voltar ao Início
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         <?php endif; ?>
 
         <?php if (!$paciente && !isset($_GET['paciente'])): ?>
@@ -170,54 +170,68 @@
             <div class="action-card mb-5">
                 <h5 class="mb-3"><i class="bi bi-clock-history me-2"></i>Histórico de Exames</h5>
                 <?php if (!empty($exames)): ?>
-                <div class="table-responsive">
-                    <table class="table table-hover table-sm align-middle">
-                        <thead>
-                            <tr>
-                                <th>Número</th>
-                                <th>Data</th>
-                                <th>Tipo</th>
-                                <th>Preceptor</th>
-                                <th>Ação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($exames as $exame): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($exame->getId()); ?></td>
-                            <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($exame->getData()))); ?></td>
-                            <td>
-                                <?php
-$tipoExame = $exame->getTipo();
-if ($tipoExame === 'hematologia'):
-?>
-                                    <span class="badge bg-primary">Hematologia</span>
-                                <?php elseif ($tipoExame === 'bioquimica'): ?>
-                                    <span class="badge bg-success">Bioquímica</span>
-                                <?php else: ?>
-                                    <span class="badge bg-secondary">N/A</span>
-                                <?php endif; ?>
-                            </td>
-                            <td><?php echo isset($preceptores_map[$exame->getPreceptor()]) ? htmlspecialchars($preceptores_map[$exame->getPreceptor()]) : 'Preceptor: ' . $exame->getPreceptor(); ?></td>
-                            <td>
-                                <?php
-$tipoExame = $exame->getTipo();
-if ($tipoExame === 'hematologia'):
-?>
-                            <a href="/exameHemato/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
-                        <?php elseif ($tipoExame === 'bioquimica'): ?>
-                             <a href="/exameBio/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
-                        <?php else: ?>
-                            <a href="/examesHemato/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
-                        <?php endif; ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Número</th>
+                                    <th>Data</th>
+                                    <th>Tipo</th>
+                                    <th>Preceptor</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($exames as $exame): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($exame->getId()); ?></td>
+                                        <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($exame->getData()))); ?></td>
+                                        <td>
+                                            <?php
+                                            $tipoExame = $exame->getTipo();
+                                            if ($tipoExame === 'hematologia'):
+                                            ?>
+                                                <span class="badge bg-primary">Hematologia</span>
+                                            <?php elseif ($tipoExame === 'bioquimica'): ?>
+                                                <span class="badge bg-success">Bioquímica</span>
+                                            <?php else: ?>
+                                                <span class="badge bg-secondary">N/A</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?php echo isset($preceptores_map[$exame->getPreceptor()]) ? htmlspecialchars($preceptores_map[$exame->getPreceptor()]) : 'Preceptor: ' . $exame->getPreceptor(); ?></td>
+                                        <td>
+                                            <?php
+                                            $tipoExame = $exame->getTipo();
+                                            if ($tipoExame === 'hematologia'):
+                                            ?>
+                                                <a href="/exameHemato/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
+                                                <?php if ($auth->isAdmin()): ?>
+                                                    <form action="/exameHemato/<?= $exame->getId() ?>" method="post" style="display: inline">
+                                                        <input type="hidden" name="method" value="DELETE">
+                                                        <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                                                    </form>
+                                                <?php endif; ?>
+
+                                            <?php elseif ($tipoExame === 'bioquimica'): ?>
+                                                <a href="/exameBio/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
+                                                <?php if ($auth->isAdmin()): ?>
+                                                    <form action="/exameBio/<?= $exame->getId() ?>" method="post" style="display: inline">
+                                                        <input type="hidden" name="method" value="DELETE">
+                                                        <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                                                    </form>
+                                                <?php endif; ?>
+
+
+                                            <?php endif; ?>
+
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 <?php else: ?>
-                <p class="text-muted">Nenhum exame encontrado.</p>
+                    <p class="text-muted">Nenhum exame encontrado.</p>
                 <?php endif; ?>
             </div>
 
@@ -239,31 +253,32 @@ if ($tipoExame === 'hematologia'):
         }
 
         <?php if (!empty($mensagem)): ?>
-        document.addEventListener('DOMContentLoaded', () => {
-            var mensagemModal = new bootstrap.Modal(document.getElementById('mensagemModal'));
-            mensagemModal.show();
-        });
+            document.addEventListener('DOMContentLoaded', () => {
+                var mensagemModal = new bootstrap.Modal(document.getElementById('mensagemModal'));
+                mensagemModal.show();
+            });
         <?php endif; ?>
 
         <?php if (!$paciente && !isset($_GET['paciente'])): ?>
-        document.addEventListener('DOMContentLoaded', () => {
-            var myModal = new bootstrap.Modal(document.getElementById('pesquisaModal'));
-            myModal.show();
-        });
+            document.addEventListener('DOMContentLoaded', () => {
+                var myModal = new bootstrap.Modal(document.getElementById('pesquisaModal'));
+                myModal.show();
+            });
         <?php endif; ?>
 
         <?php if (isset($_GET['paciente']) && !$paciente && empty($mensagem)): ?>
-        document.addEventListener('DOMContentLoaded', () => {
-            var pacienteNaoEncontradoModal = new bootstrap.Modal(document.getElementById('pacienteNaoEncontradoModal'));
-            pacienteNaoEncontradoModal.show();
-        });
+            document.addEventListener('DOMContentLoaded', () => {
+                var pacienteNaoEncontradoModal = new bootstrap.Modal(document.getElementById('pacienteNaoEncontradoModal'));
+                pacienteNaoEncontradoModal.show();
+            });
         <?php endif; ?>
 
         // Limpar campo de pesquisa quando modal for aberto
-        document.getElementById('pesquisaModal').addEventListener('shown.bs.modal', function () {
+        document.getElementById('pesquisaModal').addEventListener('shown.bs.modal', function() {
             document.getElementById('paciente').value = '';
             document.getElementById('paciente').focus();
         });
     </script>
 </body>
+
 </html>
