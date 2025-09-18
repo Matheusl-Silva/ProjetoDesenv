@@ -110,13 +110,13 @@ class ExameHematoDAO
         $options = [
             'http' => [
                 "header"  => "Content-Type: application/json\r\n",
-                "method"  => "POST"
+                "method"  => "DELETE"
             ]
         ];
 
         $context = stream_context_create($options);
 
-        $result = @file_get_contents($url, false, $context);
+        $result = file_get_contents($url, false, $context);
 
         if($result === false) return false;
 

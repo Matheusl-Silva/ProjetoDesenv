@@ -55,7 +55,7 @@ class ExameBioquimicaDAO
         $options = [
             'http' => [
                 "header"  => "Content-Type: application/json\r\n",
-                "method"  => "POST"
+                "method"  => "DELETE"
             ]
         ];
 
