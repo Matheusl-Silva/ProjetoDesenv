@@ -21,6 +21,24 @@
   <div class="bg-decoration decoration-2"></div>
   <div class="bg-decoration decoration-3"></div>
 
+  <!-- Modal de Sucesso -->
+  <div class="modal fade" id="modalSucesso" tabindex="-1" aria-labelledby="modalSucessoLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="modalSucessoLabel">Sucesso!</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <p id="mensagemSucesso">Exame Hematologico cadastrado com sucesso! Número do Exame: <?=$idExame?></p>
+              </div>
+              <div class="modal-footer">
+                  <a href="homeUsuario.php" class="btn btn-primary">Ir para Home</a>
+              </div>
+          </div>
+      </div>
+  </div>
+
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg">
     <div class="container">
@@ -205,6 +223,12 @@
 
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      if(idExame) {
+          var myModal = new bootstrap.Modal(document.getElementById('modalSucesso'));
+          myModal.show();
+      }
+    </script>
 </body>
 
 </html>
