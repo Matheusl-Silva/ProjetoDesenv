@@ -100,7 +100,7 @@ class ExameBioquimicaDAO
         $exameBio->setFosforo($row['nfosforo']);
         $exameBio->setIdResponsavel($row['id_responsavel']);
         $exameBio->setPreceptor($row['id_preceptor']);
-        $exameBio->setIdPaciente($row['id_paciente']);
+        $exameBio->setPaciente($row['id_paciente']);
         $exameBio->setData($row['ddata_exame']);
 
         return $exameBio;

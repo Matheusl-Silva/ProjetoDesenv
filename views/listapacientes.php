@@ -41,7 +41,7 @@
                     <div class="card-body">
 
                         <div class="patients-counter">
-                            Total de pacientes: <strong><?=count($listaPacientes)?></strong>
+                            Total de pacientes: <strong><?= count($listaPacientes) ?></strong>
                         </div>
 
 
@@ -49,7 +49,7 @@
                             <div class="row">
                                 <div class="col-md-8 mb-3 mb-md-0">
                                     <input type="text" class="form-control search-input" id="searchInput"
-                                           placeholder="Buscar por nome, email ou telefone...">
+                                        placeholder="Buscar por nome, email ou telefone...">
                                 </div>
                                 <div class="col-md-4">
                                     <select class="form-control search-input" id="filterPeriodo">
@@ -81,25 +81,25 @@
                                     <tbody>
                                         <?php foreach ($listaPacientes as $paciente): ?>
                                             <tr>
-                                                <td><?=$paciente->getId()?></td>
-                                                <td><strong><?=htmlspecialchars($paciente->getNome())?></strong></td>
-                                                <td><?=htmlspecialchars($paciente->getEmail())?></td>
+                                                <td><?= $paciente->getId() ?></td>
+                                                <td><strong><?= htmlspecialchars($paciente->getNome()) ?></strong></td>
+                                                <td><?= htmlspecialchars($paciente->getEmail()) ?></td>
                                                 <td>
-                                                    <span class="periodo-badge periodo-<?=$paciente->getPeriodo()?>">
-                                                        <?=ucfirst($paciente->getPeriodo())?>
+                                                    <span class="periodo-badge periodo-<?= $paciente->getPeriodo() ?>">
+                                                        <?= ucfirst($paciente->getPeriodo()) ?>
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <?php
-$dateTime = new DateTime($paciente->getDataNasc());
-echo $dateTime->format('d/m/Y');
-?>
+                                                    $dateTime = new DateTime($paciente->getDataNasc());
+                                                    echo $dateTime->format('d/m/Y');
+                                                    ?>
                                                 </td>
-                                                <td><?=htmlspecialchars($paciente->getFone())?></td>
-                                                <td><?=htmlspecialchars($paciente->getNomeMae())?></td>
+                                                <td><?= htmlspecialchars($paciente->getFone()) ?></td>
+                                                <td><?= htmlspecialchars($paciente->getNomeMae()) ?></td>
                                                 <td>
                                                     <?php if ($paciente->getMedicamento()): ?>
-                                                        <span class="status-sim" title="<?=htmlspecialchars($paciente->getMedicamento())?>">
+                                                        <span class="status-sim" title="<?= htmlspecialchars($paciente->getMedicamento()) ?>">
                                                             Sim
                                                         </span>
                                                     <?php else: ?>
@@ -108,7 +108,7 @@ echo $dateTime->format('d/m/Y');
                                                 </td>
                                                 <td>
                                                     <?php if ($paciente->getPatologia()): ?>
-                                                        <span class="status-sim" title="<?=htmlspecialchars($paciente->getPatologia())?>">
+                                                        <span class="status-sim" title="<?= htmlspecialchars($paciente->getPatologia()) ?>">
                                                             Sim
                                                         </span>
                                                     <?php else: ?>
@@ -117,14 +117,14 @@ echo $dateTime->format('d/m/Y');
                                                 </td>
                                                 <td>
                                                     <div class="d-flex gap-1">
-                                                        <a href="/paciente/<?=$paciente->getId()?>"
-                                                           class="btn btn-primary btn-sm">
+                                                        <a href="/paciente/<?= $paciente->getId() ?>"
+                                                            class="btn btn-primary btn-sm">
                                                             Editar
                                                         </a>
                                                         <button type="button"
-                                                                class="btn btn-danger btn-sm btn-delete"
-                                                                data-id="<?=$paciente->getId()?>"
-                                                                data-nome="<?=htmlspecialchars($paciente->getNome())?>">
+                                                            class="btn btn-danger btn-sm btn-delete"
+                                                            data-id="<?= $paciente->getId() ?>"
+                                                            data-nome="<?= htmlspecialchars($paciente->getNome()) ?>">
                                                             Excluir
                                                         </button>
                                                     </div>

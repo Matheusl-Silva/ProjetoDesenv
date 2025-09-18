@@ -1,6 +1,6 @@
 <?php
 
-class exameBioquimicaController
+class ExameBioquimicaController
 {
     public function VisualizarExame($id)
     {
@@ -25,5 +25,14 @@ class exameBioquimicaController
         $exameBioquimicaDao = new ExameBioquimicaDAO();
         $result = $exameBioquimicaDao->excluir($idExame);
         return $result;
+    }
+
+    public function getPaciente($idExame)
+    {
+        $exameBioquimicaDAO = new ExameBioquimicaDAO();
+        $exame = $exameBioquimicaDAO->buscarExameCompletoPorId($idExame);
+        $idPaciente = $exame->getPaciente();
+
+        return $idPaciente;
     }
 }

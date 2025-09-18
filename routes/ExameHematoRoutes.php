@@ -11,9 +11,10 @@ return function (Router $router) {
 
     $router->delete('/exameHemato/{id}', function ($id) {
         $exameHematoController = new ExameHematoController();
+        $idPaciente = $exameHematoController->getPaciente($id); //Tem um jeito melhor de fazer?
         $exameHematoController->excluir($id);
 
-        header('Location: /exames?paciente=' . $id);
+        header('Location: /exames?paciente=' . $idPaciente);
         exit;
     });
 };

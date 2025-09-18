@@ -2,7 +2,6 @@
 
 class ExameHematoController
 {
-
     public function VisualizarExame($id)
     {
         $auth = new Autenticacao();
@@ -44,5 +43,13 @@ class ExameHematoController
         $exameHematoDAO = new ExameHematoDAO();
         $result = $exameHematoDAO->excluir($idExame);
         return $result;
+    }
+
+    public function getPaciente($idExame){
+        $exameHematoDAO = new ExameHematoDAO();
+        $exame = $exameHematoDAO->buscarExameCompletoPorId($idExame);
+        $idPaciente = $exame->getPaciente();
+
+        return $idPaciente;
     }
 }

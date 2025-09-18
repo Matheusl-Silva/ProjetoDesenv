@@ -13,6 +13,30 @@
 </head>
 
 <body>
+    <?php if ($auth->isAdmin()): ?>
+        <div class="modal fade" id="modalConfirmacao" tabindex="-1" aria-labelledby="modalConfirmacaoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalConfirmacaoLabel">Confirmar Exclusão</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Tem certeza que deseja excluir este exame?</strong></p>
+                        <p class="text-muted">Esta ação não pode ser desfeita.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <form action="/exame" method="post" style="display: inline">
+                            <input type="hidden" name="method" value="DELETE">
+                            <button type="submit" class="btn btn-danger">Excluir</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <!-- Elementos decorativos -->
     <div class="bg-decoration decoration-1"></div>
     <div class="bg-decoration decoration-2"></div>
@@ -205,23 +229,12 @@
                                             if ($tipoExame === 'hematologia'):
                                             ?>
                                                 <a href="/exameHemato/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
-                                                <?php if ($auth->isAdmin()): ?>
-                                                    <form action="/exameHemato/<?= $exame->getId() ?>" method="post" style="display: inline">
-                                                        <input type="hidden" name="method" value="DELETE">
-                                                        <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
-                                                    </form>
-                                                <?php endif; ?>
-
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?= $exame->getId() ?>" data-tipo="Hemato" class="btn btn-sm btn-danger">Excluir</button>
                                             <?php elseif ($tipoExame === 'bioquimica'): ?>
                                                 <a href="/exameBio/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
-                                                <?php if ($auth->isAdmin()): ?>
-                                                    <form action="/exameBio/<?= $exame->getId() ?>" method="post" style="display: inline">
-                                                        <input type="hidden" name="method" value="DELETE">
-                                                        <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
-                                                    </form>
-                                                <?php endif; ?>
-
-
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?= $exame->getId() ?>" data-tipo="Bio" class="btn btn-sm btn-danger">Excluir</button>
+                                            <?php endif; ?>
+                                            <?php if ($auth->isAdmin()): ?>
                                             <?php endif; ?>
 
                                         </td>
@@ -244,14 +257,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Função para abrir modal de pesquisa
-        function abrirModalPesquisa() {
-            setTimeout(() => {
-                var pesquisaModal = new bootstrap.Modal(document.getElementById('pesquisaModal'));
-                pesquisaModal.show();
-            }, 300);
-        }
-
         <?php if (!empty($mensagem)): ?>
             document.addEventListener('DOMContentLoaded', () => {
                 var mensagemModal = new bootstrap.Modal(document.getElementById('mensagemModal'));
@@ -272,6 +277,18 @@
                 pacienteNaoEncontradoModal.show();
             });
         <?php endif; ?>
+
+        //Modal de confirmação de exclusão
+        document.addEventListener('DOMContentLoaded', () => {
+            const modalExcluir = document.getElementById('modalConfirmacao');
+            modalExcluir.addEventListener('show.bs.modal', function() {
+                const botao = event.relatedTarget;
+                const idExame = botao.getAttribute('data-id');
+                const tipoExame = botao.getAttribute('data-tipo');
+                const form = modalExcluir.querySelector('form');
+                form.action = form.action + tipoExame + '/' + idExame;
+            });
+        })
 
         // Limpar campo de pesquisa quando modal for aberto
         document.getElementById('pesquisaModal').addEventListener('shown.bs.modal', function() {

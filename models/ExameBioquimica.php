@@ -29,7 +29,7 @@ class ExameBioquimica
     private $fosforo;
     private $idResponsavel;
     private $preceptor;
-    private $idPaciente;
+    private $paciente;
     private $data;
     private $tipo;
 
@@ -168,10 +168,10 @@ class ExameBioquimica
     public function setPreceptor($preceptor)
     {$this->preceptor = $preceptor;}
 
-    public function getIdPaciente()
-    {return $this->idPaciente;}
-    public function setIdPaciente($idPaciente)
-    {$this->idPaciente = $idPaciente;}
+    public function getPaciente()
+    {return $this->paciente;}
+    public function setPaciente($paciente)
+    {$this->paciente = $paciente;}
 
     public function getData()
     {return $this->data;}
