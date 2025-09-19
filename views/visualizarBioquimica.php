@@ -62,7 +62,7 @@
                         <div class="col-md-6">
                             <label class="form-label">Paciente</label>
                             <?php if ($auth->isAdmin()): ?>
-                                <input type="text" class="form-control" value="<?php echo htmlspecialchars($exame->getIdPaciente()); ?>">
+                                <input type="text" class="form-control" value="<?php echo htmlspecialchars($exame->getPaciente()); ?>">
                             <?php else: ?>
                                 <input type="text" class="form-control" value="*">
                             <?php endif; ?>
@@ -75,12 +75,12 @@
                         <div class="col-md-6">
                             <label class="form-label">Responsável</label>
                             <input type="text" class="form-control"
-                                value="<?php echo htmlspecialchars($exame->getIdResponsavel()); ?>">
+                                value="<?php echo htmlspecialchars($responsavel->getNome()); ?>">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Preceptor</label>
                             <input type="text" class="form-control"
-                                value="<?php echo htmlspecialchars($exame->getPreceptor()); ?>">
+                                value="<?php echo htmlspecialchars($preceptor->getNome()); ?>">
                         </div>
                     </div>
                 </fieldset>

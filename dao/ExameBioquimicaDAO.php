@@ -98,7 +98,7 @@ class ExameBioquimicaDAO
         $exameBio->setLdh($row['nldh']);
         $exameBio->setMagnesio($row['nmagnesio']);
         $exameBio->setFosforo($row['nfosforo']);
-        $exameBio->setIdResponsavel($row['id_responsavel']);
+        $exameBio->setResponsavel($row['id_responsavel']);
         $exameBio->setPreceptor($row['id_preceptor']);
         $exameBio->setPaciente($row['id_paciente']);
         $exameBio->setData($row['ddata_exame']);

@@ -8,7 +8,11 @@ class ExameBioquimicaController
         $auth->verificarLogin();
 
         $exameBioquimicaDao = new ExameBioquimicaDAO();
+        $usuarioDAO = new UsuarioDAO();
         $exame              = $exameBioquimicaDao->buscarExameCompletoPorId($id);
+
+        $responsavel = $usuarioDAO->buscarUsuario($exame->getResponsavel());
+        $preceptor = $usuarioDAO->buscarUsuario($exame->getPreceptor());
 
         if (!$exame) {
             $mensagem = "Exame de bioquimica não encontrado.";

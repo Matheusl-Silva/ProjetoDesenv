@@ -27,7 +27,7 @@ class ExameBioquimica
     private $ldh;
     private $magnesio;
     private $fosforo;
-    private $idResponsavel;
+    private $responsavel;
     private $preceptor;
     private $paciente;
     private $data;
@@ -158,10 +158,10 @@ class ExameBioquimica
     public function setFosforo($fosforo)
     {$this->fosforo = $fosforo;}
 
-    public function getIdResponsavel()
-    {return $this->idResponsavel;}
-    public function setIdResponsavel($idResponsavel)
-    {$this->idResponsavel = $idResponsavel;}
+    public function getResponsavel()
+    {return $this->responsavel;}
+    public function setResponsavel($responsavel)
+    {$this->responsavel = $responsavel;}
 
     public function getPreceptor()
     {return $this->preceptor;}
