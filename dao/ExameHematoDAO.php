@@ -79,8 +79,8 @@ class ExameHematoDAO
             "volumePlaquetarioMedio" => $dadosExame->getVolumePlaquetarioMedio(),
             "dataExame"              => $dadosExame->getData(),
             "idResponsavel"          => $dadosExame->getIdResponsavel(),
-            "preceptor"              => $dadosExame->getPreceptor(),
-            "paciente"               => $dadosExame->getPaciente(),
+            "idPreceptor"            => $dadosExame->getPreceptor(),
+            "idPaciente"             => $dadosExame->getPaciente(),
         ];
         $options = [
             "http" => [
@@ -109,16 +109,18 @@ class ExameHematoDAO
 
         $options = [
             'http' => [
-                "header"  => "Content-Type: application/json\r\n",
-                "method"  => "DELETE"
-            ]
+                "header" => "Content-Type: application/json\r\n",
+                "method" => "DELETE",
+            ],
         ];
 
         $context = stream_context_create($options);
 
         $result = file_get_contents($url, false, $context);
 
-        if($result === false) return false;
+        if ($result === false) {
+            return false;
+        }
 
         return json_decode($result, true);
     }

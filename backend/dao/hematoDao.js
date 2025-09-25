@@ -45,10 +45,10 @@ exports.create = (data) => {
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const values = [
-      data.id_responsavel,
-      data.id_preceptor,
-      data.id_paciente,
-      data.data,
+      data.idResponsavel,
+      data.idPreceptor,
+      data.idPaciente,
+      data.dataExame,
       data.hemacia,
       data.hemoglobina,
       data.hematocrito,
@@ -66,7 +66,7 @@ exports.create = (data) => {
       data.eosinofilos,
       data.basofilos,
       data.plaquetas,
-      data.volplaquetariomedio,
+      data.volumePlaquetarioMedio,
       data.neutrofilos,
     ];
 
@@ -78,8 +78,7 @@ exports.create = (data) => {
 
 exports.update = (id, data) => {
   return new Promise((resolve, reject) => {
-    const query =
-      `UPDATE exame_hematologia SET
+    const query = `UPDATE exame_hematologia SET
       id_responsavel = ?,
       id_preceptor = ?,
       id_paciente = ?,
@@ -140,8 +139,12 @@ exports.update = (id, data) => {
 
 exports.delete = (id) => {
   return new Promise((resolve, reject) => {
-    db.query("DELETE FROM exame_hematologia WHERE id = ?", [id], (err, result) => {
-      err ? reject(err) : resolve(result);
-    });
+    db.query(
+      "DELETE FROM exame_hematologia WHERE id = ?",
+      [id],
+      (err, result) => {
+        err ? reject(err) : resolve(result);
+      }
+    );
   });
 };

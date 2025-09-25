@@ -95,9 +95,9 @@
             <div class="modal fade" id="mensagemModal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header <?php echo (strpos($mensagem, 'sucesso') !== false) ? 'bg-success text-white' : 'bg-danger text-white'; ?>">
+                        <div class="modal-header <?php echo(strpos($mensagem, 'sucesso') !== false) ? 'bg-success text-white' : 'bg-danger text-white'; ?>">
                             <h5 class="modal-title">
-                                <?php echo (strpos($mensagem, 'sucesso') !== false) ? 'Sucesso' : 'Aviso'; ?>
+                                <?php echo(strpos($mensagem, 'sucesso') !== false) ? 'Sucesso' : 'Aviso'; ?>
                             </h5>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                         </div>
@@ -192,7 +192,27 @@
 
             <!-- Histórico -->
             <div class="action-card mb-5">
-                <h5 class="mb-3"><i class="bi bi-clock-history me-2"></i>Histórico de Exames</h5>
+
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0"><i class="bi bi-clock-history me-2"></i>Histórico de Exames</h5>
+                    <a href="/exames/novo/<?php echo $paciente->getId(); ?>" class="btn btn-primary">
+                        <i class="bi bi-plus-circle me-1"></i> Incluir Exame
+                    </a>
+                </div>
+
+                <?php if (!empty($exames)): ?>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm align-middle">
+                            </table>
+                    </div>
+                <?php else: ?>
+                    <div class="text-center p-4 border rounded mt-4">
+                        <p class="text-muted mb-0">Nenhum exame encontrado para este paciente.</p>
+                        <p class="text-muted">Clique em "Incluir Exame" para adicionar o primeiro.</p>
+                    </div>
+                <?php endif; ?>
+
                 <?php if (!empty($exames)): ?>
                     <div class="table-responsive">
                         <table class="table table-hover table-sm align-middle">
@@ -212,9 +232,9 @@
                                         <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($exame->getData()))); ?></td>
                                         <td>
                                             <?php
-                                            $tipoExame = $exame->getTipo();
-                                            if ($tipoExame === 'hematologia'):
-                                            ?>
+$tipoExame = $exame->getTipo();
+if ($tipoExame === 'hematologia'):
+?>
                                                 <span class="badge bg-primary">Hematologia</span>
                                             <?php elseif ($tipoExame === 'bioquimica'): ?>
                                                 <span class="badge bg-success">Bioquímica</span>
@@ -225,14 +245,14 @@
                                         <td><?php echo isset($preceptores_map[$exame->getPreceptor()]) ? htmlspecialchars($preceptores_map[$exame->getPreceptor()]) : 'Preceptor: ' . $exame->getPreceptor(); ?></td>
                                         <td>
                                             <?php
-                                            $tipoExame = $exame->getTipo();
-                                            if ($tipoExame === 'hematologia'):
-                                            ?>
+$tipoExame = $exame->getTipo();
+if ($tipoExame === 'hematologia'):
+?>
                                                 <a href="/exameHemato/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?= $exame->getId() ?>" data-tipo="Hemato" class="btn btn-sm btn-danger">Excluir</button>
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?=$exame->getId()?>" data-tipo="Hemato" class="btn btn-sm btn-danger">Excluir</button>
                                             <?php elseif ($tipoExame === 'bioquimica'): ?>
                                                 <a href="/exameBio/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?= $exame->getId() ?>" data-tipo="Bio" class="btn btn-sm btn-danger">Excluir</button>
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?=$exame->getId()?>" data-tipo="Bio" class="btn btn-sm btn-danger">Excluir</button>
                                             <?php endif; ?>
                                             <?php if ($auth->isAdmin()): ?>
                                             <?php endif; ?>
@@ -243,9 +263,7 @@
                             </tbody>
                         </table>
                     </div>
-                <?php else: ?>
-                    <p class="text-muted">Nenhum exame encontrado.</p>
-                <?php endif; ?>
+                <?php endif?>
             </div>
 
             <div class="text-center mt-4">

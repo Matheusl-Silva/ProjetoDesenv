@@ -44,9 +44,19 @@ class ExameHematoController
 
     }
 
-    public function gerarFormCadastro()
+    public function gerarFormCadastro($idPaciente)
     {
-        $idExame = null;
+
+        $auth = new Autenticacao();
+        $auth->verificarLogin();
+        $nome_usuario = $auth->getNomeUsuario();
+        $idExame      = null;
+
+        $usuarioDAO = new UsuarioDAO();
+        $usuario    = $usuarioDAO->listarUsuarios();
+
+        $pacienteDAO = new PacienteDAO();
+        $paciente    = $pacienteDAO->buscarPaciente($idPaciente);
 
         if (isset($_SESSION["idExame"])) {
             $idExame = $_SESSION["idExame"];
@@ -54,6 +64,6 @@ class ExameHematoController
 
         unset($_SESSION["idExame"]);
 
-        require 'views/cadastrarExameHemato.php';
+        require 'views/cadastrarHematologia.php';
     }
 }

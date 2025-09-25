@@ -130,4 +130,13 @@ class PacienteController
         $result      = $pacienteDAO->excluirPaciente($idPaciente);
         return $result;
     }
+
+    public function selecionarExame($idPaciente)
+    {
+        $pacienteDAO  = new PacienteDAO();
+        $paciente     = $pacienteDAO->buscarPaciente($idPaciente);
+        $auth         = new Autenticacao();
+        $nome_usuario = $auth->getNomeUsuario();
+        require 'views/selecionarExame.php';
+    }
 }

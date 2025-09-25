@@ -18,13 +18,13 @@ return function (Router $router) {
         exit;
     });
 
-    $router->get('/cadastrarHematologia', function () {
+    $router->get('/cadastrarHematologia/{id}', function ($id) {
         $auth = new Autenticacao();
         $auth->verificarLogin();
         $auth->verificarAcessoAdmin();
 
         $exameHematoController = new ExameHematoController();
-        $exameHematoController->gerarFormCadastro();
+        $exameHematoController->gerarFormCadastro($id);
     });
 
     $router->post('/exameHemato', function () {
@@ -53,12 +53,12 @@ return function (Router $router) {
         $exameHemato->setEosinofilos($_POST["eosinofilos"]);
         $exameHemato->setBasofilos($_POST["basofilos"]);
         $exameHemato->setPlaquetas($_POST["plaquetas"]);
-        $exameHemato->setVolumePlaquetarioMedio($_POST["volplaquetariomedio"]);
+        $exameHemato->setVolumePlaquetarioMedio($_POST["volumePlaquetarioMedio"]);
         $exameHemato->setNeutrofilos($_POST["neutrofilos"]);
 
         $result = $exameHematoController->cadastrarExame($exameHemato);
 
-        header('Location: /cadastrarHematologia');
+        header('Location: /exames?paciente=' . $exameHemato->getPaciente());
         exit;
 
     });
