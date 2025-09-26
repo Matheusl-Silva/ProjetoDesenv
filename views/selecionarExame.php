@@ -88,7 +88,6 @@
                     <h6 class="card-group-title"><i class="bi bi-funnel me-2 icon-primary"></i>Função Renal</h6>
                     <div class="form-check"><input class="form-check-input" type="checkbox" id="ureia"><label class="form-check-label" for="ureia">Ureia</label></div>
                     <div class="form-check"><input class="form-check-input" type="checkbox" id="creatinina"><label class="form-check-label" for="creatinina">Creatinina</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="acido-urico"><label class="form-check-label" for="acido-urico">Ácido Úrico</label></div>
                 </div>
             </div>
 
@@ -122,6 +121,7 @@
                     <div class="form-check"><input class="form-check-input" type="checkbox" id="calcio"><label class="form-check-label" for="calcio">Cálcio</label></div>
                     <div class="form-check"><input class="form-check-input" type="checkbox" id="magnesio"><label class="form-check-label" for="magnesio">Magnésio</label></div>
                     <div class="form-check"><input class="form-check-input" type="checkbox" id="fosforo"><label class="form-check-label" for="fosforo">Fósforo</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="acido-urico"><label class="form-check-label" for="acido-urico">Ácido Úrico</label></div>
                 </div>
             </div>
 
