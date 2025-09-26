@@ -5,20 +5,20 @@ class Paciente extends Pessoa
     private $dataNasc;
     private $dataCadastro;
     private $fone;
-    private $nomeMae;
+    private $Cpf;
     private $tomaMedicamento;
     private $medicamento;
     private $trataPatologia;
     private $patologia;
 
-    public function __construct($id = null, $nome = null, $email = null, $periodo = null, $dataNasc = null, $fone = null, $nomeMae = null, $tomaMedicamento = null, $medicamento = null, $trataPatologia = null, $patologia = null)
+    public function __construct($id = null, $nome = null, $email = null, $periodo = null, $dataNasc = null, $fone = null, $Cpf = null, $tomaMedicamento = null, $medicamento = null, $trataPatologia = null, $patologia = null)
     {
         parent::__construct($nome, $email);
         $this->id              = $id;
         $this->periodo         = $periodo;
         $this->dataNasc        = $dataNasc;
         $this->fone            = $fone;
-        $this->nomeMae         = $nomeMae;
+        $this->Cpf             = $Cpf;
         $this->tomaMedicamento = $tomaMedicamento;
         $this->medicamento     = $medicamento;
         $this->trataPatologia  = $trataPatologia;
@@ -65,14 +65,14 @@ class Paciente extends Pessoa
         $this->fone = $valor;
     }
 
-    public function getNomeMae()
+    public function getCpf()
     {
-        return $this->nomeMae;
+        return $this->Cpf;
     }
 
-    public function setNomeMae($valor)
+    public function setCpf($valor)
     {
-        $this->nomeMae = $valor;
+        $this->Cpf = $valor;
     }
 
     public function getTomaMedicamento()

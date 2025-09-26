@@ -34,7 +34,7 @@ class PacienteDAO
             "periodo"         => $paciente->getPeriodo(),
             "data_nascimento" => $paciente->getDataNasc(),
             "telefone"        => $paciente->getFone(),
-            "nome_mae"        => $paciente->getNomeMae(),
+            "cpf"             => $paciente->getCpf(),
             "medicamento"     => $paciente->getMedicamento() ?: "",
             "patologia"       => $paciente->getPatologia() ?: "",
         ];
@@ -115,7 +115,7 @@ class PacienteDAO
             "periodo"         => $paciente->getPeriodo(),
             "data_nascimento" => $paciente->getDataNasc(),
             "telefone"        => $paciente->getFone(),
-            "nome_mae"        => $paciente->getNomeMae(),
+            "cpf"             => $paciente->getCpf(),
             "medicamento"     => $paciente->getMedicamento(),
             "patologia"       => $paciente->getPatologia(),
         ];
@@ -162,7 +162,7 @@ class PacienteDAO
         $paciente->setNome($row["cnome"]);
         $paciente->setEmail($row["cemail"]);
         $paciente->setPeriodo($row["cperiodo"]);
-        $paciente->setNomeMae($row["cnome_mae"]);
+        $paciente->setCpf($row["cpf"]);
         $paciente->setMedicamento($row["cmedicamento"]);
         $paciente->setPatologia($row["cpatologia"]);
         $paciente->setDataNasc($row["ddata_nascimento"]);

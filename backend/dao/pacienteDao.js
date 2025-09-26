@@ -31,7 +31,7 @@ exports.findByEmail = (email) => {
 exports.create = (data) => {
   return new Promise((resolve, reject) => {
     const query =
-      "INSERT INTO paciente (cnome, cemail, cperiodo, ddata_nascimento, ctelefone, cnome_mae, cmedicamento, cpatologia) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO paciente (cnome, cemail, cperiodo, ddata_nascimento, ctelefone, ccpf, cmedicamento, cpatologia) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     const values = [
       data.nome,
@@ -39,7 +39,7 @@ exports.create = (data) => {
       data.periodo,
       data.data_nascimento,
       data.telefone,
-      data.nome_mae,
+      data.cpf,
       data.medicamento,
       data.patologia,
     ];
@@ -53,7 +53,7 @@ exports.create = (data) => {
 exports.update = (id, data) => {
   return new Promise((resolve, reject) => {
     const query =
-      "UPDATE paciente SET cnome = ?, cemail = ?, cperiodo = ?, ddata_nascimento = ?, ctelefone = ?, cnome_mae = ?, cmedicamento = ?, cpatologia = ? WHERE id = ?";
+      "UPDATE paciente SET cnome = ?, cemail = ?, cperiodo = ?, ddata_nascimento = ?, ctelefone = ?, ccpf = ?, cmedicamento = ?, cpatologia = ? WHERE id = ?";
 
     const values = [
       data.nome,
@@ -61,7 +61,7 @@ exports.update = (id, data) => {
       data.periodo,
       data.data_nascimento,
       data.telefone,
-      data.nome_mae,
+      data.cpf,
       data.medicamento,
       data.patologia,
       id,

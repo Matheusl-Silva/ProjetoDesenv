@@ -31,7 +31,7 @@ return function (Router $router) {
         $auth = new Autenticacao();
         $auth->verificarLogin();
         $auth->verificarAcessoAdmin();
-        
+
         $pacienteController = new PacienteController();
         $pacienteController->gerarListaExames($id);
     });
@@ -45,7 +45,7 @@ return function (Router $router) {
         $paciente->setDataNasc($_POST["datanasc"]);
         $paciente->setFone($_POST["fone"]);
         $paciente->setEmail($_POST["email"]);
-        $paciente->setNomeMae($_POST["nomeMae"]);
+        $paciente->setCpf($_POST["cpf"]);
         $paciente->setTomaMedicamento($_POST["tomaMedicamento"]);
         $paciente->setMedicamento($_POST["medicamento"]);
         $paciente->setTrataPatologia($_POST["trataPatologia"]);
@@ -77,7 +77,7 @@ return function (Router $router) {
             $paciente->setDataNasc($_POST["data_nascimento"]);
             $paciente->setFone($_POST["telefone"]);
             $paciente->setEmail($_POST["email"]);
-            $paciente->setNomeMae($_POST["nome_mae"]);
+            $paciente->setCpf($_POST["cpf"]);
             $paciente->setMedicamento($_POST["medicamento"]);
             $paciente->setPatologia($_POST["patologia"]);
             $paciente->setId($id);
