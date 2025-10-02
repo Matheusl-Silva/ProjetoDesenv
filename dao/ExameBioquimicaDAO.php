@@ -54,20 +54,78 @@ class ExameBioquimicaDAO
 
         $options = [
             'http' => [
-                "header"  => "Content-Type: application/json\r\n",
-                "method"  => "DELETE"
-            ]
+                "header" => "Content-Type: application/json\r\n",
+                "method" => "DELETE",
+            ],
         ];
 
         $context = stream_context_create($options);
 
         $result = @file_get_contents($url, false, $context);
 
-        if ($result === false) return false;
+        if ($result === false) {
+            return false;
+        }
 
         return json_decode($result, true);
     }
 
+    public function cadastrarExame(ExameBioquimica $dadosExame)
+    {
+        $url = "http://localhost:3000/exameBio/";
+
+        $dados = [
+            "bilirrubina_total"  => $dadosExame->getBilirrubinaTotal(),
+            "bilirrubina_direta" => $dadosExame->getBilirrubinaDireta(),
+            "proteina_total"     => $dadosExame->getProteinaTotal(),
+            "albumina"           => $dadosExame->getAlbumina(),
+            "amilase"            => $dadosExame->getAmilase(),
+            "ast"                => $dadosExame->getTgoTransaminaseGlutamicoOxalacetica(), // ast (TGO)
+            "alt"                => $dadosExame->getTgpTransaminaseGlutamicoPiruvica(), // alt (TGP)
+            "ggt"                => $dadosExame->getGamaGtGlutamiltransferase(), // ggt (Gama GT)
+            "fa"                 => $dadosExame->getFosfataseAlcalina(), // fa (Fosfatase Alcalina)
+            "ck"                 => $dadosExame->getReatinaQuinaseCk(), // ck (Creatina Quinase)
+            "glicose"            => $dadosExame->getGlicose(),
+            "ferro"              => $dadosExame->getFerro(),
+            "col_total"          => $dadosExame->getColesterolTotal(), // col_total
+            "hdl"                => $dadosExame->getHdl(),
+            "ldl"                => $dadosExame->getLdl(),
+            "triglicerideos"     => $dadosExame->getTriglicerideos(),
+            "ureia"              => $dadosExame->getUreia(),
+            "creatinina"         => $dadosExame->getCreatinina(),
+            "acido_urico"        => $dadosExame->getAcidoUrico(),
+            "pcr"                => $dadosExame->getPcrProteinaCReativa(), // pcr
+            "calcio"             => $dadosExame->getCalcio(),
+            "ldh"                => $dadosExame->getLdh(),
+            "magnesio"           => $dadosExame->getMagnesio(),
+            "fosforo"            => $dadosExame->getFosforo(),
+            "observacao"         => $dadosExame->getObservacao(),
+            "data_exame"         => $dadosExame->getData(),
+            "id_responsavel"     => $dadosExame->getResponsavel(),
+            "id_preceptor"       => $dadosExame->getPreceptor(),
+            "id_paciente"        => $dadosExame->getPaciente(),
+            "tipo_exame"         => $dadosExame->getTipo(),
+        ];
+        $options = [
+            "http" => [
+                "header"  => "Content-Type: application/json\r\n",
+                "method"  => "POST",
+                "content" => json_encode($dados),
+            ],
+        ];
+
+        $context = stream_context_create($options);
+
+        $result = file_get_contents($url, false, $context);
+
+        if ($result === false) {
+            return false;
+        }
+
+        $response = json_decode($result, true);
+
+        return isset($response['id']) ? $response['id'] : false;
+    }
 
     private function converterParaObj($row)
     {

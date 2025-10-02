@@ -32,6 +32,7 @@ class ExameBioquimica
     private $paciente;
     private $data;
     private $tipo;
+    private $observacao;
 
     public function getId()
     {return $this->id;}
@@ -183,4 +184,10 @@ class ExameBioquimica
 
     public function setTipo($tipo)
     {$this->tipo = $tipo;}
+
+    public function getObservacao()
+    {return $this->observacao;}
+
+    public function setObservacao($observacao)
+    {$this->observacao = $observacao;}
 }

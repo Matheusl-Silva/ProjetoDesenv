@@ -162,7 +162,7 @@ class PacienteDAO
         $paciente->setNome($row["cnome"]);
         $paciente->setEmail($row["cemail"]);
         $paciente->setPeriodo($row["cperiodo"]);
-        $paciente->setCpf($row["cpf"]);
+        $paciente->setCpf($row["ccpf"]);
         $paciente->setMedicamento($row["cmedicamento"]);
         $paciente->setPatologia($row["cpatologia"]);
         $paciente->setDataNasc($row["ddata_nascimento"]);

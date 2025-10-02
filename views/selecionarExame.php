@@ -147,7 +147,7 @@
                 </div>
                 <div>
                     <button type="button" class="btn btn-custom btn-success-custom btn-lg" onclick="submitSelection()">
-                        <i class="bi bi-check-circle me-2"></i>
+                        <i class="bi bi-check-circle me-2" href="/cadastrarHematologia/<?php echo $paciente->getId(); ?>"></i>
                         Confirmar Seleção
                     </button>
                 </div>
@@ -184,16 +184,14 @@
             });
         }
 
-        // Função para confirmar seleção
+        // Função para confirmar e enviar a seleção para a próxima página
         function submitSelection() {
             const selectedExams = [];
             const checkboxes = document.querySelectorAll('.exam-card input[type="checkbox"]:checked');
 
             checkboxes.forEach(checkbox => {
-                const label = document.querySelector(`label[for="${checkbox.id}"]`);
                 selectedExams.push({
-                    id: checkbox.id,
-                    name: label.textContent.trim()
+                    id: checkbox.id
                 });
             });
 
@@ -202,6 +200,25 @@
                 return;
             }
 
+            // 1. Criar um formulário dinamicamente na memória
+            const form = document.createElement('form');
+            form.method = 'POST';
+            // A action aponta para a rota que renderiza o formulário de cadastro
+            form.action = '/cadastrarBioquimica/<?php echo $paciente->getId(); ?>';
+
+            // 2. Criar um input invisível para carregar os dados
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'exames_selecionados';
+            // Converte o array de exames em uma string JSON para enviar no POST
+            hiddenInput.value = JSON.stringify(selectedExams);
+
+            // 3. Adicionar o input ao formulário e o formulário à página
+            form.appendChild(hiddenInput);
+            document.body.appendChild(form);
+
+            // 4. Enviar o formulário
+            form.submit();
         }
     </script>
 </body>
