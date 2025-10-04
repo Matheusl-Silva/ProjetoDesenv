@@ -80,21 +80,21 @@ class ExameBioquimicaDAO
             "proteina_total"     => $dadosExame->getProteinaTotal(),
             "albumina"           => $dadosExame->getAlbumina(),
             "amilase"            => $dadosExame->getAmilase(),
-            "ast"                => $dadosExame->getTgoTransaminaseGlutamicoOxalacetica(), // ast (TGO)
-            "alt"                => $dadosExame->getTgpTransaminaseGlutamicoPiruvica(), // alt (TGP)
-            "ggt"                => $dadosExame->getGamaGtGlutamiltransferase(), // ggt (Gama GT)
-            "fa"                 => $dadosExame->getFosfataseAlcalina(), // fa (Fosfatase Alcalina)
-            "ck"                 => $dadosExame->getReatinaQuinaseCk(), // ck (Creatina Quinase)
+            "ast"                => $dadosExame->getTgoTransaminaseGlutamicoOxalacetica(),
+            "alt"                => $dadosExame->getTgpTransaminaseGlutamicoPiruvica(),
+            "ggt"                => $dadosExame->getGamaGtGlutamiltransferase(),
+            "fa"                 => $dadosExame->getFosfataseAlcalina(),
+            "ck"                 => $dadosExame->getReatinaQuinaseCk(),
             "glicose"            => $dadosExame->getGlicose(),
             "ferro"              => $dadosExame->getFerro(),
-            "col_total"          => $dadosExame->getColesterolTotal(), // col_total
+            "col_total"          => $dadosExame->getColesterolTotal(),
             "hdl"                => $dadosExame->getHdl(),
             "ldl"                => $dadosExame->getLdl(),
             "triglicerideos"     => $dadosExame->getTriglicerideos(),
             "ureia"              => $dadosExame->getUreia(),
             "creatinina"         => $dadosExame->getCreatinina(),
             "acido_urico"        => $dadosExame->getAcidoUrico(),
-            "pcr"                => $dadosExame->getPcrProteinaCReativa(), // pcr
+            "pcr"                => $dadosExame->getPcrProteinaCReativa(),
             "calcio"             => $dadosExame->getCalcio(),
             "ldh"                => $dadosExame->getLdh(),
             "magnesio"           => $dadosExame->getMagnesio(),
@@ -160,6 +160,7 @@ class ExameBioquimicaDAO
         $exameBio->setPreceptor($row['id_preceptor']);
         $exameBio->setPaciente($row['id_paciente']);
         $exameBio->setData($row['ddata_exame']);
+        $exameBio->setObservacao($row['cobservacao']);
 
         return $exameBio;
     }

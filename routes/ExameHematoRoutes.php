@@ -58,7 +58,7 @@ return function (Router $router) {
 
         $result = $exameHematoController->cadastrarExame($exameHemato);
 
-        header('Location: /exames?paciente=' . $exameHemato->getPaciente());
+        header('Location: /cadastrarHematologia/' . $exameHemato->getPaciente() . '?sucesso=1&exame_id=' . $result);
         exit;
 
     });

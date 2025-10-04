@@ -40,7 +40,7 @@
     </header>
 
     <main class="container my-5">
-        <form class="needs-validation" novalidate method="post" action="/public/exames/bioquimica/salvar">
+        <form class="needs-validation" novalidate method="post" action="/exameBio">
             <input type="hidden" name="id_paciente" value="<?php echo $paciente->getId(); ?>">
             <input type="hidden" name="tipo_exame" value="bioquimica">
 
@@ -129,7 +129,64 @@
                 <div class="col-12">
                     <div class="exam-card p-4">
                         <h6 class="card-group-title"><i class="bi bi-journal-text me-2"></i>Observações</h6>
-                        <textarea class="form-control" name="observacao" rows="4" placeholder="Observações clínicas, intercorrências, orientação ao paciente etc."></textarea>
+                        <textarea class="form-control" id = "observacao" name="observacao" rows="4" placeholder="Observações clínicas, intercorrências, orientação ao paciente etc."></textarea>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="exam-card p-4">
+                        <h6 class="card-group-title"><i class="bi bi-person-check me-2"></i>Responsáveis pelo Exame</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Responsável pelo exame <span class="text-danger">*</span></label>
+                                <select name="id_responsavel" class="form-select" required>
+                                    <option value="" selected disabled>Selecione um usuário...</option>
+                                    <?php foreach ($usuario as $usuarios): ?>
+                                    <option value="<?php echo $usuarios->getId(); ?>">
+                                        <?php echo htmlspecialchars($usuarios->getNome()); ?>
+                                    </option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Por favor, selecione o responsável pelo exame.
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Preceptor responsável <span class="text-danger">*</span></label>
+                                <select name="id_preceptor" class="form-select" required>
+                                    <option value="" selected disabled>Selecione um usuário...</option>
+                                    <?php foreach ($usuario as $usuarios): ?>
+                                    <option value="<?php echo $usuarios->getId(); ?>">
+                                        <?php echo htmlspecialchars($usuarios->getNome()); ?>
+                                    </option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Por favor, selecione o preceptor responsável.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="exam-card p-4">
+                        <h6 class="card-group-title"><i class="bi bi-calendar-event me-2"></i>Data do Exame</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Data da Coleta <span class="text-danger">*</span></label>
+                                <input type="date" name="data" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    Por favor, informe a data do exame.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -143,10 +200,50 @@
 
         </form>
     </main>
-
+    <div class="modal fade" id="modalSucesso" tabindex="-1" aria-labelledby="modalSucessoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="modalSucessoLabel">
+                <i class="bi bi-check-circle-fill me-2"></i> Sucesso!
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p id="mensagemSucesso" class="fs-5 mb-0"></p>
+            </div>
+            <div class="modal-footer">
+                <a href="/exames?paciente=<?php echo $paciente->getId(); ?>" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-1"></i> Ver Exames
+                </a>
+                <a href="/home" class="btn btn-success">
+                <i class="bi bi-house-door me-1"></i> Ir para Home
+                </a>
+            </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         (() => { const forms = document.querySelectorAll('.needs-validation'); Array.from(forms).forEach(f => { f.addEventListener('submit', e => { if (!f.checkValidity()) { e.preventDefault(); e.stopPropagation(); } f.classList.add('was-validated'); }); }); })();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const exameId = urlParams.get('exame_id');
+    const sucesso = urlParams.get('sucesso');
+
+    if (sucesso === '1') {
+        const mensagem = document.getElementById('mensagemSucesso');
+        mensagem.textContent = exameId
+        ? `Exame Bioquímico cadastrado com sucesso! Número do exame: ${exameId}`
+        : 'Exame Bioquímico cadastrado com sucesso!';
+
+        const modal = new bootstrap.Modal(document.getElementById('modalSucesso'));
+        modal.show();
+
+        const url = new URL(window.location);
+        url.searchParams.delete('sucesso');
+        window.history.replaceState({}, document.title, url);
+    }
     </script>
 </body>
 </html>

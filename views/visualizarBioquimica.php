@@ -14,7 +14,6 @@
 </head>
 
 <body>
-    <!-- Elementos decorativos -->
     <div class="bg-decoration decoration-1"></div>
     <div class="bg-decoration decoration-2"></div>
     <div class="bg-decoration decoration-3"></div>
@@ -85,54 +84,77 @@
                     </div>
                 </fieldset>
 
-                <!-- Painel Hepático -->
+                <!-- Função Hepática -->
                 <fieldset disabled>
                     <legend class="h5 mt-4 mb-3">
                         <i class="bi bi-heart-pulse me-2"></i>
-                        Painel Hepático
+                        Função Hepática
                     </legend>
                     <div class="row g-3 mb-4">
                         <?php
-                        $camposHepatico = [
-                            'getBilirrubinaTotal'                    => 'Bilirrubina Total',
-                            'getBilirrubinaDireta'                   => 'Bilirrubina Direta',
-                            'getProteinaTotal'                       => 'Proteína Total',
-                            'getAlbumina'                            => 'Albumina',
-                            'getAmilase'                             => 'Amilase',
-                            'getTgoTransaminaseGlutamicoOxalacetica' => 'TGO (AST)',
-                            'getTgpTransaminaseGlutamicoPiruvica'    => 'TGP (ALT)',
-                            'getGamaGtGlutamiltransferase'           => 'Gama GT',
-                            'getFosfataseAlcalina'                   => 'Fosfatase Alcalina',
-                            'getReatinaQuinaseCk'                    => 'CK (Creatina Quinase)',
-                        ];
-                        foreach ($camposHepatico as $metodo => $label): ?>
+$camposHepatico = [
+    'getTgoTransaminaseGlutamicoOxalacetica' => ['label' => 'TGO (AST)', 'ref' => 'F: <31 U/L • M: <35 U/L'],
+    'getTgpTransaminaseGlutamicoPiruvica'    => ['label' => 'TGP (ALT)', 'ref' => 'F: <34 U/L • M: <45 U/L'],
+    'getGamaGtGlutamiltransferase'           => ['label' => 'Gama GT', 'ref' => 'F: <32 U/L • M: <49 U/L'],
+    'getBilirrubinaTotal'                    => ['label' => 'Bilirrubina Total', 'ref' => '0,1 – 1,2 mg/dL'],
+    'getBilirrubinaDireta'                   => ['label' => 'Bilirrubina Direta', 'ref' => '≤ 0,1 – 1,2 mg/dL'],
+];
+foreach ($camposHepatico as $metodo => $info): ?>
                             <div class="col-md-3">
-                                <label class="form-label"><?php echo $label; ?></label>
+                                <label class="form-label"><?php echo $info['label']; ?></label>
                                 <input type="text" class="form-control"
                                     value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                                <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 </fieldset>
 
-                <!-- Metabólico / Outros -->
+                <!-- Função Renal -->
                 <fieldset disabled>
                     <legend class="h5 mt-4 mb-3">
-                        <i class="bi bi-activity me-2"></i>
-                        Metabólico / Outros
+                        <i class="bi bi-funnel me-2"></i>
+                        Função Renal
                     </legend>
                     <div class="row g-3 mb-4">
                         <?php
-                        $camposMetabolico = [
-                            'getGlicose'             => 'Glicose',
-                            'getPcrProteinaCReativa' => 'PCR (Proteína C Reativa)',
-                            'getLdh'                 => 'LDH',
-                        ];
-                        foreach ($camposMetabolico as $metodo => $label): ?>
+$camposRenal = [
+    'getUreia'      => ['label' => 'Ureia', 'ref' => '10-50 mg/dL'],
+    'getCreatinina' => ['label' => 'Creatinina', 'ref' => 'F: 0,5-1,1 • M: 0,7-1,3 mg/dL'],
+];
+foreach ($camposRenal as $metodo => $info): ?>
                             <div class="col-md-3">
-                                <label class="form-label"><?php echo $label; ?></label>
+                                <label class="form-label"><?php echo $info['label']; ?></label>
                                 <input type="text" class="form-control"
                                     value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                                <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </fieldset>
+
+                <!-- Proteínas e Enzimas -->
+                <fieldset disabled>
+                    <legend class="h5 mt-4 mb-3">
+                        <i class="bi bi-body-text me-2"></i>
+                        Proteínas e Enzimas
+                    </legend>
+                    <div class="row g-3 mb-4">
+                        <?php
+$camposProteinas = [
+    'getProteinaTotal'     => ['label' => 'Proteína Total', 'ref' => '3,5 – 5,2 g/dL'],
+    'getAlbumina'          => ['label' => 'Albumina', 'ref' => '3,5 – 5,2 g/dL'],
+    'getAmilase'           => ['label' => 'Amilase', 'ref' => '< 100 U/L'],
+    'getLdh'               => ['label' => 'LDH', 'ref' => '< 480 U/L'],
+    'getFosfataseAlcalina' => ['label' => 'Fosfatase Alcalina', 'ref' => 'F: 35–105 • M: 40–130 U/L'],
+    'getReatinaQuinaseCk'  => ['label' => 'CK (Creatina Quinase)', 'ref' => 'F: <145 • M: <171 U/L'],
+];
+foreach ($camposProteinas as $metodo => $info): ?>
+                            <div class="col-md-3">
+                                <label class="form-label"><?php echo $info['label']; ?></label>
+                                <input type="text" class="form-control"
+                                    value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                                <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -146,76 +168,87 @@
                     </legend>
                     <div class="row g-3 mb-4">
                         <?php
-                        $camposLipidico = [
-                            'getColesterolTotal' => 'Colesterol Total',
-                            'getHdl'             => 'HDL',
-                            'getLdl'             => 'LDL',
-                            'getTriglicerideos'  => 'Triglicerídeos',
-                        ];
-                        foreach ($camposLipidico as $metodo => $label): ?>
+$camposLipidico = [
+    'getColesterolTotal' => ['label' => 'Colesterol Total', 'ref' => '≤ 200 mg/dL'],
+    'getHdl'             => ['label' => 'HDL', 'ref' => '≥ 40–45 mg/dL'],
+    'getLdl'             => ['label' => 'LDL', 'ref' => 'Alvo por risco'],
+    'getTriglicerideos'  => ['label' => 'Triglicerídeos', 'ref' => '≤ 200 mg/dL'],
+];
+foreach ($camposLipidico as $metodo => $info): ?>
                             <div class="col-md-3">
-                                <label class="form-label"><?php echo $label; ?></label>
+                                <label class="form-label"><?php echo $info['label']; ?></label>
                                 <input type="text" class="form-control"
                                     value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                                <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 </fieldset>
 
-                <!-- Renal / Metabólitos -->
-                <fieldset disabled>
-                    <legend class="h5 mt-4 mb-3">
-                        <i class="bi bi-water me-2"></i>
-                        Renal / Metabólitos
-                    </legend>
-                    <div class="row g-3 mb-4">
-                        <?php
-                        $camposRenal = [
-                            'getUreia'      => 'Ureia',
-                            'getCreatinina' => 'Creatinina',
-                            'getAcidoUrico' => 'Ácido Úrico',
-                        ];
-                        foreach ($camposRenal as $metodo => $label): ?>
-                            <div class="col-md-3">
-                                <label class="form-label"><?php echo $label; ?></label>
-                                <input type="text" class="form-control"
-                                    value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </fieldset>
-
-                <!-- Eletrólitos -->
+                <!-- Metabolismo e Minerais -->
                 <fieldset disabled>
                     <legend class="h5 mt-4 mb-3">
                         <i class="bi bi-lightning me-2"></i>
-                        Eletrólitos
+                        Metabolismo e Minerais
                     </legend>
                     <div class="row g-3 mb-4">
                         <?php
-                        $camposEletr = [
-                            'getCalcio'   => 'Cálcio',
-                            'getMagnesio' => 'Magnésio',
-                            'getFosforo'  => 'Fósforo',
-                        ];
-                        foreach ($camposEletr as $metodo => $label): ?>
+$camposMetabolismo = [
+    'getGlicose'    => ['label' => 'Glicose', 'ref' => '70–99 jejum'],
+    'getFerro'      => ['label' => 'Ferro', 'ref' => 'F: 50-170 • M: 65-175 µg/dL'],
+    'getCalcio'     => ['label' => 'Cálcio', 'ref' => '8,5-10,5 mg/dL'],
+    'getMagnesio'   => ['label' => 'Magnésio', 'ref' => '1,7-2,2 mg/dL'],
+    'getFosforo'    => ['label' => 'Fósforo', 'ref' => '2,5-4,5 mg/dL'],
+    'getAcidoUrico' => ['label' => 'Ácido Úrico', 'ref' => 'F: 2,4-6,0 • M: 3,4-7,0 mg/dL'],
+];
+foreach ($camposMetabolismo as $metodo => $info): ?>
                             <div class="col-md-3">
-                                <label class="form-label"><?php echo $label; ?></label>
+                                <label class="form-label"><?php echo $info['label']; ?></label>
                                 <input type="text" class="form-control"
                                     value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                                <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
                             </div>
                         <?php endforeach; ?>
+                    </div>
+                </fieldset>
+
+                <!-- Marcadores Inflamatórios -->
+                <fieldset disabled>
+                    <legend class="h5 mt-4 mb-3">
+                        <i class="bi bi-fire me-2"></i>
+                        Marcadores Inflamatórios
+                    </legend>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-3">
+                            <label class="form-label">PCR (Proteína C Reativa)</label>
+                            <input type="text" class="form-control"
+                                value="<?php echo htmlspecialchars($exame->getPcrProteinaCReativa() ?? 'N/A'); ?>">
+                            <div class="form-text text-muted small">Inferior a 1,0 mg/dL</div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Observações (Agora sempre visível) -->
+                <fieldset disabled>
+                    <legend class="h5 mt-4 mb-3">
+                        <i class="bi bi-journal-text me-2"></i>
+                        Observações
+                    </legend>
+                    <div class="row g-3 mb-4">
+                        <div class="col-12">
+                            <textarea class="form-control" rows="4"><?php echo htmlspecialchars($exame->getObservacao()); ?></textarea>
+                        </div>
                     </div>
                 </fieldset>
             </div>
 
             <div class="card-footer bg-light text-center py-3">
                 <?php if ($auth->isAdmin()): ?>
-                    <button onclick="imprimirLaudo(<?php echo $exame->getId(); ?>)" class="btn btn-primary me-2">
+                    <button onclick="window.print()" class="btn btn-primary me-2">
                         <i class="bi bi-printer"></i> Imprimir
                     </button>
                 <?php endif; ?>
-                <a href="/exames?paciente=<?= $exame->getIdPaciente() ?>" class="btn btn-primary me-2">
+                <a href="/exames?paciente=<?=$exame->getIdPaciente()?>" class="btn btn-primary me-2">
                     <i class="bi bi-arrow-left"></i> Voltar para o Paciente
                 </a>
                 <a href="/home" class="btn btn-outline-secondary">
