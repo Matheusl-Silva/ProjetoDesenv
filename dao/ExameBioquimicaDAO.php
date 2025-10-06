@@ -215,6 +215,7 @@ class ExameBioquimicaDAO
         $exameBio->setPreceptor($row['id_preceptor']);
         $exameBio->setPaciente($row['id_paciente']);
         $exameBio->setData($row['ddata_exame']);
+        $exameBio->setObservacao($row['cobservacao']);
 
         return $exameBio;
     }

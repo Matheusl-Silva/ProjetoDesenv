@@ -23,15 +23,22 @@
   <div class="modal fade" id="modalSucesso" tabindex="-1" aria-labelledby="modalSucessoLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="modalSucessoLabel">Sucesso!</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div class="modal-header bg-success text-white">
+                  <h5 class="modal-title" id="modalSucessoLabel">
+                      <i class="bi bi-check-circle-fill me-2"></i> Sucesso!
+                  </h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
               </div>
-              <div class="modal-body">
-                  <p id="mensagemSucesso">Exame Hematológico cadastrado com sucesso! Número do Exame: <?php echo isset($idExame) ? $idExame : ''; ?></p>
+              <div class="modal-body text-center">
+                  <p id="mensagemSucesso" class="fs-5 mb-0"></p>
               </div>
               <div class="modal-footer">
-                  <a href="/home" class="btn btn-primary">Ir para Home</a>
+                  <a href="/exames?paciente=<?php echo $paciente->getId(); ?>" class="btn btn-outline-secondary">
+                      <i class="bi bi-arrow-left me-1"></i> Ver Exames
+                  </a>
+                  <a href="/home" class="btn btn-success">
+                      <i class="bi bi-house-door me-1"></i> Ir para Home
+                  </a>
               </div>
           </div>
       </div>
@@ -240,12 +247,21 @@
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      const idExame = <?php echo isset($idExame) ? json_encode($idExame) : 'null'; ?>;
+    const urlParams = new URLSearchParams(window.location.search);
+    const exameId = urlParams.get('exame_id');
+    const sucesso = urlParams.get('sucesso');
 
-      if(idExame) {
-          var myModal = new bootstrap.Modal(document.getElementById('modalSucesso'));
-          myModal.show();
-      }
+    if (sucesso === '1') {
+        const mensagemElement = document.getElementById('mensagemSucesso');
+        if (exameId) {
+            mensagemElement.textContent = 'Exame Hematológico cadastrado com sucesso! Número do Exame: ' + exameId;
+        } else {
+            mensagemElement.textContent = 'Exame Hematológico cadastrado com sucesso!';
+        }
+
+        var myModal = new bootstrap.Modal(document.getElementById('modalSucesso'));
+        myModal.show();
+    }
     </script>
 </body>
 </html>

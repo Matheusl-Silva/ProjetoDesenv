@@ -37,6 +37,7 @@ class PacienteController
     {
         $pacienteDAO    = new PacienteDAO();
         $listaPacientes = $pacienteDAO->listarPacientes();
+        $auth        = new Autenticacao();
 
         require 'views/listapacientes.php';
     }
