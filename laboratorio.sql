@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05-Out-2025 às 21:19
+-- Tempo de geração: 27-Set-2025 às 01:14
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.2.12
 
@@ -175,8 +175,6 @@ INSERT INTO `usuario` (`id`, `cnome`, `cemail`, `csenha`, `cadmin`) VALUES
 (11, 'Matheus Silva', 'matleandrosilva@gmail.com', 'matheus123', 'S');
 
 --
--- Índices para tabelas despejadas
---
 
 --
 -- Índices para tabela `exame_bioquimica`
@@ -212,6 +210,7 @@ ALTER TABLE `usuario`
 --
 -- AUTO_INCREMENT de tabelas despejadas
 --
+
 
 --
 -- AUTO_INCREMENT de tabela `exame_bioquimica`

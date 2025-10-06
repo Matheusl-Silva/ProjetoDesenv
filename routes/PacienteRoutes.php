@@ -18,6 +18,14 @@ return function (Router $router) {
         $pacienteController->gerarLista();
     });
 
+    $router->get('/pacienteS', function () {
+        $auth = new Autenticacao();
+        $auth->verificarLogin();
+
+        $pacienteController = new PacienteController();
+        $pacienteController->gerarLista();
+    });
+
     $router->get('/paciente/{id}', function ($id) {
         $auth = new Autenticacao();
         $auth->verificarLogin();

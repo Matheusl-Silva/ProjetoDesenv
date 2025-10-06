@@ -67,36 +67,38 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Nome</th>
-                                            <th>Email</th>
+                                            <?php if ($auth->isAdmin()): ?>
+                                                <th>Nome</th>
+                                                <th>Email</th>
+                                            <?php endif; ?>
                                             <th>Período</th>
-                                            <th>Nascimento</th>
-                                            <th>Telefone</th>
-                                            <th>CPF</th>
                                             <th>Medicamento</th>
+                                            <?php if ($auth->isAdmin()): ?>
+                                                <th>CPF</th>
+                                                <th>Nascimento</th>
+                                                <th>Telefone</th>
+                                            <?php endif; ?>
                                             <th>Patologia</th>
-                                            <th>Ações</th>
+                                            <?php if ($auth->isAdmin()): ?>
+                                                <th>Ações</th>
+                                            <?php endif; ?>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($listaPacientes as $paciente): ?>
                                             <tr>
                                                 <td><?=$paciente->getId()?></td>
-                                                <td><strong><?=htmlspecialchars($paciente->getNome())?></strong></td>
-                                                <td><?=htmlspecialchars($paciente->getEmail())?></td>
+                                                <?php if ($auth->isAdmin()): ?>
+                                                    <td><strong><?= htmlspecialchars($paciente->getNome()) ?></strong></td>
+                                                <?php endif; ?>
+                                                <?php if ($auth->isAdmin()): ?>
+                                                    <td><?=htmlspecialchars($paciente->getEmail())?></td>
+                                                <?php endif; ?>
                                                 <td>
                                                     <span class="periodo-badge periodo-<?=$paciente->getPeriodo()?>">
                                                         <?=ucfirst($paciente->getPeriodo())?>
                                                     </span>
                                                 </td>
-                                                <td>
-                                                    <?php
-$dateTime = new DateTime($paciente->getDataNasc());
-echo $dateTime->format('d/m/Y');
-?>
-                                                </td>
-                                                <td><?=htmlspecialchars($paciente->getFone())?></td>
-                                                <td><?=htmlspecialchars($paciente->getCpf())?></td>
                                                 <td>
                                                     <?php if ($paciente->getMedicamento()): ?>
                                                         <span class="status-sim" title="<?=htmlspecialchars($paciente->getMedicamento())?>">
@@ -106,6 +108,20 @@ echo $dateTime->format('d/m/Y');
                                                         <span class="status-nao">Não</span>
                                                     <?php endif; ?>
                                                 </td>
+                                                <?php if ($auth->isAdmin()): ?>
+                                                    <td><?=htmlspecialchars($paciente->getCpf())?></td>
+                                                <?php endif; ?>
+                                                <?php if ($auth->isAdmin()): ?>
+                                                    <td>
+                                                        <?php
+                                                            $dateTime = new DateTime($paciente->getDataNasc());
+                                                            echo $dateTime->format('d/m/Y');
+                                                        ?>
+                                                    </td>
+                                                <?php endif; ?>
+                                                <?php if ($auth->isAdmin()): ?>
+                                                    <td><?= htmlspecialchars($paciente->getFone()) ?></td>
+                                                <?php endif; ?>
                                                 <td>
                                                     <?php if ($paciente->getPatologia()): ?>
                                                         <span class="status-sim" title="<?=htmlspecialchars($paciente->getPatologia())?>">
@@ -115,20 +131,19 @@ echo $dateTime->format('d/m/Y');
                                                         <span class="status-nao">Não</span>
                                                     <?php endif; ?>
                                                 </td>
-                                                <td>
-                                                    <div class="d-flex gap-1">
-                                                        <a href="/paciente/<?=$paciente->getId()?>"
-                                                            class="btn btn-primary btn-sm">
-                                                            Editar
-                                                        </a>
-                                                        <button type="button"
-                                                            class="btn btn-danger btn-sm btn-delete"
-                                                            data-id="<?=$paciente->getId()?>"
-                                                            data-nome="<?=htmlspecialchars($paciente->getNome())?>">
-                                                            Excluir
-                                                        </button>
-                                                    </div>
-                                                </td>
+                                                <?php if ($auth->isAdmin()): ?>
+                                                    <td>
+                                                        <div class="d-flex gap-1">
+                                                            <a href="/paciente/<?= $paciente->getId() ?>" class="btn btn-primary btn-sm">Editar</a>
+                                                            <button type="button"
+                                                                    class="btn btn-danger btn-sm btn-delete"
+                                                                    data-id="<?= $paciente->getId() ?>"
+                                                                    data-nome="<?= htmlspecialchars($paciente->getNome()) ?>">
+                                                                Excluir
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                <?php endif; ?>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -156,9 +171,11 @@ echo $dateTime->format('d/m/Y');
 
                     <div class="card-footer text-center">
                         <div class="d-flex justify-content-center gap-3 flex-wrap">
+                            <?php if ($auth->isAdmin()): ?>
                             <a href="/cadastroPaciente" class="btn btn-success">
                                 Novo Paciente
                             </a>
+                            <?php endif; ?>
                             <a href="/home" class="btn btn-outline-secondary">
                                 Voltar para a tela de usuário
                             </a>
