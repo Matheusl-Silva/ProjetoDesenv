@@ -204,8 +204,8 @@ body {
 }
 
 .user-grid {
-  grid-template-columns: 1fr;
-  max-width: 500px;
+  grid-template-columns: 1fr 1fr;
+  max-width: 900px;
   margin: 0 auto;
 }
 /* Action Cards */
