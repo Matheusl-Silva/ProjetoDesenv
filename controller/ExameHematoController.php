@@ -44,6 +44,12 @@ class ExameHematoController
 
     }
 
+    public function editar(ExameHemato $exame){
+        $exameHematoDAO = new ExameHematoDAO();
+        $result = $exameHematoDAO->editar($exame);
+        return $result;
+    }
+
     public function gerarFormCadastro($idPaciente)
     {
 

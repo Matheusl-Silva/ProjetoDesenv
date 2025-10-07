@@ -60,6 +60,44 @@ return function (Router $router) {
 
         header('Location: /cadastrarHematologia/' . $exameHemato->getPaciente() . '?sucesso=1&exame_id=' . $result);
         exit;
+    });
 
+    $router->put('/exameHemato/{id}', function ($id) {
+        $exameHematoController = new ExameHematoController();
+        $exameHemato = new ExameHemato();
+
+        $dadosExame = json_decode($_POST["dadosEdicao"], true);
+
+        $exameHemato->setId($id);
+
+        $exameHemato->setIdResponsavel($dadosExame["idResponsavel"]);
+        $exameHemato->setPreceptor($dadosExame["idPreceptor"]);
+        $exameHemato->setPaciente($dadosExame["idPaciente"]);
+        $exameHemato->setData($dadosExame["dataExame"]);
+
+        $exameHemato->setHemacia($dadosExame["hemacia"]);
+        $exameHemato->setHemoglobina($dadosExame["hemoglobina"]);
+        $exameHemato->setHematocrito($dadosExame["hematocrito"]);
+        $exameHemato->setVcm($dadosExame["vcm"]);
+        $exameHemato->setHcm($dadosExame["hcm"]);
+        $exameHemato->setChcm($dadosExame["chcm"]);
+        $exameHemato->setRdw($dadosExame["rdw"]);
+        $exameHemato->setLeucocitos($dadosExame["leucocitos"]);
+        $exameHemato->setBlastos($dadosExame["blastos"]);
+        $exameHemato->setPromielocitos($dadosExame["promielocitos"]);
+        $exameHemato->setMielocitos($dadosExame["mielocitos"]);
+        $exameHemato->setMetamielocitos($dadosExame["metamielocitos"]);
+        $exameHemato->setBastonetes($dadosExame["bastonetes"]);
+        $exameHemato->setSegmentados($dadosExame["segmentados"]);
+        $exameHemato->setEosinofilos($dadosExame["eosinofilos"]);
+        $exameHemato->setBasofilos($dadosExame["basofilos"]);
+        $exameHemato->setPlaquetas($dadosExame["plaquetas"]);
+        $exameHemato->setVolumePlaquetarioMedio($dadosExame["volumePlaquetarioMedio"]);
+        $exameHemato->setNeutrofilos($dadosExame["neutrofilos"]);
+
+        $exameHematoController->editar($exameHemato);
+
+        header('Location: /exameHemato/listar/'. $id);
+        exit;
     });
 };

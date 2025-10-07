@@ -286,18 +286,19 @@
         document.getElementById('fieldsetDadosGerais').setAttribute('disabled', 'true');
     }
 
-    const formEdicao = document.getElementById('formEdicao');
-
+    
     function mudarParaEdicao() {
         const botoesPadrao = document.getElementById('botoesPadrao');
         const botoesEdicao = document.getElementById('botoesEdicao');
-
+        
         botoesPadrao.style.display = 'none';
         botoesEdicao.style.display = 'inline';
-
+        
         habilitarCampos();
     }
-
+    
+    const formEdicao = document.getElementById('formEdicao');
+    
     formEdicao.addEventListener('submit', function() {
 
         const nomesValores = [
