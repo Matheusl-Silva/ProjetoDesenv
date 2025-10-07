@@ -20,7 +20,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p id="mensagemSucesso">Paciente cadastrado com sucesso! Número do Paciente Cadastrado: <?= $idPaciente ?></p>
+                    <p id="mensagemSucesso">Paciente cadastrado com sucesso! Número do Paciente Cadastrado: <?=$idPaciente?></p>
                 </div>
                 <div class="modal-footer">
                     <a href="homeUsuario.php" class="btn btn-primary">Ir para Home</a>
@@ -105,8 +105,8 @@
                     </div>
 
                     <div>
-                        <label for="nomeMae" class="form-label">Nome da mãe:</label>
-                        <input type="text" class="form-control" id="nomeMae" name="nomeMae" required>
+                        <label for="cpf" class="form-label">CPF</label>
+                        <input type="text" class="form-control" id="cpf" name="cpf" required>
                     </div>
 
                     <p class="form-label">Toma algum medicamento contínuo? Se sim, qual?</p>
@@ -171,9 +171,9 @@
     configurarCaixaDeTexto("medSim", "medNao", "medicamento");
     configurarCaixaDeTexto("patSim", "patNao", "patologia");
 
-    const idPaciente = <?= json_encode($idPaciente ?? null) ?>;
-    const emailDuplicado = <?= json_encode($emailDuplicado ?? false) ?>;
-    const erroCadastro = <?= json_encode($erroCadastro ?? false) ?>;
+    const idPaciente = <?=json_encode($idPaciente ?? null)?>;
+    const emailDuplicado = <?=json_encode($emailDuplicado ?? false)?>;
+    const erroCadastro = <?=json_encode($erroCadastro ?? false)?>;
 
     if(emailDuplicado){
         const modalEmailDuplicado = new bootstrap.Modal(document.getElementById('modalEmailDuplicado'));

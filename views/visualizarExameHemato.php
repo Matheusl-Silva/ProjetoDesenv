@@ -51,7 +51,7 @@
 
             <div class="card-body p-4">
                 <!-- Dados Gerais -->
-                <fieldset disabled>
+                <fieldset disabled id="fieldsetDadosGerais">
                     <legend class="h5 mb-3">Dados Gerais</legend>
                     <div class="row g-3 mb-4">
                         <div class="col-md-6">
@@ -86,16 +86,16 @@
                     <legend class="h5 mt-4 mb-3">Eritrograma</legend>
                     <div class="row g-3 mb-4">
                         <?php
-$camposEritrograma = [
-    'getHemacia'     => 'Hemácias',
-    'getHemoglobina' => 'Hemoglobina',
-    'getHematocrito' => 'Hematócrito',
-    'getVcm'         => 'VCM',
-    'getHcm'         => 'HCM',
-    'getChcm'        => 'CHCM',
-    'getRdw'         => 'RDW',
-];
-foreach ($camposEritrograma as $metodo => $label): ?>
+                        $camposEritrograma = [
+                            'getHemacia'     => 'Hemácias',
+                            'getHemoglobina' => 'Hemoglobina',
+                            'getHematocrito' => 'Hematócrito',
+                            'getVcm'         => 'VCM',
+                            'getHcm'         => 'HCM',
+                            'getChcm'        => 'CHCM',
+                            'getRdw'         => 'RDW',
+                        ];
+                        foreach ($camposEritrograma as $metodo => $label): ?>
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $label; ?></label>
                                 <input type="text" class="form-control"
@@ -110,19 +110,19 @@ foreach ($camposEritrograma as $metodo => $label): ?>
                     <legend class="h5 mt-4 mb-3">Leucograma</legend>
                     <div class="row g-3 mb-4">
                         <?php
-$camposLeucograma = [
-    'getLeucocitos'     => 'Leucócitos',
-    'getBlastos'        => 'Blastos (µL)',
-    'getPromielocitos'  => 'Prómielócitos (µL)',
-    'getMielocitos'     => 'Mielócitos (µL)',
-    'getMetamielocitos' => 'Metamielócitos (µL)',
-    'getBastonetes'     => 'Bastonetes (µL)',
-    'getSegmentados'    => 'Segmentados (µL)',
-    'getNeutrofilos'    => 'Neutrófilos (%)',
-    'getEosinofilos'    => 'Eosinófilos (%)',
-    'getBasofilos'      => 'Basófilos (%)',
-];
-foreach ($camposLeucograma as $metodo => $label): ?>
+                        $camposLeucograma = [
+                            'getLeucocitos'     => 'Leucócitos',
+                            'getBlastos'        => 'Blastos (µL)',
+                            'getPromielocitos'  => 'Prómielócitos (µL)',
+                            'getMielocitos'     => 'Mielócitos (µL)',
+                            'getMetamielocitos' => 'Metamielócitos (µL)',
+                            'getBastonetes'     => 'Bastonetes (µL)',
+                            'getSegmentados'    => 'Segmentados (µL)',
+                            'getNeutrofilos'    => 'Neutrófilos (%)',
+                            'getEosinofilos'    => 'Eosinófilos (%)',
+                            'getBasofilos'      => 'Basófilos (%)',
+                        ];
+                        foreach ($camposLeucograma as $metodo => $label): ?>
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $label; ?></label>
                                 <input type="text" class="form-control"
@@ -152,9 +152,26 @@ foreach ($camposLeucograma as $metodo => $label): ?>
 
             <div class="card-footer bg-light text-center py-3">
                 <?php if ($auth->isAdmin()): ?>
-                    <button onclick="imprimirLaudo(<?php echo $exame->getId(); ?>)" class="btn btn-primary me-2">
-                        <i class="bi bi-printer"></i> Imprimir
-                    </button>
+                    <div id="botoesPadrao" class="mb-3">
+                        <button onclick="imprimirLaudo(<?php echo $exame->getId(); ?>)" class="btn btn-primary me-2 col-2">
+                            <i class="bi bi-printer"></i> Imprimir
+                        </button>
+                        <button type="button" class="btn btn-primary me-2 col-2" onclick="mudarParaEdicao()">
+                            <i class="bi bi-pencil-square"></i>Editar
+                        </button>
+                    </div>
+                    <div id="botoesEdicao" style="display: none" class="mb-3">
+                        <button type="button" class="btn btn-primary me-2 col-2" onclick="location.reload()">
+                            <i class="bi bi-x-lg"></i>Cancelar
+                        </button>
+                        <form action="/exameHemato/<?= $exame->getId() ?>" method="post" style="display: inline" id="formEdicao">
+                            <input type="hidden" name="method" value="PUT">
+                            <input type="hidden" name="dadosEdicao" value="" id="dadosEdicao">
+                            <button type="submit" class="btn btn-primary me-2 col-2">
+                                <i class="bi bi-check"></i>Confirmar
+                            </button>
+                        </form>
+                    </div>
                 <?php endif; ?>
                 <a href="/exames?paciente=<?= $exame->getPaciente() ?>"
                     class="btn btn-primary me-2">
@@ -168,6 +185,84 @@ foreach ($camposLeucograma as $metodo => $label): ?>
     </main>
 
     <script>
+        function habilitarCampos() {
+            const fieldsets = Array.from(document.querySelectorAll('fieldset'));
+            fieldsets.forEach((item) => {
+                item.removeAttribute('disabled');
+            });
+
+            document.getElementById('fieldsetDadosGerais').setAttribute('disabled', 'true');
+        }
+
+        function mudarParaEdicao() {
+            const botoesPadrao = document.getElementById('botoesPadrao');
+            const botoesEdicao = document.getElementById('botoesEdicao');
+
+            botoesPadrao.style.display = 'none';
+            botoesEdicao.style.display = 'block';
+
+            habilitarCampos();
+        }
+
+        const formEdicao = document.getElementById('formEdicao');
+
+        formEdicao.addEventListener('submit', function(e) {
+            //e.preventDefault();
+
+            const nomesValores = [
+                // Eritrograma
+                "hemacia",
+                "hemoglobina",
+                "hematocrito",
+                "vcm",
+                "hcm",
+                "chcm",
+                "rdw",
+
+                // Leucograma
+                "leucocitos",
+                "blastos",
+                "promielocitos",
+                "mielocitos",
+                "metamielocitos",
+                "bastonetes",
+                "segmentados",
+                "neutrofilos",
+                "eosinofilos",
+                "basofilos",
+
+                // Plaquetograma
+                "plaquetas",
+                "volumePlaquetarioMedio"
+            ];
+
+            const inputs = Array.from(document.querySelectorAll('input'));
+
+            const idPaciente = <?= json_encode($exame->getPaciente()) ?>;
+            const dataExame = <?= json_encode($exame->getData()) ?>;
+            const idResponsavel = <?= json_encode($exame->getIdResponsavel()) ?>;
+            const idPreceptor = <?= json_encode($exame->getPreceptor()) ?>;
+
+
+            let json = {};
+
+            json.idPaciente = idPaciente;
+            json.dataExame = dataExame;
+            json.idResponsavel = idResponsavel;
+            json.idPreceptor = idPreceptor;
+
+            inputs.forEach((input, index) => {
+                if (input.type == 'text' && !input.className.includes('dadosGerais')) {
+                    json[nomesValores[index - 4]] = input.value; //4 = Número de inputs não considerados    
+                }
+            })
+
+            const inputDados = document.getElementById('dadosEdicao');
+            inputDados.value = JSON.stringify(json);
+            console.log(inputDados.value);
+        });
+
+
         function imprimirLaudo(idExame) {
             const iframe = document.createElement('iframe');
             iframe.style.display = 'none';
@@ -175,11 +270,11 @@ foreach ($camposLeucograma as $metodo => $label): ?>
             console.log(iframe.src);
             document.body.appendChild(iframe);
 
-            iframe.onload = function () {
+            iframe.onload = function() {
                 try {
                     iframe.contentWindow.focus();
                     iframe.contentWindow.print();
-                    iframe.contentWindow.onafterprint = function () {
+                    iframe.contentWindow.onafterprint = function() {
                         document.body.removeChild(iframe);
                     }
                 } catch (error) {
@@ -191,4 +286,5 @@ foreach ($camposLeucograma as $metodo => $label): ?>
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

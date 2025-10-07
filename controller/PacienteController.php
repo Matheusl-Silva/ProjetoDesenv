@@ -37,6 +37,7 @@ class PacienteController
     {
         $pacienteDAO    = new PacienteDAO();
         $listaPacientes = $pacienteDAO->listarPacientes();
+        $auth        = new Autenticacao();
 
         require 'views/listapacientes.php';
     }
@@ -129,5 +130,14 @@ class PacienteController
         $pacienteDAO = new PacienteDAO();
         $result      = $pacienteDAO->excluirPaciente($idPaciente);
         return $result;
+    }
+
+    public function selecionarExame($idPaciente)
+    {
+        $pacienteDAO  = new PacienteDAO();
+        $paciente     = $pacienteDAO->buscarPaciente($idPaciente);
+        $auth         = new Autenticacao();
+        $nome_usuario = $auth->getNomeUsuario();
+        require 'views/selecionarExame.php';
     }
 }

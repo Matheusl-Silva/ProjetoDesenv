@@ -1,0 +1,125 @@
+/* Conteúdo para o arquivo selecao-exames.css */
+
+:root {
+    --primary-blue-dark: #1e3a8a;
+    --primary-blue: #1d4ed8;
+    --primary-blue-light: #3b82f6;
+    --secondary-blue: #60a5fa;
+    --success-green: #10b981;
+    --warning-orange: #f59e0b;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --border-radius: 12px;
+}
+
+.exam-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+}
+
+.exam-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.examehemato-card {
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-light));
+    color: white;
+    border: none;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.examehemato-card:hover {
+    background: linear-gradient(135deg, var(--primary-blue-dark), var(--primary-blue));
+    transform: translateY(-8px) scale(1.02);
+}
+
+.examehemato-icon {
+    font-size: 2.5rem;
+    margin-right: 15px;
+}
+
+.card-group-title {
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+}
+
+.card-group-title .bi {
+    color: var(--primary-blue);
+}
+
+.exam-card .form-check {
+    padding: 0.5rem 0;
+    margin-left: 0.5rem;
+}
+
+.exam-card .form-check:not(:last-child) {
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.exam-card .form-check-label {
+    cursor: pointer;
+    transition: color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+    width: 100%;
+}
+
+.form-check-input:checked+.form-check-label {
+    color: var(--primary-blue);
+    font-weight: 500;
+}
+
+.icon-danger { color: #ef4444 !important; }
+.icon-warning { color: #f97316 !important; }
+.icon-primary { color: #3b82f6 !important; }
+.icon-info { color: #0ea5e9 !important; }
+
+.selection-actions {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--card-shadow);
+    margin-top: 30px;
+}
+
+.btn-custom {
+    border-radius: 25px;
+    font-weight: 500;
+    padding: 10px 25px;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-light));
+    color: white;
+    box-shadow: 0 5px 15px rgba(30, 64, 175, 0.3);
+}
+
+.btn-primary-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(30, 64, 175, 0.4);
+    color: white;
+}
+
+.btn-success-custom {
+    background: linear-gradient(135deg, var(--success-green), #059669);
+    color: white;
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+}
+
+.btn-success-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+    color: white;
+}

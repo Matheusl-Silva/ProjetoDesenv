@@ -79,8 +79,8 @@ class ExameHematoDAO
             "volumePlaquetarioMedio" => $dadosExame->getVolumePlaquetarioMedio(),
             "dataExame"              => $dadosExame->getData(),
             "idResponsavel"          => $dadosExame->getIdResponsavel(),
-            "preceptor"              => $dadosExame->getPreceptor(),
-            "paciente"               => $dadosExame->getPaciente(),
+            "idPreceptor"            => $dadosExame->getPreceptor(),
+            "idPaciente"             => $dadosExame->getPaciente(),
         ];
         $options = [
             "http" => [
@@ -101,6 +101,82 @@ class ExameHematoDAO
         $response = json_decode($result, true);
 
         return isset($response['id']) ? $response['id'] : false;
+    }
+
+    public function editar(ExameHemato $exame)
+    {
+        $url = "http://localhost:3000/exameHemato/" . $exame->getId();
+
+        $dados = [
+            "hemacia"                => $exame->getHemacia(),
+            "hemoglobina"            => $exame->getHemoglobina(),
+            "hematocrito"            => $exame->getHematocrito(),
+            "vcm"                    => $exame->getVcm(),
+            "hcm"                    => $exame->getHcm(),
+            "chcm"                   => $exame->getChcm(),
+            "rdw"                    => $exame->getRdw(),
+            "leucocitos"             => $exame->getLeucocitos(),
+            "neutrofilos"            => $exame->getNeutrofilos(),
+            "blastos"                => $exame->getBlastos(),
+            "promielocitos"          => $exame->getPromielocitos(),
+            "mielocitos"             => $exame->getMielocitos(),
+            "metamielocitos"         => $exame->getMetamielocitos(),
+            "bastonetes"             => $exame->getBastonetes(),
+            "segmentados"            => $exame->getSegmentados(),
+            "eosinofilos"            => $exame->getEosinofilos(),
+            "basofilos"              => $exame->getBasofilos(),
+            "linfocitos"             => $exame->getLinfocitos(),
+            "linfocitosAtipicos"     => $exame->getLinfocitosAtipicos(),
+            "monocitos"              => $exame->getMonocitos(),
+            "mieloblastos"           => $exame->getMieloblastos(),
+            "outrasCelulas"          => $exame->getOutrasCelulas(),
+            "celulasLinfoides"       => $exame->getCelulasLinfoides(),
+            "celulasMonocitoides"    => $exame->getCelulasMonocitoides(),
+            "plaquetas"              => $exame->getPlaquetas(),
+            "volplaquetariomedio"    => $exame->getVolumePlaquetarioMedio(),
+            "dataExame"              => $exame->getData(),
+            "id_responsavel"         => $exame->getIdResponsavel(),
+            "id_preceptor"           => $exame->getPreceptor(),
+            "id_paciente"            => $exame->getPaciente(),
+        ];
+
+        $options = [
+            "http" => [
+                "header"  => "Content-Type: application/json\r\n",
+                "method"  => "PUT",
+                "content" => json_encode($dados),
+            ]
+        ];
+
+        $context = stream_context_create($options);
+
+        $result = file_get_contents($url, false, $context);
+
+        if(!$result) return false;
+
+        return json_decode($result, true);
+    }
+
+    public function excluir($idExame)
+    {
+        $url = "http://localhost:3000/exameHemato/" . $idExame;
+
+        $options = [
+            'http' => [
+                "header" => "Content-Type: application/json\r\n",
+                "method" => "DELETE",
+            ],
+        ];
+
+        $context = stream_context_create($options);
+
+        $result = file_get_contents($url, false, $context);
+
+        if ($result === false) {
+            return false;
+        }
+
+        return json_decode($result, true);
     }
 
     private function converterParaObj($row)
