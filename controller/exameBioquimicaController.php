@@ -31,6 +31,12 @@ class ExameBioquimicaController
         return $result;
     }
 
+    public function editar(ExameBioquimica $exame){
+        $exameBioquimicaDAO = new ExameBioquimicaDAO();
+
+        return $exameBioquimicaDAO->editar($exame);
+    }
+
     public function getPaciente($idExame)
     {
         $exameBioquimicaDAO = new ExameBioquimicaDAO();

@@ -78,5 +78,54 @@ return function (Router $router) {
         header('Location: /cadastrarBioquimica/' . $exameBioquimica->getPaciente() . '?sucesso=1&exame_id=' . $result);
         exit;
 
+        });
+
+    $router->put('/exameBio/{id}', function ($id) {
+        $dadosExame = json_decode($_POST["dadosEdicao"], true);
+        $exameBioquimico = new ExameBioquimica();
+        $exameBioquimicaController = new ExameBioquimicaController();
+
+        $exameBioquimico->setResponsavel($dadosExame["idResponsavel"]);
+        $exameBioquimico->setPreceptor($dadosExame["idPreceptor"]);
+        $exameBioquimico->setPaciente($dadosExame["idPaciente"]);
+        $exameBioquimico->setData($dadosExame["dataExame"]);
+
+        /*$exameBioquimico->setResponsavel(8);
+        $exameBioquimico->setPreceptor(8);
+        $exameBioquimico->setPaciente(1);
+        $exameBioquimico->setData($dadosExame["dataExame"]);*/
+        
+        $exameBioquimico->setId($id);
+
+        $exameBioquimico->setBilirrubinaTotal($dadosExame["bilirrubinaTotal"]);
+        $exameBioquimico->setBilirrubinaDireta($dadosExame["bilirrubinaDireta"]);
+        $exameBioquimico->setProteinaTotal($dadosExame["proteinaTotal"]);
+        $exameBioquimico->setAlbumina($dadosExame["albumina"]);
+        $exameBioquimico->setAmilase($dadosExame["amilase"]);
+        $exameBioquimico->setTgoTransaminaseGlutamicoOxalacetica($dadosExame["tgo"]);
+        $exameBioquimico->setTgpTransaminaseGlutamicoPiruvica($dadosExame["tgp"]);
+        $exameBioquimico->setGamaGtGlutamiltransferase($dadosExame["gamaGt"]);
+        $exameBioquimico->setFosfataseAlcalina($dadosExame["fosfataseAlcalina"]);
+        $exameBioquimico->setReatinaQuinaseCk($dadosExame["ckCreatinaQuinase"]);
+        $exameBioquimico->setGlicose($dadosExame["glicose"]);
+        $exameBioquimico->setFerro($dadosExame["ferro"]);
+        $exameBioquimico->setColesterolTotal($dadosExame["colesterolTotal"]);
+        $exameBioquimico->setHdl($dadosExame["hdl"]);
+        $exameBioquimico->setLdl($dadosExame["ldl"]);
+        $exameBioquimico->setTriglicerideos($dadosExame["triglicerideos"]);
+        $exameBioquimico->setUreia($dadosExame["ureia"]);
+        $exameBioquimico->setCreatinina($dadosExame["creatinina"]);
+        $exameBioquimico->setAcidoUrico($dadosExame["acidoUrico"]);
+        $exameBioquimico->setPcrProteinaCReativa($dadosExame["pcrProteinaCReativa"]);
+        $exameBioquimico->setCalcio($dadosExame["calcio"]);
+        $exameBioquimico->setLdh($dadosExame["ldh"]);
+        $exameBioquimico->setMagnesio($dadosExame["magnesio"]);
+        $exameBioquimico->setFosforo($dadosExame["fosforo"]);
+
+
+        $exameBioquimicaController->editar($exameBioquimico);
+
+        header('Location: /exameBio/listar/' . $id);
+        exit;
     });
 };
