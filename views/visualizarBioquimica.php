@@ -343,7 +343,7 @@
 
         const idPaciente = <?= json_encode($exame->getPaciente()) ?>;
         
-        const dataExame = "2025-01-01";
+        const dataExame = "<?= json_encode($exame->getData()) ?>";
         const idResponsavel = <?= json_encode($exame->getResponsavel()) ?>;
         const idPreceptor = <?= json_encode($exame->getPreceptor()) ?>;
 
