@@ -126,7 +126,6 @@
 
             <!-- Sem ser adm -->
             <div class="cards-grid user-grid">
-
                 <div class="action-card">
                     <div class="card-icon-container">
                         <div class="card-icon edit-patient">
@@ -136,7 +135,7 @@
                     <div class="card-content">
                         <h3 class="card-title">Listar Pacientes</h3>
                         <p class="card-description">Listar pacientes do sistema</p>
-                        <a href="/pacienteS" class="action-btn">
+                        <a href="/paciente" class="action-btn">
                             Acessar
                             <i class="bi bi-arrow-right ms-1"></i>
                         </a>
