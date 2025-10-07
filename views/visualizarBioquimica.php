@@ -235,7 +235,7 @@
                     </legend>
                     <div class="row g-3 mb-4">
                         <div class="col-12">
-                            <textarea class="form-control dadosGerais" rows="4"><?php echo htmlspecialchars($exame->getObservacao()); ?></textarea>
+                            <textarea class="form-control dadosGerais" rows="4"><?php echo htmlspecialchars($exame->getObservacao() ?? ""); ?></textarea>
                         </div>
                     </div>
                 </fieldset>
