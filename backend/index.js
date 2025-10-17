@@ -4,6 +4,7 @@ const routerPaciente = require("./routes/pacienteRouter");
 const routerUsuario = require("./routes/usuarioRouter");
 const routerHemato = require("./routes/hematoRouter");
 const routerBio = require("./routes/bioquimicaRouter");
+const routerHematoRef = require("./routes/hematoRefRouter");
 
 const app = express();
 
@@ -21,6 +22,9 @@ app.use("/exameHemato", routerHemato);
 
 //rota para exameBioquimica -> bioquimicaRouter
 app.use("/exameBio", routerBio);
+
+//rota para referencia Hematológica -> hematoRefRouter
+app.use("/hematoRef", routerHematoRef);
 
 app.listen(3000, () => {
   console.log("Servidor rodando na porta 3000.");
