@@ -12,9 +12,13 @@ exports.getAllHematoRefs = async (req, res) => {
 
 exports.createHematoRef = async (req, res) => {
   try {
+    console.log("req.body:", req.body);
+    console.log("req.body é undefined?", req.body === undefined);
+    console.log("req.body é null?", req.body === null);
+    console.log("Tipo de req.body:", typeof req.body);
     const novoHematoRef = await hematoRefDao.create(req.body);
 
-    res.json(201)({
+    res.status(201).json({
       message: "Referencia Hematológica cadastrada com sucesso",
       id: novoHematoRef.insertId,
     });

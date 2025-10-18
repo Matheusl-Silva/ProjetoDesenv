@@ -6,6 +6,6 @@ const hematoRefController = require("../Controller/hematoRefController");
 
 router.get("/", hematoRefController.getAllHematoRefs);
 router.post("/", hematoRefController.createHematoRef);
-router.put("/", hematoRefController.updateHematoRef);
+router.put("/:idReferenciaHemato", hematoRefController.updateHematoRef);
 
 module.exports = router;
