@@ -156,10 +156,6 @@ exports.create = (data) => {
       data.cvolume_plaquetario_medio_unidade,
     ];
 
-    console.log("Total de colunas na query:", 94);
-    console.log("Total de placeholders:", (query.match(/\?/g) || []).length);
-    console.log("Total de valores no array:", values.length);
-
     db.query(query, values, (err, result) => {
       if (err) {
         console.error("Erro ao executar query:", err);
