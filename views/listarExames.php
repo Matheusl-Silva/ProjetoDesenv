@@ -232,7 +232,7 @@
                         <h3 class="card-title">Bioquímica</h3>
                         <p class="card-description">Editar valores de referência para os exames de bioquímica.</p>
                         <div class="text-center">
-                            <a href="/referenciaBioquimica" class="action-btn">
+                            <a href="/bioquimicaRef" class="action-btn">
                                 Acessar
                                 <i class="bi bi-arrow-right ms-1"></i>
                             </a>
@@ -251,7 +251,7 @@
                         <h3 class="card-title">Hematologia</h3>
                         <p class="card-description">Editar valores de referência para os exames de hematologia.</p>
                         <div class="text-center">
-                            <a href="/referenciaHematologia" class="action-btn">
+                            <a href="/hematoRef" class="action-btn">
                                 Acessar
                                 <i class="bi bi-arrow-right ms-1"></i>
                             </a>

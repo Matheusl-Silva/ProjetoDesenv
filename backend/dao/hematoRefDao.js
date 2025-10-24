@@ -214,7 +214,7 @@ exports.update = (id, data) => {
         ccelulas_monocitoides_absoluto = ?, ccelulas_monocitoides_absoluto_unidade = ?,
         cplaquetas = ?, cplaquetas_unidade = ?,
         cvolume_plaquetario_medio = ?, cvolume_plaquetario_medio_unidade = ?
-      WHERE id = ?
+      WHERE id = 1
     `;
 
     const values = [
