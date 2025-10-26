@@ -16,13 +16,16 @@ class ExameHematoRefDAO
         $context = stream_context_create($options);
 
         $result = file_get_contents($url, false, $context);
-        var_dump($result);die;
+        
         if ($result == false) {
             return false;
         }
 
         $response = json_decode($result, true);
-        return $this->converterParaObj($response);
+        if (is_array($response) && count($response) > 0) {
+            return $this->converterParaObj($response[0]);
+        }
+        return false;
     }
 
     public function atualizarReferencia(ReferenciaHematologia $referencia)
