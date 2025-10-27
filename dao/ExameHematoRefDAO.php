@@ -16,7 +16,7 @@ class ExameHematoRefDAO
         $context = stream_context_create($options);
 
         $result = file_get_contents($url, false, $context);
-        
+
         if ($result == false) {
             return false;
         }
@@ -30,7 +30,7 @@ class ExameHematoRefDAO
 
     public function atualizarReferencia(ReferenciaHematologia $referencia)
     {
-        $url = "http://localhost:3000/hematoRef";
+        $url = "http://localhost:3000/hematoRef/1";
 
         $dados = [
             "chemacia_m"                             => $referencia->getChemaciaM(),

@@ -111,9 +111,13 @@ return function (Router $router) {
         $hematoRef->setCvolumePlaquetarioMedio($_POST["cvolume_plaquetario_medio"]);
         $hematoRef->setCvolumePlaquetarioMedioUnidade($_POST["cvolume_plaquetario_medio_unidade"]);
 
-        $hematoRefController->editar($hematoRef);
+        $sucesso = $hematoRefController->editar($hematoRef);
 
-        header('Location: /hematoRef');
+        if ($sucesso) {
+            header('Location: /hematoRef?status=success');
+        } else {
+            header('Location: /hematoRef?status=error');
+        }
         exit;
 
     });
