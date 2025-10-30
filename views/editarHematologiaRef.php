@@ -46,7 +46,7 @@
         <div class="action-card p-4">
             <h1 class="card-title text-center mb-4">Editar Valores de Referência - Hematologia</h1>
             <form action="/hematoRef" method="POST">
-                <input type="hidden" name="method" value="POST">
+                <input type="hidden" name="method" value="PUT">
                 <input type="hidden" name="id" value="<?php echo htmlspecialchars($hematoRef->getId() ?? 1); ?>">
 
                 <div class="row mb-3">
@@ -537,6 +537,7 @@
         </div>
     </div>
 
+    <?php if (isset($_SESSION['status']) && $_SESSION['status'] === 'success'): ?>
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -556,6 +557,16 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <?php endif; ?>
+
+   <script>
+     <?php if (isset($_SESSION['status']) && $_SESSION['status'] === 'success'): ?>
+        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+    <?php endif; ?>
+   </script>
+
 </body>
 
 </html>

@@ -96,7 +96,16 @@ return function (Router $router) {
         $bioquimicaRef->setCfosforo16A18Anos($_POST['cfosforo_16_a_18_anos']);
         $bioquimicaRef->setCfosforoUnidade($_POST['cfosforo_unidade']);
 
-        $bioquimicaController->editar($bioquimicaRef);
+        $sucesso = $bioquimicaController->editar($bioquimicaRef);
+
+        if ($sucesso) {
+            $_SESSION['status'] = 'success';
+        } else {
+            $_SESSION['status'] = 'error';
+        }
+
+        header('Location: /hematoRef');
+        exit;
     });
 
 };

@@ -114,10 +114,12 @@ return function (Router $router) {
         $sucesso = $hematoRefController->editar($hematoRef);
 
         if ($sucesso) {
-            header('Location: /hematoRef?status=success');
+            $_SESSION['status'] = 'success';
         } else {
-            header('Location: /hematoRef?status=error');
+            $_SESSION['status'] = 'error';
         }
+
+        header('Location: /hematoRef');
         exit;
 
     });

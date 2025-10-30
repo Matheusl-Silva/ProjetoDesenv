@@ -10,6 +10,7 @@ class HematoRefController
         $nomeUsuario  = $auth->getNomeUsuario();
 
         require 'views/editarHematologiaRef.php';
+        unset($_SESSION['status']);
     }
 
     public function editar(ReferenciaHematologia $hematoRef)

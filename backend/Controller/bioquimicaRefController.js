@@ -15,7 +15,7 @@ exports.createBioquimicaRef = async (req, res) => {
     const novoBioquimicaRef = await bioquimicaRefDao.create(req.body);
 
     res.status(201).json({
-      message: "Referencia Hematológica cadastrada com sucesso",
+      message: "Referencia bioquimica cadastrada com sucesso",
       id: novoBioquimicaRef.insertId,
     });
   } catch (err) {
