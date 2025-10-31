@@ -6,6 +6,7 @@ class HematoRefController
     {
         $hematoRefDAO = new ExameHematoRefDAO();
         $hematoRef    = $hematoRefDAO->buscarReferenciaHematologica();
+        if(!$hematoRef) $hematoRef = new ReferenciaHematologia();
         $auth         = new Autenticacao();
         $nomeUsuario  = $auth->getNomeUsuario();
 

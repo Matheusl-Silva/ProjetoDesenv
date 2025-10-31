@@ -33,101 +33,57 @@ class ExameHematoRefDAO
         $url = "http://localhost:3000/hematoRef/1";
 
         $dados = [
-            "chemacia_m"                             => $referencia->getChemaciaM(),
-            "chemacia_f"                             => $referencia->getChemaciaF(),
-            "chemacia_unidade"                       => $referencia->getChemaciaUnidade(),
-            "chemoglobina_m"                         => $referencia->getChemoglobinaM(),
-            "chemoglobina_f"                         => $referencia->getChemoglobinaF(),
-            "chemoglobina_unidade"                   => $referencia->getChemoglobinaUnidade(),
-            "chematocrito_m"                         => $referencia->getChematocritoM(),
-            "chematocrito_f"                         => $referencia->getChematocritoF(),
-            "chematocrito_unidade"                   => $referencia->getChematocritoUnidade(),
-            "cvcm_m"                                 => $referencia->getCvcmM(),
-            "cvcm_f"                                 => $referencia->getCvcmF(),
-            "cvcm_unidade"                           => $referencia->getCvcmUnidade(),
-            "chcm_m"                                 => $referencia->getChcmM(),
-            "chcm_f"                                 => $referencia->getChcmF(),
-            "chcm_unidade"                           => $referencia->getChcmUnidade(),
-            "cchcw_m"                                => $referencia->getCchcwM(),
-            "cchcw_f"                                => $referencia->getCchcwF(),
-            "cchcw_unidade"                          => $referencia->getCchcwUnidade(),
-            "crdw_m"                                 => $referencia->getCrdwM(),
-            "crdw_f"                                 => $referencia->getCrdwF(),
-            "crdw_unidade"                           => $referencia->getCrdwUnidade(),
-            "cleucocitos_relativo"                   => $referencia->getCleucocitosRelativo(),
-            "cleucocitos_relativo_unidade"           => $referencia->getCleucocitosRelativoUnidade(),
-            "cleucocitos_absoluto"                   => $referencia->getCleucocitosAbsoluto(),
-            "cleucocitos_absoluto_unidade"           => $referencia->getCleucocitosAbsolutoUnidade(),
-            "cneutrofilos_relativo"                  => $referencia->getCneutrofilosRelativo(),
-            "cneutrofilos_relativo_unidade"          => $referencia->getCneutrofilosRelativoUnidade(),
-            "cneutrofilos_absoluto"                  => $referencia->getCneutrofilosAbsoluto(),
-            "cneutrofilos_absoluto_unidade"          => $referencia->getCneutrofilosAbsolutoUnidade(),
-            "cblastos_relativo"                      => $referencia->getCblastosRelativo(),
-            "cblastos_relativo_unidade"              => $referencia->getCblastosRelativoUnidade(),
-            "cblastos_absoluto"                      => $referencia->getCblastosAbsoluto(),
-            "cblastos_absoluto_unidade"              => $referencia->getCblastosAbsolutoUnidade(),
-            "cpromielocitos_relativo"                => $referencia->getCpromielocitosRelativo(),
-            "cpromielocitos_relativo_unidade"        => $referencia->getCpromielocitosRelativoUnidade(),
-            "cpromielocitos_absoluto"                => $referencia->getCpromielocitosAbsoluto(),
-            "cpromielocitos_absoluto_unidade"        => $referencia->getCpromielocitosAbsolutoUnidade(),
-            "cmielocitos_relativo"                   => $referencia->getCmielocitosRelativo(),
-            "cmielocitos_relativo_unidade"           => $referencia->getCmielocitosRelativoUnidade(),
-            "cmielocitos_absoluto"                   => $referencia->getCmielocitosAbsoluto(),
-            "cmielocitos_absoluto_unidade"           => $referencia->getCmielocitosAbsolutoUnidade(),
-            "cmetamielocitos_relativo"               => $referencia->getCmetamielocitosRelativo(),
-            "cmetamielocitos_relativo_unidade"       => $referencia->getCmetamielocitosRelativoUnidade(),
-            "cmetamielocitos_absoluto"               => $referencia->getCmetamielocitosAbsoluto(),
-            "cmetamielocitos_absoluto_unidade"       => $referencia->getCmetamielocitosAbsolutoUnidade(),
-            "cbastonetes_relativo"                   => $referencia->getCbastonetesRelativo(),
-            "cbastonetes_relativo_unidade"           => $referencia->getCbastonetesRelativoUnidade(),
-            "cbastonetes_absoluto"                   => $referencia->getCbastonetesAbsoluto(),
-            "cbastonetes_absoluto_unidade"           => $referencia->getCbastonetesAbsolutoUnidade(),
-            "csegmentados_relativo"                  => $referencia->getCsegmentadosRelativo(),
-            "csegmentados_relativo_unidade"          => $referencia->getCsegmentadosRelativoUnidade(),
-            "csegmentados_absoluto"                  => $referencia->getCsegmentadosAbsoluto(),
-            "csegmentados_absoluto_unidade"          => $referencia->getCsegmentadosAbsolutoUnidade(),
-            "ceosinofilos_relativo"                  => $referencia->getCeosinofilosRelativo(),
-            "ceosinofilos_relativo_unidade"          => $referencia->getCeosinofilosRelativoUnidade(),
-            "ceosinofilos_absoluto"                  => $referencia->getCeosinofilosAbsoluto(),
-            "ceosinofilos_absoluto_unidade"          => $referencia->getCeosinofilosAbsolutoUnidade(),
-            "cbasofilos_relativo"                    => $referencia->getCbasofilosRelativo(),
-            "cbasofilos_relativo_unidade"            => $referencia->getCbasofilosRelativoUnidade(),
-            "cbasofilos_absoluto"                    => $referencia->getCbasofilosAbsoluto(),
-            "cbasofilos_absoluto_unidade"            => $referencia->getCbasofilosAbsolutoUnidade(),
-            "clinfocitos_relativo"                   => $referencia->getClinfocitosRelativo(),
-            "clinfocitos_relativo_unidade"           => $referencia->getClinfocitosRelativoUnidade(),
-            "clinfocitos_absoluto"                   => $referencia->getClinfocitosAbsoluto(),
-            "clinfocitos_absoluto_unidade"           => $referencia->getClinfocitosAbsolutoUnidade(),
-            "clinfocitos_atipicos_relativo"          => $referencia->getClinfocitosAtipicosRelativo(),
-            "clinfocitos_atipicos_relativo_unidade"  => $referencia->getClinfocitosAtipicosRelativoUnidade(),
-            "clinfocitos_atipicos_absoluto"          => $referencia->getClinfocitosAtipicosAbsoluto(),
-            "clinfocitos_atipicos_absoluto_unidade"  => $referencia->getClinfocitosAtipicosAbsolutoUnidade(),
-            "cmonocitos_relativo"                    => $referencia->getCmonocitosRelativo(),
-            "cmonocitos_relativo_unidade"            => $referencia->getCmonocitosRelativoUnidade(),
-            "cmonocitos_absoluto"                    => $referencia->getCmonocitosAbsoluto(),
-            "cmonocitos_absoluto_unidade"            => $referencia->getCmonocitosAbsolutoUnidade(),
-            "cmieloblastos_relativo"                 => $referencia->getCmieloblastosRelativo(),
-            "cmieloblastos_relativo_unidade"         => $referencia->getCmieloblastosRelativoUnidade(),
-            "cmieloblastos_absoluto"                 => $referencia->getCmieloblastosAbsoluto(),
-            "cmieloblastos_absoluto_unidade"         => $referencia->getCmieloblastosAbsolutoUnidade(),
-            "coutras_celulas_relativo"               => $referencia->getCoutrasCelulasRelativo(),
-            "coutras_celulas_relativo_unidade"       => $referencia->getCoutrasCelulasRelativoUnidade(),
-            "coutras_celulas_absoluto"               => $referencia->getCoutrasCelulasAbsoluto(),
-            "coutras_celulas_absoluto_unidade"       => $referencia->getCoutrasCelulasAbsolutoUnidade(),
-            "ccelulas_linfoides_relativo"            => $referencia->getCcelulasLinfoidesRelativo(),
-            "ccelulas_linfoides_relativo_unidade"    => $referencia->getCcelulasLinfoidesRelativoUnidade(),
-            "ccelulas_linfoides_absoluto"            => $referencia->getCcelulasLinfoidesAbsoluto(),
-            "ccelulas_linfoides_absoluto_unidade"    => $referencia->getCcelulasLinfoidesAbsolutoUnidade(),
-            "ccelulas_monocitoides_relativo"         => $referencia->getCcelulasMonocitoidesRelativo(),
-            "ccelulas_monocitoides_relativo_unidade" => $referencia->getCcelulasMonocitoidesRelativoUnidade(),
-            "ccelulas_monocitoides_absoluto"         => $referencia->getCcelulasMonocitoidesAbsoluto(),
-            "ccelulas_monocitoides_absoluto_unidade" => $referencia->getCcelulasMonocitoidesAbsolutoUnidade(),
-            "cplaquetas"                             => $referencia->getCplaquetas(),
-            "cplaquetas_unidade"                     => $referencia->getCplaquetasUnidade(),
-            "cvolume_plaquetario_medio"              => $referencia->getCvolumePlaquetarioMedio(),
-            "cvolume_plaquetario_medio_unidade"      => $referencia->getCvolumePlaquetarioMedioUnidade(),
+            "hemacia_m"                      => $referencia->getHemaciaM(),
+            "hemacia_f"                      => $referencia->getHemaciaF(),
+            "hemoglobina_m"                  => $referencia->getHemoglobinaM(),
+            "hemoglobina_f"                  => $referencia->getHemoglobinaF(),
+            "hematocrito_m"                  => $referencia->getHematocritoM(),
+            "hematocrito_f"                  => $referencia->getHematocritoF(),
+            "vcm_m"                          => $referencia->getVcmM(),
+            "vcm_f"                          => $referencia->getVcmF(),
+            "hcm_m"                          => $referencia->getHcmM(),
+            "hcm_f"                          => $referencia->getHcmF(),
+            "chcm_m"                         => $referencia->getChcmM(),
+            "chcm_f"                         => $referencia->getChcmF(),
+            "rdw_m"                          => $referencia->getRdwM(),
+            "rdw_f"                          => $referencia->getRdwF(),
+            "leucocitos_relativo"            => $referencia->getLeucocitosRelativo(),
+            "leucocitos_absoluto"            => $referencia->getLeucocitosAbsoluto(),
+            "neutrofilos_relativo"           => $referencia->getNeutrofilosRelativo(),
+            "neutrofilos_absoluto"           => $referencia->getNeutrofilosAbsoluto(),
+            "blastos_relativo"               => $referencia->getBlastosRelativo(),
+            "blastos_absoluto"               => $referencia->getBlastosAbsoluto(),
+            "promielocitos_relativo"         => $referencia->getPromielocitosRelativo(),
+            "promielocitos_absoluto"         => $referencia->getPromielocitosAbsoluto(),
+            "mielocitos_relativo"            => $referencia->getMielocitosRelativo(),
+            "mielocitos_absoluto"            => $referencia->getMielocitosAbsoluto(),
+            "metamielocitos_relativo"        => $referencia->getMetamielocitosRelativo(),
+            "metamielocitos_absoluto"        => $referencia->getMetamielocitosAbsoluto(),
+            "bastonetes_relativo"            => $referencia->getBastonetesRelativo(),
+            "bastonetes_absoluto"            => $referencia->getBastonetesAbsoluto(),
+            "segmentados_relativo"           => $referencia->getSegmentadosRelativo(),
+            "segmentados_absoluto"           => $referencia->getSegmentadosAbsoluto(),
+            "eosinofilos_relativo"           => $referencia->getEosinofilosRelativo(),
+            "eosinofilos_absoluto"           => $referencia->getEosinofilosAbsoluto(),
+            "basofilos_relativo"             => $referencia->getBasofilosRelativo(),
+            "basofilos_absoluto"             => $referencia->getBasofilosAbsoluto(),
+            "linfocitos_relativo"            => $referencia->getLinfocitosRelativo(),
+            "linfocitos_absoluto"            => $referencia->getLinfocitosAbsoluto(),
+            "linfocitos_atipicos_relativo"   => $referencia->getLinfocitosAtipicosRelativo(),
+            "linfocitos_atipicos_absoluto"   => $referencia->getLinfocitosAtipicosAbsoluto(),
+            "monocitos_relativo"             => $referencia->getMonocitosRelativo(),
+            "monocitos_absoluto"             => $referencia->getMonocitosAbsoluto(),
+            "mieloblastos_relativo"          => $referencia->getMieloblastosRelativo(),
+            "mieloblastos_absoluto"          => $referencia->getMieloblastosAbsoluto(),
+            "outras_celulas_relativo"        => $referencia->getOutrasCelulasRelativo(),
+            "outras_celulas_absoluto"        => $referencia->getOutrasCelulasAbsoluto(),
+            "celulas_linfoides_relativo"     => $referencia->getCelulasLinfoidesRelativo(),
+            "celulas_linfoides_absoluto"     => $referencia->getCelulasLinfoidesAbsoluto(),
+            "celulas_monocitoides_relativo"  => $referencia->getCelulasMonocitoidesRelativo(),
+            "celulas_monocitoides_absoluto"  => $referencia->getCelulasMonocitoidesAbsoluto(),
+            "plaquetas"                      => $referencia->getPlaquetas(),
+            "volume_plaquetario_medio"       => $referencia->getVolumePlaquetarioMedio(),
         ];
-
         $options = [
             "http" => [
                 "header"  => "Content-Type: application/json\r\n",
@@ -150,102 +106,58 @@ class ExameHematoRefDAO
     private function converterParaObj($row)
     {
         $referencia = new ReferenciaHematologia();
-
+        
         $referencia->setId($row['id'] ?? 1);
-        $referencia->setChemaciaM($row['chemacia_m']);
-        $referencia->setChemaciaF($row['chemacia_f']);
-        $referencia->setChemaciaUnidade($row['chemacia_unidade']);
-        $referencia->setChemoglobinaM($row['chemoglobina_m']);
-        $referencia->setChemoglobinaF($row['chemoglobina_f']);
-        $referencia->setChemoglobinaUnidade($row['chemoglobina_unidade']);
-        $referencia->setChematocritoM($row['chematocrito_m']);
-        $referencia->setChematocritoF($row['chematocrito_f']);
-        $referencia->setChematocritoUnidade($row['chematocrito_unidade']);
-        $referencia->setCvcmM($row['cvcm_m']);
-        $referencia->setCvcmF($row['cvcm_f']);
-        $referencia->setCvcmUnidade($row['cvcm_unidade']);
-        $referencia->setChcmM($row['chcm_m']);
-        $referencia->setChcmF($row['chcm_f']);
-        $referencia->setChcmUnidade($row['chcm_unidade']);
-        $referencia->setCchcwM($row['cchcw_m']);
-        $referencia->setCchcwF($row['cchcw_f']);
-        $referencia->setCchcwUnidade($row['cchcw_unidade']);
-        $referencia->setCrdwM($row['crdw_m']);
-        $referencia->setCrdwF($row['crdw_f']);
-        $referencia->setCrdwUnidade($row['crdw_unidade']);
-        $referencia->setCleucocitosRelativo($row['cleucocitos_relativo']);
-        $referencia->setCleucocitosRelativoUnidade($row['cleucocitos_relativo_unidade']);
-        $referencia->setCleucocitosAbsoluto($row['cleucocitos_absoluto']);
-        $referencia->setCleucocitosAbsolutoUnidade($row['cleucocitos_absoluto_unidade']);
-        $referencia->setCneutrofilosRelativo($row['cneutrofilos_relativo']);
-        $referencia->setCneutrofilosRelativoUnidade($row['cneutrofilos_relativo_unidade']);
-        $referencia->setCneutrofilosAbsoluto($row['cneutrofilos_absoluto']);
-        $referencia->setCneutrofilosAbsolutoUnidade($row['cneutrofilos_absoluto_unidade']);
-        $referencia->setCblastosRelativo($row['cblastos_relativo']);
-        $referencia->setCblastosRelativoUnidade($row['cblastos_relativo_unidade']);
-        $referencia->setCblastosAbsoluto($row['cblastos_absoluto']);
-        $referencia->setCblastosAbsolutoUnidade($row['cblastos_absoluto_unidade']);
-        $referencia->setCpromielocitosRelativo($row['cpromielocitos_relativo']);
-        $referencia->setCpromielocitosRelativoUnidade($row['cpromielocitos_relativo_unidade']);
-        $referencia->setCpromielocitosAbsoluto($row['cpromielocitos_absoluto']);
-        $referencia->setCpromielocitosAbsolutoUnidade($row['cpromielocitos_absoluto_unidade']);
-        $referencia->setCmielocitosRelativo($row['cmielocitos_relativo']);
-        $referencia->setCmielocitosRelativoUnidade($row['cmielocitos_relativo_unidade']);
-        $referencia->setCmielocitosAbsoluto($row['cmielocitos_absoluto']);
-        $referencia->setCmielocitosAbsolutoUnidade($row['cmielocitos_absoluto_unidade']);
-        $referencia->setCmetamielocitosRelativo($row['cmetamielocitos_relativo']);
-        $referencia->setCmetamielocitosRelativoUnidade($row['cmetamielocitos_relativo_unidade']);
-        $referencia->setCmetamielocitosAbsoluto($row['cmetamielocitos_absoluto']);
-        $referencia->setCmetamielocitosAbsolutoUnidade($row['cmetamielocitos_absoluto_unidade']);
-        $referencia->setCbastonetesRelativo($row['cbastonetes_relativo']);
-        $referencia->setCbastonetesRelativoUnidade($row['cbastonetes_relativo_unidade']);
-        $referencia->setCbastonetesAbsoluto($row['cbastonetes_absoluto']);
-        $referencia->setCbastonetesAbsolutoUnidade($row['cbastonetes_absoluto_unidade']);
-        $referencia->setCsegmentadosRelativo($row['csegmentados_relativo']);
-        $referencia->setCsegmentadosRelativoUnidade($row['csegmentados_relativo_unidade']);
-        $referencia->setCsegmentadosAbsoluto($row['csegmentados_absoluto']);
-        $referencia->setCsegmentadosAbsolutoUnidade($row['csegmentados_absoluto_unidade']);
-        $referencia->setCeosinofilosRelativo($row['ceosinofilos_relativo']);
-        $referencia->setCeosinofilosRelativoUnidade($row['ceosinofilos_relativo_unidade']);
-        $referencia->setCeosinofilosAbsoluto($row['ceosinofilos_absoluto']);
-        $referencia->setCeosinofilosAbsolutoUnidade($row['ceosinofilos_absoluto_unidade']);
-        $referencia->setCbasofilosRelativo($row['cbasofilos_relativo']);
-        $referencia->setCbasofilosRelativoUnidade($row['cbasofilos_relativo_unidade']);
-        $referencia->setCbasofilosAbsoluto($row['cbasofilos_absoluto']);
-        $referencia->setCbasofilosAbsolutoUnidade($row['cbasofilos_absoluto_unidade']);
-        $referencia->setClinfocitosRelativo($row['clinfocitos_relativo']);
-        $referencia->setClinfocitosRelativoUnidade($row['clinfocitos_relativo_unidade']);
-        $referencia->setClinfocitosAbsoluto($row['clinfocitos_absoluto']);
-        $referencia->setClinfocitosAbsolutoUnidade($row['clinfocitos_absoluto_unidade']);
-        $referencia->setClinfocitosAtipicosRelativo($row['clinfocitos_atipicos_relativo']);
-        $referencia->setClinfocitosAtipicosRelativoUnidade($row['clinfocitos_atipicos_relativo_unidade']);
-        $referencia->setClinfocitosAtipicosAbsoluto($row['clinfocitos_atipicos_absoluto']);
-        $referencia->setClinfocitosAtipicosAbsolutoUnidade($row['clinfocitos_atipicos_absoluto_unidade']);
-        $referencia->setCmonocitosRelativo($row['cmonocitos_relativo']);
-        $referencia->setCmonocitosRelativoUnidade($row['cmonocitos_relativo_unidade']);
-        $referencia->setCmonocitosAbsoluto($row['cmonocitos_absoluto']);
-        $referencia->setCmonocitosAbsolutoUnidade($row['cmonocitos_absoluto_unidade']);
-        $referencia->setCmieloblastosRelativo($row['cmieloblastos_relativo']);
-        $referencia->setCmieloblastosRelativoUnidade($row['cmieloblastos_relativo_unidade']);
-        $referencia->setCmieloblastosAbsoluto($row['cmieloblastos_absoluto']);
-        $referencia->setCmieloblastosAbsolutoUnidade($row['cmieloblastos_absoluto_unidade']);
-        $referencia->setCoutrasCelulasRelativo($row['coutras_celulas_relativo']);
-        $referencia->setCoutrasCelulasRelativoUnidade($row['coutras_celulas_relativo_unidade']);
-        $referencia->setCoutrasCelulasAbsoluto($row['coutras_celulas_absoluto']);
-        $referencia->setCoutrasCelulasAbsolutoUnidade($row['coutras_celulas_absoluto_unidade']);
-        $referencia->setCcelulasLinfoidesRelativo($row['ccelulas_linfoides_relativo']);
-        $referencia->setCcelulasLinfoidesRelativoUnidade($row['ccelulas_linfoides_relativo_unidade']);
-        $referencia->setCcelulasLinfoidesAbsoluto($row['ccelulas_linfoides_absoluto']);
-        $referencia->setCcelulasLinfoidesAbsolutoUnidade($row['ccelulas_linfoides_absoluto_unidade']);
-        $referencia->setCcelulasMonocitoidesRelativo($row['ccelulas_monocitoides_relativo']);
-        $referencia->setCcelulasMonocitoidesRelativoUnidade($row['ccelulas_monocitoides_relativo_unidade']);
-        $referencia->setCcelulasMonocitoidesAbsoluto($row['ccelulas_monocitoides_absoluto']);
-        $referencia->setCcelulasMonocitoidesAbsolutoUnidade($row['ccelulas_monocitoides_absoluto_unidade']);
-        $referencia->setCplaquetas($row['cplaquetas']);
-        $referencia->setCplaquetasUnidade($row['cplaquetas_unidade']);
-        $referencia->setCvolumePlaquetarioMedio($row['cvolume_plaquetario_medio']);
-        $referencia->setCvolumePlaquetarioMedioUnidade($row['cvolume_plaquetario_medio_unidade']);
-
+        $referencia->setHemaciaM($row['chemacia_m']);
+        $referencia->setHemaciaF($row['chemacia_f']);
+        $referencia->setHemoglobinaM($row['chemoglobina_m']);
+        $referencia->setHemoglobinaF($row['chemoglobina_f']);
+        $referencia->setHematocritoM($row['chematocrito_m']);
+        $referencia->setHematocritoF($row['chematocrito_f']);
+        $referencia->setVcmM($row['cvcm_m']);
+        $referencia->setVcmF($row['cvcm_f']);
+        $referencia->setHcmM($row['chcm_m']);
+        $referencia->setHcmF($row['chcm_f']);
+        $referencia->setChcmM($row['cchcw_m']);
+        $referencia->setChcmF($row['cchcw_f']);
+        $referencia->setRdwM($row['crdw_m']);
+        $referencia->setRdwF($row['crdw_f']);
+        $referencia->setLeucocitosRelativo($row['cleucocitos_relativo']);
+        $referencia->setLeucocitosAbsoluto($row['cleucocitos_absoluto']);
+        $referencia->setNeutrofilosRelativo($row['cneutrofilos_relativo']);
+        $referencia->setNeutrofilosAbsoluto($row['cneutrofilos_absoluto']);
+        $referencia->setBlastosRelativo($row['cblastos_relativo']);
+        $referencia->setBlastosAbsoluto($row['cblastos_absoluto']);
+        $referencia->setPromielocitosRelativo($row['cpromielocitos_relativo']);
+        $referencia->setPromielocitosAbsoluto($row['cpromielocitos_absoluto']);
+        $referencia->setMielocitosRelativo($row['cmielocitos_relativo']);
+        $referencia->setMielocitosAbsoluto($row['cmielocitos_absoluto']);
+        $referencia->setMetamielocitosRelativo($row['cmetamielocitos_relativo']);
+        $referencia->setMetamielocitosAbsoluto($row['cmetamielocitos_absoluto']);
+        $referencia->setBastonetesRelativo($row['cbastonetes_relativo']);
+        $referencia->setBastonetesAbsoluto($row['cbastonetes_absoluto']);
+        $referencia->setSegmentadosRelativo($row['csegmentados_relativo']);
+        $referencia->setSegmentadosAbsoluto($row['csegmentados_absoluto']);
+        $referencia->setEosinofilosRelativo($row['ceosinofilos_relativo']);
+        $referencia->setEosinofilosAbsoluto($row['ceosinofilos_absoluto']);
+        $referencia->setBasofilosRelativo($row['cbasofilos_relativo']);
+        $referencia->setBasofilosAbsoluto($row['cbasofilos_absoluto']);
+        $referencia->setLinfocitosRelativo($row['clinfocitos_relativo']);
+        $referencia->setLinfocitosAbsoluto($row['clinfocitos_absoluto']);
+        $referencia->setLinfocitosAtipicosRelativo($row['clinfocitos_atipicos_relativo']);
+        $referencia->setLinfocitosAtipicosAbsoluto($row['clinfocitos_atipicos_absoluto']);
+        $referencia->setMonocitosRelativo($row['cmonocitos_relativo']);
+        $referencia->setMonocitosAbsoluto($row['cmonocitos_absoluto']);
+        $referencia->setMieloblastosRelativo($row['cmieloblastos_relativo']);
+        $referencia->setMieloblastosAbsoluto($row['cmieloblastos_absoluto']);
+        $referencia->setOutrasCelulasRelativo($row['coutras_celulas_relativo']);
+        $referencia->setOutrasCelulasAbsoluto($row['coutras_celulas_absoluto']);
+        $referencia->setCelulasLinfoidesRelativo($row['ccelulas_linfoides_relativo']);
+        $referencia->setCelulasLinfoidesAbsoluto($row['ccelulas_linfoides_absoluto']);
+        $referencia->setCelulasMonocitoidesRelativo($row['ccelulas_monocitoides_relativo']);
+        $referencia->setCelulasMonocitoidesAbsoluto($row['ccelulas_monocitoides_absoluto']);
+        $referencia->setPlaquetas($row['cplaquetas']);
+        $referencia->setVolumePlaquetarioMedio($row['cvolume_plaquetario_medio']);
         return $referencia;
     }
 }

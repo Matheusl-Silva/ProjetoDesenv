@@ -45,483 +45,347 @@
     <div class="container mt-5">
         <div class="action-card p-4">
             <h1 class="card-title text-center mb-4">Editar Valores de Referência - Hematologia</h1>
-            <form action="/hematoRef" method="POST">
+            <form action="/hematoRef" method="POST" id="teste">
                 <input type="hidden" name="method" value="PUT">
                 <input type="hidden" name="id" value="<?php echo htmlspecialchars($hematoRef->getId() ?? 1); ?>">
-
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="chemacia_m" class="form-label">Hemácia (Masculino):</label>
-                        <input type="text" class="form-control" id="chemacia_m" name="chemacia_m"
-                            value="<?php echo htmlspecialchars($hematoRef->getChemaciaM() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="chemacia_f" class="form-label">Hemácia (Feminino):</label>
-                        <input type="text" class="form-control" id="chemacia_f" name="chemacia_f"
-                            value="<?php echo htmlspecialchars($hematoRef->getChemaciaF() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="chemacia_unidade" class="form-label">Unidade Hemácia:</label>
-                        <input type="text" class="form-control" id="chemacia_unidade" name="chemacia_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getChemaciaUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="chemoglobina_m" class="form-label">Hemoglobina (Masculino):</label>
-                        <input type="text" class="form-control" id="chemoglobina_m" name="chemoglobina_m"
-                            value="<?php echo htmlspecialchars($hematoRef->getChemoglobinaM() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="chemoglobina_f" class="form-label">Hemoglobina (Feminino):</label>
-                        <input type="text" class="form-control" id="chemoglobina_f" name="chemoglobina_f"
-                            value="<?php echo htmlspecialchars($hematoRef->getChemoglobinaF() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="chemoglobina_unidade" class="form-label">Unidade Hemoglobina:</label>
-                        <input type="text" class="form-control" id="chemoglobina_unidade" name="chemoglobina_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getChemoglobinaUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="chematocrito_m" class="form-label">Hematócrito (Masculino):</label>
-                        <input type="text" class="form-control" id="chematocrito_m" name="chematocrito_m"
-                            value="<?php echo htmlspecialchars($hematoRef->getChematocritoM() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="chematocrito_f" class="form-label">Hematócrito (Feminino):</label>
-                        <input type="text" class="form-control" id="chematocrito_f" name="chematocrito_f"
-                            value="<?php echo htmlspecialchars($hematoRef->getChematocritoF() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="chematocrito_unidade" class="form-label">Unidade Hematócrito:</label>
-                        <input type="text" class="form-control" id="chematocrito_unidade" name="chematocrito_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getChematocritoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="cvcm_m" class="form-label">VCM (Masculino):</label>
-                        <input type="text" class="form-control" id="cvcm_m" name="cvcm_m"
-                            value="<?php echo htmlspecialchars($hematoRef->getCvcmM() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cvcm_f" class="form-label">VCM (Feminino):</label>
-                        <input type="text" class="form-control" id="cvcm_f" name="cvcm_f"
-                            value="<?php echo htmlspecialchars($hematoRef->getCvcmF() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cvcm_unidade" class="form-label">Unidade VCM:</label>
-                        <input type="text" class="form-control" id="cvcm_unidade" name="cvcm_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCvcmUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="chcm_m" class="form-label">HCM (Masculino):</label>
-                        <input type="text" class="form-control" id="chcm_m" name="chcm_m"
-                            value="<?php echo htmlspecialchars($hematoRef->getChcmM() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="chcm_f" class="form-label">HCM (Feminino):</label>
-                        <input type="text" class="form-control" id="chcm_f" name="chcm_f"
-                            value="<?php echo htmlspecialchars($hematoRef->getChcmF() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="chcm_unidade" class="form-label">Unidade HCM:</label>
-                        <input type="text" class="form-control" id="chcm_unidade" name="chcm_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getChcmUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="cchcw_m" class="form-label">CHCM (Masculino):</label>
-                        <input type="text" class="form-control" id="cchcw_m" name="cchcw_m"
-                            value="<?php echo htmlspecialchars($hematoRef->getCchcwM() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cchcw_f" class="form-label">CHCM (Feminino):</label>
-                        <input type="text" class="form-control" id="cchcw_f" name="cchcw_f"
-                            value="<?php echo htmlspecialchars($hematoRef->getCchcwF() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cchcw_unidade" class="form-label">Unidade CHCM:</label>
-                        <input type="text" class="form-control" id="cchcw_unidade" name="cchcw_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCchcwUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="crdw_m" class="form-label">RDW (Masculino):</label>
-                        <input type="text" class="form-control" id="crdw_m" name="crdw_m"
-                            value="<?php echo htmlspecialchars($hematoRef->getCrdwM() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="crdw_f" class="form-label">RDW (Feminino):</label>
-                        <input type="text" class="form-control" id="crdw_f" name="crdw_f"
-                            value="<?php echo htmlspecialchars($hematoRef->getCrdwF() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="crdw_unidade" class="form-label">Unidade RDW:</label>
-                        <input type="text" class="form-control" id="crdw_unidade" name="crdw_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCrdwUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="cleucocitos_relativo" class="form-label">Leucócitos (Relativo):</label>
-                        <input type="text" class="form-control" id="cleucocitos_relativo" name="cleucocitos_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCleucocitosRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cleucocitos_absoluto" class="form-label">Leucócitos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cleucocitos_absoluto" name="cleucocitos_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCleucocitosAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cleucocitos_absoluto_unidade" class="form-label">Unidade Leucócitos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cleucocitos_absoluto_unidade"
-                            name="cleucocitos_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCleucocitosAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="cneutrofilos_relativo" class="form-label">Neutrófilos (Relativo):</label>
-                        <input type="text" class="form-control" id="cneutrofilos_relativo" name="cneutrofilos_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCneutrofilosRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cneutrofilos_absoluto" class="form-label">Neutrófilos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cneutrofilos_absoluto" name="cneutrofilos_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCneutrofilosAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cneutrofilos_absoluto_unidade" class="form-label">Unidade Neutrófilos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cneutrofilos_absoluto_unidade"
-                            name="cneutrofilos_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCneutrofilosAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="cblastos_relativo" class="form-label">Blastos (Relativo):</label>
-                        <input type="text" class="form-control" id="cblastos_relativo" name="cblastos_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCblastosRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cblastos_absoluto" class="form-label">Blastos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cblastos_absoluto" name="cblastos_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCblastosAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cblastos_absoluto_unidade" class="form-label">Unidade Blastos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cblastos_absoluto_unidade"
-                            name="cblastos_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCblastosAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="cpromielocitos_relativo" class="form-label">Promielócitos (Relativo):</label>
-                        <input type="text" class="form-control" id="cpromielocitos_relativo"
-                            name="cpromielocitos_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCpromielocitosRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cpromielocitos_absoluto" class="form-label">Promielócitos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cpromielocitos_absoluto"
-                            name="cpromielocitos_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCpromielocitosAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cpromielocitos_absoluto_unidade" class="form-label">Unidade Promielócitos
-                            (Absoluto):</label>
-                        <input type="text" class="form-control" id="cpromielocitos_absoluto_unidade"
-                            name="cpromielocitos_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCpromielocitosAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="cmielocitos_relativo" class="form-label">Mielócitos (Relativo):</label>
-                        <input type="text" class="form-control" id="cmielocitos_relativo" name="cmielocitos_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCmielocitosRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cmielocitos_absoluto" class="form-label">Mielócitos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cmielocitos_absoluto" name="cmielocitos_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCmielocitosAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cmielocitos_absoluto_unidade" class="form-label">Unidade Mielócitos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cmielocitos_absoluto_unidade"
-                            name="cmielocitos_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCmielocitosAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="cmetamielocitos_relativo" class="form-label">Metamielócitos (Relativo):</label>
-                        <input type="text" class="form-control" id="cmetamielocitos_relativo"
-                            name="cmetamielocitos_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCmetamielocitosRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cmetamielocitos_absoluto" class="form-label">Metamielócitos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cmetamielocitos_absoluto"
-                            name="cmetamielocitos_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCmetamielocitosAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cmetamielocitos_absoluto_unidade" class="form-label">Unidade Metamielócitos
-                            (Absoluto):</label>
-                        <input type="text" class="form-control" id="cmetamielocitos_absoluto_unidade"
-                            name="cmetamielocitos_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCmetamielocitosAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="cbastonetes_relativo" class="form-label">Bastonetes (Relativo):</label>
-                        <input type="text" class="form-control" id="cbastonetes_relativo" name="cbastonetes_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCbastonetesRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cbastonetes_absoluto" class="form-label">Bastonetes (Absoluto):</label>
-                        <input type="text" class="form-control" id="cbastonetes_absoluto" name="cbastonetes_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCbastonetesAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cbastonetes_absoluto_unidade" class="form-label">Unidade Bastonetes (Absoluto):</label>
-                        <input type="text" class="form-control" id="cbastonetes_absoluto_unidade"
-                            name="cbastonetes_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCbastonetesAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="csegmentados_relativo" class="form-label">Segmentados (Relativo):</label>
-                        <input type="text" class="form-control" id="csegmentados_relativo" name="csegmentados_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCsegmentadosRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="csegmentados_absoluto" class="form-label">Segmentados (Absoluto):</label>
-                        <input type="text" class="form-control" id="csegmentados_absoluto" name="csegmentados_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCsegmentadosAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="csegmentados_absoluto_unidade" class="form-label">Unidade Segmentados (Absoluto):</label>
-                        <input type="text" class="form-control" id="csegmentados_absoluto_unidade"
-                            name="csegmentados_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCsegmentadosAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="ceosinofilos_relativo" class="form-label">Eosinófilos (Relativo):</label>
-                        <input type="text" class="form-control" id="ceosinofilos_relativo" name="ceosinofilos_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCeosinofilosRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="ceosinofilos_absoluto" class="form-label">Eosinófilos (Absoluto):</label>
-                        <input type="text" class="form-control" id="ceosinofilos_absoluto" name="ceosinofilos_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCeosinofilosAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="ceosinofilos_absoluto_unidade" class="form-label">Unidade Eosinófilos (Absoluto):</label>
-                        <input type="text" class="form-control" id="ceosinofilos_absoluto_unidade"
-                            name="ceosinofilos_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCeosinofilosAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="cbasofilos_relativo" class="form-label">Basófilos (Relativo):</label>
-                        <input type="text" class="form-control" id="cbasofilos_relativo" name="cbasofilos_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCbasofilosRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cbasofilos_absoluto" class="form-label">Basófilos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cbasofilos_absoluto" name="cbasofilos_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCbasofilosAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cbasofilos_absoluto_unidade" class="form-label">Unidade Basófilos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cbasofilos_absoluto_unidade"
-                            name="cbasofilos_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCbasofilosAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="clinfocitos_relativo" class="form-label">Linfócitos (Relativo):</label>
-                        <input type="text" class="form-control" id="clinfocitos_relativo" name="clinfocitos_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getClinfocitosRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="clinfocitos_absoluto" class="form-label">Linfócitos (Absoluto):</label>
-                        <input type="text" class="form-control" id="clinfocitos_absoluto" name="clinfocitos_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getClinfocitosAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="clinfocitos_absoluto_unidade" class="form-label">Unidade Linfócitos (Absoluto):</label>
-                        <input type="text" class="form-control" id="clinfocitos_absoluto_unidade"
-                            name="clinfocitos_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getClinfocitosAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="clinfocitos_atipicos_relativo" class="form-label">Linfócitos Atípicos (Relativo):</label>
-                        <input type="text" class="form-control" id="clinfocitos_atipicos_relativo"
-                            name="clinfocitos_atipicos_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getClinfocitosAtipicosRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="clinfocitos_atipicos_absoluto" class="form-label">Linfócitos Atípicos (Absoluto):</label>
-                        <input type="text" class="form-control" id="clinfocitos_atipicos_absoluto"
-                            name="clinfocitos_atipicos_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getClinfocitosAtipicosAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="clinfocitos_atipicos_absoluto_unidade" class="form-label">Unidade Linfócitos Atípicos
-                            (Absoluto):</label>
-                        <input type="text" class="form-control" id="clinfocitos_atipicos_absoluto_unidade"
-                            name="clinfocitos_atipicos_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getClinfocitosAtipicosAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="cmonocitos_relativo" class="form-label">Monócitos (Relativo):</label>
-                        <input type="text" class="form-control" id="cmonocitos_relativo" name="cmonocitos_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCmonocitosRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cmonocitos_absoluto" class="form-label">Monócitos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cmonocitos_absoluto" name="cmonocitos_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCmonocitosAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cmonocitos_absoluto_unidade" class="form-label">Unidade Monócitos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cmonocitos_absoluto_unidade"
-                            name="cmonocitos_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCmonocitosAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="cmieloblastos_relativo" class="form-label">Mieloblastos (Relativo):</label>
-                        <input type="text" class="form-control" id="cmieloblastos_relativo"
-                            name="cmieloblastos_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCmieloblastosRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cmieloblastos_absoluto" class="form-label">Mieloblastos (Absoluto):</label>
-                        <input type="text" class="form-control" id="cmieloblastos_absoluto"
-                            name="cmieloblastos_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCmieloblastosAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cmieloblastos_absoluto_unidade" class="form-label">Unidade Mieloblastos
-                            (Absoluto):</label>
-                        <input type="text" class="form-control" id="cmieloblastos_absoluto_unidade"
-                            name="cmieloblastos_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCmieloblastosAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="coutras_celulas_relativo" class="form-label">Outras Células (Relativo):</label>
-                        <input type="text" class="form-control" id="coutras_celulas_relativo"
-                            name="coutras_celulas_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCoutrasCelulasRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="coutras_celulas_absoluto" class="form-label">Outras Células (Absoluto):</label>
-                        <input type="text" class="form-control" id="coutras_celulas_absoluto"
-                            name="coutras_celulas_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCoutrasCelulasAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="coutras_celulas_absoluto_unidade" class="form-label">Unidade Outras Células
-                            (Absoluto):</label>
-                        <input type="text" class="form-control" id="coutras_celulas_absoluto_unidade"
-                            name="coutras_celulas_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCoutrasCelulasAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="ccelulas_linfoides_relativo" class="form-label">Células Linfoides (Relativo):</label>
-                        <input type="text" class="form-control" id="ccelulas_linfoides_relativo"
-                            name="ccelulas_linfoides_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCcelulasLinfoidesRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="ccelulas_linfoides_absoluto" class="form-label">Células Linfoides (Absoluto):</label>
-                        <input type="text" class="form-control" id="ccelulas_linfoides_absoluto"
-                            name="ccelulas_linfoides_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCcelulasLinfoidesAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="ccelulas_linfoides_absoluto_unidade" class="form-label">Unidade Células Linfoides
-                            (Absoluto):</label>
-                        <input type="text" class="form-control" id="ccelulas_linfoides_absoluto_unidade"
-                            name="ccelulas_linfoides_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCcelulasLinfoidesAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="ccelulas_monocitoides_relativo" class="form-label">Células Monocitoides
-                            (Relativo):</label>
-                        <input type="text" class="form-control" id="ccelulas_monocitoides_relativo"
-                            name="ccelulas_monocitoides_relativo"
-                            value="<?php echo htmlspecialchars($hematoRef->getCcelulasMonocitoidesRelativo() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="ccelulas_monocitoides_absoluto" class="form-label">Células Monocitoides
-                            (Absoluto):</label>
-                        <input type="text" class="form-control" id="ccelulas_monocitoides_absoluto"
-                            name="ccelulas_monocitoides_absoluto"
-                            value="<?php echo htmlspecialchars($hematoRef->getCcelulasMonocitoidesAbsoluto() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="ccelulas_monocitoides_absoluto_unidade" class="form-label">Unidade Células
-                            Monocitoides (Absoluto):</label>
-                        <input type="text" class="form-control" id="ccelulas_monocitoides_absoluto_unidade"
-                            name="ccelulas_monocitoides_absoluto_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCcelulasMonocitoidesAbsolutoUnidade() ?? ''); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="cplaquetas" class="form-label">Plaquetas:</label>
-                        <input type="text" class="form-control" id="cplaquetas" name="cplaquetas"
-                            value="<?php echo htmlspecialchars($hematoRef->getCplaquetas() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cplaquetas_unidade" class="form-label">Unidade Plaquetas:</label>
-                        <input type="text" class="form-control" id="cplaquetas_unidade" name="cplaquetas_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCplaquetasUnidade() ?? ''); ?>">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cvolume_plaquetario_medio" class="form-label">Volume Plaquetário Médio:</label>
-                        <input type="text" class="form-control" id="cvolume_plaquetario_medio"
-                            name="cvolume_plaquetario_medio"
-                            value="<?php echo htmlspecialchars($hematoRef->getCvolumePlaquetarioMedio() ?? ''); ?>">
-                    </div>
-                </div>
+                
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="cvolume_plaquetario_medio_unidade" class="form-label">Unidade Volume Plaquetário
-                            Médio:</label>
-                        <input type="text" class="form-control" id="cvolume_plaquetario_medio_unidade"
-                            name="cvolume_plaquetario_medio_unidade"
-                            value="<?php echo htmlspecialchars($hematoRef->getCvolumePlaquetarioMedioUnidade() ?? ''); ?>">
+                        <label for="hemacia_m" class="form-label">Hemácia (Masculino):</label>
+                        <input type="text" class="form-control" id="hemacia_m" name="chemacia_m"
+                            value="<?php echo htmlspecialchars($hematoRef->getHemaciaM() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="hemacia_f" class="form-label">Hemácia (Feminino):</label>
+                        <input type="text" class="form-control" id="hemacia_f" name="chemacia_f"
+                            value="<?php echo htmlspecialchars($hematoRef->getHemaciaF() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="hemoglobina_m" class="form-label">Hemoglobina (Masculino):</label>
+                        <input type="text" class="form-control" id="hemoglobina_m" name="chemoglobina_m"
+                            value="<?php echo htmlspecialchars($hematoRef->getHemoglobinaM() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="hemoglobina_f" class="form-label">Hemoglobina (Feminino):</label>
+                        <input type="text" class="form-control" id="hemoglobina_f" name="chemoglobina_f"
+                            value="<?php echo htmlspecialchars($hematoRef->getHemoglobinaF() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="hematocrito_m" class="form-label">Hematócrito (Masculino):</label>
+                        <input type="text" class="form-control" id="hematocrito_m" name="chematocrito_m"
+                            value="<?php echo htmlspecialchars($hematoRef->getHematocritoM() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="hematocrito_f" class="form-label">Hematócrito (Feminino):</label>
+                        <input type="text" class="form-control" id="hematocrito_f" name="chematocrito_f"
+                            value="<?php echo htmlspecialchars($hematoRef->getHematocritoF() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="vcm_m" class="form-label">VCM (Masculino):</label>
+                        <input type="text" class="form-control" id="vcm_m" name="cvcm_m"
+                            value="<?php echo htmlspecialchars($hematoRef->getVcmM() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="vcm_f" class="form-label">VCM (Feminino):</label>
+                        <input type="text" class="form-control" id="vcm_f" name="cvcm_f"
+                            value="<?php echo htmlspecialchars($hematoRef->getVcmF() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="hcm_m" class="form-label">HCM (Masculino):</label>
+                        <input type="text" class="form-control" id="hcm_m" name="chcm_m"
+                            value="<?php echo htmlspecialchars($hematoRef->getHcmM() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="hcm_f" class="form-label">HCM (Feminino):</label>
+                        <input type="text" class="form-control" id="hcm_f" name="chcm_f"
+                            value="<?php echo htmlspecialchars($hematoRef->getHcmF() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="chcw_m" class="form-label">CHCM (Masculino):</label>
+                        <input type="text" class="form-control" id="chcw_m" name="cchcw_m"
+                            value="<?php echo htmlspecialchars($hematoRef->getChcmM() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="chcw_f" class="form-label">CHCM (Feminino):</label>
+                        <input type="text" class="form-control" id="chcw_f" name="cchcw_f"
+                            value="<?php echo htmlspecialchars($hematoRef->getChcmF() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="rdw_m" class="form-label">RDW (Masculino):</label>
+                        <input type="text" class="form-control" id="rdw_m" name="crdw_m"
+                            value="<?php echo htmlspecialchars($hematoRef->getRdwM() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="rdw_f" class="form-label">RDW (Feminino):</label>
+                        <input type="text" class="form-control" id="rdw_f" name="crdw_f"
+                            value="<?php echo htmlspecialchars($hematoRef->getRdwF() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="leucocitos_relativo" class="form-label">Leucócitos (Relativo):</label>
+                        <input type="text" class="form-control" id="leucocitos_relativo" name="cleucocitos_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getLeucocitosRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="leucocitos_absoluto" class="form-label">Leucócitos (Absoluto):</label>
+                        <input type="text" class="form-control" id="leucocitos_absoluto" name="cleucocitos_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getLeucocitosAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="neutrofilos_relativo" class="form-label">Neutrófilos (Relativo):</label>
+                        <input type="text" class="form-control" id="neutrofilos_relativo" name="cneutrofilos_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getNeutrofilosRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="neutrofilos_absoluto" class="form-label">Neutrófilos (Absoluto):</label>
+                        <input type="text" class="form-control" id="neutrofilos_absoluto" name="cneutrofilos_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getNeutrofilosAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="blastos_relativo" class="form-label">Blastos (Relativo):</label>
+                        <input type="text" class="form-control" id="blastos_relativo" name="cblastos_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getBlastosRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="blastos_absoluto" class="form-label">Blastos (Absoluto):</label>
+                        <input type="text" class="form-control" id="blastos_absoluto" name="cblastos_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getBlastosAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="promielocitos_relativo" class="form-label">Promielócitos (Relativo):</label>
+                        <input type="text" class="form-control" id="promielocitos_relativo"
+                            name="cpromielocitos_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getPromielocitosRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="promielocitos_absoluto" class="form-label">Promielócitos (Absoluto):</label>
+                        <input type="text" class="form-control" id="promielocitos_absoluto"
+                            name="cpromielocitos_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getPromielocitosAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="mielocitos_relativo" class="form-label">Mielócitos (Relativo):</label>
+                        <input type="text" class="form-control" id="mielocitos_relativo" name="cmielocitos_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getMielocitosRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="mielocitos_absoluto" class="form-label">Mielócitos (Absoluto):</label>
+                        <input type="text" class="form-control" id="mielocitos_absoluto" name="cmielocitos_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getMielocitosAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="metamielocitos_relativo" class="form-label">Metamielócitos (Relativo):</label>
+                        <input type="text" class="form-control" id="metamielocitos_relativo"
+                            name="cmetamielocitos_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getMetamielocitosRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="metamielocitos_absoluto" class="form-label">Metamielócitos (Absoluto):</label>
+                        <input type="text" class="form-control" id="metamielocitos_absoluto"
+                            name="cmetamielocitos_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getMetamielocitosAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="bastonetes_relativo" class="form-label">Bastonetes (Relativo):</label>
+                        <input type="text" class="form-control" id="bastonetes_relativo" name="cbastonetes_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getBastonetesRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="bastonetes_absoluto" class="form-label">Bastonetes (Absoluto):</label>
+                        <input type="text" class="form-control" id="bastonetes_absoluto" name="cbastonetes_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getBastonetesAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="segmentados_relativo" class="form-label">Segmentados (Relativo):</label>
+                        <input type="text" class="form-control" id="segmentados_relativo" name="csegmentados_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getSegmentadosRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="segmentados_absoluto" class="form-label">Segmentados (Absoluto):</label>
+                        <input type="text" class="form-control" id="segmentados_absoluto" name="csegmentados_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getSegmentadosAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="eosinofilos_relativo" class="form-label">Eosinófilos (Relativo):</label>
+                        <input type="text" class="form-control" id="eosinofilos_relativo" name="ceosinofilos_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getEosinofilosRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="eosinofilos_absoluto" class="form-label">Eosinófilos (Absoluto):</label>
+                        <input type="text" class="form-control" id="eosinofilos_absoluto" name="ceosinofilos_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getEosinofilosAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="basofilos_relativo" class="form-label">Basófilos (Relativo):</label>
+                        <input type="text" class="form-control" id="basofilos_relativo" name="cbasofilos_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getBasofilosRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="basofilos_absoluto" class="form-label">Basófilos (Absoluto):</label>
+                        <input type="text" class="form-control" id="basofilos_absoluto" name="cbasofilos_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getBasofilosAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="linfocitos_relativo" class="form-label">Linfócitos (Relativo):</label>
+                        <input type="text" class="form-control" id="linfocitos_relativo" name="clinfocitos_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getLinfocitosRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="linfocitos_absoluto" class="form-label">Linfócitos (Absoluto):</label>
+                        <input type="text" class="form-control" id="linfocitos_absoluto" name="clinfocitos_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getLinfocitosAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="linfocitos_atipicos_relativo" class="form-label">Linfócitos Atípicos (Relativo):</label>
+                        <input type="text" class="form-control" id="linfocitos_atipicos_relativo"
+                            name="clinfocitos_atipicos_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getLinfocitosAtipicosRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="linfocitos_atipicos_absoluto" class="form-label">Linfócitos Atípicos (Absoluto):</label>
+                        <input type="text" class="form-control" id="linfocitos_atipicos_absoluto"
+                            name="clinfocitos_atipicos_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getLinfocitosAtipicosAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="monocitos_relativo" class="form-label">Monócitos (Relativo):</label>
+                        <input type="text" class="form-control" id="monocitos_relativo" name="cmonocitos_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getMonocitosRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="monocitos_absoluto" class="form-label">Monócitos (Absoluto):</label>
+                        <input type="text" class="form-control" id="monocitos_absoluto" name="cmonocitos_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getMonocitosAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="mieloblastos_relativo" class="form-label">Mieloblastos (Relativo):</label>
+                        <input type="text" class="form-control" id="mieloblastos_relativo"
+                            name="cmieloblastos_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getMieloblastosRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="mieloblastos_absoluto" class="form-label">Mieloblastos (Absoluto):</label>
+                        <input type="text" class="form-control" id="mieloblastos_absoluto"
+                            name="cmieloblastos_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getMieloblastosAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="outras_celulas_relativo" class="form-label">Outras Células (Relativo):</label>
+                        <input type="text" class="form-control" id="outras_celulas_relativo"
+                            name="coutras_celulas_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getOutrasCelulasRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="outras_celulas_absoluto" class="form-label">Outras Células (Absoluto):</label>
+                        <input type="text" class="form-control" id="outras_celulas_absoluto"
+                            name="coutras_celulas_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getOutrasCelulasAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="celulas_linfoides_relativo" class="form-label">Células Linfoides (Relativo):</label>
+                        <input type="text" class="form-control" id="celulas_linfoides_relativo"
+                            name="ccelulas_linfoides_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getCelulasLinfoidesRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="celulas_linfoides_absoluto" class="form-label">Células Linfoides (Absoluto):</label>
+                        <input type="text" class="form-control" id="celulas_linfoides_absoluto"
+                            name="ccelulas_linfoides_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getCelulasLinfoidesAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="celulas_monocitoides_relativo" class="form-label">Células Monocitoides (Relativo):</label>
+                        <input type="text" class="form-control" id="celulas_monocitoides_relativo"
+                            name="ccelulas_monocitoides_relativo"
+                            value="<?php echo htmlspecialchars($hematoRef->getCelulasMonocitoidesRelativo() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="celulas_monocitoides_absoluto" class="form-label">Células Monocitoides (Absoluto):</label>
+                        <input type="text" class="form-control" id="celulas_monocitoides_absoluto"
+                            name="ccelulas_monocitoides_absoluto"
+                            value="<?php echo htmlspecialchars($hematoRef->getCelulasMonocitoidesAbsoluto() ?? ''); ?>">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="plaquetas" class="form-label">Plaquetas:</label>
+                        <input type="text" class="form-control" id="plaquetas" name="cplaquetas"
+                            value="<?php echo htmlspecialchars($hematoRef->getPlaquetas() ?? ''); ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="volume_plaquetario_medio" class="form-label">Volume Plaquetário Médio:</label>
+                        <input type="text" class="form-control" id="volume_plaquetario_medio"
+                            name="cvolume_plaquetario_medio"
+                            value="<?php echo htmlspecialchars($hematoRef->getVolumePlaquetarioMedio() ?? ''); ?>">
                     </div>
                 </div>
 
@@ -558,14 +422,22 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <?php endif; ?>
+    <?php endif; ?>
 
-   <script>
-     <?php if (isset($_SESSION['status']) && $_SESSION['status'] === 'success'): ?>
+    <script>
+        <?php if (isset($_SESSION['status']) && $_SESSION['status'] === 'success'): ?>
         const successModal = new bootstrap.Modal(document.getElementById('successModal'));
         successModal.show();
-    <?php endif; ?>
-   </script>
+        <?php endif; ?>
+    </script>
+
+    <script>
+        /*const form = document.getElementById('teste');
+        form.addEventListener("submit", function(e){
+            e.preventDefault();
+            console.log(form);
+        })*/
+    </script>
 
 </body>
 
