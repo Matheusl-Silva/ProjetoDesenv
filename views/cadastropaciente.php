@@ -23,7 +23,7 @@
                     <p id="mensagemSucesso">Paciente cadastrado com sucesso! Número do Paciente Cadastrado: <?=$idPaciente?></p>
                 </div>
                 <div class="modal-footer">
-                    <a href="homeUsuario.php" class="btn btn-primary">Ir para Home</a>
+                    <a href="/home" class="btn btn-primary">Ir para Home</a>
                 </div>
             </div>
         </div>
