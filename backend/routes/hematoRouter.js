@@ -11,7 +11,7 @@ const hematoController = require("../Controller/hematoController");
 
 /**
  * @swagger
- * /hemato/{idPaciente}:
+ * /exameHemato/{idPaciente}:
  *   get:
  *     summary: Lista os exames hematológicos de um paciente (somente cabeçalhos)
  *     tags: [Hematologia]
@@ -40,7 +40,7 @@ router.get("/:idPaciente", hematoController.getByRegistro);
 
 /**
  * @swagger
- * /hemato/listar/{idExame}:
+ * /exameHemato/listar/{idExame}:
  *   get:
  *     summary: Retorna os detalhes completos de um exame hematológico
  *     tags: [Hematologia]
@@ -89,7 +89,7 @@ router.post("/", hematoController.CreateHemato);
 
 /**
  * @swagger
- * /hemato/{idExame}:
+ * /exameHemato/{idExame}:
  *   put:
  *     summary: Atualiza um exame hematológico existente
  *     tags: [Hematologia]
@@ -120,7 +120,7 @@ router.put("/:idExame", hematoController.updateHemato);
 
 /**
  * @swagger
- * /hemato/{idExame}:
+ * /exameHemato/{idExame}:
  *   delete:
  *     summary: Exclui um exame hematológico
  *     tags: [Hematologia]

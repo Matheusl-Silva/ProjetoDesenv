@@ -1,259 +1,198 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Usuários
+ *   description: Endpoints para gerenciamento de usuários do sistema
+ */
+
 const express = require("express");
 const router = express.Router();
 const usuarioController = require("../Controller/usuarioController");
 
 /**
- * @openapi
- * components:
- *   schemas:
- *     Usuario:
- *       type: object
- *       properties:
- *         idUsuario:
- *           type: integer
- *           example: 1
- *         nome:
- *           type: string
- *           example: João Silva
- *         email:
- *           type: string
- *           format: email
- *           example: joao.silva@exemplo.com
- *         senha:
- *           type: string
- *           example: senha123
- *         admin:
- *           type: boolean
- *           example: false
- *
- *     UsuarioLogin:
- *       type: object
- *       required:
- *         - email
- *         - senha
- *       properties:
- *         email:
- *           type: string
- *           format: email
- *           example: joao.silva@exemplo.com
- *         senha:
- *           type: string
- *           example: senha123
- */
-
-/**
- * @openapi
- * /:
+ * @swagger
+ * /usuarios:
  *   get:
- *     summary: Retorna todos os usuários.
- *     tags: [Usuário]
+ *     summary: Lista todos os usuários
+ *     tags: [Usuários]
  *     responses:
  *       200:
- *         description: Lista de todos os usuários.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Usuario'
- *       404:
- *         description: Erro ao buscar usuários.
+ *         description: Lista de usuários retornada com sucesso
+ *       500:
+ *         description: Erro no servidor
  */
 router.get("/", usuarioController.getAllUsuarios);
 
 /**
- * @openapi
- * /{idUsuario}:
+ * @swagger
+ * /usuarios/{idUsuario}:
  *   get:
- *     summary: Retorna um usuário pelo ID.
- *     tags: [Usuário]
+ *     summary: Obtém um usuário pelo ID
+ *     tags: [Usuários]
  *     parameters:
  *       - in: path
  *         name: idUsuario
+ *         required: true
  *         schema:
  *           type: integer
- *         required: true
- *         description: ID único do usuário.
+ *         description: ID do usuário a ser buscado
  *     responses:
  *       200:
- *         description: Detalhes do usuário.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Usuario'
+ *         description: Dados do usuário retornados com sucesso
  *       404:
- *         description: Usuário não encontrado.
+ *         description: Usuário não encontrado
  *       500:
- *         description: Erro ao buscar usuário.
+ *         description: Erro no servidor
  */
 router.get("/:idUsuario", usuarioController.getUsuariobyId);
 
 /**
- * @openapi
- * /:
+ * @swagger
+ * /usuarios:
  *   post:
- *     summary: Cria um novo usuário.
- *     tags: [Usuário]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Usuario'
- *           example:
- *             nome: Novo Usuário
- *             email: novo.usuario@exemplo.com
- *             senha: senha123
- *     responses:
- *       201:
- *         description: Usuário cadastrado com sucesso.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: usuario cadastrado com sucesso!
- *                 id:
- *                   type: integer
- *                   example: 5
- *       409:
- *         description: Já existe um usuário com o mesmo email.
- *       500:
- *         description: Erro ao tentar cadastrar o usuário.
- */
-router.post("/", usuarioController.createUsuario);
-
-/**
- * @openapi
- * /verificar-email:
- *   post:
- *     summary: Verifica a existência de um email de usuário.
- *     tags: [Usuário]
+ *     summary: Cria um novo usuário
+ *     tags: [Usuários]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
- *             required:
- *               - email
+ *             properties:
+ *               nome:
+ *                 type: string
+ *                 example: João da Silva
+ *               email:
+ *                 type: string
+ *                 example: joao@email.com
+ *               senha:
+ *                 type: string
+ *                 example: "123456"
+ *     responses:
+ *       201:
+ *         description: Usuário criado com sucesso
+ *       400:
+ *         description: Dados inválidos
+ *       500:
+ *         description: Erro no servidor
+ */
+router.post("/", usuarioController.createUsuario);
+
+/**
+ * @swagger
+ * /usuarios/verificar-email:
+ *   post:
+ *     summary: Verifica se um email já está cadastrado
+ *     tags: [Usuários]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
  *             properties:
  *               email:
  *                 type: string
- *                 format: email
- *                 example: joao.silva@exemplo.com
+ *                 example: joao@email.com
  *     responses:
  *       200:
- *         description: Email encontrado. Retorna o objeto do usuário.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Usuario'
- *       404:
- *         description: Email não encontrado. Retorna `false`.
+ *         description: Resultado da verificação
  *       500:
- *         description: Erro ao buscar usuário por email.
+ *         description: Erro no servidor
  */
 router.post("/verificar-email", usuarioController.verificarEmail);
 
 /**
- * @openapi
- * /login:
+ * @swagger
+ * /usuarios/login:
  *   post:
- *     summary: Realiza o login do usuário.
- *     tags: [Usuário]
+ *     summary: Realiza login de um usuário
+ *     tags: [Usuários]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/UsuarioLogin'
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: joao@email.com
+ *               senha:
+ *                 type: string
+ *                 example: "123456"
  *     responses:
  *       200:
- *         description: Login bem-sucedido. Retorna o objeto do usuário.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Usuario'
- *       404:
- *         description: Usuário não encontrado (email ou senha incorretos).
+ *         description: Login realizado com sucesso
+ *       401:
+ *         description: Credenciais inválidas
  *       500:
- *         description: Erro ao tentar fazer login.
+ *         description: Erro no servidor
  */
 router.post("/login", usuarioController.login);
 
 /**
- * @openapi
- * /{idUsuario}:
+ * @swagger
+ * /usuarios/{idUsuario}:
  *   put:
- *     summary: Atualiza um usuário existente.
- *     tags: [Usuário]
+ *     summary: Atualiza os dados de um usuário
+ *     tags: [Usuários]
  *     parameters:
  *       - in: path
  *         name: idUsuario
+ *         required: true
  *         schema:
  *           type: integer
- *         required: true
- *         description: ID único do usuário a ser atualizado.
+ *         description: ID do usuário a ser atualizado
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Usuario'
- *           example:
- *             nome: Nome Atualizado
- *             email: email.atualizado@exemplo.com
- *             senha: NovaSenha456
- *             admin: true
+ *             type: object
+ *             properties:
+ *               nome:
+ *                 type: string
+ *                 example: João da Silva
+ *               email:
+ *                 type: string
+ *                 example: joao@email.com
+ *               senha:
+ *                 type: string
+ *                 example: "novaSenha123"
+ *               admin:
+ *                 type: boolean
+ *                 example: false
  *     responses:
  *       200:
- *         description: Usuário atualizado com sucesso.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: usuario atualizado com sucesso
+ *         description: Usuário atualizado com sucesso
  *       404:
- *         description: Usuário não encontrado.
+ *         description: Usuário não encontrado
  *       500:
- *         description: Erro ao tentar atualizar o usuário.
+ *         description: Erro no servidor
  */
 router.put("/:idUsuario", usuarioController.updateUsuario);
 
 /**
- * @openapi
- * /{idUsuario}:
+ * @swagger
+ * /usuarios/{idUsuario}:
  *   delete:
- *     summary: Deleta um usuário.
- *     tags: [Usuário]
+ *     summary: Remove um usuário do sistema
+ *     tags: [Usuários]
  *     parameters:
  *       - in: path
  *         name: idUsuario
+ *         required: true
  *         schema:
  *           type: integer
- *         required: true
- *         description: ID único do usuário a ser deletado.
+ *         description: ID do usuário a ser removido
  *     responses:
  *       200:
- *         description: Usuário deletado com sucesso.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: Usuario deletado com sucesso
+ *         description: Usuário deletado com sucesso
  *       404:
- *         description: Usuário não encontrado.
+ *         description: Usuário não encontrado
  *       500:
- *         description: Erro ao tentar deletar o usuário.
+ *         description: Erro no servidor
  */
 router.delete("/:idUsuario", usuarioController.deleteUsuario);
 

@@ -11,7 +11,7 @@ const hematoRefController = require("../Controller/hematoRefController");
 
 /**
  * @swagger
- * /api/hematoref:
+ * /hematoRef:
  *   get:
  *     summary: Lista todos os valores de referência de hematologia
  *     tags: [Referência Hematologia]
@@ -25,7 +25,7 @@ router.get("/", hematoRefController.getAllHematoRefs);
 
 /**
  * @swagger
- * /api/hematoref:
+ * /hematoref:
  *   post:
  *     summary: Cria um novo registro de referência de hematologia
  *     tags: [Referência Hematologia]
@@ -72,7 +72,7 @@ router.post("/", hematoRefController.createHematoRef);
 
 /**
  * @swagger
- * /api/hematoref/{idReferenciaHemato}:
+ * /hematoRef/{idReferenciaHemato}:
  *   put:
  *     summary: Atualiza um registro de referência de hematologia existente
  *     tags: [Referência Hematologia]

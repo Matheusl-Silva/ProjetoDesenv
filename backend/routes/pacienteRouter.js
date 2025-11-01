@@ -11,7 +11,7 @@ const pacienteController = require("../Controller/pacienteController");
 
 /**
  * @swagger
- * /paciente:
+ * /pacientes:
  *   get:
  *     summary: Lista todos os pacientes
  *     tags: [Paciente]

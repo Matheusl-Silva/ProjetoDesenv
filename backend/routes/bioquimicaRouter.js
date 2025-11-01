@@ -11,7 +11,7 @@ const bioquimicaController = require("../Controller/bioquimicaController");
 
 /**
  * @swagger
- * /api/bioquimica/{idPaciente}:
+ * /exameBio/{idPaciente}:
  *   get:
  *     summary: Lista todos os exames de bioquímica de um paciente
  *     tags: [Bioquímica]
@@ -32,7 +32,7 @@ router.get("/:idPaciente", bioquimicaController.getByRegistro);
 
 /**
  * @swagger
- * /api/bioquimica/listar/{idExame}:
+ * /exameBio/listar/{idExame}:
  *   get:
  *     summary: Retorna os detalhes completos de um exame de bioquímica
  *     tags: [Bioquímica]
@@ -53,7 +53,7 @@ router.get("/listar/:idExame", bioquimicaController.getById);
 
 /**
  * @swagger
- * /api/bioquimica:
+ * /exameBio:
  *   post:
  *     summary: Cria um novo exame de bioquímica
  *     tags: [Bioquímica]
@@ -86,7 +86,7 @@ router.post("/", bioquimicaController.CreateBio);
 
 /**
  * @swagger
- * /api/bioquimica/{idExame}:
+ * /exameBio/{idExame}:
  *   put:
  *     summary: Atualiza um exame existente
  *     tags: [Bioquímica]
@@ -112,7 +112,7 @@ router.put("/:idExame", bioquimicaController.updateBio);
 
 /**
  * @swagger
- * /api/bioquimica/{idExame}:
+ * /exameBio/{idExame}:
  *   delete:
  *     summary: Exclui um exame de bioquímica
  *     tags: [Bioquímica]
