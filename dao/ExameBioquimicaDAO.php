@@ -61,7 +61,7 @@ class ExameBioquimicaDAO
 
         $context = stream_context_create($options);
 
-        $result = @file_get_contents($url, false, $context);
+        $result = file_get_contents($url, false, $context);
 
         if ($result === false) {
             return false;
@@ -111,7 +111,7 @@ class ExameBioquimicaDAO
                 "header"  => "Content-Type: application/json\r\n",
                 "method"  => "POST",
                 "content" => json_encode($dados),
-            ]
+            ],
         ];
 
         $context = stream_context_create($options);
@@ -127,60 +127,60 @@ class ExameBioquimicaDAO
         return isset($response['id']) ? $response['id'] : false;
     }
 
-
     public function editar(ExameBioquimica $exame)
     {
         $url = "http://localhost:3000/exameBio/" . $exame->getId();
 
         $dados = [
-            "id_responsavel" => $exame->getResponsavel(),
-            "id_preceptor" => $exame->getPreceptor(),
-            "id_paciente" => $exame->getPaciente(),
-            "data_exame" => $exame->getData(),
+            "id_responsavel"                         => $exame->getResponsavel(),
+            "id_preceptor"                           => $exame->getPreceptor(),
+            "id_paciente"                            => $exame->getPaciente(),
+            "data_exame"                             => $exame->getData(),
 
-            "bilirrubina_total" => $exame->getBilirrubinaTotal(),
-            "bilirrubina_direta" => $exame->getBilirrubinaDireta(),
-            "proteina_total" => $exame->getProteinaTotal(),
-            "albumina" => $exame->getAlbumina(),
-            "amilase" => $exame->getAmilase(),
+            "bilirrubina_total"                      => $exame->getBilirrubinaTotal(),
+            "bilirrubina_direta"                     => $exame->getBilirrubinaDireta(),
+            "proteina_total"                         => $exame->getProteinaTotal(),
+            "albumina"                               => $exame->getAlbumina(),
+            "amilase"                                => $exame->getAmilase(),
             "tgo_transaminase_glutamico_oxalacetica" => $exame->getTgoTransaminaseGlutamicoOxalacetica(),
-            "tgp_transaminase_glutamico_piruvica" => $exame->getTgpTransaminaseGlutamicoPiruvica(),
-            "gama_gt_glutamiltransferase" => $exame->getGamaGtGlutamiltransferase(),
-            "fosfatase_alcalina" => $exame->getFosfataseAlcalina(),
-            "reatina_quinase_ck" => $exame->getReatinaQuinaseCk(),
-            "glicose" => $exame->getGlicose(),
-            "ferro" => $exame->getFerro(),
-            "colesterol_total" => $exame->getColesterolTotal(),
-            "hdl" => $exame->getHdl(),
-            "ldl" => $exame->getLdl(),
-            "triglicerideos" => $exame->getTriglicerideos(),
-            "ureia" => $exame->getUreia(),
-            "creatinina" => $exame->getCreatinina(),
-            "acido_urico" => $exame->getAcidoUrico(),
-            "pcr_proteina_c_reativa" => $exame->getPcrProteinaCReativa(),
-            "calcio" => $exame->getCalcio(),
-            "ldh" => $exame->getLdh(),
-            "magnesio" => $exame->getMagnesio(),
-            "fosforo" => $exame->getFosforo()
+            "tgp_transaminase_glutamico_piruvica"    => $exame->getTgpTransaminaseGlutamicoPiruvica(),
+            "gama_gt_glutamiltransferase"            => $exame->getGamaGtGlutamiltransferase(),
+            "fosfatase_alcalina"                     => $exame->getFosfataseAlcalina(),
+            "reatina_quinase_ck"                     => $exame->getReatinaQuinaseCk(),
+            "glicose"                                => $exame->getGlicose(),
+            "ferro"                                  => $exame->getFerro(),
+            "colesterol_total"                       => $exame->getColesterolTotal(),
+            "hdl"                                    => $exame->getHdl(),
+            "ldl"                                    => $exame->getLdl(),
+            "triglicerideos"                         => $exame->getTriglicerideos(),
+            "ureia"                                  => $exame->getUreia(),
+            "creatinina"                             => $exame->getCreatinina(),
+            "acido_urico"                            => $exame->getAcidoUrico(),
+            "pcr_proteina_c_reativa"                 => $exame->getPcrProteinaCReativa(),
+            "calcio"                                 => $exame->getCalcio(),
+            "ldh"                                    => $exame->getLdh(),
+            "magnesio"                               => $exame->getMagnesio(),
+            "fosforo"                                => $exame->getFosforo(),
         ];
 
         $options = [
             "http" => [
-                "header" => "Content-Type: application/json\r\n",
-                "method" => "PUT",
-                "content" => json_encode($dados)
-            ]
+                "header"  => "Content-Type: application/json\r\n",
+                "method"  => "PUT",
+                "content" => json_encode($dados),
+            ],
         ];
 
         $context = stream_context_create($options);
 
         $result = @file_get_contents($url, false, $context);
 
-        if (!$result) return false;
+        if (!$result) {
+            return false;
+        }
 
         return json_decode($result, true);
     }
-
 
     private function converterParaObj($row)
     {

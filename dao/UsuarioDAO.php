@@ -4,9 +4,9 @@ class UsuarioDAO
 {
     public function listarUsuarios()
     {
-        $url = "http://localhost:3000/usuarios";
+        $url    = "http://localhost:3000/usuarios";
         $result = file_get_contents($url);
-        $lista = json_decode($result, true);
+        $lista  = json_decode($result, true);
 
         $listaObj = [];
         foreach ($lista as $usuario) {
@@ -18,10 +18,12 @@ class UsuarioDAO
 
     public function buscarUsuario($id)
     {
-        $url = "http://localhost:3000/usuarios/" . $id;
+        $url    = "http://localhost:3000/usuarios/" . $id;
         $result = file_get_contents($url);
 
-        if ($result == false) return false;
+        if ($result == false) {
+            return false;
+        }
 
         $response = json_decode($result, true);
         return $this->converterParaObj($response);
@@ -29,32 +31,29 @@ class UsuarioDAO
 
     public function cadastrarUsuario(Usuario $usuario)
     {
-        $url = "http://localhost:3000/usuarios";
+        $url   = "http://localhost:3000/usuarios";
         $dados = [
-            "nome" => $usuario->getNome(),
+            "nome"  => $usuario->getNome(),
             "email" => $usuario->getEmail(),
             "senha" => $usuario->getSenha(),
-            "admin" => $usuario->getAdmin()
         ];
 
         $options = [
             "http" => [
-                "header" => "Content-Type: application/json\r\n",
-                "method" => "POST",
-                "content" => json_encode($dados)
-            ]
+                "header"  => "Content-Type: application/json\r\n",
+                "method"  => "POST",
+                "content" => json_encode($dados),
+            ],
         ];
 
         $context = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
+        $result  = file_get_contents($url, false, $context);
 
-        if ($result === false) return false;
+        if ($result === false) {
+            return false;
+        }
 
         $response = json_decode($result, true);
-
-        if (isset($response["id"]) && strpos($response["error"], 'Email já cadastrado') != false) {
-            return "EMAIL_DUPLICADO";
-        }
 
         return isset($response["id"]) ? $response["id"] : false;
     }
@@ -63,7 +62,7 @@ class UsuarioDAO
     {
         $url   = "http://localhost:3000/usuarios/verificar-email";
         $dados = [
-            "email" => $email
+            "email" => $email,
         ];
         $options = [
             "http" => [
@@ -74,9 +73,11 @@ class UsuarioDAO
         ];
 
         $context = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
+        $result  = file_get_contents($url, false, $context);
 
-        if ($result == false) return false;
+        if ($result == false) {
+            return false;
+        }
 
         $response = json_decode($result, true);
 
@@ -85,47 +86,49 @@ class UsuarioDAO
 
     public function login($email, $senha)
     {
-        $url = "http://localhost:3000/usuarios/login";
+        $url   = "http://localhost:3000/usuarios/login";
         $dados = [
             "email" => $email,
-            "senha" => $senha
+            "senha" => $senha,
         ];
         $options = [
             "http" => [
-                "header" => "Content-Type: application/json\r\n",
-                "method" => "POST",
-                "content" => json_encode($dados, true)
-            ]
+                "header"  => "Content-Type: application/json\r\n",
+                "method"  => "POST",
+                "content" => json_encode($dados, true),
+            ],
         ];
-        
-        $context = stream_context_create($options);
-        $result = @file_get_contents($url, false, $context);
 
-        if($result === false) return false;
+        $context = stream_context_create($options);
+        $result  = @file_get_contents($url, false, $context);
+
+        if ($result === false) {
+            return false;
+        }
 
         return $this->converterParaObj(json_decode($result, true));
     }
 
     public function atualizarUsuario(Usuario $usuario)
     {
-        $url = "http://localhost:3000/usuarios/" . $usuario->getId();
+        $url   = "http://localhost:3000/usuarios/" . $usuario->getId();
         $dados = [
-            "nome" => $usuario->getNome(),
+            "nome"  => $usuario->getNome(),
             "email" => $usuario->getEmail(),
             "senha" => $usuario->getSenha(),
-            "admin" => $usuario->getAdmin()
+            "admin" => $usuario->getAdmin(),
         ];
 
         $options = [
             "http" => [
-                "header" => "Content-Type: application/json\r\n",
-                "method" => "PUT",
-                "content" => json_encode($dados)
-            ]
+                "header"  => "Content-Type: application/json\r\n",
+                "method"  => "PUT",
+                "content" => json_encode($dados),
+            ],
         ];
 
         $context = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
+        $result  = file_get_contents($url, false, $context);
 
         if ($result == false) {
             return ["erro" => "Falha na requisição PUT"];
@@ -136,16 +139,16 @@ class UsuarioDAO
 
     public function excluirUsuario(Usuario $usuario)
     {
-        $url = "http://localhost:3000/usuarios/" . $usuario->getId();
+        $url     = "http://localhost:3000/usuarios/" . $usuario->getId();
         $options = [
             "http" => [
                 "header" => "Content-Type: application/json\r\n",
-                "method" => "DELETE"
-            ]
+                "method" => "DELETE",
+            ],
         ];
 
         $context = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
+        $result  = file_get_contents($url, false, $context);
 
         if ($result === false) {
             return ["erro" => "Erro ao excluir usuário"];

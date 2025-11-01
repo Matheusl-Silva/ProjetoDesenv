@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `exame_bioquimica` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `nbilirrubina_total` decimal(10,2) DEFAULT NULL,
   `nbilirrubina_direta` decimal(10,2) DEFAULT NULL,
   `nproteina_total` decimal(10,2) DEFAULT NULL,
@@ -77,7 +77,7 @@ INSERT INTO `exame_bioquimica` (`id`, `nbilirrubina_total`, `nbilirrubina_direta
 --
 
 CREATE TABLE `exame_hematologia` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `nhemacia` decimal(10,0) NOT NULL,
   `nhemoglobina` decimal(10,0) NOT NULL,
   `nhematocrito` decimal(10,0) NOT NULL,
@@ -125,7 +125,7 @@ INSERT INTO `exame_hematologia` (`id`, `nhemacia`, `nhemoglobina`, `nhematocrito
 --
 
 CREATE TABLE `paciente` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `cnome` varchar(240) NOT NULL,
   `cemail` varchar(240) NOT NULL,
   `cperiodo` varchar(240) NOT NULL,
@@ -159,7 +159,7 @@ INSERT INTO `paciente` (`id`, `cnome`, `cemail`, `cperiodo`, `cmedicamento`, `cp
 --
 
 CREATE TABLE `referencia_bioquimica` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `cbilirrubina_total` varchar(100) DEFAULT '0,1 - 1,2 mg/dL',
   `cbilirrubina_direta` varchar(100) DEFAULT '≤ 0,1 - 1,2 mg/dL',
   `cproteina_total` varchar(100) DEFAULT '3,5 - 5,2 g/dL',
@@ -284,7 +284,7 @@ CREATE TABLE `referencia_hematologia` (
 --
 
 CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `cnome` varchar(240) NOT NULL,
   `cemail` varchar(240) NOT NULL,
   `csenha` varchar(240) NOT NULL,
@@ -301,15 +301,10 @@ INSERT INTO `usuario` (`id`, `cnome`, `cemail`, `csenha`, `cadmin`) VALUES
 (10, 'usernovo', 'a@aaa.com', '1', 'N'),
 (11, 'Matheus Silva', 'matleandrosilva@gmail.com', 'matheus123', 'S');
 
---
--- Indexes for dumped tables
---
 
---
 -- Indexes for table `exame_bioquimica`
 --
 ALTER TABLE `exame_bioquimica`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `id_responsavel` (`id_responsavel`),
   ADD KEY `id_preceptor` (`id_preceptor`),
   ADD KEY `id_paciente` (`id_paciente`);
@@ -318,39 +313,19 @@ ALTER TABLE `exame_bioquimica`
 -- Indexes for table `exame_hematologia`
 --
 ALTER TABLE `exame_hematologia`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `id_responsavel` (`id_responsavel`),
   ADD KEY `id_preceptor` (`id_preceptor`),
   ADD KEY `id_paciente` (`id_paciente`);
 
---
--- Indexes for table `paciente`
---
-ALTER TABLE `paciente`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `referencia_bioquimica`
---
-ALTER TABLE `referencia_bioquimica`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `referencia_hematologia`
 --
-ALTER TABLE `referencia_hematologia`
-  ADD PRIMARY KEY (`id`);
-
 --
 -- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `cemail` (`cemail`);
-
---
--- AUTO_INCREMENT for dumped tables
---
 
 --
 -- AUTO_INCREMENT for table `exame_bioquimica`
