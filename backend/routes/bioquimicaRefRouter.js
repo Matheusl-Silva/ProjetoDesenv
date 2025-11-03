@@ -6,6 +6,6 @@ const bioquimicaRefController = require("../Controller/bioquimicaRefController")
 
 router.get("/", bioquimicaRefController.getAllBioquimicaRef);
 router.post("/", bioquimicaRefController.createBioquimicaRef);
-router.put("/:idReferenciaHemato", bioquimicaRefController.updateBioquimicaRef);
+router.put("/", bioquimicaRefController.updateBioquimicaRef);
 
 module.exports = router;

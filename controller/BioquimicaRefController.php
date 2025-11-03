@@ -2,10 +2,11 @@
 
 class BioquimicaRefController
 {
-    public function VisualizarHematoRef()
+    public function VisualizarBioquimicaRef()
     {
         $bioquimicaRefDAO = new ExameBioquimicaRefDAO();
         $bioquimicaRef    = $bioquimicaRefDAO->buscarReferenciaBioquimica();
+        if(!$bioquimicaRef) $bioquimicaRef = new ReferenciaBioquimica();
         $auth             = new Autenticacao();
         $nomeUsuario      = $auth->getNomeUsuario();
 

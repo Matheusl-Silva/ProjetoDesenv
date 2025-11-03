@@ -25,19 +25,18 @@ exports.createBioquimicaRef = async (req, res) => {
 };
 
 exports.updateBioquimicaRef = async (req, res) => {
-  const id = req.params.idBioquimicaRef;
   const dadosAtualizar = req.body;
   try {
-    const result = await bioquimicaRefDao.update(id, dadosAtualizar);
-
+    console.log(dadosAtualizar); 
+    const result = await bioquimicaRefDao.update(dadosAtualizar);
     if (result.affectedRows === 0) {
-      return res.status(404).json({ error: "Referencia não encontrada" });
+      return res.status(404).json({ error: "Referência não encontrada" });
     }
-    res.status(200).json({ message: "Referencia Atualizada com sucesso" });
+    res.status(200).json({ message: "Referência Atualizada com sucesso" });
   } catch (err) {
-    console.error("Erro ao tentar atualizar Referencia de Bioquimica: ", err);
+    console.error("Erro ao tentar atualizar referência de Bioquimica: ", err);
     res
       .status(500)
-      .json({ error: "Erro ao tentar atualizar Referencia de Bioquimica" });
+      .json({ error: "Erro ao tentar atualizar referência de Bioquimica" });
   }
 };
