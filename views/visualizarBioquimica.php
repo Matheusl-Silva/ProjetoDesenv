@@ -103,7 +103,7 @@
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $info['label']; ?></label>
                                 <input type="text" class="form-control"
-                                    value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                                    value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == NULL) ? '' : $exame->$metodo()); ?>">
                                 <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
                             </div>
                         <?php endforeach; ?>
@@ -126,7 +126,7 @@
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $info['label']; ?></label>
                                 <input type="text" class="form-control"
-                                    value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                                    value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == NULL) ? '' : $exame->$metodo()); ?>">
                                 <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
                             </div>
                         <?php endforeach; ?>
@@ -153,7 +153,7 @@
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $info['label']; ?></label>
                                 <input type="text" class="form-control"
-                                    value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                                    value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == NULL) ? '' : $exame->$metodo()); ?>">
                                 <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
                             </div>
                         <?php endforeach; ?>
@@ -178,7 +178,7 @@
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $info['label']; ?></label>
                                 <input type="text" class="form-control"
-                                    value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                                    value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == NULL) ? '' : $exame->$metodo()); ?>">
                                 <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
                             </div>
                         <?php endforeach; ?>
@@ -205,7 +205,7 @@
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $info['label']; ?></label>
                                 <input type="text" class="form-control"
-                                    value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                                    value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == NULL) ? '' : $exame->$metodo()); ?>">
                                 <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
                             </div>
                         <?php endforeach; ?>
@@ -221,7 +221,7 @@
                         <div class="col-md-3">
                             <label class="form-label">PCR (Proteína C Reativa)</label>
                             <input type="text" class="form-control"
-                                value="<?php echo htmlspecialchars($exame->getPcrProteinaCReativa() ?? 'N/A'); ?>">
+                                value="<?php echo htmlspecialchars(($exame->getPcrProteinaCReativa() == 0) || ($exame->getPcrProteinaCReativa() == NULL) ? '' : $exame->getPcrProteinaCReativa()); ?>">
                             <div class="form-text text-muted small">Inferior a 1,0 mg/dL</div>
                         </div>
                     </div>
@@ -344,7 +344,7 @@
 
         const idPaciente = <?= json_encode($exame->getPaciente()) ?>;
         
-        const dataExame = "<?= json_encode($exame->getData()) ?>";
+        const dataExame = <?= json_encode($exame->getData()) ?>;
         const idResponsavel = <?= json_encode($exame->getResponsavel()) ?>;
         const idPreceptor = <?= json_encode($exame->getPreceptor()) ?>;
 
