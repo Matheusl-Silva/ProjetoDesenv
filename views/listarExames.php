@@ -195,7 +195,7 @@
                     <p class="welcome-subtitle">Selecione o tipo de exame para pesquisar um paciente</p>
                 </div>
             </div>
-
+            <?php if ($auth->isAdmin()): ?>
             <!-- Card de Exames Gerais (acima) -->
             <div class="row justify-content-center mb-4">
                 <div class="col-md-8">
@@ -207,7 +207,7 @@
                         </div>
                         <div class="card-content">
                             <h3 class="card-title">Exames Gerais</h3>
-                            <p class="card-description">Pesquisar paciente para visualizar todos os exames disponíveis, incluindo bioquímica, hematologia e outros tipos de exames laboratoriais</p>
+                            <p class="card-description">Pesquisar paciente para visualizar todos os exames disponíveis, incluindo bioquímica e hematologia</p>
                             <div class="text-center">
                                 <button class="action-btn" data-bs-toggle="modal" data-bs-target="#pesquisaGeralModal">
                                     Acessar
@@ -259,6 +259,29 @@
                     </div>
                 </div>
             </div>
+            <?php else: ?>
+                       <div class="row justify-content-center mb-4">
+                <div class="col-md-8">
+                    <div class="action-card">
+                        <div class="card-icon-container">
+                            <div class="card-icon edit-patient">
+                                <i class="bi bi-clipboard2-data"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Exames Gerais</h3>
+                            <p class="card-description">Pesquisar paciente para visualizar todos os exames disponíveis, incluindo bioquímica e hematologia</p>
+                            <div class="text-center">
+                                <button class="action-btn" data-bs-toggle="modal" data-bs-target="#pesquisaGeralModal">
+                                    Acessar
+                                    <i class="bi bi-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
 
             <div class="text-center my-4">
                 <a href="/home" class="btn btn-outline-secondary">
@@ -343,7 +366,7 @@ if ($tipoExame === 'hematologia'):
                                                 <span class="badge bg-secondary">N/A</span>
                                             <?php endif; ?>
                                         </td>
-                                        <td><?php echo isset($preceptores_map[$exame->getPreceptor()]) ? htmlspecialchars($preceptores_map[$exame->getPreceptor()]) : 'Preceptor: ' . $exame->getPreceptor(); ?></td>
+                                        <td><?php echo isset($preceptores_map[$exame->getPreceptor()]) ? htmlspecialchars($preceptores_map[$exame->getPreceptor()]) : 'Preceptor: <strong>' . $usuarioDAO->buscarUsuario($exame->getPreceptor())->getNome() . '</strong>'; ?></td>
                                         <td>
                                             <?php
 $tipoExame = $exame->getTipo();
