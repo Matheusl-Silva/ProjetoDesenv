@@ -4,7 +4,6 @@ return function (Router $router) {
     $router->get('/exameBio/listar/{id}', function ($id) {
         $auth = new Autenticacao();
         $auth->verificarLogin();
-        $auth->verificarAcessoAdmin();
 
         $exameBioquimicaController = new ExameBioquimicaController();
         $exameBioquimicaController->VisualizarExame($id);
@@ -22,7 +21,6 @@ return function (Router $router) {
     $router->post('/cadastrarBioquimica/{id}', function ($id) {
         $auth = new Autenticacao();
         $auth->verificarLogin();
-        $auth->verificarAcessoAdmin();
 
         $exameBioquimicaController = new ExameBioquimicaController();
         $exameBioquimicaController->gerarFormCadastro($id);
@@ -32,7 +30,6 @@ return function (Router $router) {
     $router->get('/cadastrarBioquimica/{id}', function ($id) {
         $auth = new Autenticacao();
         $auth->verificarLogin();
-        $auth->verificarAcessoAdmin();
 
         $exameBioquimicaController = new ExameBioquimicaController();
         $exameBioquimicaController->gerarFormCadastro($id);

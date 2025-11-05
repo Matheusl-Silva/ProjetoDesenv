@@ -66,7 +66,7 @@
                                 <table class="table" id="usersTable">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Número do Usuario</th>
                                             <th>Nome</th>
                                             <th>Email</th>
                                             <th>Tipo</th>
@@ -120,7 +120,7 @@
                                 <div class="no-results">
                                     <h4>Nenhum usuário cadastrado</h4>
                                     <p>Comece adicionando o primeiro usuário ao sistema.</p>
-                                    <a href="/usuario/novo" class="btn btn-primary mt-3">
+                                    <a href="/cadastrarUsuario" class="btn btn-primary mt-3">
                                         Cadastrar Primeiro Usuário
                                     </a>
                                 </div>
@@ -130,7 +130,7 @@
 
                     <div class="card-footer text-center">
                         <div class="d-flex justify-content-center gap-3 flex-wrap">
-                            <a href="/usuario/novo" class="btn btn-success">
+                            <a href="/cadastrarUsuario" class="btn btn-success">
                                 Novo Usuário
                             </a>
                             <a href="/home" class="btn btn-outline-secondary">

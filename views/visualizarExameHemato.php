@@ -60,7 +60,7 @@
                                 <input type="text" class="form-control"
                                     value="<?php echo htmlspecialchars($exame->getPaciente()); ?>">
                             <?php else: ?>
-                                <input type="text" class="form-control" value="*****">
+                                <input type="text" class="form-control" value="***********">
                             <?php endif; ?>
                         </div>
                         <div class="col-md-6">
@@ -86,16 +86,16 @@
                     <legend class="h5 mt-4 mb-3">Eritrograma</legend>
                     <div class="row g-3 mb-4">
                         <?php
-                        $camposEritrograma = [
-                            'getHemacia'     => 'Hemácias',
-                            'getHemoglobina' => 'Hemoglobina',
-                            'getHematocrito' => 'Hematócrito',
-                            'getVcm'         => 'VCM',
-                            'getHcm'         => 'HCM',
-                            'getChcm'        => 'CHCM',
-                            'getRdw'         => 'RDW',
-                        ];
-                        foreach ($camposEritrograma as $metodo => $label): ?>
+$camposEritrograma = [
+    'getHemacia'     => 'Hemácias',
+    'getHemoglobina' => 'Hemoglobina',
+    'getHematocrito' => 'Hematócrito',
+    'getVcm'         => 'VCM',
+    'getHcm'         => 'HCM',
+    'getChcm'        => 'CHCM',
+    'getRdw'         => 'RDW',
+];
+foreach ($camposEritrograma as $metodo => $label): ?>
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $label; ?></label>
                                 <input type="text" class="form-control"
@@ -110,19 +110,19 @@
                     <legend class="h5 mt-4 mb-3">Leucograma</legend>
                     <div class="row g-3 mb-4">
                         <?php
-                        $camposLeucograma = [
-                            'getLeucocitos'     => 'Leucócitos',
-                            'getBlastos'        => 'Blastos (µL)',
-                            'getPromielocitos'  => 'Prómielócitos (µL)',
-                            'getMielocitos'     => 'Mielócitos (µL)',
-                            'getMetamielocitos' => 'Metamielócitos (µL)',
-                            'getBastonetes'     => 'Bastonetes (µL)',
-                            'getSegmentados'    => 'Segmentados (µL)',
-                            'getNeutrofilos'    => 'Neutrófilos (%)',
-                            'getEosinofilos'    => 'Eosinófilos (%)',
-                            'getBasofilos'      => 'Basófilos (%)',
-                        ];
-                        foreach ($camposLeucograma as $metodo => $label): ?>
+$camposLeucograma = [
+    'getLeucocitos'     => 'Leucócitos',
+    'getBlastos'        => 'Blastos (µL)',
+    'getPromielocitos'  => 'Prómielócitos (µL)',
+    'getMielocitos'     => 'Mielócitos (µL)',
+    'getMetamielocitos' => 'Metamielócitos (µL)',
+    'getBastonetes'     => 'Bastonetes (µL)',
+    'getSegmentados'    => 'Segmentados (µL)',
+    'getNeutrofilos'    => 'Neutrófilos (%)',
+    'getEosinofilos'    => 'Eosinófilos (%)',
+    'getBasofilos'      => 'Basófilos (%)',
+];
+foreach ($camposLeucograma as $metodo => $label): ?>
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $label; ?></label>
                                 <input type="text" class="form-control"
@@ -164,7 +164,7 @@
                         <button type="button" class="btn btn-primary me-2 col-2" onclick="location.reload()">
                             <i class="bi bi-x-lg"></i>Cancelar
                         </button>
-                        <form action="/exameHemato/<?= $exame->getId() ?>" method="post" style="display: inline" id="formEdicao">
+                        <form action="/exameHemato/<?=$exame->getId()?>" method="post" style="display: inline" id="formEdicao">
                             <input type="hidden" name="method" value="PUT">
                             <input type="hidden" name="dadosEdicao" value="" id="dadosEdicao">
                             <button type="submit" class="btn btn-primary me-2 col-2">
@@ -173,7 +173,7 @@
                         </form>
                     </div>
                 <?php endif; ?>
-                <a href="/exames?paciente=<?= $exame->getPaciente() ?>"
+                <a href="/exames?paciente=<?=$exame->getPaciente()?>"
                     class="btn btn-primary me-2">
                     <i class="bi bi-arrow-left"></i> Voltar para o Paciente
                 </a>
@@ -238,10 +238,10 @@
 
             const inputs = Array.from(document.querySelectorAll('input'));
 
-            const idPaciente = <?= json_encode($exame->getPaciente()) ?>;
-            const dataExame = <?= json_encode($exame->getData()) ?>;
-            const idResponsavel = <?= json_encode($exame->getIdResponsavel()) ?>;
-            const idPreceptor = <?= json_encode($exame->getPreceptor()) ?>;
+            const idPaciente = <?=json_encode($exame->getPaciente())?>;
+            const dataExame = <?=json_encode($exame->getData())?>;
+            const idResponsavel = <?=json_encode($exame->getIdResponsavel())?>;
+            const idPreceptor = <?=json_encode($exame->getPreceptor())?>;
 
 
             let json = {};
@@ -253,7 +253,7 @@
 
             inputs.forEach((input, index) => {
                 if (input.type == 'text' && !input.className.includes('dadosGerais')) {
-                    json[nomesValores[index - 4]] = input.value; //4 = Número de inputs não considerados    
+                    json[nomesValores[index - 4]] = input.value; //4 = Número de inputs não considerados
                 }
             })
 
