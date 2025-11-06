@@ -45,7 +45,7 @@
     <main class="container my-5">
         <div class="card shadow-lg">
             <div class="card-header bg-primary text-white text-center">
-                <h2 class="mb-1">Resultado do Exame</h2>
+                <h2 class="mb-1">Resultado do Exame Hematologia</h2>
                 <p class="mb-0">Número do Exame: <?php echo htmlspecialchars($exame->getId()); ?></p>
             </div>
 
