@@ -18,7 +18,7 @@
     <div class="bg-decoration decoration-1"></div>
     <div class="bg-decoration decoration-2"></div>
     <div class="bg-decoration decoration-3"></div>
-
+<?php var_dump($bioRefExame);die; ?>
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
