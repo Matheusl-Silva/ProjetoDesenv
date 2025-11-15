@@ -15,7 +15,6 @@ spl_autoload_register(function ($class) {
 
 $idExame = $_GET['id'];
 
-
 $exameHematoDAO = new ExameHematoDAO();
 $exame = $exameHematoDAO->buscarExameCompletoPorId($idExame);
 
@@ -25,7 +24,17 @@ if (!$referencia) {
     $referencia = new ReferenciaHematologia();
 }
 
+$pacienteDAO = new PacienteDAO();
+$paciente = $pacienteDAO->buscarPaciente($exame->getPaciente());
+
 $dataExame = date('d/m/Y H:i', strtotime($exame->getData()));
+
+$idade = '';
+if ($paciente && $paciente->getDataNasc()) {
+    $dataNasc = new DateTime($paciente->getDataNasc());
+    $hoje = new DateTime();
+    $idade = $hoje->diff($dataNasc)->y . ' anos';
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -180,23 +189,18 @@ $dataExame = date('d/m/Y H:i', strtotime($exame->getData()));
 
     <div class="info-paciente">
         <div class="info-row">
-            <div><span class="info-label">Paciente:</span></div>
+            <div><span class="info-label">Paciente: <?php echo $paciente ? htmlspecialchars($paciente->getNome()) : 'N/A'; ?></span></div>
             <div><span class="info-label">Nome Social:</span></div>
         </div>
         <div class="info-row">
-            <div><span class="info-label">Idade:</span></div>
+            <div><span class="info-label">Idade: <?php echo $idade; ?></span></div>
             <div></div>
         </div>
         <div class="info-row">
-            <div><span class="info-label">Sexo:</span></div>
+            <div><span class="info-label">CPF: <?php echo $paciente ? htmlspecialchars($paciente->getCpf()) : 'N/A'; ?></span></div>
             <div></div>
         </div>
         <div class="info-row">
-            <div><span class="info-label">CPF:</span></div>
-            <div></div>
-        </div>
-        <div class="info-row">
-            <div><span class="info-label">Prontuário:</span></div>
             <div><span class="info-label">Data: <?php echo $dataExame; ?></span></div>
         </div>
     </div>
