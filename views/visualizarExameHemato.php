@@ -304,7 +304,7 @@ foreach ($camposLeucograma as $metodo => $config):
         function imprimirLaudo(idExame) {
             const iframe = document.createElement('iframe');
             iframe.style.display = 'none';
-            iframe.src = `/views/LaudoView.php?id=${idExame}`;
+            iframe.src = `/views/ImprimirExameHemato.php?id=${idExame}`;
             console.log(iframe.src);
             document.body.appendChild(iframe);
 
