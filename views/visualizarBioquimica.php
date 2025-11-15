@@ -110,10 +110,10 @@
                     <div class="row g-3 mb-4">
                         <?php
                         $camposRenal = [
-                            "getUreia"      => ["label" => "Ureia", "ref" => "F: < 50 anos: {$referencia->getUreiaFMenosDe50Anos()} • > 50 anos: {$referencia->getUreiaFMaisDe50Anos()} \n
-                                                                            M: < 50 anos: {$referencia->getUreiaMMenosDe50Anos()} • > 50 anos: {$referencia->getUreiaMMaisDe50Anos()} \n
+                            "getUreia"      => ["label" => "Ureia", "ref" => "F: < 50 anos: {$referencia->getUreiaFMenosDe50Anos()} • > 50 anos: {$referencia->getUreiaFMaisDe50Anos()}
+                                                                            M: < 50 anos: {$referencia->getUreiaMMenosDe50Anos()} • > 50 anos: {$referencia->getUreiaMMaisDe50Anos()}
                                                                             Infantil: {$referencia->getUreiaCrianca()}"],
-                            "getCreatinina" => ["label" => "Creatinina", "ref" => "F: {$referencia->getCreatininaF()} • M: {$referencia->getCreatininaM()} \n
+                            "getCreatinina" => ["label" => "Creatinina", "ref" => "F: {$referencia->getCreatininaF()} • M: {$referencia->getCreatininaM()}
                                                                             Infantil: {$referencia->getCreatininaCrianca()}"],
                         ];
                         foreach ($camposRenal as $metodo => $info): ?>
@@ -159,9 +159,9 @@
                         $camposLipidico = [
                             "getColesterolTotal" => ["label" => "Colesterol Total", "ref" => $referencia->getColesterolTotal()],
                             "getHdl"             => ["label" => "HDL", "ref" => "Até 19 anos: {$referencia->getHdlAte19Anos()} • > 20 anos: {$referencia->getHdlMaisDe20Anos()}"],
-                            "getLdl"             => ["label" => "LDL", "ref" => "Baixo risco: {$referencia->getLdlBaixoRisco()} \n 
-                                                    Risco intermediário: {$referencia->getLdlRiscoIntermediario()}\n
-                                                    Alto risco: {$referencia->getLdlAltoRisco()}\n
+                            "getLdl"             => ["label" => "LDL", "ref" => "Baixo risco: {$referencia->getLdlBaixoRisco()} 
+                                                    Risco intermediário: {$referencia->getLdlRiscoIntermediario()}
+                                                    Alto risco: {$referencia->getLdlAltoRisco()}
                                                     Muito alto risco: {$referencia->getLdlMuitoAltoRisco()}"],
                             "getTriglicerideos"  => ["label" => "Triglicerídeos", "ref" => $referencia->getTriglicerideos()],
                         ];
@@ -183,15 +183,15 @@
                         <?php
                         $camposMetabolismo = [
                             "getGlicose"    => ["label" => "Glicose", "ref" => $referencia->getGlicose()],
-                            "getFerro"      => ["label" => "Ferro", "ref" => "F: Até 40 anos: {$referencia->getFerroFAte40Anos()} • > 40 anos: {$referencia->getFerroFMaisDe40Anos()} • > 60 anos: {$referencia->getFerroFMaisDe60Anos()}\n
-                                                M: Até 40 anos: {$referencia->getFerroMAte40Anos()} • > 40 anos: {$referencia->getFerroMMaisDe40Anos()} • > 60 anos: {$referencia->getFerroMMaisDe60Anos()}\n
+                            "getFerro"      => ["label" => "Ferro", "ref" => "F: Até 40 anos: {$referencia->getFerroFAte40Anos()} • > 40 anos: {$referencia->getFerroFMaisDe40Anos()} • > 60 anos: {$referencia->getFerroFMaisDe60Anos()}
+                                                M: Até 40 anos: {$referencia->getFerroMAte40Anos()} • > 40 anos: {$referencia->getFerroMMaisDe40Anos()} • > 60 anos: {$referencia->getFerroMMaisDe60Anos()}
                                                 Infantil: {$referencia->getFerroCrianca()}"],
                             "getCalcio"     => ["label" => "Cálcio", "ref" => $referencia->getCalcio()],
-                            "getMagnesio"   => ["label" => "Magnésio", "ref" => "F: {$referencia->getMagnesioF()} • M: {$referencia->getMagnesioM()} \n
+                            "getMagnesio"   => ["label" => "Magnésio", "ref" => "F: {$referencia->getMagnesioF()} • M: {$referencia->getMagnesioM()}
                                                                             Infantil: {$referencia->getMagnesioCrianca()}"],
-                            "getFosforo"    => ["label" => "Fósforo", "ref" => "Adulto: {$referencia->getFosforoAdulto()} \n
+                            "getFosforo"    => ["label" => "Fósforo", "ref" => "Adulto: {$referencia->getFosforoAdulto()}
                                                                                 1-3 anos: {$referencia->getFosforo1a3Anos()} • 4-12 anos: {$referencia->getFosforo4a12Anos()} • 13-15 anos: {$referencia->getFosforo13a15Anos()} • 16-18 anos: {$referencia->getFosforo16a18Anos()}"],
-                            "getAcidoUrico" => ["label" => "Ácido Úrico", "ref" => "F: 1-9 anos: {$referencia->getAcidoUricoF1a9Anos()} • 10-18 anos: {$referencia->getAcidoUricoF10a18Anos()} • > 18 anos: {$referencia->getAcidoUricoFMaisDe18Anos()} \n
+                            "getAcidoUrico" => ["label" => "Ácido Úrico", "ref" => "F: 1-9 anos: {$referencia->getAcidoUricoF1a9Anos()} • 10-18 anos: {$referencia->getAcidoUricoF10a18Anos()} • > 18 anos: {$referencia->getAcidoUricoFMaisDe18Anos()}
                                                                                     M: 13-18 anos: {$referencia->getAcidoUricoM13a18Anos()} • > 18 anos: {$referencia->getAcidoUricoMMaisDe18Anos()}"],
                         ];
                         foreach ($camposMetabolismo as $metodo => $info): ?>
