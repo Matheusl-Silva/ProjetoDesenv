@@ -8,10 +8,10 @@ class ExameBioquimicaController
         $auth->verificarLogin();
 
         $exameBioquimicaDao = new ExameBioquimicaDAO();
+        $bioquimicaDAO = new ExameBioquimicaRefDAO();
         $usuarioDAO         = new UsuarioDAO();
         $exame              = $exameBioquimicaDao->buscarExameCompletoPorId($id);
-        $bioquimicaRefDao   = new ExameBioquimicaRefDAO();
-        $bioRefExame        = $bioquimicaRefDao->buscarReferenciaBioquimica();
+        $referencia = $bioquimicaDAO->buscarReferenciaBioquimica();
 
         $responsavel = $usuarioDAO->buscarUsuario($exame->getResponsavel());
         $preceptor   = $usuarioDAO->buscarUsuario($exame->getPreceptor());
