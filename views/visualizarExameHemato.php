@@ -103,7 +103,7 @@ foreach ($camposEritrograma as $metodo => $config):
         $valM = $referencia->$refM();
         $valF = $referencia->$refF();
         if ($valM && $valF) {
-            $valorRef = "Ref: M: {$valM} / F: {$valF}";
+            $valorRef = "M: {$valM} • F: {$valF}";
         }
     }
 ?>
@@ -144,11 +144,11 @@ foreach ($camposLeucograma as $metodo => $config):
         $valRel = $referencia->$refRel();
         $valAbs = $referencia->$refAbs();
         if ($valRel && $valAbs) {
-            $valorRef = "Ref: Rel: {$valRel} / Abs: {$valAbs}";
+            $valorRef = "Rel: {$valRel} • Abs: {$valAbs}";
         } elseif ($valRel) {
-            $valorRef = "Ref: {$valRel}";
+            $valorRef = "{$valRel}";
         } elseif ($valAbs) {
-            $valorRef = "Ref: {$valAbs}";
+            $valorRef = "{$valAbs}";
         }
     }
 ?>
@@ -173,7 +173,7 @@ foreach ($camposLeucograma as $metodo => $config):
                             <input type="text" class="form-control"
                                 value="<?php echo htmlspecialchars($exame->getPlaquetas() ?? 'N/A'); ?>">
                             <?php if ($referencia && $referencia->getPlaquetas()): ?>
-                                <small class="text-muted">Ref: <?php echo $referencia->getPlaquetas(); ?></small>
+                                <small class="text-muted"><?php echo $referencia->getPlaquetas(); ?></small>
                             <?php endif; ?>
                         </div>
                         <div class="col-md-4">
@@ -181,7 +181,7 @@ foreach ($camposLeucograma as $metodo => $config):
                             <input type="text" class="form-control"
                                 value="<?php echo htmlspecialchars($exame->getVolumePlaquetarioMedio() ?? 'N/A'); ?>">
                             <?php if ($referencia && $referencia->getVolumePlaquetarioMedio()): ?>
-                                <small class="text-muted">Ref: <?php echo $referencia->getVolumePlaquetarioMedio(); ?></small>
+                                <small class="text-muted"><?php echo $referencia->getVolumePlaquetarioMedio(); ?></small>
                             <?php endif; ?>
                         </div>
                     </div>
