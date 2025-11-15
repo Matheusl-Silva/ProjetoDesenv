@@ -32,7 +32,7 @@ class UsuarioController
 
     public function gerarHome()
     {
-        $auth = new Autenticacao();
+        $auth        = new Autenticacao();
         $nomeUsuario = $auth->getNomeUsuario();
         require 'views/homeUsuario.php';
     }
@@ -57,7 +57,6 @@ class UsuarioController
             } else {
                 // Executa a query
                 $result = $usuarioDAO->cadastrarUsuario($usuario);
-
                 if (!$result) {
                     $_SESSION["flash"] = [
                         "mensagem" => "Erro ao cadastrar",

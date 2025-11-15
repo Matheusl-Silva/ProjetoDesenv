@@ -8,8 +8,10 @@ class ExameBioquimicaController
         $auth->verificarLogin();
 
         $exameBioquimicaDao = new ExameBioquimicaDAO();
+        $bioquimicaDAO = new ExameBioquimicaRefDAO();
         $usuarioDAO         = new UsuarioDAO();
         $exame              = $exameBioquimicaDao->buscarExameCompletoPorId($id);
+        $referencia = $bioquimicaDAO->buscarReferenciaBioquimica();
 
         $responsavel = $usuarioDAO->buscarUsuario($exame->getResponsavel());
         $preceptor   = $usuarioDAO->buscarUsuario($exame->getPreceptor());
@@ -31,7 +33,8 @@ class ExameBioquimicaController
         return $result;
     }
 
-    public function editar(ExameBioquimica $exame){
+    public function editar(ExameBioquimica $exame)
+    {
         $exameBioquimicaDAO = new ExameBioquimicaDAO();
 
         return $exameBioquimicaDAO->editar($exame);

@@ -45,7 +45,7 @@
     <main class="container my-5">
         <div class="card shadow-lg">
             <div class="card-header bg-primary text-white text-center">
-                <h2 class="mb-1">Resultado do Exame</h2>
+                <h2 class="mb-1">Resultado do Exame Hematologia</h2>
                 <p class="mb-0">Número do Exame: <?php echo htmlspecialchars($exame->getId()); ?></p>
             </div>
 
@@ -60,7 +60,7 @@
                                 <input type="text" class="form-control"
                                     value="<?php echo htmlspecialchars($exame->getPaciente()); ?>">
                             <?php else: ?>
-                                <input type="text" class="form-control" value="*****">
+                                <input type="text" class="form-control" value="***********">
                             <?php endif; ?>
                         </div>
                         <div class="col-md-6">
@@ -86,20 +86,34 @@
                     <legend class="h5 mt-4 mb-3">Eritrograma</legend>
                     <div class="row g-3 mb-4">
                         <?php
-                        $camposEritrograma = [
-                            'getHemacia'     => 'Hemácias',
-                            'getHemoglobina' => 'Hemoglobina',
-                            'getHematocrito' => 'Hematócrito',
-                            'getVcm'         => 'VCM',
-                            'getHcm'         => 'HCM',
-                            'getChcm'        => 'CHCM',
-                            'getRdw'         => 'RDW',
-                        ];
-                        foreach ($camposEritrograma as $metodo => $label): ?>
+$camposEritrograma = [
+    'getHemacia'     => ['label' => 'Hemácias', 'refM' => 'getHemaciaM', 'refF' => 'getHemaciaF'],
+    'getHemoglobina' => ['label' => 'Hemoglobina', 'refM' => 'getHemoglobinaM', 'refF' => 'getHemoglobinaF'],
+    'getHematocrito' => ['label' => 'Hematócrito', 'refM' => 'getHematocritoM', 'refF' => 'getHematocritoF'],
+    'getVcm'         => ['label' => 'VCM', 'refM' => 'getVcmM', 'refF' => 'getVcmF'],
+    'getHcm'         => ['label' => 'HCM', 'refM' => 'getHcmM', 'refF' => 'getHcmF'],
+    'getChcm'        => ['label' => 'CHCM', 'refM' => 'getChcmM', 'refF' => 'getChcmF'],
+    'getRdw'         => ['label' => 'RDW', 'refM' => 'getRdwM', 'refF' => 'getRdwF'],
+];
+foreach ($camposEritrograma as $metodo => $config): 
+    $valorRef = '';
+    if ($referencia) {
+        $refM = $config['refM'];
+        $refF = $config['refF'];
+        $valM = $referencia->$refM();
+        $valF = $referencia->$refF();
+        if ($valM && $valF) {
+            $valorRef = "M: {$valM} • F: {$valF}";
+        }
+    }
+?>
                             <div class="col-md-3">
-                                <label class="form-label"><?php echo $label; ?></label>
+                                <label class="form-label"><?php echo $config['label']; ?></label>
                                 <input type="text" class="form-control"
                                     value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                                <?php if ($valorRef): ?>
+                                    <small class="text-muted"><?php echo $valorRef; ?></small>
+                                <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -110,23 +124,41 @@
                     <legend class="h5 mt-4 mb-3">Leucograma</legend>
                     <div class="row g-3 mb-4">
                         <?php
-                        $camposLeucograma = [
-                            'getLeucocitos'     => 'Leucócitos',
-                            'getBlastos'        => 'Blastos (µL)',
-                            'getPromielocitos'  => 'Prómielócitos (µL)',
-                            'getMielocitos'     => 'Mielócitos (µL)',
-                            'getMetamielocitos' => 'Metamielócitos (µL)',
-                            'getBastonetes'     => 'Bastonetes (µL)',
-                            'getSegmentados'    => 'Segmentados (µL)',
-                            'getNeutrofilos'    => 'Neutrófilos (%)',
-                            'getEosinofilos'    => 'Eosinófilos (%)',
-                            'getBasofilos'      => 'Basófilos (%)',
-                        ];
-                        foreach ($camposLeucograma as $metodo => $label): ?>
+$camposLeucograma = [
+    'getLeucocitos'     => ['label' => 'Leucócitos', 'refRel' => 'getLeucocitosRelativo', 'refAbs' => 'getLeucocitosAbsoluto'],
+    'getBlastos'        => ['label' => 'Blastos (µL)', 'refRel' => 'getBlastosRelativo', 'refAbs' => 'getBlastosAbsoluto'],
+    'getPromielocitos'  => ['label' => 'Prómielócitos (µL)', 'refRel' => 'getPromielocitosRelativo', 'refAbs' => 'getPromielocitosAbsoluto'],
+    'getMielocitos'     => ['label' => 'Mielócitos (µL)', 'refRel' => 'getMielocitosRelativo', 'refAbs' => 'getMielocitosAbsoluto'],
+    'getMetamielocitos' => ['label' => 'Metamielócitos (µL)', 'refRel' => 'getMetamielocitosRelativo', 'refAbs' => 'getMetamielocitosAbsoluto'],
+    'getBastonetes'     => ['label' => 'Bastonetes (µL)', 'refRel' => 'getBastonetesRelativo', 'refAbs' => 'getBastonetesAbsoluto'],
+    'getSegmentados'    => ['label' => 'Segmentados (µL)', 'refRel' => 'getSegmentadosRelativo', 'refAbs' => 'getSegmentadosAbsoluto'],
+    'getNeutrofilos'    => ['label' => 'Neutrófilos (%)', 'refRel' => 'getNeutrofilosRelativo', 'refAbs' => 'getNeutrofilosAbsoluto'],
+    'getEosinofilos'    => ['label' => 'Eosinófilos (%)', 'refRel' => 'getEosinofilosRelativo', 'refAbs' => 'getEosinofilosAbsoluto'],
+    'getBasofilos'      => ['label' => 'Basófilos (%)', 'refRel' => 'getBasofilosRelativo', 'refAbs' => 'getBasofilosAbsoluto'],
+];
+foreach ($camposLeucograma as $metodo => $config): 
+    $valorRef = '';
+    if ($referencia) {
+        $refRel = $config['refRel'];
+        $refAbs = $config['refAbs'];
+        $valRel = $referencia->$refRel();
+        $valAbs = $referencia->$refAbs();
+        if ($valRel && $valAbs) {
+            $valorRef = "Rel: {$valRel} • Abs: {$valAbs}";
+        } elseif ($valRel) {
+            $valorRef = "{$valRel}";
+        } elseif ($valAbs) {
+            $valorRef = "{$valAbs}";
+        }
+    }
+?>
                             <div class="col-md-3">
-                                <label class="form-label"><?php echo $label; ?></label>
+                                <label class="form-label"><?php echo $config['label']; ?></label>
                                 <input type="text" class="form-control"
                                     value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
+                                <?php if ($valorRef): ?>
+                                    <small class="text-muted"><?php echo $valorRef; ?></small>
+                                <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -140,11 +172,17 @@
                             <label class="form-label">Plaquetas</label>
                             <input type="text" class="form-control"
                                 value="<?php echo htmlspecialchars($exame->getPlaquetas() ?? 'N/A'); ?>">
+                            <?php if ($referencia && $referencia->getPlaquetas()): ?>
+                                <small class="text-muted"><?php echo $referencia->getPlaquetas(); ?></small>
+                            <?php endif; ?>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Volume Plaquetário Médio</label>
                             <input type="text" class="form-control"
                                 value="<?php echo htmlspecialchars($exame->getVolumePlaquetarioMedio() ?? 'N/A'); ?>">
+                            <?php if ($referencia && $referencia->getVolumePlaquetarioMedio()): ?>
+                                <small class="text-muted"><?php echo $referencia->getVolumePlaquetarioMedio(); ?></small>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </fieldset>
@@ -164,7 +202,7 @@
                         <button type="button" class="btn btn-primary me-2 col-2" onclick="location.reload()">
                             <i class="bi bi-x-lg"></i>Cancelar
                         </button>
-                        <form action="/exameHemato/<?= $exame->getId() ?>" method="post" style="display: inline" id="formEdicao">
+                        <form action="/exameHemato/<?=$exame->getId()?>" method="post" style="display: inline" id="formEdicao">
                             <input type="hidden" name="method" value="PUT">
                             <input type="hidden" name="dadosEdicao" value="" id="dadosEdicao">
                             <button type="submit" class="btn btn-primary me-2 col-2">
@@ -173,7 +211,7 @@
                         </form>
                     </div>
                 <?php endif; ?>
-                <a href="/exames?paciente=<?= $exame->getPaciente() ?>"
+                <a href="/exames?paciente=<?=$exame->getPaciente()?>"
                     class="btn btn-primary me-2">
                     <i class="bi bi-arrow-left"></i> Voltar para o Paciente
                 </a>
@@ -238,10 +276,10 @@
 
             const inputs = Array.from(document.querySelectorAll('input'));
 
-            const idPaciente = <?= json_encode($exame->getPaciente()) ?>;
-            const dataExame = <?= json_encode($exame->getData()) ?>;
-            const idResponsavel = <?= json_encode($exame->getIdResponsavel()) ?>;
-            const idPreceptor = <?= json_encode($exame->getPreceptor()) ?>;
+            const idPaciente = <?=json_encode($exame->getPaciente())?>;
+            const dataExame = <?=json_encode($exame->getData())?>;
+            const idResponsavel = <?=json_encode($exame->getIdResponsavel())?>;
+            const idPreceptor = <?=json_encode($exame->getPreceptor())?>;
 
 
             let json = {};
@@ -253,7 +291,7 @@
 
             inputs.forEach((input, index) => {
                 if (input.type == 'text' && !input.className.includes('dadosGerais')) {
-                    json[nomesValores[index - 4]] = input.value; //4 = Número de inputs não considerados    
+                    json[nomesValores[index - 4]] = input.value; //4 = Número de inputs não considerados
                 }
             })
 
@@ -266,7 +304,7 @@
         function imprimirLaudo(idExame) {
             const iframe = document.createElement('iframe');
             iframe.style.display = 'none';
-            iframe.src = `/views/LaudoView.php?id=${idExame}`;
+            iframe.src = `/views/ImprimirExameHemato.php?id=${idExame}`;
             console.log(iframe.src);
             document.body.appendChild(iframe);
 

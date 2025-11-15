@@ -67,22 +67,66 @@
         </div>
     </nav>
 
-    <div class="container my-5">
+    <div class="container">
 
-        <!-- Modal Pesquisa -->
-        <div class="modal fade" id="pesquisaModal" tabindex="-1" aria-hidden="true">
+        <!-- Modal Pesquisa Bioquímica -->
+        <div class="modal fade" id="pesquisaBioquimicaModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content shadow">
-                    <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title">Pesquisar Paciente</h5>
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">Pesquisar Paciente - Bioquímica</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
                         <form action="/exames" method="get">
-                            <label for="paciente" class="form-label">Número do Paciente:</label>
-                            <input type="text" class="form-control mb-3" id="paciente" name="paciente" required>
+                            <input type="hidden" name="tipo" value="bioquimica">
+                            <label for="pacienteBioquimica" class="form-label">Número do Paciente:</label>
+                            <input type="text" class="form-control mb-3" id="pacienteBioquimica" name="paciente" required>
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-primary">Pesquisar</button>
+                                <button type="submit" class="btn btn-success">Pesquisar Bioquímica</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Pesquisa Hematologia -->
+        <div class="modal fade" id="pesquisaHematologiaModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content shadow">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">Pesquisar Paciente - Hematologia</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/exames" method="get">
+                            <input type="hidden" name="tipo" value="hematologia">
+                            <label for="pacienteHematologia" class="form-label">Número do Paciente:</label>
+                            <input type="text" class="form-control mb-3" id="pacienteHematologia" name="paciente" required>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Pesquisar Hematologia</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Pesquisa Geral -->
+        <div class="modal fade" id="pesquisaGeralModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content shadow">
+                    <div class="modal-header bg-info text-white">
+                        <h5 class="modal-title">Pesquisar Paciente - Exames Gerais</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/exames" method="get">
+                            <label for="pacienteGeral" class="form-label">Número do Paciente:</label>
+                            <input type="text" class="form-control mb-3" id="pacienteGeral" name="paciente" required>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-info">Pesquisar Exames Gerais</button>
                             </div>
                         </form>
                     </div>
@@ -102,8 +146,8 @@
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body"><?php echo htmlspecialchars($mensagem); ?></div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#pesquisaModal">
+                        <div class="modal-footer my-4">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="bi bi-search me-1"></i>Nova Pesquisa
                             </button>
                             <a href="/home" class="btn btn-outline-secondary">
@@ -130,8 +174,8 @@
                             <p class="mb-3">O paciente com o número <strong><?php echo htmlspecialchars($_GET['paciente']); ?></strong> não foi encontrado no sistema.</p>
                             <p class="text-muted mb-0">Verifique se o número foi digitado corretamente e tente novamente.</p>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="abrirModalPesquisa()">
+                        <div class="modal-footer my-4">
+                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">
                                 <i class="bi bi-search me-1"></i>Nova Pesquisa
                             </button>
                             <a href="/home" class="btn btn-outline-secondary">
@@ -144,58 +188,150 @@
         <?php endif; ?>
 
         <?php if (!$paciente && !isset($_GET['paciente'])): ?>
-            <!-- Tela inicial -->
-            <div class="d-flex align-items-center justify-content-center">
-                <div class="action-card p-5 text-center shadow">
-                    <h2 class="mb-3">Cadastro Hematológico</h2>
-                    <p class="text-primary mb-4">Clique abaixo para pesquisar um paciente</p>
-                    <button class="action-btn" data-bs-toggle="modal" data-bs-target="#pesquisaModal">
-                        <i class="bi bi-search me-1"></i>Pesquisar Paciente
-                    </button>
-                    <div class="mt-4">
-                        <a href="/home" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-left me-1"></i>Voltar
-                        </a>
+            <!-- Tela inicial com cards -->
+            <div class="welcome-banner">
+                <div class="welcome-content">
+                    <h1 class="welcome-title">Exames Laboratoriais</h1>
+                    <p class="welcome-subtitle">Selecione o tipo de exame para pesquisar um paciente</p>
+                </div>
+            </div>
+            <?php if ($auth->isAdmin()): ?>
+            <!-- Card de Exames Gerais (acima) -->
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-8">
+                    <div class="action-card">
+                        <div class="card-icon-container">
+                            <div class="card-icon edit-patient">
+                                <i class="bi bi-clipboard2-data"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Exames Gerais</h3>
+                            <p class="card-description">Pesquisar paciente para visualizar todos os exames disponíveis, incluindo bioquímica e hematologia</p>
+                            <div class="text-center">
+                                <button class="action-btn" data-bs-toggle="modal" data-bs-target="#pesquisaGeralModal">
+                                    Acessar
+                                    <i class="bi bi-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Cards de Bioquímica e Hematologia (abaixo) -->
+            <div class="cards-grid admin-grid">
+                <!-- Card Bioquímica -->
+                <div class="action-card">
+                    <div class="card-icon-container">
+                        <div class="card-icon exames">
+                            <i class="bi bi-droplet"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Bioquímica</h3>
+                        <p class="card-description">Editar valores de referência para os exames de bioquímica.</p>
+                        <div class="text-center">
+                            <a href="/bioquimicaRef" class="action-btn">
+                                Acessar
+                                <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Hematologia -->
+                <div class="action-card">
+                    <div class="card-icon-container">
+                        <div class="card-icon exames">
+                            <i class="bi bi-heart-pulse"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Hematologia</h3>
+                        <p class="card-description">Editar valores de referência para os exames de hematologia.</p>
+                        <div class="text-center">
+                            <a href="/hematoRef" class="action-btn">
+                                Acessar
+                                <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php else: ?>
+                       <div class="row justify-content-center mb-4">
+                <div class="col-md-8">
+                    <div class="action-card">
+                        <div class="card-icon-container">
+                            <div class="card-icon edit-patient">
+                                <i class="bi bi-clipboard2-data"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Exames Gerais</h3>
+                            <p class="card-description">Pesquisar paciente para visualizar todos os exames disponíveis, incluindo bioquímica e hematologia</p>
+                            <div class="text-center">
+                                <button class="action-btn" data-bs-toggle="modal" data-bs-target="#pesquisaGeralModal">
+                                    Acessar
+                                    <i class="bi bi-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+
+            <div class="text-center my-4">
+                <a href="/home" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-1"></i>Voltar ao Início
+                </a>
+            </div>
+
         <?php elseif (!$paciente && isset($_GET['paciente'])): ?>
-            <!-- Paciente não encontrado - tela alternativa se não usar modal -->
-            <div class="d-flex align-items-center justify-content-center">
-                <div class="action-card p-5 text-center shadow border-warning">
-                    <div class="text-warning mb-3">
-                        <i class="bi bi-exclamation-triangle" style="font-size: 3rem;"></i>
-                    </div>
-                    <h2 class="mb-3 text-warning">Paciente não encontrado</h2>
-                    <p class="text-muted mb-4">
-                        O paciente com o número <strong><?php echo htmlspecialchars($_GET['paciente']); ?></strong> não foi encontrado no sistema.
-                        <br>Verifique se o número foi digitado corretamente.
-                    </p>
-                    <div class="d-flex gap-2 justify-content-center">
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#pesquisaModal">
-                            <i class="bi bi-search me-1"></i>Nova Pesquisa
-                        </button>
-                        <a href="/home" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-left me-1"></i>Voltar
-                        </a>
-                    </div>
+            <!-- Paciente não encontrado -->
+            <div class="welcome-banner">
+                <div class="welcome-content text-center">
+                    <h1 class="welcome-title">Paciente não encontrado</h1>
+                    <p class="welcome-subtitle">Verifique o número do paciente e tente novamente</p>
                 </div>
             </div>
+
+            <div class="action-card p-5 text-center">
+                <div class="text-warning mb-3">
+                    <i class="bi bi-exclamation-triangle" style="font-size: 3rem;"></i>
+                </div>
+                <p class="text-muted mb-4">
+                    O paciente com o número <strong><?php echo htmlspecialchars($_GET['paciente']); ?></strong> não foi encontrado no sistema.
+                    <br>Verifique se o número foi digitado corretamente.
+                </p>
+                <div class="d-flex gap-2 justify-content-center my-4">
+                    <a href="/exames" class="btn btn-warning">
+                        <i class="bi bi-grid me-1"></i>Voltar aos Exames
+                    </a>
+                    <a href="/home" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-1"></i>Voltar ao Início
+                    </a>
+                </div>
+            </div>
+
         <?php else: ?>
             <!-- Paciente encontrado -->
-            <div class="welcome-banner mb-4">
-                <div class="welcome-content text-center">
-                    <h2>Exames do paciente</h2>
+            <div class="welcome-banner">
+                <div class="welcome-content">
+                    <h1 class="welcome-title">Exames do Paciente</h1>
                     <p class="welcome-subtitle">Paciente Nº <?php echo htmlspecialchars($paciente->getId()); ?></p>
                 </div>
             </div>
 
-            <!-- Histórico -->
-            <div class="action-card mb-5">
-
-
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0"><i class="bi bi-clock-history me-2"></i>Histórico de Exames</h5>
+            <!-- Histórico de Exames -->
+            <div class="action-card">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h3 class="card-title mb-1"><i class="bi bi-clock-history me-2"></i>Histórico de Exames</h3>
+                        <p class="text-muted mb-0">Visualize e gerencie os exames deste paciente</p>
+                    </div>
                     <a href="/exames/novo/<?php echo $paciente->getId(); ?>" class="btn btn-primary">
                         <i class="bi bi-plus-circle me-1"></i> Incluir Exame
                     </a>
@@ -203,19 +339,7 @@
 
                 <?php if (!empty($exames)): ?>
                     <div class="table-responsive">
-                        <table class="table table-hover table-sm align-middle">
-                            </table>
-                    </div>
-                <?php else: ?>
-                    <div class="text-center p-4 border rounded mt-4">
-                        <p class="text-muted mb-0">Nenhum exame encontrado para este paciente.</p>
-                        <p class="text-muted">Clique em "Incluir Exame" para adicionar o primeiro.</p>
-                    </div>
-                <?php endif; ?>
-
-                <?php if (!empty($exames)): ?>
-                    <div class="table-responsive">
-                        <table class="table table-hover table-sm align-middle">
+                        <table class="table table-hover align-middle">
                             <thead>
                                 <tr>
                                     <th>Número</th>
@@ -242,33 +366,46 @@ if ($tipoExame === 'hematologia'):
                                                 <span class="badge bg-secondary">N/A</span>
                                             <?php endif; ?>
                                         </td>
-                                        <td><?php echo isset($preceptores_map[$exame->getPreceptor()]) ? htmlspecialchars($preceptores_map[$exame->getPreceptor()]) : 'Preceptor: ' . $exame->getPreceptor(); ?></td>
+                                        <td><?php echo isset($preceptores_map[$exame->getPreceptor()]) ? htmlspecialchars($preceptores_map[$exame->getPreceptor()]) : 'Preceptor: <strong>' . $usuarioDAO->buscarUsuario($exame->getPreceptor())->getNome() . '</strong>'; ?></td>
                                         <td>
                                             <?php
 $tipoExame = $exame->getTipo();
 if ($tipoExame === 'hematologia'):
 ?>
                                                 <a href="/exameHemato/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?=$exame->getId()?>" data-tipo="Hemato" class="btn btn-sm btn-danger">Excluir</button>
+                                                <?php if ($auth->isAdmin()): ?>
+                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?=$exame->getId()?>" data-tipo="Hemato" class="btn btn-sm btn-danger">Excluir</button>
+                                                <?php endif; ?>
                                             <?php elseif ($tipoExame === 'bioquimica'): ?>
                                                 <a href="/exameBio/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?=$exame->getId()?>" data-tipo="Bio" class="btn btn-sm btn-danger">Excluir</button>
+                                                <?php if ($auth->isAdmin()): ?>
+                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?=$exame->getId()?>" data-tipo="Bio" class="btn btn-sm btn-danger">Excluir</button>
+                                                <?php endif; ?>
                                             <?php endif; ?>
-                                            <?php if ($auth->isAdmin()): ?>
-                                            <?php endif; ?>
-
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
-                <?php endif?>
+                <?php else: ?>
+                    <div class="text-center p-5">
+                        <div class="text-muted mb-3">
+                            <i class="bi bi-clipboard2-x" style="font-size: 3rem;"></i>
+                        </div>
+                        <p class="text-muted mb-2">Nenhum exame encontrado para este paciente.</p>
+                        <p class="text-muted">Clique em "Incluir Exame" para adicionar o primeiro.</p>
+                    </div>
+                <?php endif; ?>
             </div>
 
-            <div class="text-center mt-4">
-                <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#pesquisaModal"><i class="bi bi-search me-1"></i>Nova Pesquisa</button>
-                <a href="/home" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i>Voltar</a>
+            <div class="text-center my-4">
+                <a href="/exames" class="btn btn-outline-primary me-2">
+                    <i class="bi bi-grid me-1"></i>Voltar aos Exames
+                </a>
+                <a href="/home" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-1"></i>Voltar ao Início
+                </a>
             </div>
         <?php endif; ?>
     </div>
@@ -282,13 +419,6 @@ if ($tipoExame === 'hematologia'):
             });
         <?php endif; ?>
 
-        <?php if (!$paciente && !isset($_GET['paciente'])): ?>
-            document.addEventListener('DOMContentLoaded', () => {
-                var myModal = new bootstrap.Modal(document.getElementById('pesquisaModal'));
-                myModal.show();
-            });
-        <?php endif; ?>
-
         <?php if (isset($_GET['paciente']) && !$paciente && empty($mensagem)): ?>
             document.addEventListener('DOMContentLoaded', () => {
                 var pacienteNaoEncontradoModal = new bootstrap.Modal(document.getElementById('pacienteNaoEncontradoModal'));
@@ -299,19 +429,31 @@ if ($tipoExame === 'hematologia'):
         //Modal de confirmação de exclusão
         document.addEventListener('DOMContentLoaded', () => {
             const modalExcluir = document.getElementById('modalConfirmacao');
-            modalExcluir.addEventListener('show.bs.modal', function() {
-                const botao = event.relatedTarget;
-                const idExame = botao.getAttribute('data-id');
-                const tipoExame = botao.getAttribute('data-tipo');
-                const form = modalExcluir.querySelector('form');
-                form.action = form.action + tipoExame + '/' + idExame;
-            });
-        })
+            if (modalExcluir) {
+                modalExcluir.addEventListener('show.bs.modal', function(event) {
+                    const botao = event.relatedTarget;
+                    const idExame = botao.getAttribute('data-id');
+                    const tipoExame = botao.getAttribute('data-tipo');
+                    const form = modalExcluir.querySelector('form');
+                    form.action = form.action + tipoExame + '/' + idExame;
+                });
+            }
+        });
 
-        // Limpar campo de pesquisa quando modal for aberto
-        document.getElementById('pesquisaModal').addEventListener('shown.bs.modal', function() {
-            document.getElementById('paciente').value = '';
-            document.getElementById('paciente').focus();
+        // Limpar campos de pesquisa quando modais forem abertos
+        document.getElementById('pesquisaBioquimicaModal').addEventListener('shown.bs.modal', function() {
+            document.getElementById('pacienteBioquimica').value = '';
+            document.getElementById('pacienteBioquimica').focus();
+        });
+
+        document.getElementById('pesquisaHematologiaModal').addEventListener('shown.bs.modal', function() {
+            document.getElementById('pacienteHematologia').value = '';
+            document.getElementById('pacienteHematologia').focus();
+        });
+
+        document.getElementById('pesquisaGeralModal').addEventListener('shown.bs.modal', function() {
+            document.getElementById('pacienteGeral').value = '';
+            document.getElementById('pacienteGeral').focus();
         });
     </script>
 </body>

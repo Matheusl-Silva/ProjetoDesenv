@@ -53,7 +53,7 @@ class Autenticacao
     public function verificarAcessoAdmin()
     {
         if (!$this->isAdmin()) {
-            header("Location: homeUsuario.php");
+            header("Location: /home");
             exit;
         }
     }

@@ -3,7 +3,6 @@ return function (Router $router) {
     $router->get('/exameHemato/listar/{id}', function ($id) {
         $auth = new Autenticacao();
         $auth->verificarLogin();
-        $auth->verificarAcessoAdmin();
 
         $exameHematoController = new ExameHematoController();
         $exameHematoController->VisualizarExame($id);
@@ -21,7 +20,6 @@ return function (Router $router) {
     $router->get('/cadastrarHematologia/{id}', function ($id) {
         $auth = new Autenticacao();
         $auth->verificarLogin();
-        $auth->verificarAcessoAdmin();
 
         $exameHematoController = new ExameHematoController();
         $exameHematoController->gerarFormCadastro($id);
@@ -64,7 +62,7 @@ return function (Router $router) {
 
     $router->put('/exameHemato/{id}', function ($id) {
         $exameHematoController = new ExameHematoController();
-        $exameHemato = new ExameHemato();
+        $exameHemato           = new ExameHemato();
 
         $dadosExame = json_decode($_POST["dadosEdicao"], true);
 
@@ -97,7 +95,7 @@ return function (Router $router) {
 
         $exameHematoController->editar($exameHemato);
 
-        header('Location: /exameHemato/listar/'. $id);
+        header('Location: /exameHemato/listar/' . $id);
         exit;
     });
 };

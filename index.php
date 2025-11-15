@@ -1,7 +1,7 @@
 <?php
 //Reporta erros
-ini_set('display_errors',1);
-ini_set('display_startup_erros',1);
+ini_set('display_errors', 1);
+ini_set('display_startup_erros', 1);
 error_reporting(E_ALL);
 
 //Inicia sessão
@@ -35,12 +35,16 @@ require_once 'router.php';
 $router = new Router();
 
 //Recebe todas as rotas dos routers
-foreach(glob(__DIR__ . '/routes/*.php') as $arquivo){
+foreach (glob(__DIR__ . '/routes/*.php') as $arquivo) {
     $registrarRota = require $arquivo;
     $registrarRota($router);
 }
 
-$router->get('/', function(){
+$router->get('/', function () {
+    if (isset($_SESSION["id"])) {
+        header('Location: /home');
+        exit;
+    }
     require 'views/home.html';
 });
 

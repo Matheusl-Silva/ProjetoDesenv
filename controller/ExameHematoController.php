@@ -16,6 +16,12 @@ class ExameHematoController
             exit();
         }
 
+        $hematoRefDAO = new ExameHematoRefDAO();
+        $referencia = $hematoRefDAO->buscarReferenciaHematologica();
+        if (!$referencia) {
+            $referencia = new ReferenciaHematologia();
+        }
+
         $nome_usuario = $auth->getNomeUsuario();
         require 'views/visualizarExameHemato.php';
     }

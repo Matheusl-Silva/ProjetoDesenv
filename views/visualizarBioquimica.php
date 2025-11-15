@@ -8,62 +8,59 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/home-usuario.css">
-    <link rel="stylesheet" href="../../assets/css/Bioquimica.css">
+
     <link rel="icon" href="../../assets/img/favicon.png" type="image/x-icon">
     <title>Resultado do Exame</title>
 </head>
 
 <body>
+    <!-- Elementos decorativos de fundo -->
     <div class="bg-decoration decoration-1"></div>
     <div class="bg-decoration decoration-2"></div>
     <div class="bg-decoration decoration-3"></div>
 
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <div class="d-flex align-items-center">
-                <div class="logo-container-nav">
-                    <img src="../../assets/img/LogoPositivo.png" alt="Logo Portal de Saúde Positivo" class="logo-nav">
-                </div>
-                <a class="navbar-brand">Portal de Saúde Positivo</a>
-            </div>
-            <div class="collapse navbar-collapse justify-content-end">
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
                 <div class="d-flex align-items-center">
-                    <span class="user-greeting me-3">Olá, <?php echo htmlspecialchars($nome_usuario); ?></span>
-                    <form action="/logout" method="post">
-                        <button type="submit" class="btn-logout">
-                            <i class="bi bi-box-arrow-right me-1"></i>
-                            Sair
-                        </button>
-                    </form>
+                    <div class="logo-container-nav">
+                        <img src="../../assets/img/LogoPositivo.png" alt="Logo Portal de Saúde Positivo" class="logo-nav">
+                    </div>
+                    <a class="navbar-brand">Portal de Saúde Positivo</a>
+                </div>
+                <div class="collapse navbar-collapse justify-content-end">
+                    <div class="d-flex align-items-center">
+                        <span class="user-greeting me-3">Olá, <?php echo htmlspecialchars($nome_usuario); ?></span>
+                        <form action="/logout" method="post">
+                            <button type="submit" class="btn-logout">
+                                <i class="bi bi-box-arrow-right me-1"></i>
+                                Sair
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <main class="container my-5">
         <div class="card shadow-lg">
             <div class="card-header bg-primary text-white text-center">
-                <h2 class="mb-1">
-                    <i class="bi bi-clipboard-data me-2"></i>
-                    Resultado do Exame - Bioquímica
-                </h2>
+                <h2 class="mb-1">Resultado do Exame Bioquímica</h2>
                 <p class="mb-0">Número do Exame: <?php echo htmlspecialchars($exame->getId()); ?></p>
             </div>
 
             <div class="card-body p-4">
                 <!-- Dados Gerais -->
                 <fieldset disabled id="fieldsetDadosGerais">
-                    <legend class="h5 mb-3">
-                        <i class="bi bi-person-badge me-2"></i>
-                        Dados Gerais
-                    </legend>
+                    <legend class="h5 mb-3">Dados Gerais</legend>
                     <div class="row g-3 mb-4">
                         <div class="col-md-6">
                             <label class="form-label">Paciente</label>
                             <?php if ($auth->isAdmin()): ?>
                                 <input type="text" class="form-control dadosGerais" value="<?php echo htmlspecialchars($exame->getPaciente()); ?>">
                             <?php else: ?>
-                                <input type="text" class="form-control dadosGerais" value="*">
+                                <input type="text" class="form-control dadosGerais" value="***********">
                             <?php endif; ?>
                         </div>
                         <div class="col-md-6">
@@ -86,25 +83,22 @@
 
                 <!-- Função Hepática -->
                 <fieldset disabled>
-                    <legend class="h5 mt-4 mb-3">
-                        <i class="bi bi-heart-pulse me-2"></i>
-                        Função Hepática
-                    </legend>
+                    <legend class="h5 mt-4 mb-3">Função Hepática</legend>
                     <div class="row g-3 mb-4">
                         <?php
                         $camposHepatico = [
-                            'getTgoTransaminaseGlutamicoOxalacetica' => ['label' => 'TGO (AST)', 'ref' => 'F: <31 U/L • M: <35 U/L'],
-                            'getTgpTransaminaseGlutamicoPiruvica'    => ['label' => 'TGP (ALT)', 'ref' => 'F: <34 U/L • M: <45 U/L'],
-                            'getGamaGtGlutamiltransferase'           => ['label' => 'Gama GT', 'ref' => 'F: <32 U/L • M: <49 U/L'],
-                            'getBilirrubinaTotal'                    => ['label' => 'Bilirrubina Total', 'ref' => '0,1 – 1,2 mg/dL'],
-                            'getBilirrubinaDireta'                   => ['label' => 'Bilirrubina Direta', 'ref' => '≤ 0,1 – 1,2 mg/dL'],
+                            "getTgoTransaminaseGlutamicoOxalacetica" => ["label" => "TGO (AST)", "ref" => "F: {$referencia->getTgoTransaminaseGlutamicoOxalaceticaF()} • M: {$referencia->getTgoTransaminaseGlutamicoOxalaceticaM()}"],
+                            "getTgpTransaminaseGlutamicoPiruvica"    => ["label" => "TGP (ALT)", "ref" => "F: {$referencia->getTgpTransaminaseGlutamicoPiruvicaF()} • M: {$referencia->getTgpTransaminaseGlutamicoPiruvicaM()}"],
+                            "getGamaGtGlutamiltransferase"           => ["label" => "Gama GT", "ref" => "F: {$referencia->getGamaGtGlutamiltransferaseF()} • M: {$referencia->getGamaGtGlutamiltransferaseM()}"],
+                            "getBilirrubinaTotal"                    => ["label" => "Bilirrubina Total", "ref" => $referencia->getBilirrubinaTotal()],
+                            "getBilirrubinaDireta"                   => ["label" => "Bilirrubina Direta", "ref" => $referencia->getBilirrubinaDireta()],
                         ];
                         foreach ($camposHepatico as $metodo => $info): ?>
                             <div class="col-md-3">
-                                <label class="form-label"><?php echo $info['label']; ?></label>
+                                <label class="form-label"><?php echo $info["label"]; ?></label>
                                 <input type="text" class="form-control"
-                                    value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
-                                <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
+                                    value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == null) ? '' : $exame->$metodo()); ?>">
+                                <div class="form-text text-muted small"><?php echo $info["ref"]; ?></div>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -112,22 +106,22 @@
 
                 <!-- Função Renal -->
                 <fieldset disabled>
-                    <legend class="h5 mt-4 mb-3">
-                        <i class="bi bi-funnel me-2"></i>
-                        Função Renal
-                    </legend>
+                    <legend class="h5 mt-4 mb-3">Função Renal</legend>
                     <div class="row g-3 mb-4">
                         <?php
                         $camposRenal = [
-                            'getUreia'      => ['label' => 'Ureia', 'ref' => '10-50 mg/dL'],
-                            'getCreatinina' => ['label' => 'Creatinina', 'ref' => 'F: 0,5-1,1 • M: 0,7-1,3 mg/dL'],
+                            "getUreia"      => ["label" => "Ureia", "ref" => "F: < 50 anos: {$referencia->getUreiaFMenosDe50Anos()} • > 50 anos: {$referencia->getUreiaFMaisDe50Anos()}
+                                                                            M: < 50 anos: {$referencia->getUreiaMMenosDe50Anos()} • > 50 anos: {$referencia->getUreiaMMaisDe50Anos()}
+                                                                            Infantil: {$referencia->getUreiaCrianca()}"],
+                            "getCreatinina" => ["label" => "Creatinina", "ref" => "F: {$referencia->getCreatininaF()} • M: {$referencia->getCreatininaM()}
+                                                                            Infantil: {$referencia->getCreatininaCrianca()}"],
                         ];
                         foreach ($camposRenal as $metodo => $info): ?>
                             <div class="col-md-3">
-                                <label class="form-label"><?php echo $info['label']; ?></label>
+                                <label class="form-label"><?php echo $info["label"]; ?></label>
                                 <input type="text" class="form-control"
-                                    value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
-                                <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
+                                    value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == null) ? '' : $exame->$metodo()); ?>">
+                                <div class="form-text text-muted small"><?php echo nl2br($info["ref"]); ?></div>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -135,26 +129,23 @@
 
                 <!-- Proteínas e Enzimas -->
                 <fieldset disabled>
-                    <legend class="h5 mt-4 mb-3">
-                        <i class="bi bi-body-text me-2"></i>
-                        Proteínas e Enzimas
-                    </legend>
+                    <legend class="h5 mt-4 mb-3">Proteínas e Enzimas</legend>
                     <div class="row g-3 mb-4">
                         <?php
                         $camposProteinas = [
-                            'getProteinaTotal'     => ['label' => 'Proteína Total', 'ref' => '3,5 – 5,2 g/dL'],
-                            'getAlbumina'          => ['label' => 'Albumina', 'ref' => '3,5 – 5,2 g/dL'],
-                            'getAmilase'           => ['label' => 'Amilase', 'ref' => '< 100 U/L'],
-                            'getLdh'               => ['label' => 'LDH', 'ref' => '< 480 U/L'],
-                            'getFosfataseAlcalina' => ['label' => 'Fosfatase Alcalina', 'ref' => 'F: 35–105 • M: 40–130 U/L'],
-                            'getReatinaQuinaseCk'  => ['label' => 'CK (Creatina Quinase)', 'ref' => 'F: <145 • M: <171 U/L'],
+                            "getProteinaTotal"     => ["label" => "Proteína Total", "ref" => $referencia->getProteinaTotal()],
+                            "getAlbumina"          => ["label" => "Albumina", "ref" => $referencia->getAlbumina()],
+                            "getAmilase"           => ["label" => "Amilase", "ref" => $referencia->getAmilase()],
+                            "getLdh"               => ["label" => "LDH", "ref" => $referencia->getLdh()],
+                            "getFosfataseAlcalina" => ["label" => "Fosfatase Alcalina", "ref" => "F: {$referencia->getFosfataseAlcalinaF()} • M: {$referencia->getFosfataseAlcalinaM()}"],
+                            "getReatinaQuinaseCk"  => ["label" => "CK (Creatina Quinase)", "ref" => "F: {$referencia->getCreatinaQuinaseCkF()} • M: {$referencia->getCreatinaQuinaseCkM()}"],
                         ];
                         foreach ($camposProteinas as $metodo => $info): ?>
                             <div class="col-md-3">
-                                <label class="form-label"><?php echo $info['label']; ?></label>
+                                <label class="form-label"><?php echo $info["label"]; ?></label>
                                 <input type="text" class="form-control"
-                                    value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
-                                <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
+                                    value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == null) ? '' : $exame->$metodo()); ?>">
+                                <div class="form-text text-muted small"><?php echo $info["ref"]; ?></div>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -162,24 +153,24 @@
 
                 <!-- Perfil Lipídico -->
                 <fieldset disabled>
-                    <legend class="h5 mt-4 mb-3">
-                        <i class="bi bi-droplet me-2"></i>
-                        Perfil Lipídico
-                    </legend>
+                    <legend class="h5 mt-4 mb-3">Perfil Lipídico</legend>
                     <div class="row g-3 mb-4">
                         <?php
                         $camposLipidico = [
-                            'getColesterolTotal' => ['label' => 'Colesterol Total', 'ref' => '≤ 200 mg/dL'],
-                            'getHdl'             => ['label' => 'HDL', 'ref' => '≥ 40–45 mg/dL'],
-                            'getLdl'             => ['label' => 'LDL', 'ref' => 'Alvo por risco'],
-                            'getTriglicerideos'  => ['label' => 'Triglicerídeos', 'ref' => '≤ 200 mg/dL'],
+                            "getColesterolTotal" => ["label" => "Colesterol Total", "ref" => $referencia->getColesterolTotal()],
+                            "getHdl"             => ["label" => "HDL", "ref" => "Até 19 anos: {$referencia->getHdlAte19Anos()} • > 20 anos: {$referencia->getHdlMaisDe20Anos()}"],
+                            "getLdl"             => ["label" => "LDL", "ref" => "Baixo risco: {$referencia->getLdlBaixoRisco()} 
+                                                    Risco intermediário: {$referencia->getLdlRiscoIntermediario()}
+                                                    Alto risco: {$referencia->getLdlAltoRisco()}
+                                                    Muito alto risco: {$referencia->getLdlMuitoAltoRisco()}"],
+                            "getTriglicerideos"  => ["label" => "Triglicerídeos", "ref" => $referencia->getTriglicerideos()],
                         ];
                         foreach ($camposLipidico as $metodo => $info): ?>
                             <div class="col-md-3">
-                                <label class="form-label"><?php echo $info['label']; ?></label>
+                                <label class="form-label"><?php echo $info["label"]; ?></label>
                                 <input type="text" class="form-control"
-                                    value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
-                                <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
+                                    value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == null) ? '' : $exame->$metodo()); ?>">
+                                <div class="form-text text-muted small"><?php echo nl2br($info["ref"]); ?></div>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -187,52 +178,49 @@
 
                 <!-- Metabolismo e Minerais -->
                 <fieldset disabled>
-                    <legend class="h5 mt-4 mb-3">
-                        <i class="bi bi-lightning me-2"></i>
-                        Metabolismo e Minerais
-                    </legend>
+                    <legend class="h5 mt-4 mb-3">Metabolismo e Minerais</legend>
                     <div class="row g-3 mb-4">
                         <?php
                         $camposMetabolismo = [
-                            'getGlicose'    => ['label' => 'Glicose', 'ref' => '70–99 jejum'],
-                            'getFerro'      => ['label' => 'Ferro', 'ref' => 'F: 50-170 • M: 65-175 µg/dL'],
-                            'getCalcio'     => ['label' => 'Cálcio', 'ref' => '8,5-10,5 mg/dL'],
-                            'getMagnesio'   => ['label' => 'Magnésio', 'ref' => '1,7-2,2 mg/dL'],
-                            'getFosforo'    => ['label' => 'Fósforo', 'ref' => '2,5-4,5 mg/dL'],
-                            'getAcidoUrico' => ['label' => 'Ácido Úrico', 'ref' => 'F: 2,4-6,0 • M: 3,4-7,0 mg/dL'],
+                            "getGlicose"    => ["label" => "Glicose", "ref" => $referencia->getGlicose()],
+                            "getFerro"      => ["label" => "Ferro", "ref" => "F: Até 40 anos: {$referencia->getFerroFAte40Anos()} • > 40 anos: {$referencia->getFerroFMaisDe40Anos()} • > 60 anos: {$referencia->getFerroFMaisDe60Anos()}
+                                                M: Até 40 anos: {$referencia->getFerroMAte40Anos()} • > 40 anos: {$referencia->getFerroMMaisDe40Anos()} • > 60 anos: {$referencia->getFerroMMaisDe60Anos()}
+                                                Infantil: {$referencia->getFerroCrianca()}"],
+                            "getCalcio"     => ["label" => "Cálcio", "ref" => $referencia->getCalcio()],
+                            "getMagnesio"   => ["label" => "Magnésio", "ref" => "F: {$referencia->getMagnesioF()} • M: {$referencia->getMagnesioM()}
+                                                                            Infantil: {$referencia->getMagnesioCrianca()}"],
+                            "getFosforo"    => ["label" => "Fósforo", "ref" => "Adulto: {$referencia->getFosforoAdulto()}
+                                                                                1-3 anos: {$referencia->getFosforo1a3Anos()} • 4-12 anos: {$referencia->getFosforo4a12Anos()} • 13-15 anos: {$referencia->getFosforo13a15Anos()} • 16-18 anos: {$referencia->getFosforo16a18Anos()}"],
+                            "getAcidoUrico" => ["label" => "Ácido Úrico", "ref" => "F: 1-9 anos: {$referencia->getAcidoUricoF1a9Anos()} • 10-18 anos: {$referencia->getAcidoUricoF10a18Anos()} • > 18 anos: {$referencia->getAcidoUricoFMaisDe18Anos()}
+                                                                                    M: 13-18 anos: {$referencia->getAcidoUricoM13a18Anos()} • > 18 anos: {$referencia->getAcidoUricoMMaisDe18Anos()}"],
                         ];
                         foreach ($camposMetabolismo as $metodo => $info): ?>
                             <div class="col-md-3">
-                                <label class="form-label"><?php echo $info['label']; ?></label>
+                                <label class="form-label"><?php echo $info["label"]; ?></label>
                                 <input type="text" class="form-control"
-                                    value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
-                                <div class="form-text text-muted small"><?php echo $info['ref']; ?></div>
+                                    value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == null) ? '' : $exame->$metodo()); ?>">
+                                <div class="form-text text-muted small"><?php echo nl2br($info["ref"]); ?></div>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 </fieldset>
+
                 <!-- Marcadores Inflamatórios -->
                 <fieldset disabled>
-                    <legend class="h5 mt-4 mb-3">
-                        <i class="bi bi-fire me-2"></i>
-                        Marcadores Inflamatórios
-                    </legend>
+                    <legend class="h5 mt-4 mb-3">Marcadores Inflamatórios</legend>
                     <div class="row g-3 mb-4">
                         <div class="col-md-3">
                             <label class="form-label">PCR (Proteína C Reativa)</label>
                             <input type="text" class="form-control"
-                                value="<?php echo htmlspecialchars($exame->getPcrProteinaCReativa() ?? 'N/A'); ?>">
-                            <div class="form-text text-muted small">Inferior a 1,0 mg/dL</div>
+                                value="<?php echo htmlspecialchars(($exame->getPcrProteinaCReativa() == 0) || ($exame->getPcrProteinaCReativa() == null) ? '' : $exame->getPcrProteinaCReativa()); ?>">
+                            <div class="form-text text-muted small"><?= $referencia->getPcrProteinaCReativa() ?></div>
                         </div>
                     </div>
                 </fieldset>
 
-                <!-- Observações (Agora sempre visível) -->
+                <!-- Observações -->
                 <fieldset disabled>
-                    <legend class="h5 mt-4 mb-3">
-                        <i class="bi bi-journal-text me-2"></i>
-                        Observações
-                    </legend>
+                    <legend class="h5 mt-4 mb-3">Observações</legend>
                     <div class="row g-3 mb-4">
                         <div class="col-12">
                             <textarea class="form-control dadosGerais" rows="4"><?php echo htmlspecialchars($exame->getObservacao() ?? ""); ?></textarea>
@@ -241,9 +229,9 @@
                 </fieldset>
             </div>
 
-            <?php if ($auth->isAdmin()): ?>
-                <div class="text-center py-3">
-                    <div id="botoesPadrao">
+            <div class="card-footer bg-light text-center py-3">
+                <?php if ($auth->isAdmin()): ?>
+                    <div id="botoesPadrao" class="mb-3">
                         <button onclick="imprimirLaudo(<?php echo $exame->getId(); ?>)" class="btn btn-primary me-2 col-2" id="botaoImpressao">
                             <i class="bi bi-printer"></i> Imprimir
                         </button>
@@ -251,9 +239,9 @@
                             <i class="bi bi-pencil-square"></i>Editar
                         </button>
                     </div>
-                    <div id="botoesEdicao" style="display: none">
+                    <div id="botoesEdicao" style="display: none" class="mb-3">
                         <button type="button" class="btn btn-primary me-2 col-2" onclick="location.reload()"><i class="bi bi-x-lg"></i>Cancelar</button>
-                        <form action="/exameBio/<?= $exame->getId() ?>" method="post" class="col-12 justify-content-center" style="display: inline" id="formEdicao">
+                        <form action="/exameBio/<?= $exame->getId() ?>" method="post" style="display: inline" id="formEdicao">
                             <input type="hidden" name="method" value="PUT">
                             <input type="hidden" name="dadosEdicao" value="" id="dadosEdicao">
                             <button type="submit" class="btn btn-primary me-2 col-2">
@@ -261,10 +249,7 @@
                             </button>
                         </form>
                     </div>
-                </div>
-            <?php endif; ?>
-
-            <div class="card-footer bg-light text-center py-3">
+                <?php endif; ?>
                 <a href="/exames?paciente=<?= $exame->getPaciente() ?>" class="btn btn-primary me-2">
                     <i class="bi bi-arrow-left"></i> Voltar para o Paciente
                 </a>
@@ -275,97 +260,114 @@
         </div>
     </main>
 
-</body>
-<script>
-    function habilitarCampos() {
-        const fieldsets = Array.from(document.querySelectorAll('fieldset'));
-        fieldsets.forEach((item) => {
-            item.removeAttribute('disabled');
+    <script>
+        function habilitarCampos() {
+            const fieldsets = Array.from(document.querySelectorAll("fieldset"));
+            fieldsets.forEach((item) => {
+                item.removeAttribute("disabled");
+            });
+
+            document.getElementById("fieldsetDadosGerais").setAttribute("disabled", "true");
+        }
+
+        function mudarParaEdicao() {
+            const botoesPadrao = document.getElementById("botoesPadrao");
+            const botoesEdicao = document.getElementById("botoesEdicao");
+
+            botoesPadrao.style.display = "none";
+            botoesEdicao.style.display = "block";
+
+            habilitarCampos();
+        }
+
+        const formEdicao = document.getElementById("formEdicao");
+
+        formEdicao.addEventListener("submit", function() {
+            const nomesValores = [
+                // Função Hepática
+                "tgo",
+                "tgp",
+                "gamaGt",
+                "bilirrubinaTotal",
+                "bilirrubinaDireta",
+
+                // Função Renal
+                "ureia",
+                "creatinina",
+
+                // Proteínas e Enzimas
+                "proteinaTotal",
+                "albumina",
+                "amilase",
+                "ldh",
+                "fosfataseAlcalina",
+                "ckCreatinaQuinase",
+
+                // Perfil Lipídico
+                "colesterolTotal",
+                "hdl",
+                "ldl",
+                "triglicerideos",
+
+                // Metabolismo e Minerais
+                "glicose",
+                "ferro",
+                "calcio",
+                "magnesio",
+                "fosforo",
+                "acidoUrico",
+
+                // Marcadores Inflamatórios
+                "pcrProteinaCReativa"
+            ];
+
+            const inputs = Array.from(document.querySelectorAll("input"));
+
+            const idPaciente = <?= json_encode($exame->getPaciente()) ?>;
+            const dataExame = <?= json_encode($exame->getData()) ?>;
+            const idResponsavel = <?= json_encode($exame->getResponsavel()) ?>;
+            const idPreceptor = <?= json_encode($exame->getPreceptor()) ?>;
+
+            let json = {};
+
+            json.idPaciente = idPaciente;
+            json.dataExame = dataExame;
+            json.idResponsavel = idResponsavel;
+            json.idPreceptor = idPreceptor;
+
+            inputs.forEach((input, index) => {
+                if (input.type == "text" && !input.className.includes("dadosGerais")) {
+                    json[nomesValores[index - 4]] = input.value; //4 = Número de inputs não considerados
+                }
+            })
+
+            const inputDados = document.getElementById("dadosEdicao");
+            inputDados.value = JSON.stringify(json);
+            console.log(inputDados.value);
         });
 
-        document.getElementById('fieldsetDadosGerais').setAttribute('disabled', 'true');
-    }
+        function imprimirLaudo(idExame) {
+            const iframe = document.createElement("iframe");
+            iframe.style.display = "none";
+            iframe.src = `/views/ImprimirExameBioquimica.php?id=${idExame}`;
+            console.log(iframe.src);
+            document.body.appendChild(iframe);
 
-    
-    function mudarParaEdicao() {
-        const botoesPadrao = document.getElementById('botoesPadrao');
-        const botoesEdicao = document.getElementById('botoesEdicao');
-        
-        botoesPadrao.style.display = 'none';
-        botoesEdicao.style.display = 'inline';
-        
-        habilitarCampos();
-    }
-    
-    const formEdicao = document.getElementById('formEdicao');
-    
-    formEdicao.addEventListener('submit', function() {
-
-        const nomesValores = [
-            // Função Hepática
-            "tgo",
-            "tgp",
-            "gamaGt",
-            "bilirrubinaTotal",
-            "bilirrubinaDireta",
-
-            // Função Renal
-            "ureia",
-            "creatinina",
-
-            // Proteínas e Enzimas
-            "proteinaTotal",
-            "albumina",
-            "amilase",
-            "ldh",
-            "fosfataseAlcalina",
-            "ckCreatinaQuinase",
-
-            // Perfil Lipídico
-            "colesterolTotal",
-            "hdl",
-            "ldl",
-            "triglicerideos",
-
-            // Metabolismo e Minerais
-            "glicose",
-            "ferro",
-            "calcio",
-            "magnesio",
-            "fosforo",
-            "acidoUrico",
-
-            // Marcadores Inflamatórios
-            "pcrProteinaCReativa"
-        ];
-
-
-        const inputs = Array.from(document.querySelectorAll('input'));
-
-        const idPaciente = <?= json_encode($exame->getPaciente()) ?>;
-        
-        const dataExame = "<?= json_encode($exame->getData()) ?>";
-        const idResponsavel = <?= json_encode($exame->getResponsavel()) ?>;
-        const idPreceptor = <?= json_encode($exame->getPreceptor()) ?>;
-
-
-        let json = {};
-
-        json.idPaciente = idPaciente;
-        json.dataExame = dataExame;
-        json.idResponsavel = idResponsavel;
-        json.idPreceptor = idPreceptor;
-
-        inputs.forEach((input, index) => {
-            if (input.type == 'text' && !input.className.includes('dadosGerais')) {
-                json[nomesValores[index - 4]] = input.value; //4 = Número de inputs não considerados    
-            }
-        })
-
-        const inputDados = document.getElementById('dadosEdicao');
-        inputDados.value = JSON.stringify(json);
-        console.log(inputDados.value);
-    });
-</script>
+            iframe.onload = function() {
+                try {
+                    iframe.contentWindow.focus();
+                    iframe.contentWindow.print();
+                    iframe.contentWindow.onafterprint = function() {
+                        document.body.removeChild(iframe);
+                    }
+                } catch (error) {
+                    alert("Não foi possível abrir a janela de impressão.");
+                    document.body.removeChild(iframe);
+                }
+            };
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
 </html>

@@ -4,7 +4,6 @@ return function (Router $router) {
     $router->get('/exameBio/listar/{id}', function ($id) {
         $auth = new Autenticacao();
         $auth->verificarLogin();
-        $auth->verificarAcessoAdmin();
 
         $exameBioquimicaController = new ExameBioquimicaController();
         $exameBioquimicaController->VisualizarExame($id);
@@ -22,7 +21,6 @@ return function (Router $router) {
     $router->post('/cadastrarBioquimica/{id}', function ($id) {
         $auth = new Autenticacao();
         $auth->verificarLogin();
-        $auth->verificarAcessoAdmin();
 
         $exameBioquimicaController = new ExameBioquimicaController();
         $exameBioquimicaController->gerarFormCadastro($id);
@@ -32,7 +30,6 @@ return function (Router $router) {
     $router->get('/cadastrarBioquimica/{id}', function ($id) {
         $auth = new Autenticacao();
         $auth->verificarLogin();
-        $auth->verificarAcessoAdmin();
 
         $exameBioquimicaController = new ExameBioquimicaController();
         $exameBioquimicaController->gerarFormCadastro($id);
@@ -78,11 +75,11 @@ return function (Router $router) {
         header('Location: /cadastrarBioquimica/' . $exameBioquimica->getPaciente() . '?sucesso=1&exame_id=' . $result);
         exit;
 
-        });
+    });
 
     $router->put('/exameBio/{id}', function ($id) {
-        $dadosExame = json_decode($_POST["dadosEdicao"], true);
-        $exameBioquimico = new ExameBioquimica();
+        $dadosExame                = json_decode($_POST["dadosEdicao"], true);
+        $exameBioquimico           = new ExameBioquimica();
         $exameBioquimicaController = new ExameBioquimicaController();
 
         $exameBioquimico->setResponsavel($dadosExame["idResponsavel"]);
@@ -90,11 +87,6 @@ return function (Router $router) {
         $exameBioquimico->setPaciente($dadosExame["idPaciente"]);
         $exameBioquimico->setData($dadosExame["dataExame"]);
 
-        /*$exameBioquimico->setResponsavel(8);
-        $exameBioquimico->setPreceptor(8);
-        $exameBioquimico->setPaciente(1);
-        $exameBioquimico->setData($dadosExame["dataExame"]);*/
-        
         $exameBioquimico->setId($id);
 
         $exameBioquimico->setBilirrubinaTotal($dadosExame["bilirrubinaTotal"]);
@@ -121,7 +113,6 @@ return function (Router $router) {
         $exameBioquimico->setLdh($dadosExame["ldh"]);
         $exameBioquimico->setMagnesio($dadosExame["magnesio"]);
         $exameBioquimico->setFosforo($dadosExame["fosforo"]);
-
 
         $exameBioquimicaController->editar($exameBioquimico);
 
