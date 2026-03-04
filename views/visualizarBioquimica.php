@@ -87,11 +87,11 @@
                     <div class="row g-3 mb-4">
                         <?php
                         $camposHepatico = [
-                            "getTgoTransaminaseGlutamicoOxalacetica" => ["label" => "TGO (AST)", "ref" => "F: {$referencia->getTgoTransaminaseGlutamicoOxalaceticaF()} • M: {$referencia->getTgoTransaminaseGlutamicoOxalaceticaM()}"],
-                            "getTgpTransaminaseGlutamicoPiruvica"    => ["label" => "TGP (ALT)", "ref" => "F: {$referencia->getTgpTransaminaseGlutamicoPiruvicaF()} • M: {$referencia->getTgpTransaminaseGlutamicoPiruvicaM()}"],
-                            "getGamaGtGlutamiltransferase"           => ["label" => "Gama GT", "ref" => "F: {$referencia->getGamaGtGlutamiltransferaseF()} • M: {$referencia->getGamaGtGlutamiltransferaseM()}"],
-                            "getBilirrubinaTotal"                    => ["label" => "Bilirrubina Total", "ref" => $referencia->getBilirrubinaTotal()],
-                            "getBilirrubinaDireta"                   => ["label" => "Bilirrubina Direta", "ref" => $referencia->getBilirrubinaDireta()],
+                            "getTgoTransaminaseGlutamicoOxalacetica" => ["label" => "TGO (AST)", "ref" => "<b>F:</b> {$referencia->getTgoTransaminaseGlutamicoOxalaceticaF()} • <b>M:</b> {$referencia->getTgoTransaminaseGlutamicoOxalaceticaM()}"],
+                            "getTgpTransaminaseGlutamicoPiruvica"    => ["label" => "TGP (ALT)", "ref" => "<b>F:</b> {$referencia->getTgpTransaminaseGlutamicoPiruvicaF()} • <b>M:</b> {$referencia->getTgpTransaminaseGlutamicoPiruvicaM()}"],
+                            "getGamaGtGlutamiltransferase"           => ["label" => "Gama GT", "ref" => "<b>F:</b> {$referencia->getGamaGtGlutamiltransferaseF()} • <b>M:</b> {$referencia->getGamaGtGlutamiltransferaseM()}"],
+                            "getBilirrubinaTotal"                    => ["label" => "Bilirrubina Total", "ref" => "<b>{$referencia->getBilirrubinaTotal()}</b>"],
+                            "getBilirrubinaDireta"                   => ["label" => "Bilirrubina Direta", "ref" => "<b>{$referencia->getBilirrubinaDireta()}</b>"],
                         ];
                         foreach ($camposHepatico as $metodo => $info): ?>
                             <div class="col-md-3">
@@ -110,11 +110,11 @@
                     <div class="row g-3 mb-4">
                         <?php
                         $camposRenal = [
-                            "getUreia"      => ["label" => "Ureia", "ref" => "F: < 50 anos: {$referencia->getUreiaFMenosDe50Anos()} • > 50 anos: {$referencia->getUreiaFMaisDe50Anos()}
-                                                                            M: < 50 anos: {$referencia->getUreiaMMenosDe50Anos()} • > 50 anos: {$referencia->getUreiaMMaisDe50Anos()}
-                                                                            Infantil: {$referencia->getUreiaCrianca()}"],
-                            "getCreatinina" => ["label" => "Creatinina", "ref" => "F: {$referencia->getCreatininaF()} • M: {$referencia->getCreatininaM()}
-                                                                            Infantil: {$referencia->getCreatininaCrianca()}"],
+                            "getUreia"      => ["label" => "Ureia", "ref" => "<b>- F: \n• < 50 anos:</b> {$referencia->getUreiaFMenosDe50Anos()}\n• <b>> 50 anos:</b> {$referencia->getUreiaFMaisDe50Anos()}
+                                                                            <b>- M: \n•< 50 anos:</b> {$referencia->getUreiaMMenosDe50Anos()} \n• <b>> 50 anos:</b> {$referencia->getUreiaMMaisDe50Anos()}
+                                                                            <b>- Infantil:</b> {$referencia->getUreiaCrianca()}"],
+                            "getCreatinina" => ["label" => "Creatinina", "ref" => "<b>F:</b> {$referencia->getCreatininaF()} \n<b>M:</b> {$referencia->getCreatininaM()}
+                                                                            <b>Infantil:</b> {$referencia->getCreatininaCrianca()}"],
                         ];
                         foreach ($camposRenal as $metodo => $info): ?>
                             <div class="col-md-3">
@@ -133,12 +133,12 @@
                     <div class="row g-3 mb-4">
                         <?php
                         $camposProteinas = [
-                            "getProteinaTotal"     => ["label" => "Proteína Total", "ref" => $referencia->getProteinaTotal()],
-                            "getAlbumina"          => ["label" => "Albumina", "ref" => $referencia->getAlbumina()],
-                            "getAmilase"           => ["label" => "Amilase", "ref" => $referencia->getAmilase()],
-                            "getLdh"               => ["label" => "LDH", "ref" => $referencia->getLdh()],
-                            "getFosfataseAlcalina" => ["label" => "Fosfatase Alcalina", "ref" => "F: {$referencia->getFosfataseAlcalinaF()} • M: {$referencia->getFosfataseAlcalinaM()}"],
-                            "getReatinaQuinaseCk"  => ["label" => "CK (Creatina Quinase)", "ref" => "F: {$referencia->getCreatinaQuinaseCkF()} • M: {$referencia->getCreatinaQuinaseCkM()}"],
+                            "getProteinaTotal"     => ["label" => "Proteína Total", "ref" => "<b>{$referencia->getProteinaTotal()}</b>"],
+                            "getAlbumina"          => ["label" => "Albumina", "ref" => "<b>{$referencia->getAlbumina()}</b>"],
+                            "getAmilase"           => ["label" => "Amilase", "ref" => "<b>{$referencia->getAmilase()}</b>"],
+                            "getLdh"               => ["label" => "LDH", "ref" => "<b>{$referencia->getLdh()}</b>"],
+                            "getFosfataseAlcalina" => ["label" => "Fosfatase Alcalina", "ref" => "<b>F:</b> {$referencia->getFosfataseAlcalinaF()} • <b>M:</b> {$referencia->getFosfataseAlcalinaM()}"],
+                            "getReatinaQuinaseCk"  => ["label" => "CK (Creatina Quinase)", "ref" => "<b>F:</b> {$referencia->getCreatinaQuinaseCkF()} • <b>M:</b> {$referencia->getCreatinaQuinaseCkM()}"],
                         ];
                         foreach ($camposProteinas as $metodo => $info): ?>
                             <div class="col-md-3">
@@ -157,13 +157,13 @@
                     <div class="row g-3 mb-4">
                         <?php
                         $camposLipidico = [
-                            "getColesterolTotal" => ["label" => "Colesterol Total", "ref" => $referencia->getColesterolTotal()],
-                            "getHdl"             => ["label" => "HDL", "ref" => "Até 19 anos: {$referencia->getHdlAte19Anos()} • > 20 anos: {$referencia->getHdlMaisDe20Anos()}"],
-                            "getLdl"             => ["label" => "LDL", "ref" => "Baixo risco: {$referencia->getLdlBaixoRisco()} 
-                                                    Risco intermediário: {$referencia->getLdlRiscoIntermediario()}
-                                                    Alto risco: {$referencia->getLdlAltoRisco()}
-                                                    Muito alto risco: {$referencia->getLdlMuitoAltoRisco()}"],
-                            "getTriglicerideos"  => ["label" => "Triglicerídeos", "ref" => $referencia->getTriglicerideos()],
+                            "getColesterolTotal" => ["label" => "Colesterol Total", "ref" => "<b>{$referencia->getColesterolTotal()}</b>"],
+                            "getHdl"             => ["label" => "HDL", "ref" => "<b>Até 19 anos:</b> {$referencia->getHdlAte19Anos()} \n <b>> 20 anos:</b> {$referencia->getHdlMaisDe20Anos()}"],
+                            "getLdl"             => ["label" => "LDL", "ref" => "<b>Baixo risco:</b> {$referencia->getLdlBaixoRisco()}
+                                                    <b>Risco intermediário:</b> {$referencia->getLdlRiscoIntermediario()}
+                                                    <b>Alto risco:</b> {$referencia->getLdlAltoRisco()}
+                                                    <b>Muito alto risco:</b> {$referencia->getLdlMuitoAltoRisco()}"],
+                            "getTriglicerideos"  => ["label" => "Triglicerídeos", "ref" => "<b>{$referencia->getTriglicerideos()}</b>"],
                         ];
                         foreach ($camposLipidico as $metodo => $info): ?>
                             <div class="col-md-3">
@@ -182,17 +182,25 @@
                     <div class="row g-3 mb-4">
                         <?php
                         $camposMetabolismo = [
-                            "getGlicose"    => ["label" => "Glicose", "ref" => $referencia->getGlicose()],
-                            "getFerro"      => ["label" => "Ferro", "ref" => "F: Até 40 anos: {$referencia->getFerroFAte40Anos()} • > 40 anos: {$referencia->getFerroFMaisDe40Anos()} • > 60 anos: {$referencia->getFerroFMaisDe60Anos()}
-                                                M: Até 40 anos: {$referencia->getFerroMAte40Anos()} • > 40 anos: {$referencia->getFerroMMaisDe40Anos()} • > 60 anos: {$referencia->getFerroMMaisDe60Anos()}
-                                                Infantil: {$referencia->getFerroCrianca()}"],
-                            "getCalcio"     => ["label" => "Cálcio", "ref" => $referencia->getCalcio()],
-                            "getMagnesio"   => ["label" => "Magnésio", "ref" => "F: {$referencia->getMagnesioF()} • M: {$referencia->getMagnesioM()}
-                                                                            Infantil: {$referencia->getMagnesioCrianca()}"],
-                            "getFosforo"    => ["label" => "Fósforo", "ref" => "Adulto: {$referencia->getFosforoAdulto()}
-                                                                                1-3 anos: {$referencia->getFosforo1a3Anos()} • 4-12 anos: {$referencia->getFosforo4a12Anos()} • 13-15 anos: {$referencia->getFosforo13a15Anos()} • 16-18 anos: {$referencia->getFosforo16a18Anos()}"],
-                            "getAcidoUrico" => ["label" => "Ácido Úrico", "ref" => "F: 1-9 anos: {$referencia->getAcidoUricoF1a9Anos()} • 10-18 anos: {$referencia->getAcidoUricoF10a18Anos()} • > 18 anos: {$referencia->getAcidoUricoFMaisDe18Anos()}
-                                                                                    M: 13-18 anos: {$referencia->getAcidoUricoM13a18Anos()} • > 18 anos: {$referencia->getAcidoUricoMMaisDe18Anos()}"],
+                            "getGlicose"    => ["label" => "Glicose", "ref" => "<b>{$referencia->getGlicose()}</b>"],
+                            "getFerro"      => ["label" => "Ferro", "ref" => "<b>- F:</b>\n • <b>Até 40 anos:</b> {$referencia->getFerroFAte40Anos()} \n• <b>> 40 anos:</b> {$referencia->getFerroFMaisDe40Anos()} \n• <b>> 60 anos:</b> {$referencia->getFerroFMaisDe60Anos()}
+                                                <b>- M:</b>\n • <b>Até 40 anos:</b> {$referencia->getFerroMAte40Anos()}\n • <b>> 40 anos:</b> {$referencia->getFerroMMaisDe40Anos()}\n • <b>> 60 anos:</b> {$referencia->getFerroMMaisDe60Anos()}
+                                                <b>- Infantil:</b> {$referencia->getFerroCrianca()}"],
+                            "getCalcio"     => ["label" => "Cálcio", "ref" => "<b>{$referencia->getCalcio()}</b>"],
+                            "getMagnesio"   => ["label" => "Magnésio", "ref" => "<b>F:</b> {$referencia->getMagnesioF()}\n <b>M:</b> {$referencia->getMagnesioM()}
+                                                                            <b>Infantil:</b> {$referencia->getMagnesioCrianca()}"],
+                            "getFosforo"    => ["label" => "Fósforo", "ref" => "• <b>Adulto:</b> {$referencia->getFosforoAdulto()}
+                                                                                • <b>1-3 anos:</b> {$referencia->getFosforo1a3Anos()}
+                                                                                • <b>4-12 anos:</b> {$referencia->getFosforo4a12Anos()}
+                                                                                • <b>13-15 anos:</b> {$referencia->getFosforo13a15Anos()}
+                                                                                • <b>16-18 anos:</b> {$referencia->getFosforo16a18Anos()}"],
+                            "getAcidoUrico" => ["label" => "Ácido Úrico", "ref" => "<b>- F: </b>
+                                                                                    • <b>1-9 anos:</b> {$referencia->getAcidoUricoF1a9Anos()} 
+                                                                                    • <b>10-18 anos:</b> {$referencia->getAcidoUricoF10a18Anos()} 
+                                                                                    • <b>> 18 anos:</b> {$referencia->getAcidoUricoFMaisDe18Anos()}
+                                                                                    <b>- M:</b>
+                                                                                    <b>• 13-18 anos:</b> {$referencia->getAcidoUricoM13a18Anos()} 
+                                                                                    • <b>> 18 anos:</b> {$referencia->getAcidoUricoMMaisDe18Anos()}"],
                         ];
                         foreach ($camposMetabolismo as $metodo => $info): ?>
                             <div class="col-md-3">
@@ -213,7 +221,7 @@
                             <label class="form-label">PCR (Proteína C Reativa)</label>
                             <input type="text" class="form-control"
                                 value="<?php echo htmlspecialchars(($exame->getPcrProteinaCReativa() == 0) || ($exame->getPcrProteinaCReativa() == null) ? '' : $exame->getPcrProteinaCReativa()); ?>">
-                            <div class="form-text text-muted small"><?= $referencia->getPcrProteinaCReativa() ?></div>
+                            <div class="form-text text-muted small"><?= "<b>{$referencia->getPcrProteinaCReativa()}</b>" ?></div>
                         </div>
                     </div>
                 </fieldset>
