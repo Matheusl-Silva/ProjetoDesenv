@@ -57,7 +57,7 @@
                         <div class="col-md-6">
                             <label class="form-label">Paciente</label>
                             <?php if ($auth->isAdmin()): ?>
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control" style="font-weight: bold;"
                                     value="<?php echo htmlspecialchars($exame->getPaciente()); ?>">
                             <?php else: ?>
                                 <input type="text" class="form-control" value="***********">

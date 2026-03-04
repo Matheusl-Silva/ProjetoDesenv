@@ -76,7 +76,7 @@
                                     <tbody>
                                         <?php foreach ($listaUsuarios as $usuario): ?>
                                             <tr>
-                                                <td><?=$usuario->getId()?></td>
+                                                <td><b><?=$usuario->getId()?></b></td>
                                                 <td><strong><?=htmlspecialchars($usuario->getNome())?></strong></td>
                                                 <td><?=htmlspecialchars($usuario->getEmail())?></td>
                                                 <td>

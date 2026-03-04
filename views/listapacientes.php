@@ -87,7 +87,7 @@
                                     <tbody>
                                         <?php foreach ($listaPacientes as $paciente): ?>
                                             <tr>
-                                                <td><?= $paciente->getId() ?></td>
+                                                <td><b><?= $paciente->getId() ?></b></td>
                                                 <?php if ($auth->isAdmin()): ?>
                                                     <td><strong><?= htmlspecialchars($paciente->getNome()) ?></strong></td>
                                                 <?php endif; ?>
