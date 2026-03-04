@@ -6,6 +6,7 @@ class ExameHematoController
     {
         $auth = new Autenticacao();
         $auth->verificarLogin();
+        $usuarioDAO = new UsuarioDAO();
 
         $exameHematoDAO = new ExameHematoDAO();
         $exame          = $exameHematoDAO->buscarExameCompletoPorId($id);
@@ -22,6 +23,8 @@ class ExameHematoController
             $referencia = new ReferenciaHematologia();
         }
 
+        $responsavel = $usuarioDAO->buscarUsuario($exame->getIdResponsavel());
+        $preceptor = $usuarioDAO->buscarUsuario($exame->getPreceptor());
         $nome_usuario = $auth->getNomeUsuario();
         require 'views/visualizarExameHemato.php';
     }

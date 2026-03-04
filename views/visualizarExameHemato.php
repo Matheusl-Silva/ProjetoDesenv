@@ -71,12 +71,12 @@
                         <div class="col-md-6">
                             <label class="form-label">Responsável pelo Exame</label>
                             <input type="text" class="form-control"
-                                value="<?php echo htmlspecialchars($exame->getIdResponsavel()); ?>">
+                                value="<?php echo htmlspecialchars($responsavel->getNome()); ?>">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Preceptor Responsável</label>
                             <input type="text" class="form-control"
-                                value="<?php echo htmlspecialchars($exame->getPreceptor()); ?>">
+                                value="<?php echo htmlspecialchars(($preceptor->getNome())); ?>">
                         </div>
                     </div>
                 </fieldset>
