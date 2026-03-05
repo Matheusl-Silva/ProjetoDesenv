@@ -231,7 +231,7 @@
                     <legend class="h5 mt-4 mb-3">Observações</legend>
                     <div class="row g-3 mb-4">
                         <div class="col-12">
-                            <textarea class="form-control dadosGerais" rows="4"><?php echo htmlspecialchars($exame->getObservacao() ?? ""); ?></textarea>
+                            <textarea class="form-control dadosGerais" rows="4" id="observacao"><?php echo htmlspecialchars($exame->getObservacao() ?? ""); ?></textarea>
                         </div>
                     </div>
                 </fieldset>
@@ -349,9 +349,10 @@
                 }
             })
 
+            json.observacao = document.getElementById('observacao').value;
+
             const inputDados = document.getElementById("dadosEdicao");
             inputDados.value = JSON.stringify(json);
-            console.log(inputDados.value);
         });
 
         function imprimirLaudo(idExame) {

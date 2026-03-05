@@ -137,7 +137,8 @@ exports.update = (id, data) => {
       id_responsavel = ?,
       id_preceptor = ?,
       id_paciente = ?,
-      ddata_exame = ?
+      ddata_exame = ?,
+      cobservacao = ?
     WHERE id = ?`;
 
     const values = [
@@ -169,6 +170,7 @@ exports.update = (id, data) => {
       data.id_preceptor,
       data.id_paciente,
       data.data_exame,
+      data.observacao,
       id,
     ];
 

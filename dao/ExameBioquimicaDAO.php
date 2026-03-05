@@ -161,6 +161,8 @@ class ExameBioquimicaDAO
             "ldh"                                    => $exame->getLdh(),
             "magnesio"                               => $exame->getMagnesio(),
             "fosforo"                                => $exame->getFosforo(),
+
+            "observacao"                             => $exame->getObservacao()
         ];
 
         $options = [

@@ -114,6 +114,8 @@ return function (Router $router) {
         $exameBioquimico->setMagnesio($dadosExame["magnesio"]);
         $exameBioquimico->setFosforo($dadosExame["fosforo"]);
 
+        $exameBioquimico->setObservacao($dadosExame["observacao"]);
+
         $exameBioquimicaController->editar($exameBioquimico);
 
         header('Location: /exameBio/listar/' . $id);
