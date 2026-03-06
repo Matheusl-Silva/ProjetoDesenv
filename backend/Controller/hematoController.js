@@ -1,4 +1,5 @@
 const hematoDao = require("../dao/hematoDao");
+const dataValidation = require("../dataValidation");
 
 exports.getByRegistro = async (req, res) => {
   const idPaciente = req.params.idPaciente;
@@ -37,8 +38,15 @@ exports.getById = async (req, res) => {
 };
 
 exports.CreateHemato = async (req, res) => {
+  const dadosExame = req.body;
   try {
-    const novoHemato = await hematoDao.create(req.body);
+    if (!dataValidation.hematoExamValidation(dadosExame)) {
+      return res.status(400).json({ error: "Dados de exame inválidos" });
+    }
+
+    dataValidation.replaceToInsertHemato(dadosExame);
+
+    const novoHemato = await hematoDao.create(dadosExame);
 
     res.status(201).json({
       message: "Exame cadastrado com sucesso!",
@@ -52,9 +60,15 @@ exports.CreateHemato = async (req, res) => {
 
 exports.updateHemato = async (req, res) => {
   const id = req.params.idExame;
-  const dadosAtualizar = req.body;
+  const dadosExame = req.body;
   try {
-    const result = await hematoDao.update(id, dadosAtualizar);
+    if (!dataValidation.hematoExamValidation(dadosExame)) {
+      return res.status(400).json({ error: "Dados de exame inválidos" });
+    }
+
+    dataValidation.replaceToInsertHemato(dadosExame);
+
+    const result = await hematoDao.update(id, dadosExame);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: "Exame não encontrado" });
