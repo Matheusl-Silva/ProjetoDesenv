@@ -1,5 +1,5 @@
 const hematoDao = require("../dao/hematoDao");
-const dataValidation = require("../dataValidation");
+const dataTreatment = require("../examDataTreatment");
 
 exports.getByRegistro = async (req, res) => {
   const idPaciente = req.params.idPaciente;
@@ -30,7 +30,11 @@ exports.getById = async (req, res) => {
         .status(404)
         .json({ error: "Exame não encontrado para listar" });
     }
+
+    dataTreatment.removeZerosHemato(exames[0]);
+    
     res.json(exames[0]);
+
   } catch (err) {
     console.error("Erro ao listar exame do paciente", err);
     res.status(500).json({ error: "Erro interno ao listar exame do paciente" });
@@ -40,11 +44,11 @@ exports.getById = async (req, res) => {
 exports.CreateHemato = async (req, res) => {
   const dadosExame = req.body;
   try {
-    if (!dataValidation.hematoExamValidation(dadosExame)) {
+    if (!dataTreatment.hematoExamValidation(dadosExame)) {
       return res.status(400).json({ error: "Dados de exame inválidos" });
     }
 
-    dataValidation.replaceToInsertHemato(dadosExame);
+    dataTreatment.replaceToInsertHemato(dadosExame);
 
     const novoHemato = await hematoDao.create(dadosExame);
 
@@ -62,11 +66,11 @@ exports.updateHemato = async (req, res) => {
   const id = req.params.idExame;
   const dadosExame = req.body;
   try {
-    if (!dataValidation.hematoExamValidation(dadosExame)) {
+    if (!dataTreatment.hematoExamValidation(dadosExame)) {
       return res.status(400).json({ error: "Dados de exame inválidos" });
     }
 
-    dataValidation.replaceToInsertHemato(dadosExame);
+    dataTreatment.replaceToInsertHemato(dadosExame);
 
     const result = await hematoDao.update(id, dadosExame);
 

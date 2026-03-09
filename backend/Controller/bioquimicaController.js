@@ -1,5 +1,5 @@
 const bioquimicaDao = require("../dao/bioquimicaDao");
-const dataValidation = require("../dataValidation");
+const dataTreatment = require("../examDataTreatment");
 
 exports.getByRegistro = async (req, res) => {
   const idPaciente = req.params.idPaciente;
@@ -25,6 +25,8 @@ exports.getById = async (req, res) => {
   try {
     const exames = await bioquimicaDao.findById(idExame);
 
+    dataTreatment.removeZerosBio(exames[0]);
+
     if (exames.length === 0) {
       return res
         .status(404)
@@ -40,11 +42,11 @@ exports.getById = async (req, res) => {
 exports.CreateBio = async (req, res) => {
   const dadosExame = req.body;
   console.log(dadosExame);
-  if (!dataValidation.bioExamValidation(dadosExame)) {
+  if (!dataTreatment.bioExamValidation(dadosExame)) {
     return res.status(400).json({ error: "Dados de exame inválidos" });
   }
 
-  dataValidation.replaceToInsertBio(dadosExame);
+  dataTreatment.replaceToInsertBio(dadosExame);
 
   try {
     const novoBio = await bioquimicaDao.create(dadosExame);
@@ -65,11 +67,11 @@ exports.updateBio = async (req, res) => {
   const id = req.params.idExame;
   const dadosAtualizar = req.body;
 
-  if (!dataValidation.bioExamValidation(dadosAtualizar)) {
+  if (!dataTreatment.bioExamValidation(dadosAtualizar)) {
     return res.status(400).json({ error: "Dados de exame inválidos" });
   }
 
-  dataValidation.replaceToInsertBio(dadosAtualizar);
+  dataTreatment.replaceToInsertBio(dadosAtualizar);
 
   try {
     const result = await bioquimicaDao.update(id, dadosAtualizar);

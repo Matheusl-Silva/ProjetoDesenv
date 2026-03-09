@@ -30,6 +30,25 @@ exports.replaceToInsertHemato = (reqBody) => {
   });
 };
 
+exports.removeZerosHemato = examData => {
+  const examNames = Object.keys(examData).filter(key => {
+      return ![
+      "id",
+      "id_responsavel",
+      "id_preceptor",
+      "id_paciente",
+      "ddata_exame",
+      "nome_paciente",
+      "nome_responsavel",
+      "nome_preceptor",
+      "observacao"].includes(key)
+    })
+
+    examNames.forEach(name => {
+      examData[name] = parseFloat(examData[name])
+    })
+}
+
 exports.bioExamValidation = reqBody => {
     const examNames = Object.keys(reqBody).filter((key) => {
     return ![
@@ -62,5 +81,21 @@ const nomesExames = Object.keys(reqBody).filter((key) => {
   });
   nomesExames.forEach((nome) => {
     reqBody[nome] = String(reqBody[nome]).replace(",", ".");
+  })
+}
+
+exports.removeZerosBio = examData => {
+  const examNames = Object.keys(examData).filter((key) => {
+    return ![
+      "id_responsavel",
+      "id_preceptor",
+      "id_paciente",
+      "data_exame",
+      "observacao",
+    ].includes(key);
+  });
+
+  examNames.forEach(name => {
+    examData[name] = parseFloat(examData[name]);
   })
 }
