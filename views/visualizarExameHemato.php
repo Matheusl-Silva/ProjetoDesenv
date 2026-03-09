@@ -86,30 +86,30 @@
                     <legend class="h5 mt-4 mb-3">Eritrograma</legend>
                     <div class="row g-3 mb-4">
                         <?php
-$camposEritrograma = [
-    'getHemacia'     => ['label' => 'Hemácias', 'refM' => 'getHemaciaM', 'refF' => 'getHemaciaF'],
-    'getHemoglobina' => ['label' => 'Hemoglobina', 'refM' => 'getHemoglobinaM', 'refF' => 'getHemoglobinaF'],
-    'getHematocrito' => ['label' => 'Hematócrito', 'refM' => 'getHematocritoM', 'refF' => 'getHematocritoF'],
-    'getVcm'         => ['label' => 'VCM', 'refM' => 'getVcmM', 'refF' => 'getVcmF'],
-    'getHcm'         => ['label' => 'HCM', 'refM' => 'getHcmM', 'refF' => 'getHcmF'],
-    'getChcm'        => ['label' => 'CHCM', 'refM' => 'getChcmM', 'refF' => 'getChcmF'],
-    'getRdw'         => ['label' => 'RDW', 'refM' => 'getRdwM', 'refF' => 'getRdwF'],
-];
-foreach ($camposEritrograma as $metodo => $config): 
-    $valorRef = '';
-    if ($referencia) {
-        $refM = $config['refM'];
-        $refF = $config['refF'];
-        $valM = $referencia->$refM();
-        $valF = $referencia->$refF();
-        if ($valM && $valF) {
-            $valorRef = "<b>M:</b> {$valM} • <b>F:</b> {$valF}";
-        }
-    }
-?>
+                        $camposEritrograma = [
+                            'getHemacia'     => ['label' => 'Hemácias', 'refM' => 'getHemaciaM', 'refF' => 'getHemaciaF'],
+                            'getHemoglobina' => ['label' => 'Hemoglobina', 'refM' => 'getHemoglobinaM', 'refF' => 'getHemoglobinaF'],
+                            'getHematocrito' => ['label' => 'Hematócrito', 'refM' => 'getHematocritoM', 'refF' => 'getHematocritoF'],
+                            'getVcm'         => ['label' => 'VCM', 'refM' => 'getVcmM', 'refF' => 'getVcmF'],
+                            'getHcm'         => ['label' => 'HCM', 'refM' => 'getHcmM', 'refF' => 'getHcmF'],
+                            'getChcm'        => ['label' => 'CHCM', 'refM' => 'getChcmM', 'refF' => 'getChcmF'],
+                            'getRdw'         => ['label' => 'RDW', 'refM' => 'getRdwM', 'refF' => 'getRdwF'],
+                        ];
+                        foreach ($camposEritrograma as $metodo => $config):
+                            $valorRef = '';
+                            if ($referencia) {
+                                $refM = $config['refM'];
+                                $refF = $config['refF'];
+                                $valM = $referencia->$refM();
+                                $valF = $referencia->$refF();
+                                if ($valM && $valF) {
+                                    $valorRef = "<b>M:</b> {$valM} • <b>F:</b> {$valF}";
+                                }
+                            }
+                        ?>
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $config['label']; ?></label>
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control exam-data"
                                     value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
                                 <?php if ($valorRef): ?>
                                     <small class="text-muted"><?php echo $valorRef; ?></small>
@@ -124,37 +124,37 @@ foreach ($camposEritrograma as $metodo => $config):
                     <legend class="h5 mt-4 mb-3">Leucograma</legend>
                     <div class="row g-3 mb-4">
                         <?php
-$camposLeucograma = [
-    'getLeucocitos'     => ['label' => 'Leucócitos', 'refRel' => 'getLeucocitosRelativo', 'refAbs' => 'getLeucocitosAbsoluto'],
-    'getBlastos'        => ['label' => 'Blastos (µL)', 'refRel' => 'getBlastosRelativo', 'refAbs' => 'getBlastosAbsoluto'],
-    'getPromielocitos'  => ['label' => 'Prómielócitos (µL)', 'refRel' => 'getPromielocitosRelativo', 'refAbs' => 'getPromielocitosAbsoluto'],
-    'getMielocitos'     => ['label' => 'Mielócitos (µL)', 'refRel' => 'getMielocitosRelativo', 'refAbs' => 'getMielocitosAbsoluto'],
-    'getMetamielocitos' => ['label' => 'Metamielócitos (µL)', 'refRel' => 'getMetamielocitosRelativo', 'refAbs' => 'getMetamielocitosAbsoluto'],
-    'getBastonetes'     => ['label' => 'Bastonetes (µL)', 'refRel' => 'getBastonetesRelativo', 'refAbs' => 'getBastonetesAbsoluto'],
-    'getSegmentados'    => ['label' => 'Segmentados (µL)', 'refRel' => 'getSegmentadosRelativo', 'refAbs' => 'getSegmentadosAbsoluto'],
-    'getNeutrofilos'    => ['label' => 'Neutrófilos (%)', 'refRel' => 'getNeutrofilosRelativo', 'refAbs' => 'getNeutrofilosAbsoluto'],
-    'getEosinofilos'    => ['label' => 'Eosinófilos (%)', 'refRel' => 'getEosinofilosRelativo', 'refAbs' => 'getEosinofilosAbsoluto'],
-    'getBasofilos'      => ['label' => 'Basófilos (%)', 'refRel' => 'getBasofilosRelativo', 'refAbs' => 'getBasofilosAbsoluto'],
-];
-foreach ($camposLeucograma as $metodo => $config): 
-    $valorRef = '';
-    if ($referencia) {
-        $refRel = $config['refRel'];
-        $refAbs = $config['refAbs'];
-        $valRel = $referencia->$refRel();
-        $valAbs = $referencia->$refAbs();
-        if ($valRel && $valAbs) {
-            $valorRef = "<b>Rel:</b> {$valRel} • <b>Abs:</b> {$valAbs}";
-        } elseif ($valRel) {
-            $valorRef = "{$valRel}";
-        } elseif ($valAbs) {
-            $valorRef = "{$valAbs}";
-        }
-    }
-?>
+                        $camposLeucograma = [
+                            'getLeucocitos'     => ['label' => 'Leucócitos', 'refRel' => 'getLeucocitosRelativo', 'refAbs' => 'getLeucocitosAbsoluto'],
+                            'getBlastos'        => ['label' => 'Blastos (µL)', 'refRel' => 'getBlastosRelativo', 'refAbs' => 'getBlastosAbsoluto'],
+                            'getPromielocitos'  => ['label' => 'Prómielócitos (µL)', 'refRel' => 'getPromielocitosRelativo', 'refAbs' => 'getPromielocitosAbsoluto'],
+                            'getMielocitos'     => ['label' => 'Mielócitos (µL)', 'refRel' => 'getMielocitosRelativo', 'refAbs' => 'getMielocitosAbsoluto'],
+                            'getMetamielocitos' => ['label' => 'Metamielócitos (µL)', 'refRel' => 'getMetamielocitosRelativo', 'refAbs' => 'getMetamielocitosAbsoluto'],
+                            'getBastonetes'     => ['label' => 'Bastonetes (µL)', 'refRel' => 'getBastonetesRelativo', 'refAbs' => 'getBastonetesAbsoluto'],
+                            'getSegmentados'    => ['label' => 'Segmentados (µL)', 'refRel' => 'getSegmentadosRelativo', 'refAbs' => 'getSegmentadosAbsoluto'],
+                            'getNeutrofilos'    => ['label' => 'Neutrófilos (%)', 'refRel' => 'getNeutrofilosRelativo', 'refAbs' => 'getNeutrofilosAbsoluto'],
+                            'getEosinofilos'    => ['label' => 'Eosinófilos (%)', 'refRel' => 'getEosinofilosRelativo', 'refAbs' => 'getEosinofilosAbsoluto'],
+                            'getBasofilos'      => ['label' => 'Basófilos (%)', 'refRel' => 'getBasofilosRelativo', 'refAbs' => 'getBasofilosAbsoluto'],
+                        ];
+                        foreach ($camposLeucograma as $metodo => $config):
+                            $valorRef = '';
+                            if ($referencia) {
+                                $refRel = $config['refRel'];
+                                $refAbs = $config['refAbs'];
+                                $valRel = $referencia->$refRel();
+                                $valAbs = $referencia->$refAbs();
+                                if ($valRel && $valAbs) {
+                                    $valorRef = "<b>Rel:</b> {$valRel} • <b>Abs:</b> {$valAbs}";
+                                } elseif ($valRel) {
+                                    $valorRef = "{$valRel}";
+                                } elseif ($valAbs) {
+                                    $valorRef = "{$valAbs}";
+                                }
+                            }
+                        ?>
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $config['label']; ?></label>
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control exam-data"
                                     value="<?php echo htmlspecialchars($exame->$metodo() ?? 'N/A'); ?>">
                                 <?php if ($valorRef): ?>
                                     <small class="text-muted"><?php echo $valorRef; ?></small>
@@ -170,7 +170,7 @@ foreach ($camposLeucograma as $metodo => $config):
                     <div class="row g-3 mb-4">
                         <div class="col-md-4">
                             <label class="form-label">Plaquetas</label>
-                            <input type="text" class="form-control"
+                            <input type="text" class="form-control exam-data"
                                 value="<?php echo htmlspecialchars($exame->getPlaquetas() ?? 'N/A'); ?>">
                             <?php if ($referencia && $referencia->getPlaquetas()): ?>
                                 <small class="text-muted"><?php echo "<b>{$referencia->getPlaquetas()}</b>"; ?></small>
@@ -178,7 +178,7 @@ foreach ($camposLeucograma as $metodo => $config):
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Volume Plaquetário Médio</label>
-                            <input type="text" class="form-control"
+                            <input type="text" class="form-control exam-data"
                                 value="<?php echo htmlspecialchars($exame->getVolumePlaquetarioMedio() ?? 'N/A'); ?>">
                             <?php if ($referencia && $referencia->getVolumePlaquetarioMedio()): ?>
                                 <small class="text-muted"><?php echo "<b>{$referencia->getVolumePlaquetarioMedio()}</b>" ?></small>
@@ -202,7 +202,7 @@ foreach ($camposLeucograma as $metodo => $config):
                         <button type="button" class="btn btn-primary me-2 col-2" onclick="location.reload()">
                             <i class="bi bi-x-lg"></i>Cancelar
                         </button>
-                        <form action="/exameHemato/<?=$exame->getId()?>" method="post" style="display: inline" id="formEdicao">
+                        <form action="/exameHemato/<?= $exame->getId() ?>" method="post" style="display: inline" id="formEdicao">
                             <input type="hidden" name="method" value="PUT">
                             <input type="hidden" name="dadosEdicao" value="" id="dadosEdicao">
                             <button type="submit" class="btn btn-primary me-2 col-2">
@@ -211,7 +211,7 @@ foreach ($camposLeucograma as $metodo => $config):
                         </form>
                     </div>
                 <?php endif; ?>
-                <a href="/exames?paciente=<?=$exame->getPaciente()?>"
+                <a href="/exames?paciente=<?= $exame->getPaciente() ?>"
                     class="btn btn-primary me-2">
                     <i class="bi bi-arrow-left"></i> Voltar para o Paciente
                 </a>
@@ -222,6 +222,7 @@ foreach ($camposLeucograma as $metodo => $config):
         </div>
     </main>
 
+    <script src="/assets/js/mask.js"></script>
     <script>
         function habilitarCampos() {
             const fieldsets = Array.from(document.querySelectorAll('fieldset'));
@@ -276,10 +277,10 @@ foreach ($camposLeucograma as $metodo => $config):
 
             const inputs = Array.from(document.querySelectorAll('input'));
 
-            const idPaciente = <?=json_encode($exame->getPaciente())?>;
-            const dataExame = <?=json_encode($exame->getData())?>;
-            const idResponsavel = <?=json_encode($exame->getIdResponsavel())?>;
-            const idPreceptor = <?=json_encode($exame->getPreceptor())?>;
+            const idPaciente = <?= json_encode($exame->getPaciente()) ?>;
+            const dataExame = <?= json_encode($exame->getData()) ?>;
+            const idResponsavel = <?= json_encode($exame->getIdResponsavel()) ?>;
+            const idPreceptor = <?= json_encode($exame->getPreceptor()) ?>;
 
 
             let json = {};
@@ -321,6 +322,10 @@ foreach ($camposLeucograma as $metodo => $config):
                 }
             };
         }
+
+        Array.from(document.getElementsByClassName('exam-data')).forEach(element => {
+            examInputMask(element)
+        })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

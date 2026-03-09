@@ -96,7 +96,7 @@
                         foreach ($camposHepatico as $metodo => $info): ?>
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $info["label"]; ?></label>
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control exam-data"
                                     value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == null) ? '' : $exame->$metodo()); ?>">
                                 <div class="form-text text-muted small"><?php echo $info["ref"]; ?></div>
                             </div>
@@ -119,7 +119,7 @@
                         foreach ($camposRenal as $metodo => $info): ?>
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $info["label"]; ?></label>
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control exam-data"
                                     value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == null) ? '' : $exame->$metodo()); ?>">
                                 <div class="form-text text-muted small"><?php echo nl2br($info["ref"]); ?></div>
                             </div>
@@ -143,7 +143,7 @@
                         foreach ($camposProteinas as $metodo => $info): ?>
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $info["label"]; ?></label>
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control exam-data"
                                     value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == null) ? '' : $exame->$metodo()); ?>">
                                 <div class="form-text text-muted small"><?php echo $info["ref"]; ?></div>
                             </div>
@@ -168,7 +168,7 @@
                         foreach ($camposLipidico as $metodo => $info): ?>
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $info["label"]; ?></label>
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control exam-data"
                                     value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == null) ? '' : $exame->$metodo()); ?>">
                                 <div class="form-text text-muted small"><?php echo nl2br($info["ref"]); ?></div>
                             </div>
@@ -205,7 +205,7 @@
                         foreach ($camposMetabolismo as $metodo => $info): ?>
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo $info["label"]; ?></label>
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control exam-data"
                                     value="<?php echo htmlspecialchars(($exame->$metodo() == 0) || ($exame->$metodo() == null) ? '' : $exame->$metodo()); ?>">
                                 <div class="form-text text-muted small"><?php echo nl2br($info["ref"]); ?></div>
                             </div>
@@ -219,7 +219,7 @@
                     <div class="row g-3 mb-4">
                         <div class="col-md-3">
                             <label class="form-label">PCR (Proteína C Reativa)</label>
-                            <input type="text" class="form-control"
+                            <input type="text" class="form-control exam-data"
                                 value="<?php echo htmlspecialchars(($exame->getPcrProteinaCReativa() == 0) || ($exame->getPcrProteinaCReativa() == null) ? '' : $exame->getPcrProteinaCReativa()); ?>">
                             <div class="form-text text-muted small"><?= "<b>{$referencia->getPcrProteinaCReativa()}</b>" ?></div>
                         </div>
@@ -268,6 +268,7 @@
         </div>
     </main>
 
+    <script src="/assets/js/mask.js"></script>
     <script>
         function habilitarCampos() {
             const fieldsets = Array.from(document.querySelectorAll("fieldset"));
@@ -375,6 +376,10 @@
                 }
             };
         }
+
+        Array.from(document.getElementsByClassName('exam-data')).forEach(element => {
+            examInputMask(element);
+        })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
