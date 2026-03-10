@@ -107,7 +107,7 @@ class RecoverController
         }
 
         $usuarioDao = new UsuarioDAO();
-        $usuario    = $usuarioDao->buscarUsuario($email);
+        $usuario    = $usuarioDao->verificarEmail($email);
 
         if ($usuario) {
             $nome             = $usuario->getNome();

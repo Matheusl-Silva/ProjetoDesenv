@@ -73,9 +73,9 @@ class UsuarioDAO
         ];
 
         $context = stream_context_create($options);
-        $result  = file_get_contents($url, false, $context);
+        $result  = @file_get_contents($url, false, $context);
 
-        if ($result == false) {
+        if ($result === false) {
             return false;
         }
 

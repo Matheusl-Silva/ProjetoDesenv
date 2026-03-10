@@ -7,7 +7,9 @@ error_reporting(E_ALL);
 //Inicia sessão
 session_start();
 
-//Autoload
+//Autoload do vendor
+require_once __DIR__ . '/vendor/autoload.php';
+
 spl_autoload_register(function ($class) {
     $pastas = ['controller', 'dao', 'models', 'database'];
 
