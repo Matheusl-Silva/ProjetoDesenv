@@ -104,6 +104,35 @@ router.post("/verificar-email", usuarioController.verificarEmail);
 
 /**
  * @swagger
+ * /usuarios/recover-password:
+ *   put:
+ *     summary: Atualiza a senha de um usuário por email (recuperação de senha)
+ *     tags: [Usuários]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: joao@email.com
+ *               senha:
+ *                 type: string
+ *                 example: "novaSenha123"
+ *     responses:
+ *       200:
+ *         description: Senha atualizada com sucesso
+ *       404:
+ *         description: Usuário não encontrado
+ *       500:
+ *         description: Erro no servidor
+ */
+router.put("/recover-password", usuarioController.updatePassword);
+
+/**
+ * @swagger
  * /usuarios/login:
  *   post:
  *     summary: Realiza login de um usuário

@@ -23,7 +23,7 @@
           <p>O email ou a senha são inválidos! Por favor tente novamente ou redefina a senha.</a></p>
         </div>
         <div class="modal-footer">
-          <a href="/recover><button type="button" class="btn btn-secondary">Redefinir a senha</button></a>
+          <a href="/recover"><button type="button" class="btn btn-secondary">Redefinir a senha</button></a>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tentar novamente</button>
         </div>
       </div>

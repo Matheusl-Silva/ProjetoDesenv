@@ -73,9 +73,9 @@ class UsuarioDAO
         ];
 
         $context = stream_context_create($options);
-        $result  = file_get_contents($url, false, $context);
+        $result  = @file_get_contents($url, false, $context);
 
-        if ($result == false) {
+        if ($result === false) {
             return false;
         }
 
@@ -154,6 +154,33 @@ class UsuarioDAO
             return ["erro" => "Erro ao excluir usuário"];
         }
         return json_decode($result, true);
+    }
+
+    public function updatePassword($email, $novaSenha)
+    {
+        $url   = "http://localhost:3000/usuarios/recover-password";
+        $dados = [
+            "email" => $email,
+            "senha" => $novaSenha,
+        ];
+
+        $options = [
+            "http" => [
+                "header"  => "Content-Type: application/json\r\n",
+                "method"  => "PUT",
+                "content" => json_encode($dados),
+            ],
+        ];
+
+        $context = stream_context_create($options);
+        $result  = @file_get_contents($url, false, $context);
+
+        if ($result === false) {
+            return false;
+        }
+
+        $response = json_decode($result, true);
+        return isset($response["message"]);
     }
 
     private function converterParaObj($row)

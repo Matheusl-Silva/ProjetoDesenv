@@ -73,3 +73,12 @@ exports.delete = (id) => {
     });
   });
 };
+
+exports.updatePasswordByEmail = (email, novaSenha) => {
+  return new Promise((resolve, reject) => {
+    const query = "UPDATE usuario SET csenha = ? WHERE cemail = ?";
+    db.query(query, [novaSenha, email], (err, result) => {
+      err ? reject(err) : resolve(result);
+    });
+  });
+};
