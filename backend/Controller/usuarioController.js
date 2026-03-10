@@ -104,3 +104,25 @@ exports.deleteUsuario = async (req, res) => {
     res.status(500).json({ error: "Erro ao tentar deletar Usuario" });
   }
 };
+
+exports.updatePassword = async (req, res) => {
+  const { email, senha } = req.body;
+  try {
+    const usuario = await usuarioDao.findByEmail(email);
+
+    if (!usuario || usuario.length === 0) {
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+
+    const result = await usuarioDao.updatePasswordByEmail(email, senha);
+
+    if (result.affectedRows === 0) {
+      return res.status(500).json({ error: "Erro ao atualizar a senha" });
+    }
+
+    res.status(200).json({ message: "Senha atualizada com sucesso" });
+  } catch (err) {
+    console.error("Erro ao atualizar senha: ", err);
+    res.status(500).json({ error: "Erro ao atualizar senha" });
+  }
+};
