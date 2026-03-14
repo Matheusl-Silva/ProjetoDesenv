@@ -93,7 +93,7 @@ exports.create = (data) => {
       data.calcio,
       data.ldh,
       data.magnesio,
-      data.fosforo,
+      data.fosforo, 
       data.id_responsavel,
       data.id_preceptor,
       data.id_paciente,

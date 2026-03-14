@@ -108,7 +108,7 @@ exports.update = (id, data) => {
       data.id_responsavel,
       data.id_preceptor,
       data.id_paciente,
-      data.data,
+      data.dataExame,
       data.hemacia,
       data.hemoglobina,
       data.hematocrito,
