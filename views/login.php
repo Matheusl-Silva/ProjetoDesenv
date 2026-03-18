@@ -5,71 +5,94 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/assets/css/login.css">
-  <link rel="icon" href="./../../assets/img/favicon.png" type="image/x-icon">
-  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/assets/css/login.css?v=<?php echo time(); ?>">
+  <link rel="icon" href="/assets/img/favicon.png" type="image/x-icon">
+  <title>Portal de Saúde Positivo - Login</title>
 </head>
 
-<body class="bg-info-subtle">
+<body>
 
-  <div class="modal fade" id="modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title">Login inválido!</h1>
-          <button class="btn btn-close" data-bs-dismiss="modal"></button>
+  <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg" style="border-radius: 16px;">
+        <div class="modal-header bg-danger text-white border-0" style="border-radius: 16px 16px 0 0;">
+          <h5 class="modal-title fw-bold"><i class="bi bi-exclamation-triangle-fill me-2"></i>Login inválido!</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <p>O email ou a senha são inválidos! Por favor tente novamente ou redefina a senha.</a></p>
+        <div class="modal-body p-4 text-center">
+          <p class="fs-5 mb-0 text-muted">O email ou a senha estão incorretos! Por favor, tente novamente ou redefina a sua senha.</p>
         </div>
-        <div class="modal-footer">
-          <a href="/recover"><button type="button" class="btn btn-secondary">Redefinir a senha</button></a>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tentar novamente</button>
+        <div class="modal-footer border-0 justify-content-center pb-4">
+          <a href="/recover" class="btn btn-outline-secondary px-4 rounded-pill">Redefinir Senha</a>
+          <button type="button" class="btn btn-danger px-4 rounded-pill" data-bs-dismiss="modal">Tentar Novamente</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
-          <div class="card-header bg-body-tertiary text-center">
-            <h2>Bem-vindo!</h2>
-            <div class="logo-text text-primary">Por favor insira suas informações para acessar</div>
-          </div>
-          <div class="card-body bg-body-tertiary">
-            <form action="/login" method="POST">
-              <div class="form-group">
-                <label for="email" class="form-label">Email: <span style="color: red;">*</span></label>
-                <input type="email" class="form-control mb-2" name="email" id="email" placeholder="Insira seu e-mail"
-                  required>
-              </div>
-              <div class="form-group">
-                <label for="senha" class="form-label">Senha: <span style="color: red;">*</span></label>
-                <input type="password" class="form-control mb-2" name="senha" placeholder="Insira sua senha" required>
-              </div>
-              <div class="col-12">
-                <span>Esqueceu a senha?</span>
-                <a href="/recover">Recuperação de senha</a>
-              </div>
-              <button type="submit" class="btn btn-primary col-12 mt-3 mb-2" id="submit">Entrar</button>
-                <a href="/" class="btn btn-outline-secondary col-12">Voltar para a tela inicial</a>
-            </form>
-          </div>
+  <div class="bg-shape shape1"></div>
+  <div class="bg-shape shape2"></div>
+  <div class="bg-shape shape3"></div>
+
+  <div class="container d-flex justify-content-center align-items-center vh-100 position-relative z-3">
+    <div class="login-card w-100">
+      <div class="text-center mb-4">
+        <div class="logo-circle mx-auto mb-3">
+          <i class="bi bi-heart-pulse-fill text-primary fs-2"></i>
         </div>
+        <h2 class="brand-title">Portal Positivo</h2>
+        <p class="brand-subtitle">Acesso seguro aos seus dados de saúde</p>
       </div>
+
+      <form action="/login" method="POST">
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" name="email" id="email" placeholder="nome@exemplo.com" required>
+          <label for="email"><i class="bi bi-envelope me-2 text-secondary"></i>Email</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha" required>
+          <label for="senha"><i class="bi bi-lock me-2 text-secondary"></i>Senha</label>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4 px-1">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="lembrarMim">
+            <label class="form-check-label text-secondary small" for="lembrarMim">
+              Lembrar-me
+            </label>
+          </div>
+          <a href="/recover" class="text-decoration-none fw-semibold small text-primary hover-link">Esqueceu a senha?</a>
+        </div>
+
+        <button type="submit" class="btn btn-login mb-3 w-100">
+          Entrar na Plataforma
+        </button>
+        
+        <a href="/" class="btn btn-outline-secondary w-100 btn-back">
+          <i class="bi bi-arrow-left me-2"></i>Voltar para o início
+        </a>
+      </form>
     </div>
   </div>
+
+  <script src="/assets/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const loginInvalido = <?php echo isset($loginInvalido) && $loginInvalido ? 'true' : 'false'; ?>;
+    
+    if(loginInvalido){
+      document.addEventListener("DOMContentLoaded", function() {
+        if(typeof bootstrap !== 'undefined') {
+          const modalElt = document.getElementById("modal");
+          if(modalElt) {
+            const modal = new bootstrap.Modal(modalElt);
+            modal.show();
+          }
+        }
+      });
+    }
+  </script>
 </body>
-<script src="assets/js/bootstrap.min.js"></script>
-<script>
-  const loginInvalido = <?php echo $loginInvalido ? 'true' : 'false'; ?>;
-
-  if(loginInvalido){
-    const modal = new bootstrap.Modal(document.getElementById("modal"));
-    modal.show();
-  }
-</script>
-
 </html>
