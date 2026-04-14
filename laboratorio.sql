@@ -3,9 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2025 at 07:39 PM
+-- Generation Time: Apr 15, 2026 at 12:57 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -23,11 +24,50 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `anamnese_enfermagem`
+--
+
+CREATE TABLE `anamnese_enfermagem` (
+  `id` int(11) NOT NULL,
+  `cqueixa` varchar(250) NOT NULL,
+  `dinicio_sintomas` datetime NOT NULL,
+  `cfrequencia` varchar(250) NOT NULL,
+  `clocalizacao_da_dor` varchar(250) NOT NULL,
+  `bcardiopatia` tinyint(1) NOT NULL,
+  `bhipertensao` tinyint(1) NOT NULL,
+  `bdiabetes` tinyint(1) NOT NULL,
+  `bcancer` tinyint(1) NOT NULL,
+  `bcirurgias` tinyint(1) NOT NULL,
+  `coutras_doencas` varchar(250) DEFAULT NULL,
+  `calergias` varchar(250) DEFAULT NULL,
+  `cmedicamento` varchar(250) DEFAULT NULL,
+  `nrefeicoes_ao_dia` int(11) NOT NULL,
+  `celiminacao_urinaria` varchar(250) NOT NULL,
+  `celiminacao_intestinal` varchar(250) NOT NULL,
+  `cciclo_menstrual` varchar(250) DEFAULT NULL,
+  `csono_e_repouso` varchar(250) NOT NULL,
+  `nhoras_de_sono` int(11) NOT NULL,
+  `cfrequencia_fumo` varchar(250) DEFAULT NULL,
+  `cfrequencia_drogas` varchar(250) DEFAULT NULL,
+  `cfrequencia_alcool` varchar(250) DEFAULT NULL,
+  `cfrequencia_exercicios` varchar(250) DEFAULT NULL,
+  `clazer` varchar(250) DEFAULT NULL,
+  `bsaneamento_basico` tinyint(1) NOT NULL,
+  `canimais_domesticos` varchar(250) DEFAULT NULL,
+  `bposto_de_saude` tinyint(1) NOT NULL,
+  `cdoenca_familiar` varchar(250) DEFAULT NULL,
+  `ctratamento_doenca_familiar` varchar(250) DEFAULT NULL,
+  `id_paciente` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `exame_bioquimica`
 --
 
 CREATE TABLE `exame_bioquimica` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `nbilirrubina_total` decimal(10,3) DEFAULT NULL,
   `nbilirrubina_direta` decimal(10,3) DEFAULT NULL,
   `nproteina_total` decimal(10,3) DEFAULT NULL,
@@ -64,10 +104,10 @@ CREATE TABLE `exame_bioquimica` (
 --
 
 INSERT INTO `exame_bioquimica` (`id`, `nbilirrubina_total`, `nbilirrubina_direta`, `nproteina_total`, `nalbumina`, `namilase`, `ntgo_transaminase_glutamico_oxalacetica`, `ntgp_transaminase_glutamico_piruvica`, `ngama_gt_glutamiltransferase`, `nfosfatase_alcalina`, `nreatina_quinase_ck`, `nglicose`, `nferro`, `ncolesterol_total`, `nhdl`, `nldl`, `ntriglicerideos`, `nureia`, `ncreatinina`, `nacido_urico`, `npcr_proteina_c_reativa`, `ncalcio`, `nldh`, `nmagnesio`, `nfosforo`, `id_responsavel`, `id_preceptor`, `id_paciente`, `ddata_exame`, `cobservacao`) VALUES
-(2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1231.00, 312312.00, NULL, NULL, NULL, NULL, NULL, NULL, 8, 8, 1, '2025-10-10', NULL),
-(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1321321.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, 8, 1, '2025-10-03', NULL),
+(2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1231.000, 312312.000, NULL, NULL, NULL, NULL, NULL, NULL, 8, 8, 1, '2025-10-10', NULL),
+(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1321321.000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, 8, 1, '2025-10-03', NULL),
 (9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, 11, 1, '2025-10-03', 'Matheus12'),
-(10, 4.00, 5.00, 7.10, 4.50, 0.60, 1.25, 2.00, 3.00, 85.00, 3.50, 92.00, 105.00, 180.00, 55.00, 100.00, 130.00, 35.00, 99999999.99, 5.20, 1111.00, 32.00, 180.00, 2.00, 0.90, 8, 8, 1, '2025-01-01', 'MatheusTEste1');
+(10, 4.000, 5.000, 7.100, 4.500, 0.600, 1.250, 2.000, 3.000, 85.000, 3.500, 92.000, 105.000, 180.000, 55.000, 100.000, 130.000, 35.000, 9999999.999, 5.200, 1111.000, 32.000, 180.000, 2.000, 0.900, 8, 8, 1, '2025-01-01', 'MatheusTEste1');
 
 -- --------------------------------------------------------
 
@@ -76,7 +116,7 @@ INSERT INTO `exame_bioquimica` (`id`, `nbilirrubina_total`, `nbilirrubina_direta
 --
 
 CREATE TABLE `exame_hematologia` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `nhemacia` decimal(10,3) NOT NULL,
   `nhemoglobina` decimal(10,3) NOT NULL,
   `nhematocrito` decimal(10,3) NOT NULL,
@@ -114,8 +154,10 @@ CREATE TABLE `exame_hematologia` (
 --
 
 INSERT INTO `exame_hematologia` (`id`, `nhemacia`, `nhemoglobina`, `nhematocrito`, `nvcm`, `nhcm`, `nchcm`, `nrdw`, `nleucocitos`, `nneutrofilos`, `nblastos`, `npromielocitos`, `nmielocitos`, `nmetamielocitos`, `nbastonetes`, `nsegmentados`, `neosinofilos`, `nbasofilos`, `nlinfocitos`, `nlinfocitos_atipicos`, `nmonocitos`, `nmieloblastos`, `noutras_celulas`, `ncelulas_linfoides`, `ncelulas_monocitoides`, `nplaquetas`, `nvolume_plaquetario_medio`, `id_responsavel`, `id_preceptor`, `id_paciente`, `ddata_exame`) VALUES
-(3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 3232, 3232, 11, 11, 1, '2025-10-04'),
-(5, 2313, 132131, 3123, 312312, 312312, 321312, 321312, 13123, 231, 123, 312, 3123, 13, 123, 131, 321312, 3123, 0, 0, 0, 0, 0, 0, 0, 1, 15, 11, 9, 1, '0000-00-00');
+(3, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 3232.000, 3232.000, 11, 11, 1, '2025-10-04'),
+(5, 2313.000, 132131.000, 3123.000, 312312.000, 312312.000, 321312.000, 321312.000, 13123.000, 231.000, 123.000, 312.000, 3123.000, 13.000, 123.000, 131.000, 321312.000, 3123.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 1.000, 15.000, 11, 9, 1, '0000-00-00'),
+(6, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 2.000, 4.000, 11, 11, 1, '1899-11-30'),
+(7, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 1.000, 3.000, 11, 11, 1, '2026-03-14');
 
 -- --------------------------------------------------------
 
@@ -124,7 +166,7 @@ INSERT INTO `exame_hematologia` (`id`, `nhemacia`, `nhemoglobina`, `nhematocrito
 --
 
 CREATE TABLE `paciente` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `cnome` varchar(240) NOT NULL,
   `cemail` varchar(240) NOT NULL,
   `cperiodo` varchar(240) NOT NULL,
@@ -158,7 +200,7 @@ INSERT INTO `paciente` (`id`, `cnome`, `cemail`, `cperiodo`, `cmedicamento`, `cp
 --
 
 CREATE TABLE `referencia_bioquimica` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `cbilirrubina_total` varchar(100) DEFAULT '0,1 - 1,2 mg/dL',
   `cbilirrubina_direta` varchar(100) DEFAULT '≤ 0,1 - 1,2 mg/dL',
   `cproteina_total` varchar(100) DEFAULT '3,5 - 5,2 g/dL',
@@ -223,7 +265,7 @@ CREATE TABLE `referencia_bioquimica` (
 --
 
 CREATE TABLE `referencia_hematologia` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `chemacia_m` varchar(100) DEFAULT '4,3 - 5,7 milhões/µL',
   `chemacia_f` varchar(100) DEFAULT '3,9 - 5,0 milhões/µL',
   `chemoglobina_m` varchar(100) DEFAULT '13,5 - 17,5 g/dL',
@@ -283,7 +325,7 @@ CREATE TABLE `referencia_hematologia` (
 --
 
 CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `cnome` varchar(240) NOT NULL,
   `cemail` varchar(240) NOT NULL,
   `csenha` varchar(240) NOT NULL,
@@ -300,10 +342,22 @@ INSERT INTO `usuario` (`id`, `cnome`, `cemail`, `csenha`, `cadmin`) VALUES
 (10, 'usernovo', 'a@aaa.com', '1', 'N'),
 (11, 'Matheus Silva', 'matleandrosilva@gmail.com', 'matheus123', 'S');
 
+--
+-- Indexes for dumped tables
+--
 
+--
+-- Indexes for table `anamnese_enfermagem`
+--
+ALTER TABLE `anamnese_enfermagem`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_paciente` (`id_paciente`);
+
+--
 -- Indexes for table `exame_bioquimica`
 --
 ALTER TABLE `exame_bioquimica`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_responsavel` (`id_responsavel`),
   ADD KEY `id_preceptor` (`id_preceptor`),
   ADD KEY `id_paciente` (`id_paciente`);
@@ -312,19 +366,39 @@ ALTER TABLE `exame_bioquimica`
 -- Indexes for table `exame_hematologia`
 --
 ALTER TABLE `exame_hematologia`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_responsavel` (`id_responsavel`),
   ADD KEY `id_preceptor` (`id_preceptor`),
   ADD KEY `id_paciente` (`id_paciente`);
 
+--
+-- Indexes for table `paciente`
+--
+ALTER TABLE `paciente`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `referencia_bioquimica`
+--
+ALTER TABLE `referencia_bioquimica`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `referencia_hematologia`
 --
+ALTER TABLE `referencia_hematologia`
+  ADD PRIMARY KEY (`id`);
+
 --
 -- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `cemail` (`cemail`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
 
 --
 -- AUTO_INCREMENT for table `exame_bioquimica`
@@ -336,13 +410,25 @@ ALTER TABLE `exame_bioquimica`
 -- AUTO_INCREMENT for table `exame_hematologia`
 --
 ALTER TABLE `exame_hematologia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `paciente`
 --
 ALTER TABLE `paciente`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `referencia_bioquimica`
+--
+ALTER TABLE `referencia_bioquimica`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `referencia_hematologia`
+--
+ALTER TABLE `referencia_hematologia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `usuario`
@@ -353,6 +439,12 @@ ALTER TABLE `usuario`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `anamnese_enfermagem`
+--
+ALTER TABLE `anamnese_enfermagem`
+  ADD CONSTRAINT `anamnese_enfermagem_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `exame_bioquimica`
