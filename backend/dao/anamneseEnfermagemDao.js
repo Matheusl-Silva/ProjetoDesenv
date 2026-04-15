@@ -1,10 +1,20 @@
 const db = require("../database/connection");
 
+exports.findByPacientId = (pacientId) => {
+  return new Promise((resolve, reject) => {
+    const query = `SELECT id, ddata FROM anamnese_enfermagem WHERE id_paciente = ? ORDER BY ddata DESC;`;
+
+    db.query(query, [pacientId] , (err, result) => {
+      err ? reject(err) : resolve(result);
+    })
+  })
+}
+
 exports.findById = (id) => {
   return new Promise((resolve, reject) => {
     const query = "SELECT * FROM anamnese_enfermagem WHERE ID = ?;";
-    db.query(query, [id], (err, results) => {
-      err ? reject(err) : resolve(results);
+    db.query(query, [id], (err, result) => {
+      err ? reject(err) : resolve(result);
     });
   });
 };
@@ -12,6 +22,7 @@ exports.findById = (id) => {
 exports.create = (data) => {
   return new Promise((resolve, reject) => {
     const query = `INSERT INTO anamnese_enfermagem (
+                    ddata,
                     cqueixa,
                     dinicio_sintomas,
                     cfrequencia,
@@ -44,38 +55,39 @@ exports.create = (data) => {
                     ) VALUES (
                     ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
                     ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-                    ?, ?, ?, ?, ?, ?, ?, ?, ?
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
                     );`;
 
     const values = [
-      data.cqueixa,
-      data.dinicioSintomas,
-      data.cfrequencia,
-      data.clocalizacaoDaDor,
-      data.bcardiopatia,
-      data.bhipertensao,
-      data.bdiabetes,
-      data.bcancer,
-      data.bcirurgias,
-      data.coutrasDoencas,
-      data.calergias,
-      data.cmedicamento,
-      data.nrefeicoesAoDia,
-      data.celiminacaoUrinaria,
-      data.celiminacaoIntestinal,
-      data.ccicloMenstrual,
-      data.csonoERepouso,
-      data.nhorasDeSono,
-      data.cfrequenciaFumo,
-      data.cfrequenciaDrogas,
-      data.cfrequenciaAlcool,
-      data.cfrequenciaExercicios,
-      data.clazer,
-      data.bsaneamentoBasico,
-      data.canimaisDomesticos,
-      data.bpostoDeSaude,
-      data.cdoencaFamiliar,
-      data.ctratamentoDoencaFamiliar,
+      data.data,
+      data.queixa,
+      data.inicioSintomas,
+      data.frequencia,
+      data.localizacaoDaDor,
+      data.cardiopatia,
+      data.hipertensao,
+      data.diabetes,
+      data.cancer,
+      data.cirurgias,
+      data.outrasDoencas,
+      data.alergias,
+      data.medicamento,
+      data.refeicoesAoDia,
+      data.eliminacaoUrinaria,
+      data.eliminacaoIntestinal,
+      data.cicloMenstrual,
+      data.sonoERepouso,
+      data.horasDeSono,
+      data.frequenciaFumo,
+      data.frequenciaDrogas,
+      data.frequenciaAlcool,
+      data.frequenciaExercicios,
+      data.lazer,
+      data.saneamentoBasico,
+      data.animaisDomesticos,
+      data.postoDeSaude,
+      data.doencaFamiliar,
+      data.tratamentoDoencaFamiliar,
       data.idPaciente,
     ];
 

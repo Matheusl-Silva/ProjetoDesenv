@@ -1,5 +1,16 @@
 const anamneseDao = require("../dao/anamneseEnfermagemDao");
 
+exports.getByPatientId = async (req, res) => {
+  const idPaciente = req.params.idPaciente;
+  try{
+    const lista = await anamneseDao.findByPacientId(idPaciente);
+    res.json(lista);
+  }catch(err){
+    console.error("Erro ao buscar anamneses: ", err);
+    res.status(500).json({error: 'Erro interno ao buscar anamneses'})
+  }
+}
+
 exports.getById = async (req, res) => {
     const id = req.params.id;
     try{
