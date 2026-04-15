@@ -6,6 +6,7 @@ const routerHemato = require("./routes/hematoRouter");
 const routerBio = require("./routes/bioquimicaRouter");
 const routerHematoRef = require("./routes/hematoRefRouter");
 const routerBioquimicaRef = require("./routes/bioquimicaRefRouter");
+const routerAnamneseEnf = require("./routes/anamnsesEnfermagemRoutes");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./Swagger/swagger");
 
@@ -34,6 +35,8 @@ app.use("/hematoRef", routerHematoRef);
 
 //rota para referencia Bioquímica -> bioquimicaRefRouter
 app.use("/bioquimicaRef", routerBioquimicaRef);
+
+app.use("/anamneseEnf", routerAnamneseEnf);
 
 app.listen(3000, () => {
   console.log("Servidor rodando na porta 3000.");
