@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2026 at 12:57 AM
+-- Generation Time: Apr 15, 2026 at 02:40 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -59,6 +59,14 @@ CREATE TABLE `anamnese_enfermagem` (
   `ctratamento_doenca_familiar` varchar(250) DEFAULT NULL,
   `id_paciente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `anamnese_enfermagem`
+--
+
+INSERT INTO `anamnese_enfermagem` (`id`, `cqueixa`, `dinicio_sintomas`, `cfrequencia`, `clocalizacao_da_dor`, `bcardiopatia`, `bhipertensao`, `bdiabetes`, `bcancer`, `bcirurgias`, `coutras_doencas`, `calergias`, `cmedicamento`, `nrefeicoes_ao_dia`, `celiminacao_urinaria`, `celiminacao_intestinal`, `cciclo_menstrual`, `csono_e_repouso`, `nhoras_de_sono`, `cfrequencia_fumo`, `cfrequencia_drogas`, `cfrequencia_alcool`, `cfrequencia_exercicios`, `clazer`, `bsaneamento_basico`, `canimais_domesticos`, `bposto_de_saude`, `cdoenca_familiar`, `ctratamento_doenca_familiar`, `id_paciente`) VALUES
+(1, 'Dor abdominal intensa', '2026-04-10 14:30:00', 'Contínua', 'Região inferior direita', 0, 1, 0, 0, 1, 'Asma', 'Penicilina', 'Dipirona', 3, 'Normal', 'Constipação', 'Regular', 'Sono irregular', 6, 'Não fuma', 'Nunca usou', 'Socialmente', '2 vezes por semana', 'Leitura', 1, 'Cachorro', 1, 'Hipertensão', 'Uso contínuo de medicação', 1),
+(2, 'Dor abdominal intensa', '2026-04-10 14:30:00', 'Contínua', 'Região inferior direita', 0, 1, 0, 0, 1, 'Asma', 'Penicilina', 'Dipirona', 3, 'Normal', 'Constipação', 'Regular', 'Sono irregular', 6, 'Não fuma', 'Nunca usou', 'Socialmente', '2 vezes por semana', 'Leitura', 1, 'Cachorro', 1, 'Hipertensão', 'Uso contínuo de medicação', 1);
 
 -- --------------------------------------------------------
 
@@ -399,6 +407,12 @@ ALTER TABLE `usuario`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `anamnese_enfermagem`
+--
+ALTER TABLE `anamnese_enfermagem`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `exame_bioquimica`
