@@ -54,3 +54,14 @@ exports.update = async (req, res) => {
     res.status(500).json({error: "Erro interno ao atualizar anamnese"});
   }
 }
+
+exports.delete = async (req, res) => {
+  const id = req.params.id;
+  try{
+    await anamneseDao.delete(id);
+    res.status(200).json({message: "Anamnese excluída com sucesso"});
+  }catch(err){
+    console.error("Erro ao excluir anamnese: ", err);
+    res.status(500).json({error: "Erro interno ao excluir anamnese"});
+  }
+}

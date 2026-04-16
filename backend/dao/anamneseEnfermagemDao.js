@@ -171,3 +171,12 @@ exports.update = (id, data) => {
     });
   });
 };
+
+exports.delete = async (id) => {
+  return new Promise((resolve, reject) => {
+    const query = "DELETE FROM anamnese_enfermagem WHERE id = ?";
+    db.query(query, id, (err, result) => {
+      err ? reject(err) : resolve(result);
+    })
+  })
+}
