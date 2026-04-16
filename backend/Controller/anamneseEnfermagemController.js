@@ -33,7 +33,7 @@ exports.create = async (req, res) => {
     res
       .status(201)
       .json({
-        message: "Anamnese cadastrada com sucesso!",
+        message: "Anamnese cadastrada com sucesso",
         id: novaAnamnese.insertId,
       });
   } catch (err) {
@@ -41,3 +41,16 @@ exports.create = async (req, res) => {
     res.status(500).json({ error: "Erro interno ao criar anamnese" });
   }
 };
+
+exports.update = async (req, res) => {
+  const id = req.params.id;
+  const dados = req.body;
+
+  try{
+    await anamneseDao.update(id, dados);
+    res.status(200).json({message: "Anamnese atualizada com sucesso"});
+  }catch(err){
+    console.error("Erro ao atualizar anamnese: ", err);
+    res.status(500).json({error: "Erro interno ao atualizar anamnese"});
+  }
+}
