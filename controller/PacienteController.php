@@ -61,6 +61,9 @@ class PacienteController
             if ($paciente) {
                 $examesHemato = $hematoDAO->buscarPorPacienteId($_GET["paciente"]);
                 $examesBio    = $bioDAO->buscarPorPacienteId($_GET["paciente"]);
+                
+                $anamneseDAO  = new AnamneseDAO();
+                $anamnesesEnf = $anamneseDAO->buscarPorPacienteId($_GET["paciente"]);
 
                 // Processar exames de hematologia, adicionando a propriedade de tipo
                 if ($examesHemato && is_array($examesHemato)) {
@@ -79,6 +82,17 @@ class PacienteController
                         if ($exame && method_exists($exame, 'getId')) {
                             // Adiciona a propriedade 'tipo' ao objeto do exame
                             $exame->setTipo('bioquimica'); // Você precisa adicionar este método à classe ExameBioquimica
+                            $exames[] = $exame;
+                        }
+                    }
+                }
+
+                // Processar Anamnese de Enfermagem, adicionando a propriedade de tipo
+                if ($anamnesesEnf && is_array($anamnesesEnf)) {
+                    foreach ($anamnesesEnf as $exame) {
+                        if ($exame && method_exists($exame, 'getId')) {
+                            // Adiciona a propriedade 'tipo' ao objeto do exame
+                            $exame->setTipo('anamnese');
                             $exames[] = $exame;
                         }
                     }

@@ -51,20 +51,41 @@
             </div>
         </div>
 
-        <a href="/cadastrarHematologia/<?php echo $paciente->getId(); ?>" class="text-decoration-none">
-            <div class="action-card examehemato-card">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center">
-                        <i class="bi bi-droplet-half examehemato-icon"></i>
-                        <div>
-                            <h4 class="mb-1 text-white">Hematologia</h4>
-                            <p class="mb-0 text-white opacity-75">Clique para acessar a tela específica do exame hematológico</p>
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <a href="/cadastrarHematologia/<?php echo $paciente->getId(); ?>" class="text-decoration-none">
+                    <div class="action-card examehemato-card h-100 p-4" style="border-radius: var(--border-radius); box-shadow: var(--card-shadow);">
+                        <div class="d-flex align-items-center justify-content-between h-100">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-droplet-half examehemato-icon"></i>
+                                <div>
+                                    <h4 class="mb-1 text-white">Hematologia</h4>
+                                    <p class="mb-0 text-white opacity-75">Clique para acessar a tela específica do exame hematológico</p>
+                                </div>
+                            </div>
+                            <i class="bi bi-chevron-right text-white" style="font-size: 1.5rem;"></i>
                         </div>
                     </div>
-                    <i class="bi bi-chevron-right text-white" style="font-size: 1.5rem;"></i>
-                </div>
+                </a>
             </div>
-        </a>
+            
+            <div class="col-md-6">
+                <a href="/cadastrarAnamneseEnf/<?php echo $paciente->getId(); ?>" class="text-decoration-none">
+                    <div class="action-card anamnese-card h-100 p-4">
+                        <div class="d-flex align-items-center justify-content-between h-100">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-clipboard2-heart anamnese-icon"></i>
+                                <div>
+                                    <h4 class="mb-1 text-white">Anamnese de Enfermagem</h4>
+                                    <p class="mb-0 text-white opacity-75">Clique para acessar o questionário e formulário da anamnese</p>
+                                </div>
+                            </div>
+                            <i class="bi bi-chevron-right text-white" style="font-size: 1.5rem;"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
 
         <h4 class="mb-4">
             <i class="bi bi-clipboard2-pulse me-2"></i>

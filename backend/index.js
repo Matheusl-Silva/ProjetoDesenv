@@ -36,6 +36,7 @@ app.use("/hematoRef", routerHematoRef);
 //rota para referencia Bioquímica -> bioquimicaRefRouter
 app.use("/bioquimicaRef", routerBioquimicaRef);
 
+//rota para anamnese de enfermagem -> anamneseEnfRouter
 app.use("/anamneseEnf", routerAnamneseEnf);
 
 app.listen(3000, () => {

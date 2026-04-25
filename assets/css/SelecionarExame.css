@@ -44,6 +44,27 @@
     margin-right: 15px;
 }
 
+.anamnese-card {
+    background: linear-gradient(135deg, var(--success-green), #059669);
+    color: white;
+    border: none;
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+}
+
+.anamnese-card:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-8px) scale(1.02);
+}
+
+.anamnese-icon {
+    font-size: 2.5rem;
+    margin-right: 15px;
+}
+
 .card-group-title {
     font-weight: 600;
     margin-bottom: 1.25rem;

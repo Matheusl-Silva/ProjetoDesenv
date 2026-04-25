@@ -27,7 +27,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <form action="/exame" method="post" style="display: inline">
+                        <form action="" method="post" style="display: inline">
                             <input type="hidden" name="method" value="DELETE">
                             <button type="submit" class="btn btn-danger">Excluir</button>
                         </form>
@@ -362,11 +362,21 @@
                                                 <span class="badge bg-primary">Hematologia</span>
                                             <?php elseif ($tipoExame === 'bioquimica'): ?>
                                                 <span class="badge bg-success">Bioquímica</span>
+                                            <?php elseif ($tipoExame === 'anamnese'): ?>
+                                                <span class="badge" style="background-color: #059669; color: white;">Anamnese Enf.</span>
                                             <?php else: ?>
                                                 <span class="badge bg-secondary">N/A</span>
                                             <?php endif; ?>
                                         </td>
-                                        <td><?php echo isset($preceptores_map[$exame->getPreceptor()]) ? htmlspecialchars($preceptores_map[$exame->getPreceptor()]) : 'Preceptor: <strong>' . $usuarioDAO->buscarUsuario($exame->getPreceptor())->getNome() . '</strong>'; ?></td>
+                                        <td>
+                                            <?php 
+                                            if (method_exists($exame, 'getPreceptor') && $exame->getPreceptor()) {
+                                                echo isset($preceptores_map[$exame->getPreceptor()]) ? htmlspecialchars($preceptores_map[$exame->getPreceptor()]) : 'Preceptor: <strong>' . $usuarioDAO->buscarUsuario($exame->getPreceptor())->getNome() . '</strong>'; 
+                                            } else {
+                                                echo '<span class="text-muted">N/A</span>';
+                                            }
+                                            ?>
+                                        </td>
                                         <td>
                                             <?php
                                             $tipoExame = $exame->getTipo();
@@ -374,12 +384,17 @@
                                             ?>
                                                 <a href="/exameHemato/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
                                                 <?php if ($auth->isAdmin()): ?>
-                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?= $exame->getId() ?>" data-tipo="Hemato" class="btn btn-sm btn-danger">Excluir</button>
+                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?= $exame->getId() ?>" data-url="/exameHemato/" class="btn btn-sm btn-danger">Excluir</button>
                                                 <?php endif; ?>
                                             <?php elseif ($tipoExame === 'bioquimica'): ?>
                                                 <a href="/exameBio/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
                                                 <?php if ($auth->isAdmin()): ?>
-                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?= $exame->getId() ?>" data-tipo="Bio" class="btn btn-sm btn-danger">Excluir</button>
+                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?= $exame->getId() ?>" data-url="/exameBio/" class="btn btn-sm btn-danger">Excluir</button>
+                                                <?php endif; ?>
+                                            <?php elseif ($tipoExame === 'anamnese'): ?>
+                                                <a href="/anamneseEnf/listar/<?php echo $exame->getId(); ?>" class="btn btn-sm btn-info">Visualizar</a>
+                                                <?php if ($auth->isAdmin()): ?>
+                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmacao" data-id="<?= $exame->getId() ?>" data-url="/anamneseEnf/" class="btn btn-sm btn-danger">Excluir</button>
                                                 <?php endif; ?>
                                             <?php endif; ?>
                                         </td>
@@ -433,9 +448,9 @@
                 modalExcluir.addEventListener('show.bs.modal', function(event) {
                     const botao = event.relatedTarget;
                     const idExame = botao.getAttribute('data-id');
-                    const tipoExame = botao.getAttribute('data-tipo');
+                    const urlBase = botao.getAttribute('data-url');
                     const form = modalExcluir.querySelector('form');
-                    form.action = form.action + tipoExame + '/' + idExame;
+                    form.action = urlBase + idExame;
                 });
             }
         });
