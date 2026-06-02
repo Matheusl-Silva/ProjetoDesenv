@@ -4,7 +4,7 @@ class ExameBioquimicaRefDAO
 
     public function buscarReferenciaBioquimica()
     {
-        $url    = "http://localhost:3000/bioquimicaRef";
+        $url    = API_BASE_URL . "/bioquimicaRef";
         $result = file_get_contents($url);
 
         if ($result == false) {
@@ -17,7 +17,7 @@ class ExameBioquimicaRefDAO
 
     public function atualizarReferencia(ReferenciaBioquimica $referencia)
     {
-        $url = "http://localhost:3000/bioquimicaRef/";
+        $url = API_BASE_URL . "/bioquimicaRef/";
 
         $dados = [
             "bilirrubina_total"             => $referencia->getBilirrubinaTotal(),

@@ -4,7 +4,7 @@ class AnamneseDAO
 {
     public function buscarPorPacienteId($registroPaciente)
     {
-        $url = "http://localhost:3000/anamneseEnf/paciente/" . $registroPaciente;
+        $url = API_BASE_URL . "/anamneseEnf/paciente/" . $registroPaciente;
 
         try {
 
@@ -29,7 +29,7 @@ class AnamneseDAO
 
     public function buscarExameCompletoPorId($idExame)
     {
-        $url = "http://localhost:3000/anamneseEnf/" . $idExame;
+        $url = API_BASE_URL . "/anamneseEnf/" . $idExame;
         try {
             $response = @file_get_contents($url);
             if ($response === false) {
@@ -48,7 +48,7 @@ class AnamneseDAO
 
     public function cadastrarExame(AnamneseEnf $dadosExame)
     {
-        $url = "http://localhost:3000/anamneseEnf/";
+        $url = API_BASE_URL . "/anamneseEnf/";
 
         $dados = [
             "queixa" => $dadosExame->getQueixa(),
@@ -105,7 +105,7 @@ class AnamneseDAO
 
     public function editar(AnamneseEnf $exame)
     {
-        $url = "http://localhost:3000/anamneseEnf/" . $exame->getId();
+        $url = API_BASE_URL . "/anamneseEnf/" . $exame->getId();
 
         $dados = [
             "queixa" => $exame->getQueixa(),
@@ -159,7 +159,7 @@ class AnamneseDAO
 
     public function excluir($idExame)
     {
-        $url = "http://localhost:3000/anamneseEnf/" . $idExame;
+        $url = API_BASE_URL . "/anamneseEnf/" . $idExame;
 
         $options = [
             'http' => [

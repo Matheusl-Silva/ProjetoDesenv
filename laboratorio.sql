@@ -65,9 +65,6 @@ CREATE TABLE `anamnese_enfermagem` (
 -- Dumping data for table `anamnese_enfermagem`
 --
 
-INSERT INTO `anamnese_enfermagem` (`id`, `cqueixa`, `dinicio_sintomas`, `cfrequencia`, `clocalizacao_da_dor`, `bcardiopatia`, `bhipertensao`, `bdiabetes`, `bcancer`, `bcirurgias`, `coutras_doencas`, `calergias`, `cmedicamento`, `nrefeicoes_ao_dia`, `celiminacao_urinaria`, `celiminacao_intestinal`, `cciclo_menstrual`, `csono_e_repouso`, `nhoras_de_sono`, `cfrequencia_fumo`, `cfrequencia_drogas`, `cfrequencia_alcool`, `cfrequencia_exercicios`, `clazer`, `bsaneamento_basico`, `canimais_domesticos`, `bposto_de_saude`, `cdoenca_familiar`, `ctratamento_doenca_familiar`, `id_paciente`, `ddata`) VALUES
-(4, 'Dor abdominal intensa', '2026-04-10 14:30:00', 'Contínua', 'Região inferior direita', 0, 1, 0, 0, 1, 'Asma', 'Penicilina', 'Dipirona', 3, 'Normal', 'Constipação', 'Regular', 'Sono irregular', 6, 'Não fuma', 'Nunca usou', 'Socialmente', '2 vezes por semana', 'Leitura', 1, 'Cachorro', 1, 'Hipertensão', 'Uso contínuo de medicação', 1, '2026-04-15 00:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -110,12 +107,6 @@ CREATE TABLE `exame_bioquimica` (
 --
 -- Dumping data for table `exame_bioquimica`
 --
-
-INSERT INTO `exame_bioquimica` (`id`, `nbilirrubina_total`, `nbilirrubina_direta`, `nproteina_total`, `nalbumina`, `namilase`, `ntgo_transaminase_glutamico_oxalacetica`, `ntgp_transaminase_glutamico_piruvica`, `ngama_gt_glutamiltransferase`, `nfosfatase_alcalina`, `nreatina_quinase_ck`, `nglicose`, `nferro`, `ncolesterol_total`, `nhdl`, `nldl`, `ntriglicerideos`, `nureia`, `ncreatinina`, `nacido_urico`, `npcr_proteina_c_reativa`, `ncalcio`, `nldh`, `nmagnesio`, `nfosforo`, `id_responsavel`, `id_preceptor`, `id_paciente`, `ddata_exame`, `cobservacao`) VALUES
-(2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1231.000, 312312.000, NULL, NULL, NULL, NULL, NULL, NULL, 8, 8, 1, '2025-10-10', NULL),
-(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1321321.000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, 8, 1, '2025-10-03', NULL),
-(9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, 11, 1, '2025-10-03', 'Matheus12'),
-(10, 4.000, 5.000, 7.100, 4.500, 0.600, 1.250, 2.000, 3.000, 85.000, 3.500, 92.000, 105.000, 180.000, 55.000, 100.000, 130.000, 35.000, 9999999.999, 5.200, 1111.000, 32.000, 180.000, 2.000, 0.900, 8, 8, 1, '2025-01-01', 'MatheusTEste1');
 
 -- --------------------------------------------------------
 
@@ -161,12 +152,6 @@ CREATE TABLE `exame_hematologia` (
 -- Dumping data for table `exame_hematologia`
 --
 
-INSERT INTO `exame_hematologia` (`id`, `nhemacia`, `nhemoglobina`, `nhematocrito`, `nvcm`, `nhcm`, `nchcm`, `nrdw`, `nleucocitos`, `nneutrofilos`, `nblastos`, `npromielocitos`, `nmielocitos`, `nmetamielocitos`, `nbastonetes`, `nsegmentados`, `neosinofilos`, `nbasofilos`, `nlinfocitos`, `nlinfocitos_atipicos`, `nmonocitos`, `nmieloblastos`, `noutras_celulas`, `ncelulas_linfoides`, `ncelulas_monocitoides`, `nplaquetas`, `nvolume_plaquetario_medio`, `id_responsavel`, `id_preceptor`, `id_paciente`, `ddata_exame`) VALUES
-(3, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 3232.000, 3232.000, 11, 11, 1, '2025-10-04'),
-(5, 2313.000, 132131.000, 3123.000, 312312.000, 312312.000, 321312.000, 321312.000, 13123.000, 231.000, 123.000, 312.000, 3123.000, 13.000, 123.000, 131.000, 321312.000, 3123.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 1.000, 15.000, 11, 9, 1, '0000-00-00'),
-(6, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 2.000, 4.000, 11, 11, 1, '1899-11-30'),
-(7, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 1.000, 3.000, 11, 11, 1, '2026-03-14');
-
 -- --------------------------------------------------------
 
 --
@@ -189,17 +174,6 @@ CREATE TABLE `paciente` (
 --
 -- Dumping data for table `paciente`
 --
-
-INSERT INTO `paciente` (`id`, `cnome`, `cemail`, `cperiodo`, `cmedicamento`, `cpatologia`, `ddata_nascimento`, `ddata_cadastro`, `ctelefone`, `ccpf`) VALUES
-(1, 'JoÃ£o da Silva', 'a@dssd.com', '', 'Dipirona', 'Dipirona', '1990-05-15', '0000-00-00', '(11) 99999-8888', '1111111111'),
-(2, 'PACIENTE3', 'a@aa.com', 'matutino', '', '', '2025-07-31', '0000-00-00', '99', ''),
-(3, 'paciente3', 'a@aaa.com', 'matutino', '', '', '2025-08-14', '0000-00-00', '99', ''),
-(4, 'pacientesla', 'a@aaaaaaaaaa.com', 'matutino', '', '', '2025-08-22', '0000-00-00', '9', ''),
-(5, 'doente', 'a@aaab.com', 'matutino', 'medicamento', 'patologia', '2025-08-14', '0000-00-00', '99', ''),
-(6, 'a', 'a@b.com', 'matutino', '', '', '0111-01-01', '0000-00-00', '99', ''),
-(7, 'asdasd', 'a@aadasdasd.com', 'matutino', '', '', '2025-08-19', '0000-00-00', 'asdasd', ''),
-(8, 'pacientenovo', 'a@aaaaaaaa.com', 'matutino', '', '', '2025-10-07', '0000-00-00', '1', '111111111'),
-(9, 'paciente', 'a@abcd.com', 'matutino', '', '', '1200-01-01', '0000-00-00', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -344,12 +318,6 @@ CREATE TABLE `usuario` (
 -- Dumping data for table `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `cnome`, `cemail`, `csenha`, `cadmin`) VALUES
-(8, 'user10', 'a@a.com', '1', 'S'),
-(9, 'user2adasd', 'a@aa.com', '11111111', 'N'),
-(10, 'usernovo', 'a@aaa.com', '1', 'N'),
-(11, 'Matheus Silva', 'matleandrosilva@gmail.com', 'matheus123', 'S');
-
 --
 -- Indexes for dumped tables
 --
@@ -412,25 +380,25 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `anamnese_enfermagem`
 --
 ALTER TABLE `anamnese_enfermagem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `exame_bioquimica`
 --
 ALTER TABLE `exame_bioquimica`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `exame_hematologia`
 --
 ALTER TABLE `exame_hematologia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `referencia_bioquimica`
@@ -448,7 +416,7 @@ ALTER TABLE `referencia_hematologia`
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Constraints for dumped tables

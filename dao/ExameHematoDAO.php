@@ -4,7 +4,7 @@ class ExameHematoDAO
 {
     public function buscarPorPacienteId($registroPaciente)
     {
-        $url = "http://localhost:3000/exameHemato/" . $registroPaciente;
+        $url = API_BASE_URL . "/exameHemato/" . $registroPaciente;
 
         try {
 
@@ -29,7 +29,7 @@ class ExameHematoDAO
 
     public function buscarExameCompletoPorId($idExame)
     {
-        $url = "http://localhost:3000/exameHemato/listar/" . $idExame;
+        $url = API_BASE_URL . "/exameHemato/listar/" . $idExame;
         try {
             $response = @file_get_contents($url);
             if ($response === false) {
@@ -48,7 +48,7 @@ class ExameHematoDAO
 
     public function cadastrarExame(ExameHemato $dadosExame)
     {
-        $url = "http://localhost:3000/exameHemato/";
+        $url = API_BASE_URL . "/exameHemato/";
 
         $dados = [
             "hemacia"                => $dadosExame->getHemacia(),
@@ -105,7 +105,7 @@ class ExameHematoDAO
 
     public function editar(ExameHemato $exame)
     {
-        $url = "http://localhost:3000/exameHemato/" . $exame->getId();
+        $url = API_BASE_URL . "/exameHemato/" . $exame->getId();
 
         $dados = [
             "hemacia"                => $exame->getHemacia(),
@@ -159,7 +159,7 @@ class ExameHematoDAO
 
     public function excluir($idExame)
     {
-        $url = "http://localhost:3000/exameHemato/" . $idExame;
+        $url = API_BASE_URL . "/exameHemato/" . $idExame;
 
         $options = [
             'http' => [

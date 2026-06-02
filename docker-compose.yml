@@ -1,0 +1,48 @@
+services:
+  db:
+    build: ./database
+    restart: always
+    env_file: .env
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - lab-net
+
+  backend:
+    build: ./backend
+    restart: always
+    env_file: .env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - lab-net
+
+  frontend:
+    build: ./frontend
+    restart: always
+    env_file: .env
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    networks:
+      - lab-net
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: K9mXq2vL7nRp4Wz8
+    networks:
+      - lab-net
+
+volumes:
+  db_data:
+
+networks:
+  lab-net:

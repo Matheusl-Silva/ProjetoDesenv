@@ -4,7 +4,7 @@ class UsuarioDAO
 {
     public function listarUsuarios()
     {
-        $url    = "http://localhost:3000/usuarios";
+        $url    = API_BASE_URL . "/usuarios";
         $result = file_get_contents($url);
         $lista  = json_decode($result, true);
 
@@ -18,7 +18,7 @@ class UsuarioDAO
 
     public function buscarUsuario($id)
     {
-        $url    = "http://localhost:3000/usuarios/" . $id;
+        $url    = API_BASE_URL . "/usuarios/" . $id;
         $result = file_get_contents($url);
 
         if ($result == false) {
@@ -31,7 +31,7 @@ class UsuarioDAO
 
     public function cadastrarUsuario(Usuario $usuario)
     {
-        $url   = "http://localhost:3000/usuarios";
+        $url   = API_BASE_URL . "/usuarios";
         $dados = [
             "nome"  => $usuario->getNome(),
             "email" => $usuario->getEmail(),
@@ -60,7 +60,7 @@ class UsuarioDAO
 
     public function verificarEmail($email)
     {
-        $url   = "http://localhost:3000/usuarios/verificar-email";
+        $url   = API_BASE_URL . "/usuarios/verificar-email";
         $dados = [
             "email" => $email,
         ];
@@ -86,7 +86,7 @@ class UsuarioDAO
 
     public function login($email, $senha)
     {
-        $url   = "http://localhost:3000/usuarios/login";
+        $url   = API_BASE_URL . "/usuarios/login";
         $dados = [
             "email" => $email,
             "senha" => $senha,
@@ -111,7 +111,7 @@ class UsuarioDAO
 
     public function atualizarUsuario(Usuario $usuario)
     {
-        $url   = "http://localhost:3000/usuarios/" . $usuario->getId();
+        $url   = API_BASE_URL . "/usuarios/" . $usuario->getId();
         $dados = [
             "nome"  => $usuario->getNome(),
             "email" => $usuario->getEmail(),
@@ -139,7 +139,7 @@ class UsuarioDAO
 
     public function excluirUsuario(Usuario $usuario)
     {
-        $url     = "http://localhost:3000/usuarios/" . $usuario->getId();
+        $url     = API_BASE_URL . "/usuarios/" . $usuario->getId();
         $options = [
             "http" => [
                 "header" => "Content-Type: application/json\r\n",
@@ -158,7 +158,7 @@ class UsuarioDAO
 
     public function updatePassword($email, $novaSenha)
     {
-        $url   = "http://localhost:3000/usuarios/recover-password";
+        $url   = API_BASE_URL . "/usuarios/recover-password";
         $dados = [
             "email" => $email,
             "senha" => $novaSenha,

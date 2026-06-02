@@ -3,7 +3,7 @@ class ExameBioquimicaDAO
 {
     public function buscarPorPacienteId($registroPaciente)
     {
-        $url = "http://localhost:3000/exameBio/" . $registroPaciente;
+        $url = API_BASE_URL . "/exameBio/" . $registroPaciente;
 
         try {
             $response = @file_get_contents($url);
@@ -31,7 +31,7 @@ class ExameBioquimicaDAO
 
     public function buscarExameCompletoPorId($idExame)
     {
-        $url = "http://localhost:3000/exameBio/listar/" . $idExame;
+        $url = API_BASE_URL . "/exameBio/listar/" . $idExame;
         try {
             $response = @file_get_contents($url);
             if ($response === false) {
@@ -50,7 +50,7 @@ class ExameBioquimicaDAO
 
     public function excluir($idExame)
     {
-        $url = "http://localhost:3000/exameBio/" . $idExame;
+        $url = API_BASE_URL . "/exameBio/" . $idExame;
 
         $options = [
             'http' => [
@@ -72,7 +72,7 @@ class ExameBioquimicaDAO
 
     public function cadastrarExame(ExameBioquimica $dadosExame)
     {
-        $url = "http://localhost:3000/exameBio/";
+        $url = API_BASE_URL . "/exameBio/";
 
         $dados = [
             "bilirrubina_total"                      => $dadosExame->getBilirrubinaTotal(),
@@ -129,7 +129,7 @@ class ExameBioquimicaDAO
 
     public function editar(ExameBioquimica $exame)
     {
-        $url = "http://localhost:3000/exameBio/" . $exame->getId();
+        $url = API_BASE_URL . "/exameBio/" . $exame->getId();
 
         $dados = [
             "id_responsavel"                         => $exame->getResponsavel(),

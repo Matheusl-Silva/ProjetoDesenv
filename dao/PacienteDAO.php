@@ -4,7 +4,7 @@ class PacienteDAO
 
     public function verificarEmailExistente($email)
     {
-        $url   = "http://localhost:3000/pacientes/verificar-email";
+        $url   = API_BASE_URL . "/pacientes/verificar-email";
         $dados = ["email" => $email];
 
         $options = [
@@ -27,7 +27,7 @@ class PacienteDAO
 
     public function cadastrarPaciente(Paciente $paciente)
     {
-        $url   = "http://localhost:3000/pacientes";
+        $url   = API_BASE_URL . "/pacientes";
         $dados = [
             "nome"            => $paciente->getNome(),
             "email"           => $paciente->getEmail(),
@@ -64,7 +64,7 @@ class PacienteDAO
 
     public function listarPacientes()
     {
-        $url    = "http://localhost:3000/pacientes";
+        $url    = API_BASE_URL . "/pacientes";
         $result = file_get_contents($url);
         $lista  = json_decode($result, true);
 
@@ -82,7 +82,7 @@ class PacienteDAO
 
     public function buscarPaciente($idPaciente)
     {
-        $url   = "http://localhost:3000/pacientes/" . $idPaciente;
+        $url   = API_BASE_URL . "/pacientes/" . $idPaciente;
         $dados = [
             "id" => $idPaciente,
         ];
@@ -107,7 +107,7 @@ class PacienteDAO
 
     public function atualizarPacientes(Paciente $paciente)
     {
-        $url   = "http://localhost:3000/pacientes/" . $paciente->getId();
+        $url   = API_BASE_URL . "/pacientes/" . $paciente->getId();
         $dados = [
             "id"              => $paciente->getId(),
             "nome"            => $paciente->getNome(),
@@ -139,7 +139,7 @@ class PacienteDAO
 
     public function excluirPaciente(Paciente $paciente)
     {
-        $url     = "http://localhost:3000/pacientes/" . $paciente->getId();
+        $url     = API_BASE_URL . "/pacientes/" . $paciente->getId();
         $options = [
             "http" => [
                 "header" => "Content-Type: application/json\r\n",

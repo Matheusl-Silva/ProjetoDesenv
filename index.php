@@ -4,6 +4,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_erros', 1);
 error_reporting(E_ALL);
 
+// URL base da API Node.js — lê do ambiente ou usa padrão local
+define('API_BASE_URL', getenv('API_BASE_URL') ?: 'http://localhost:3000');
+
 //Inicia sessão
 session_start();
 

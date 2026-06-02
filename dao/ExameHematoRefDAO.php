@@ -4,7 +4,7 @@ class ExameHematoRefDAO
 
     public function buscarReferenciaHematologica()
     {
-        $url = "http://localhost:3000/hematoRef";
+        $url = API_BASE_URL . "/hematoRef";
 
         $options = [
             "http" => [
@@ -30,7 +30,7 @@ class ExameHematoRefDAO
 
     public function atualizarReferencia(ReferenciaHematologia $referencia)
     {
-        $url = "http://localhost:3000/hematoRef/1";
+        $url = API_BASE_URL . "/hematoRef/1";
 
         $dados = [
             "hemacia_m"                      => $referencia->getHemaciaM(),
