@@ -46,9 +46,9 @@ return function (Router $router) {
         $paciente->setEmail($_POST["email"]);
         $paciente->setCpf($_POST["cpf"]);
         $paciente->setTomaMedicamento($_POST["tomaMedicamento"]);
-        $paciente->setMedicamento(isset($_POST["medicamento"]) ? $_POST["medicamento"] : null);
+        $paciente->setMedicamento(isset($_POST["medicamento"]) ?? null);
         $paciente->setTrataPatologia($_POST["trataPatologia"]);
-        $paciente->setPatologia(isset($_POST["patologia"]) ? $_POST["patologia"] : null);
+        $paciente->setPatologia(isset($_POST["patologia"]) ?? null);
 
         $result = $pacienteController->cadastrar($paciente);
 
