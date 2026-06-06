@@ -29,7 +29,7 @@ class PacienteController
         $dateTime    = new DateTime($paciente->getDataNasc());
         $paciente->setDataNasc($dateTime->format('Y-m-d'));
 
-        require 'views/editarpaciente.php';
+        require 'views/editarPaciente.php';
         unset($_SESSION["flash"]);
     }
 
