@@ -3,77 +3,35 @@ class ExameBioquimicaDAO
 {
     public function buscarPorPacienteId($registroPaciente)
     {
-        $url = API_BASE_URL . "/exameBio/" . $registroPaciente;
-
-        try {
-            $response = @file_get_contents($url);
-
-            if ($response === false) {
-                return null;
-            }
-
-            $data = json_decode($response, true);
-
-            $examesObj = [];
-
-            if ($data) {
-                foreach ($data as $exame) {
-                    $examesObj[] = @$this->converterParaObj($exame);
-                }
-                return $examesObj;
-            }
-            return null;
-        } catch (Exception $e) {
-            echo "Erro ao buscar exame de bioquímica: $e";
+        $r = ApiClient::get("/exameBio/" . $registroPaciente);
+        if ($r['status'] !== 200 || !is_array($r['json'])) {
             return null;
         }
+        $examesObj = [];
+        foreach ($r['json'] as $exame) {
+            $examesObj[] = @$this->converterParaObj($exame);
+        }
+        return $examesObj;
     }
 
     public function buscarExameCompletoPorId($idExame)
     {
-        $url = API_BASE_URL . "/exameBio/listar/" . $idExame;
-        try {
-            $response = @file_get_contents($url);
-            if ($response === false) {
-                return null;
-            }
-            $data = json_decode($response, true);
-            if ($data) {
-
-                return @$this->converterParaObj($data);
-            }
-            return null;
-        } catch (Exception $e) {
+        $r = ApiClient::get("/exameBio/listar/" . $idExame);
+        if ($r['status'] !== 200 || !$r['json']) {
             return null;
         }
+        return @$this->converterParaObj($r['json']);
     }
 
     public function excluir($idExame)
     {
-        $url = API_BASE_URL . "/exameBio/" . $idExame;
-
-        $options = [
-            'http' => [
-                "header" => "Content-Type: application/json\r\n",
-                "method" => "DELETE",
-            ],
-        ];
-
-        $context = stream_context_create($options);
-
-        $result = file_get_contents($url, false, $context);
-
-        if ($result === false) {
-            return false;
-        }
-
-        return json_decode($result, true);
+        $r = ApiClient::delete("/exameBio/" . $idExame);
+        if ($r['status'] >= 400) return false;
+        return $r['json'];
     }
 
     public function cadastrarExame(ExameBioquimica $dadosExame)
     {
-        $url = API_BASE_URL . "/exameBio/";
-
         $dados = [
             "bilirrubina_total"                      => $dadosExame->getBilirrubinaTotal(),
             "bilirrubina_direta"                     => $dadosExame->getBilirrubinaDireta(),
@@ -106,37 +64,18 @@ class ExameBioquimicaDAO
             "id_paciente"                            => $dadosExame->getPaciente(),
             "tipo_exame"                             => $dadosExame->getTipo(),
         ];
-        $options = [
-            "http" => [
-                "header"  => "Content-Type: application/json\r\n",
-                "method"  => "POST",
-                "content" => json_encode($dados),
-            ],
-        ];
-
-        $context = stream_context_create($options);
-
-        $result = file_get_contents($url, false, $context);
-
-        if ($result === false) {
-            return false;
-        }
-
-        $response = json_decode($result, true);
-
-        return isset($response['id']) ? $response['id'] : false;
+        $r = ApiClient::post("/exameBio/", $dados);
+        if ($r['status'] >= 400) return false;
+        return $r['json']['id'] ?? false;
     }
 
     public function editar(ExameBioquimica $exame)
     {
-        $url = API_BASE_URL . "/exameBio/" . $exame->getId();
-
         $dados = [
             "id_responsavel"                         => $exame->getResponsavel(),
             "id_preceptor"                           => $exame->getPreceptor(),
             "id_paciente"                            => $exame->getPaciente(),
             "data_exame"                             => $exame->getData(),
-
             "bilirrubina_total"                      => $exame->getBilirrubinaTotal(),
             "bilirrubina_direta"                     => $exame->getBilirrubinaDireta(),
             "proteina_total"                         => $exame->getProteinaTotal(),
@@ -161,33 +100,16 @@ class ExameBioquimicaDAO
             "ldh"                                    => $exame->getLdh(),
             "magnesio"                               => $exame->getMagnesio(),
             "fosforo"                                => $exame->getFosforo(),
-
-            "observacao"                             => $exame->getObservacao()
+            "observacao"                             => $exame->getObservacao(),
         ];
-
-        $options = [
-            "http" => [
-                "header"  => "Content-Type: application/json\r\n",
-                "method"  => "PUT",
-                "content" => json_encode($dados),
-            ],
-        ];
-
-        $context = stream_context_create($options);
-
-        $result = @file_get_contents($url, false, $context);
-
-        if (!$result) {
-            return false;
-        }
-
-        return json_decode($result, true);
+        $r = ApiClient::put("/exameBio/" . $exame->getId(), $dados);
+        if ($r['status'] >= 400) return false;
+        return $r['json'];
     }
 
     private function converterParaObj($row)
     {
         $exameBio = new ExameBioquimica();
-
         $exameBio->setId($row['id']);
         $exameBio->setBilirrubinaTotal($row['nbilirrubina_total']);
         $exameBio->setBilirrubinaDireta($row['nbilirrubina_direta']);
@@ -218,7 +140,6 @@ class ExameBioquimicaDAO
         $exameBio->setPaciente($row['id_paciente']);
         $exameBio->setData($row['ddata_exame']);
         $exameBio->setObservacao($row['cobservacao']);
-
         return $exameBio;
     }
 }

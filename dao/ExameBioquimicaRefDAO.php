@@ -4,21 +4,15 @@ class ExameBioquimicaRefDAO
 
     public function buscarReferenciaBioquimica()
     {
-        $url    = API_BASE_URL . "/bioquimicaRef";
-        $result = file_get_contents($url);
-
-        if ($result == false) {
+        $r = ApiClient::get("/bioquimicaRef");
+        if ($r['status'] !== 200 || !is_array($r['json']) || empty($r['json'][0])) {
             return false;
         }
-
-        $response = json_decode($result, true);
-        return $this->converterParaObj($response[0]);
+        return $this->converterParaObj($r['json'][0]);
     }
 
     public function atualizarReferencia(ReferenciaBioquimica $referencia)
     {
-        $url = API_BASE_URL . "/bioquimicaRef/";
-
         $dados = [
             "bilirrubina_total"             => $referencia->getBilirrubinaTotal(),
             "bilirrubina_direta"            => $referencia->getBilirrubinaDireta(),
@@ -76,23 +70,11 @@ class ExameBioquimicaRefDAO
             "fosforo_16_a_18_anos"                      => $referencia->getFosforo16A18Anos(),
         ];
 
-        $options = [
-            "http" => [
-                "header"  => "Content-Type: application/json\r\n",
-                "method"  => "PUT",
-                "content" => json_encode($dados),
-            ],
-        ];
-
-        $context = stream_context_create($options);
-
-        $result = @file_get_contents($url, false, $context);
-
-        if ($result == false) {
+        $r = ApiClient::put("/bioquimicaRef/", $dados);
+        if ($r['status'] >= 400) {
             return ["erro" => "Falha na requisição PUT"];
         }
-
-        return json_decode($result, true);
+        return $r['json'];
     }
 
     private function converterParaObj($row)

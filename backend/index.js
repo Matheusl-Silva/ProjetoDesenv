@@ -10,33 +10,35 @@ const routerAnamneseEnf = require("./routes/anamnsesEnfermagemRoutes");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./Swagger/swagger");
 
+const { verifyToken } = require("./middleware/auth");
+const usuarioController = require("./Controller/usuarioController");
+
 const app = express();
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//rota da documentação com swagger
+// Documentação
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// rota de pacientes -> vai para PacienteRouter
+// === ROTAS PÚBLICAS (sem JWT) ===
+// Login
+app.post("/usuarios/login", usuarioController.login);
+// Cadastro inicial (libera por ora — se quiser fechar, basta remover essa linha)
+app.post("/usuarios", usuarioController.createUsuario);
+// Recuperação de senha
+app.post("/usuarios/verificar-email", usuarioController.verificarEmail);
+app.put("/usuarios/recover-password", usuarioController.updatePassword);
+
+// === A PARTIR DAQUI TUDO EXIGE JWT ===
+app.use(verifyToken);
+
 app.use("/pacientes", routerPaciente);
-
-//rota de usuario -> UsuarioRouter
 app.use("/usuarios", routerUsuario);
-
-//rota para exameHemato -> hematoRouter
 app.use("/exameHemato", routerHemato);
-
-//rota para exameBioquimica -> bioquimicaRouter
 app.use("/exameBio", routerBio);
-
-//rota para referencia Hematológica -> hematoRefRouter
 app.use("/hematoRef", routerHematoRef);
-
-//rota para referencia Bioquímica -> bioquimicaRefRouter
 app.use("/bioquimicaRef", routerBioquimicaRef);
-
-//rota para anamnese de enfermagem -> anamneseEnfRouter
 app.use("/anamneseEnf", routerAnamneseEnf);
 
 app.listen(3000, () => {

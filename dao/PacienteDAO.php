@@ -1,33 +1,17 @@
 <?php
 class PacienteDAO
 {
-
     public function verificarEmailExistente($email)
     {
-        $url   = API_BASE_URL . "/pacientes/verificar-email";
-        $dados = ["email" => $email];
-
-        $options = [
-            "http" => [
-                "header"  => "Content-Type: application/json\r\n",
-                "method"  => "POST",
-                "content" => json_encode($dados),
-            ],
-        ];
-
-        $context = stream_context_create($options);
-        $result  = file_get_contents($url, false, $context);
-
-        $response = json_decode($result, true);
-        if ($response == false) {
+        $r = ApiClient::post("/pacientes/verificar-email", ["email" => $email]);
+        if ($r['status'] !== 200 || !$r['json']) {
             return false;
         }
-        return $this->converterParaObj(json_decode($result, true));
+        return $this->converterParaObj($r['json']);
     }
 
     public function cadastrarPaciente(Paciente $paciente)
     {
-        $url   = API_BASE_URL . "/pacientes";
         $dados = [
             "nome"            => $paciente->getNome(),
             "email"           => $paciente->getEmail(),
@@ -38,76 +22,45 @@ class PacienteDAO
             "medicamento"     => $paciente->getMedicamento() ?: "",
             "patologia"       => $paciente->getPatologia() ?: "",
         ];
-        $options = [
-            "http" => [
-                "header"  => "Content-Type: application/json\r\n",
-                "method"  => "POST",
-                "content" => json_encode($dados),
-            ],
-        ];
-
-        $context = stream_context_create($options);
-        $result  = file_get_contents($url, false, $context);
-
-        if ($result === false) {
+        $r = ApiClient::post("/pacientes", $dados);
+        if ($r['status'] >= 400) {
+            $resp = $r['json'];
+            if (isset($resp['error']) && strpos($resp['error'], 'Email já cadastrado') !== false) {
+                return "EMAIL_DUPLICADO";
+            }
             return false;
         }
-
-        $response = json_decode($result, true);
-
-        if (isset($response['error']) && strpos($response['error'], 'Email já cadastrado') !== false) {
-            return "EMAIL_DUPLICADO";
-        }
-
-        return isset($response['id']) ? $response['id'] : false;
+        return $r['json']['id'] ?? false;
     }
 
     public function listarPacientes()
     {
-        $url    = API_BASE_URL . "/pacientes";
-        $result = file_get_contents($url);
-        $lista  = json_decode($result, true);
-
+        $r = ApiClient::get("/pacientes");
+        if ($r['status'] !== 200 || !is_array($r['json'])) {
+            return [];
+        }
         $listaObj = [];
-        foreach ($lista as &$paciente) {
+        foreach ($r['json'] as $paciente) {
             if (isset($paciente['data_nascimento'])) {
                 $data                        = new DateTime($paciente['data_nascimento']);
                 $paciente['data_nascimento'] = $data->format('Y-m-d');
             }
             $listaObj[] = $this->converterParaObj($paciente);
         }
-
         return $listaObj;
     }
 
     public function buscarPaciente($idPaciente)
     {
-        $url   = API_BASE_URL . "/pacientes/" . $idPaciente;
-        $dados = [
-            "id" => $idPaciente,
-        ];
-
-        $options = [
-            "http" => [
-                "header"  => "Content-Type: application/json\r\n",
-                "content" => json_encode($dados),
-            ],
-        ];
-
-        $context = stream_context_create($options);
-        $result  = @file_get_contents($url, false, $context);
-
-        if ($result == false) {
+        $r = ApiClient::get("/pacientes/" . $idPaciente);
+        if ($r['status'] !== 200) {
             return false;
         }
-
-        $response = json_decode($result, true);
-        return $this->converterParaObj($response);
+        return $this->converterParaObj($r['json']);
     }
 
     public function atualizarPacientes(Paciente $paciente)
     {
-        $url   = API_BASE_URL . "/pacientes/" . $paciente->getId();
         $dados = [
             "id"              => $paciente->getId(),
             "nome"            => $paciente->getNome(),
@@ -119,56 +72,35 @@ class PacienteDAO
             "medicamento"     => $paciente->getMedicamento(),
             "patologia"       => $paciente->getPatologia(),
         ];
-
-        $options = [
-            "http" => [
-                "header"  => "Content-Type: application/json\r\n",
-                "method"  => "PUT",
-                "content" => json_encode($dados),
-            ],
-        ];
-
-        $context = stream_context_create($options);
-        $result  = file_get_contents($url, false, $context);
-
-        if ($result === false) {
+        $r = ApiClient::put("/pacientes/" . $paciente->getId(), $dados);
+        if ($r['status'] >= 400) {
             return ["erro" => "Falha na requisição PUT"];
         }
-        return json_decode($result, true);
+        return $r['json'];
     }
 
     public function excluirPaciente(Paciente $paciente)
     {
-        $url     = API_BASE_URL . "/pacientes/" . $paciente->getId();
-        $options = [
-            "http" => [
-                "header" => "Content-Type: application/json\r\n",
-                "method" => "DELETE",
-            ],
-        ];
-        $context = stream_context_create($options);
-        $result  = file_get_contents($url, false, $context);
-
-        if ($result === false) {
+        $r = ApiClient::delete("/pacientes/" . $paciente->getId());
+        if ($r['status'] >= 400) {
             return ["erro" => "Erro ao excluir paciente"];
         }
-        return json_decode($result, true);
+        return $r['json'];
     }
 
     private function converterParaObj($row)
     {
         $paciente = new Paciente();
-        $paciente->setId($row["id"]);
-        $paciente->setNome($row["cnome"]);
-        $paciente->setEmail($row["cemail"]);
-        $paciente->setPeriodo($row["cperiodo"]);
-        $paciente->setCpf($row["ccpf"]);
-        $paciente->setMedicamento($row["cmedicamento"]);
-        $paciente->setPatologia($row["cpatologia"]);
-        $paciente->setDataNasc($row["ddata_nascimento"]);
-        $paciente->setDataCadastro($row["ddata_cadastro"]);
-        $paciente->setFone($row["ctelefone"]);
-
+        $paciente->setId($row["id"] ?? null);
+        $paciente->setNome($row["cnome"] ?? null);
+        $paciente->setEmail($row["cemail"] ?? null);
+        $paciente->setPeriodo($row["cperiodo"] ?? null);
+        $paciente->setCpf($row["ccpf"] ?? null);
+        $paciente->setMedicamento($row["cmedicamento"] ?? null);
+        $paciente->setPatologia($row["cpatologia"] ?? null);
+        $paciente->setDataNasc($row["ddata_nascimento"] ?? null);
+        $paciente->setDataCadastro($row["ddata_cadastro"] ?? null);
+        $paciente->setFone($row["ctelefone"] ?? null);
         return $paciente;
     }
 }

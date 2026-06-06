@@ -77,13 +77,17 @@ class UsuarioController
     public function login($email, $senha)
     {
         $usuarioDAO = new UsuarioDAO();
+        $resposta   = null;
         if (!empty($email) && !empty($senha)) {
-            $usuario = $usuarioDAO->login($email, $senha);
+            $resposta = $usuarioDAO->login($email, $senha);
         }
-        if ($usuario) {
-            $_SESSION['id']    = $usuario->getId();
-            $_SESSION['nome']  = $usuario->getNome();
-            $_SESSION['admin'] = $usuario->getAdmin();
+        if ($resposta && !empty($resposta['token']) && !empty($resposta['usuario'])) {
+            $usuario             = $resposta['usuario'];
+            $_SESSION['id']      = $usuario->getId();
+            $_SESSION['nome']    = $usuario->getNome();
+            $_SESSION['admin']   = $usuario->getAdmin();
+            $_SESSION['email']   = $usuario->getEmail();
+            $_SESSION['token']   = $resposta['token'];
             return true;
         }
         $loginInvalido = true;

@@ -4,52 +4,28 @@ class ExameHematoDAO
 {
     public function buscarPorPacienteId($registroPaciente)
     {
-        $url = API_BASE_URL . "/exameHemato/" . $registroPaciente;
-
-        try {
-
-            $response = @file_get_contents($url);
-            if ($response === false) {
-                return null;
-            }
-
-            $data      = json_decode($response, true);
-            $examesObj = [];
-            if ($data) {
-                foreach ($data as $exame) {
-                    $examesObj[] = @$this->converterParaObj($exame);
-                }
-                return $examesObj;
-            }
-            return null;
-        } catch (Exception $e) {
+        $r = ApiClient::get("/exameHemato/" . $registroPaciente);
+        if ($r['status'] !== 200 || !is_array($r['json'])) {
             return null;
         }
+        $examesObj = [];
+        foreach ($r['json'] as $exame) {
+            $examesObj[] = @$this->converterParaObj($exame);
+        }
+        return $examesObj;
     }
 
     public function buscarExameCompletoPorId($idExame)
     {
-        $url = API_BASE_URL . "/exameHemato/listar/" . $idExame;
-        try {
-            $response = @file_get_contents($url);
-            if ($response === false) {
-                return null;
-            }
-            $data = json_decode($response, true);
-            if ($data) {
-
-                return $this->converterParaObj($data);
-            }
-            return null;
-        } catch (Exception $e) {
+        $r = ApiClient::get("/exameHemato/listar/" . $idExame);
+        if ($r['status'] !== 200 || !$r['json']) {
             return null;
         }
+        return $this->converterParaObj($r['json']);
     }
 
     public function cadastrarExame(ExameHemato $dadosExame)
     {
-        $url = API_BASE_URL . "/exameHemato/";
-
         $dados = [
             "hemacia"                => $dadosExame->getHemacia(),
             "hemoglobina"            => $dadosExame->getHemoglobina(),
@@ -82,31 +58,13 @@ class ExameHematoDAO
             "idPreceptor"            => $dadosExame->getPreceptor(),
             "idPaciente"             => $dadosExame->getPaciente(),
         ];
-        $options = [
-            "http" => [
-                "header"  => "Content-Type: application/json\r\n",
-                "method"  => "POST",
-                "content" => json_encode($dados),
-            ],
-        ];
-
-        $context = stream_context_create($options);
-
-        $result = file_get_contents($url, false, $context);
-
-        if ($result === false) {
-            return false;
-        }
-
-        $response = json_decode($result, true);
-
-        return isset($response['id']) ? $response['id'] : false;
+        $r = ApiClient::post("/exameHemato/", $dados);
+        if ($r['status'] >= 400) return false;
+        return $r['json']['id'] ?? false;
     }
 
     public function editar(ExameHemato $exame)
     {
-        $url = API_BASE_URL . "/exameHemato/" . $exame->getId();
-
         $dados = [
             "hemacia"                => $exame->getHemacia(),
             "hemoglobina"            => $exame->getHemoglobina(),
@@ -139,50 +97,21 @@ class ExameHematoDAO
             "id_preceptor"           => $exame->getPreceptor(),
             "id_paciente"            => $exame->getPaciente(),
         ];
-
-        $options = [
-            "http" => [
-                "header"  => "Content-Type: application/json\r\n",
-                "method"  => "PUT",
-                "content" => json_encode($dados),
-            ]
-        ];
-
-        $context = stream_context_create($options);
-
-        $result = file_get_contents($url, false, $context);
-
-        if(!$result) return false;
-
-        return json_decode($result, true);
+        $r = ApiClient::put("/exameHemato/" . $exame->getId(), $dados);
+        if ($r['status'] >= 400) return false;
+        return $r['json'];
     }
 
     public function excluir($idExame)
     {
-        $url = API_BASE_URL . "/exameHemato/" . $idExame;
-
-        $options = [
-            'http' => [
-                "header" => "Content-Type: application/json\r\n",
-                "method" => "DELETE",
-            ],
-        ];
-
-        $context = stream_context_create($options);
-
-        $result = file_get_contents($url, false, $context);
-
-        if ($result === false) {
-            return false;
-        }
-
-        return json_decode($result, true);
+        $r = ApiClient::delete("/exameHemato/" . $idExame);
+        if ($r['status'] >= 400) return false;
+        return $r['json'];
     }
 
     private function converterParaObj($row)
     {
         $exameHemato = new ExameHemato();
-
         $exameHemato->setId($row['id']);
         $exameHemato->setHemacia($row['nhemacia']);
         $exameHemato->setHemoglobina($row['nhemoglobina']);
@@ -214,7 +143,6 @@ class ExameHematoDAO
         $exameHemato->setIdResponsavel($row['id_responsavel']);
         $exameHemato->setPreceptor($row['id_preceptor']);
         $exameHemato->setPaciente($row['id_paciente']);
-
         return $exameHemato;
     }
 }

@@ -15,12 +15,16 @@ class Autenticacao
 
     public function verificarLogin()
     {
-        // Verifica se o usuário está logado
-        $logado = isset($_SESSION['id']) && isset($_SESSION['nome']);
+        // Verifica se o usuário está logado E tem token JWT válido
+        $logado = isset($_SESSION['id'])
+            && isset($_SESSION['nome'])
+            && !empty($_SESSION['token']);
 
         // Redireciona para a página de login se não estiver logado
         if (!$logado) {
-            header("Location: /");
+            $_SESSION = [];
+            session_destroy();
+            header("Location: /login");
             exit;
         }
 
