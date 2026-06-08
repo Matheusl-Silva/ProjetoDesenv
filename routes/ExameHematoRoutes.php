@@ -33,7 +33,7 @@ return function (Router $router) {
         $exameHemato->setIdResponsavel($_POST["id_responsavel"]);
         $exameHemato->setPreceptor($_POST["id_preceptor"]);
         $exameHemato->setPaciente($_POST["id_paciente"]);
-        $exameHemato->setData($_POST["data"]);
+        $exameHemato->setData(substr($_POST["data"], 0, 10));
         $exameHemato->setHemacia($_POST["hemacia"]);
         $exameHemato->setHemoglobina($_POST["hemoglobina"]);
         $exameHemato->setHematocrito($_POST["hematocrito"]);
@@ -71,7 +71,7 @@ return function (Router $router) {
         $exameHemato->setIdResponsavel($dadosExame["idResponsavel"]);
         $exameHemato->setPreceptor($dadosExame["idPreceptor"]);
         $exameHemato->setPaciente($dadosExame["idPaciente"]);
-        $exameHemato->setData($dadosExame["dataExame"]);
+        $exameHemato->setData(substr($dadosExame["dataExame"], 0, 10));
 
         $exameHemato->setHemacia($dadosExame["hemacia"]);
         $exameHemato->setHemoglobina($dadosExame["hemoglobina"]);

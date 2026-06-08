@@ -43,7 +43,7 @@ return function (Router $router) {
         $exameBioquimica->setResponsavel($_POST["id_responsavel"]);
         $exameBioquimica->setPreceptor($_POST["id_preceptor"]);
         $exameBioquimica->setPaciente($_POST["id_paciente"]);
-        $exameBioquimica->setData($_POST["data"]);
+        $exameBioquimica->setData(substr($_POST["data"], 0, 10));
         $exameBioquimica->setTgoTransaminaseGlutamicoOxalacetica($_POST["ast"] ?? null);
         $exameBioquimica->setTgpTransaminaseGlutamicoPiruvica($_POST["alt"] ?? null);
         $exameBioquimica->setGamaGtGlutamiltransferase($_POST["ggt"] ?? null);
@@ -85,7 +85,7 @@ return function (Router $router) {
         $exameBioquimico->setResponsavel($dadosExame["idResponsavel"]);
         $exameBioquimico->setPreceptor($dadosExame["idPreceptor"]);
         $exameBioquimico->setPaciente($dadosExame["idPaciente"]);
-        $exameBioquimico->setData($dadosExame["dataExame"]);
+        $exameBioquimico->setData(substr($dadosExame["dataExame"], 0, 10));
 
         $exameBioquimico->setId($id);
 
