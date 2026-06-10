@@ -182,8 +182,20 @@
             class="form-control exam-data">
         </div>
         <div class="col-md-3">
-          <label class="form-label">Plasmócitos (/µL)</label>
-          <input type="text" name="plasmocitos" class="form-control exam-data">
+          <label class="form-label">Mieloblastos (/µL)</label>
+          <input type="text" name="mieloblastos" class="form-control exam-data">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Células Linfoides (/µL)</label>
+          <input type="text" name="celulas_linfoides" class="form-control exam-data">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Células Monocitoides (/µL)</label>
+          <input type="text" name="celulas_monocitoides" class="form-control exam-data">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Outras Células (/µL)</label>
+          <input type="text" name="outras_celulas" class="form-control exam-data">
         </div>
       </div>
 
