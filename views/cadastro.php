@@ -70,9 +70,9 @@
                 <button type="submit" class="btn btn-login w-100 mb-3">
                     <i class="bi bi-person-plus me-2"></i>Cadastrar
                 </button>
-                <a href="/login" class="btn btn-outline-secondary w-100 btn-back">
-                    <i class="bi bi-arrow-left me-2"></i>Voltar para o Login
-                </a>
+                <button onclick="history.back()" class="btn btn-outline-secondary w-100 btn-back">
+                    <i class="bi bi-arrow-left me-2"></i>Voltar
+            </button>
             </form>
         </div>
     </div>
