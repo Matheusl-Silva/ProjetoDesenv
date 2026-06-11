@@ -39,9 +39,6 @@ class UsuarioController
 
     public function cadastrarUsuario(Usuario $usuario)
     {
-        $db     = new Conexao();
-        $mysqli = $db->getConexao();
-
         $usuarioDAO = new UsuarioDAO();
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
