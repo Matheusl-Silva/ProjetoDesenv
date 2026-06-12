@@ -73,13 +73,12 @@ return function (Router $router) {
 
         $dadosExame = json_decode($_POST["dadosEdicao"], true);
 
-        $exameHemato->setId($id);
+        $exameHemato->setId($id); //certo?
 
         $exameHemato->setIdResponsavel($dadosExame["idResponsavel"]);
         $exameHemato->setPreceptor($dadosExame["idPreceptor"]);
         $exameHemato->setPaciente($dadosExame["idPaciente"]);
         $exameHemato->setData(substr($dadosExame["dataExame"], 0, 10));
-
         $exameHemato->setHemacia($dadosExame["hemacia"]);
         $exameHemato->setHemoglobina($dadosExame["hemoglobina"]);
         $exameHemato->setHematocrito($dadosExame["hematocrito"]);
@@ -88,15 +87,21 @@ return function (Router $router) {
         $exameHemato->setChcm($dadosExame["chcm"]);
         $exameHemato->setRdw($dadosExame["rdw"]);
         $exameHemato->setLeucocitos($dadosExame["leucocitos"]);
+        $exameHemato->setLinfocitos($dadosExame["linfocitos"]);
+        $exameHemato->setLinfocitosAtipicos($dadosExame["linfocitosAtipicos"]);
         $exameHemato->setBlastos($dadosExame["blastos"]);
         $exameHemato->setPromielocitos($dadosExame["promielocitos"]);
         $exameHemato->setMielocitos($dadosExame["mielocitos"]);
         $exameHemato->setMetamielocitos($dadosExame["metamielocitos"]);
         $exameHemato->setBastonetes($dadosExame["bastonetes"]);
         $exameHemato->setSegmentados($dadosExame["segmentados"]);
-        $exameHemato->setSegmentados($dadosExame["segmentados"]);
+        $exameHemato->setMonocitos($dadosExame["monocitos"]);
         $exameHemato->setEosinofilos($dadosExame["eosinofilos"]);
+        $exameHemato->setMieloblastos($dadosExame["mieloblastos"]);
         $exameHemato->setBasofilos($dadosExame["basofilos"]);
+        $exameHemato->setCelulasLinfoides($dadosExame["celulasLinfoides"]);
+        $exameHemato->setCelulasMonocitoides($dadosExame["celulasMonocitoides"]);
+        $exameHemato->setOutrasCelulas($dadosExame["outrasCelulas"]);
         $exameHemato->setPlaquetas($dadosExame["plaquetas"]);
         $exameHemato->setVolumePlaquetarioMedio($dadosExame["volumePlaquetarioMedio"]);
         $exameHemato->setNeutrofilos($dadosExame["neutrofilos"]);

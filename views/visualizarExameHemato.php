@@ -126,15 +126,22 @@
                         <?php
                         $camposLeucograma = [
                             'getLeucocitos'     => ['label' => 'Leucócitos', 'refRel' => 'getLeucocitosRelativo', 'refAbs' => 'getLeucocitosAbsoluto'],
+                            'getNeutrofilos'    => ['label' => 'Neutrófilos (%)', 'refRel' => 'getNeutrofilosRelativo', 'refAbs' => 'getNeutrofilosAbsoluto'],
+                            'getLinfocitos'     => ['label' => 'Linfócitos (%)', 'refRel' => 'getLinfocitosRelativo', 'refAbs' => 'getLinfocitosAbsoluto'],
+                            'getMonocitos'      => ['label' => 'Monócitos (%)', 'refRel' => 'getMonocitosRelativo', 'refAbs' => 'getMonocitosAbsoluto'],
+                            'getEosinofilos'    => ['label' => 'Eosinófilos (%)', 'refRel' => 'getEosinofilosRelativo', 'refAbs' => 'getEosinofilosAbsoluto'],
+                            'getBasofilos'      => ['label' => 'Basófilos (%)', 'refRel' => 'getBasofilosRelativo', 'refAbs' => 'getBasofilosAbsoluto'],
+                            'getBastonetes'     => ['label' => 'Bastonetes (µL)', 'refRel' => 'getBastonetesRelativo', 'refAbs' => 'getBastonetesAbsoluto'],
                             'getBlastos'        => ['label' => 'Blastos (µL)', 'refRel' => 'getBlastosRelativo', 'refAbs' => 'getBlastosAbsoluto'],
                             'getPromielocitos'  => ['label' => 'Prómielócitos (µL)', 'refRel' => 'getPromielocitosRelativo', 'refAbs' => 'getPromielocitosAbsoluto'],
                             'getMielocitos'     => ['label' => 'Mielócitos (µL)', 'refRel' => 'getMielocitosRelativo', 'refAbs' => 'getMielocitosAbsoluto'],
                             'getMetamielocitos' => ['label' => 'Metamielócitos (µL)', 'refRel' => 'getMetamielocitosRelativo', 'refAbs' => 'getMetamielocitosAbsoluto'],
-                            'getBastonetes'     => ['label' => 'Bastonetes (µL)', 'refRel' => 'getBastonetesRelativo', 'refAbs' => 'getBastonetesAbsoluto'],
-                            'getSegmentados'    => ['label' => 'Segmentados (µL)', 'refRel' => 'getSegmentadosRelativo', 'refAbs' => 'getSegmentadosAbsoluto'],
-                            'getNeutrofilos'    => ['label' => 'Neutrófilos (%)', 'refRel' => 'getNeutrofilosRelativo', 'refAbs' => 'getNeutrofilosAbsoluto'],
-                            'getEosinofilos'    => ['label' => 'Eosinófilos (%)', 'refRel' => 'getEosinofilosRelativo', 'refAbs' => 'getEosinofilosAbsoluto'],
-                            'getBasofilos'      => ['label' => 'Basófilos (%)', 'refRel' => 'getBasofilosRelativo', 'refAbs' => 'getBasofilosAbsoluto'],
+                            'getSegmentados'    => ['label' => 'Segmentados (µL)', 'refRel' => 'getSegmentadosRelativo', 'refAbs' => 'getSegmentadosAbsoluto'],                            
+                            'getLinfocitosAtipicos'    => ['label' => 'Linfócitos Atípicos (µL)', 'refRel' => 'getLinfocitosAtipicosRelativo', 'refAbs' => 'getLinfocitosAtipicosAbsoluto'],                            
+                            'getMieloblastos'    => ['label' => 'Mieloblastos (µL)', 'refRel' => 'getMieloblastosRelativo', 'refAbs' => 'getMieloblastosAbsoluto'],                            
+                            'getCelulasLinfoides'    => ['label' => 'Células Linfoides (µL)', 'refRel' => 'getCelulasLinfoidesRelativo', 'refAbs' => 'getCelulasLinfoidesAbsoluto'],                            
+                            'getCelulasMonocitoides'    => ['label' => 'Células Monocitoides (µL)', 'refRel' => 'getCelulasMonocitoidesRelativo', 'refAbs' => 'getCelulasMonocitoidesAbsoluto'],                            
+                            'getOutrasCelulas'    => ['label' => 'Outras Células (µL)', 'refRel' => 'getOutrasCelulasRelativo', 'refAbs' => 'getOutrasCelulasAbsoluto'],                            
                         ];
                         foreach ($camposLeucograma as $metodo => $config):
                             $valorRef = '';
@@ -260,15 +267,22 @@
 
                 // Leucograma
                 "leucocitos",
+                "neutrofilos",
+                "linfocitos",
+                "monocitos",
+                "eosinofilos",
+                "basofilos",
+                "bastonetes",
                 "blastos",
                 "promielocitos",
                 "mielocitos",
                 "metamielocitos",
-                "bastonetes",
                 "segmentados",
-                "neutrofilos",
-                "eosinofilos",
-                "basofilos",
+                "linfocitosAtipicos",
+                "mieloblastos",
+                "celulasLinfoides",
+                "celulasMonocitoides",
+                "outrasCelulas",
 
                 // Plaquetograma
                 "plaquetas",
