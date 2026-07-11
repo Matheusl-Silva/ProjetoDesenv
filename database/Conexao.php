@@ -7,13 +7,17 @@ class Conexao
     private $database = 'laboratorio';
     private $conexao;
 
-    public function __construct($host = 'localhost', $usuarios = 'root', $senha = '', $database = 'laboratorio')
-    {
+    public function __construct(
+        $host     = null,
+        $usuarios = null,
+        $senha    = null,
+        $database = null
+    ) {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-        $this->host     = $host;
-        $this->usuarios = $usuarios;
-        $this->senha    = $senha;
-        $this->database = $database;
+        $this->host     = $host     ?? getenv('DB_HOST')     ?: 'localhost';
+        $this->usuarios = $usuarios ?? getenv('DB_USER')     ?: 'root';
+        $this->senha    = $senha    ?? getenv('DB_PASSWORD')  ?: '';
+        $this->database = $database ?? getenv('DB_NAME')     ?: 'laboratorio';
         $this->conectar();
     }
 

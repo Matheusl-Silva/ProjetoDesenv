@@ -44,14 +44,39 @@
     </div>
   </div>
 
+  <div class="modal fade" id="modalErro" tabindex="-1" aria-labelledby="modalErroLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="modalErroLabel">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> Não foi possível cadastrar
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p id="mensagemErro" class="fs-5 mb-2"></p>
+          <p class="text-muted small mb-0">
+            Verifique se os valores informados são válidos — números muito grandes ou campos
+            obrigatórios em branco podem impedir o cadastro.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+            <i class="bi bi-pencil me-1"></i> Corrigir dados
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <div class="d-flex align-items-center">
         <div class="logo-container-nav">
           <img src="../assets/img/LogoPositivo.png"
-            alt="Logo Portal de Saúde Positivo" class="logo-nav">
+            alt="Logo LabFlow" class="logo-nav">
         </div>
-        <a class="navbar-brand">Portal de Saúde Positivo</a>
+        <a class="navbar-brand">LabFlow</a>
       </div>
       <div class="collapse navbar-collapse justify-content-end">
         <div class="d-flex align-items-center">
@@ -182,8 +207,20 @@
             class="form-control exam-data">
         </div>
         <div class="col-md-3">
-          <label class="form-label">Plasmócitos (/µL)</label>
-          <input type="text" name="plasmocitos" class="form-control exam-data">
+          <label class="form-label">Mieloblastos (/µL)</label>
+          <input type="text" name="mieloblastos" class="form-control exam-data">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Células Linfoides (/µL)</label>
+          <input type="text" name="celulas_linfoides" class="form-control exam-data">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Células Monocitoides (/µL)</label>
+          <input type="text" name="celulas_monocitoides" class="form-control exam-data">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Outras Células (/µL)</label>
+          <input type="text" name="outras_celulas" class="form-control exam-data">
         </div>
       </div>
 
@@ -250,6 +287,13 @@
     const urlParams = new URLSearchParams(window.location.search);
     const exameId = urlParams.get('exame_id');
     const sucesso = urlParams.get('sucesso');
+    const erro = urlParams.get('erro');
+
+    if (erro) {
+      document.getElementById('mensagemErro').textContent = erro;
+      var myModalErro = new bootstrap.Modal(document.getElementById('modalErro'));
+      myModalErro.show();
+    }
 
     if (sucesso === '1') {
       const mensagemElement = document.getElementById('mensagemSucesso');

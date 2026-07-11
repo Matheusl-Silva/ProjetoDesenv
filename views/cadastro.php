@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/login.css?v=<?php echo time(); ?>">
     <link rel="icon" href="/assets/img/favicon.png" type="image/x-icon">
-    <title>Portal de Saúde Positivo - Cadastro</title>
+    <title>LabFlow - Cadastro</title>
 </head>
 
 <body>
@@ -70,9 +70,9 @@
                 <button type="submit" class="btn btn-login w-100 mb-3">
                     <i class="bi bi-person-plus me-2"></i>Cadastrar
                 </button>
-                <a href="/login" class="btn btn-outline-secondary w-100 btn-back">
-                    <i class="bi bi-arrow-left me-2"></i>Voltar para o Login
-                </a>
+                <button onclick="history.back()" class="btn btn-outline-secondary w-100 btn-back">
+                    <i class="bi bi-arrow-left me-2"></i>Voltar
+            </button>
             </form>
         </div>
     </div>

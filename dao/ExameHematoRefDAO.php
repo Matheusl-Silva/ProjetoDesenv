@@ -4,34 +4,15 @@ class ExameHematoRefDAO
 
     public function buscarReferenciaHematologica()
     {
-        $url = "http://localhost:3000/hematoRef";
-
-        $options = [
-            "http" => [
-                "header" => "Content-Type: application/json\r\n",
-                "method" => "GET",
-            ],
-        ];
-
-        $context = stream_context_create($options);
-
-        $result = file_get_contents($url, false, $context);
-
-        if ($result == false) {
+        $r = ApiClient::get("/hematoRef");
+        if ($r['status'] !== 200 || !is_array($r['json']) || empty($r['json'][0])) {
             return false;
         }
-
-        $response = json_decode($result, true);
-        if (is_array($response) && count($response) > 0) {
-            return $this->converterParaObj($response[0]);
-        }
-        return false;
+        return $this->converterParaObj($r['json'][0]);
     }
 
     public function atualizarReferencia(ReferenciaHematologia $referencia)
     {
-        $url = "http://localhost:3000/hematoRef/1";
-
         $dados = [
             "hemacia_m"                      => $referencia->getHemaciaM(),
             "hemacia_f"                      => $referencia->getHemaciaF(),
@@ -84,23 +65,12 @@ class ExameHematoRefDAO
             "plaquetas"                      => $referencia->getPlaquetas(),
             "volume_plaquetario_medio"       => $referencia->getVolumePlaquetarioMedio(),
         ];
-        $options = [
-            "http" => [
-                "header"  => "Content-Type: application/json\r\n",
-                "method"  => "PUT",
-                "content" => json_encode($dados),
-            ],
-        ];
 
-        $context = stream_context_create($options);
-
-        $result = @file_get_contents($url, false, $context);
-
-        if ($result == false) {
+        $r = ApiClient::put("/hematoRef/1", $dados);
+        if ($r['status'] >= 400) {
             return ["erro" => "Falha na requisição PUT"];
         }
-
-        return json_decode($result, true);
+        return $r['json'];
     }
 
     private function converterParaObj($row)

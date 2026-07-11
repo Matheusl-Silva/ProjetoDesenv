@@ -1,8 +1,11 @@
 <?php
 //Reporta erros
 ini_set('display_errors', 1);
-ini_set('display_startup_erros', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+// URL base da API Node.js — lê do ambiente ou usa padrão local
+define('API_BASE_URL', getenv('API_BASE_URL') ?: ($_ENV['API_BASE_URL'] ?? ($_SERVER['API_BASE_URL'] ?? 'http://localhost:3000')));
 
 //Inicia sessão
 session_start();
@@ -11,7 +14,7 @@ session_start();
 require_once __DIR__ . '/vendor/autoload.php';
 
 spl_autoload_register(function ($class) {
-    $pastas = ['controller', 'dao', 'models', 'database'];
+    $pastas = ['controller', 'dao', 'models', 'database', 'helpers'];
 
     foreach ($pastas as $pasta) {
         $caminho = __DIR__ . "/$pasta" . "/$class.php";

@@ -4,52 +4,29 @@ class AnamneseDAO
 {
     public function buscarPorPacienteId($registroPaciente)
     {
-        $url = "http://localhost:3000/anamneseEnf/paciente/" . $registroPaciente;
-
-        try {
-
-            $response = @file_get_contents($url);
-            if ($response === false) {
-                return null;
-            }
-
-            $data      = json_decode($response, true);
-            $examesObj = [];
-            if ($data) {
-                foreach ($data as $exame) {
-                    $examesObj[] = @$this->converterParaObj($exame);
-                }
-                return $examesObj;
-            }
-            return null;
-        } catch (Exception $e) {
+        $r = ApiClient::get("/anamneseEnf/paciente/" . $registroPaciente);
+        if ($r['status'] !== 200 || !is_array($r['json'])) {
             return null;
         }
+        $examesObj = [];
+        foreach ($r['json'] as $exame) {
+            $examesObj[] = @$this->converterParaObj($exame);
+        }
+        return $examesObj;
     }
 
     public function buscarExameCompletoPorId($idExame)
     {
-        $url = "http://localhost:3000/anamneseEnf/" . $idExame;
-        try {
-            $response = @file_get_contents($url);
-            if ($response === false) {
-                return null;
-            }
-            $data = json_decode($response, true);
-            if ($data) {
-                $row = isset($data[0]) ? $data[0] : $data;
-                return $this->converterParaObj($row);
-            }
-            return null;
-        } catch (Exception $e) {
+        $r = ApiClient::get("/anamneseEnf/" . $idExame);
+        if ($r['status'] !== 200 || !$r['json']) {
             return null;
         }
+        $row = isset($r['json'][0]) ? $r['json'][0] : $r['json'];
+        return $this->converterParaObj($row);
     }
 
     public function cadastrarExame(AnamneseEnf $dadosExame)
     {
-        $url = "http://localhost:3000/anamneseEnf/";
-
         $dados = [
             "queixa" => $dadosExame->getQueixa(),
             "inicioSintomas" => $dadosExame->getInicioSintomas(),
@@ -82,31 +59,13 @@ class AnamneseDAO
             "idPaciente" => $dadosExame->getIdPaciente(),
             "data" => $dadosExame->getData(),
         ];
-        $options = [
-            "http" => [
-                "header"  => "Content-Type: application/json\r\n",
-                "method"  => "POST",
-                "content" => json_encode($dados),
-            ],
-        ];
-
-        $context = stream_context_create($options);
-
-        $result = @file_get_contents($url, false, $context);
-
-        if ($result === false) {
-            return false;
-        }
-
-        $response = json_decode($result, true);
-
-        return isset($response['id']) ? $response['id'] : false;
+        $r = ApiClient::post("/anamneseEnf/", $dados);
+        if ($r['status'] >= 400) return false;
+        return $r['json']['id'] ?? false;
     }
 
     public function editar(AnamneseEnf $exame)
     {
-        $url = "http://localhost:3000/anamneseEnf/" . $exame->getId();
-
         $dados = [
             "queixa" => $exame->getQueixa(),
             "inicioSintomas" => $exame->getInicioSintomas(),
@@ -139,50 +98,21 @@ class AnamneseDAO
             "idPaciente" => $exame->getIdPaciente(),
             "data" => $exame->getData(),
         ];
-
-        $options = [
-            "http" => [
-                "header"  => "Content-Type: application/json\r\n",
-                "method"  => "PUT",
-                "content" => json_encode($dados),
-            ]
-        ];
-
-        $context = stream_context_create($options);
-
-        $result = @file_get_contents($url, false, $context);
-
-        if(!$result) return false;
-
-        return json_decode($result, true);
+        $r = ApiClient::put("/anamneseEnf/" . $exame->getId(), $dados);
+        if ($r['status'] >= 400) return false;
+        return $r['json'];
     }
 
     public function excluir($idExame)
     {
-        $url = "http://localhost:3000/anamneseEnf/" . $idExame;
-
-        $options = [
-            'http' => [
-                "header" => "Content-Type: application/json\r\n",
-                "method" => "DELETE",
-            ],
-        ];
-
-        $context = stream_context_create($options);
-
-        $result = @file_get_contents($url, false, $context);
-
-        if ($result === false) {
-            return false;
-        }
-
-        return json_decode($result, true);
+        $r = ApiClient::delete("/anamneseEnf/" . $idExame);
+        if ($r['status'] >= 400) return false;
+        return $r['json'];
     }
 
     private function converterParaObj($row)
     {
         $ana = new AnamneseEnf();
-
         $ana->setId(isset($row['id']) ? $row['id'] : null);
         $ana->setQueixa(isset($row['cqueixa']) ? $row['cqueixa'] : null);
         $ana->setInicioSintomas(isset($row['dinicio_sintomas']) ? $row['dinicio_sintomas'] : null);
@@ -214,7 +144,6 @@ class AnamneseDAO
         $ana->setTratamentoDoencaFamiliar(isset($row['ctratamento_doenca_familiar']) ? $row['ctratamento_doenca_familiar'] : null);
         $ana->setIdPaciente(isset($row['id_paciente']) ? $row['id_paciente'] : null);
         $ana->setData(isset($row['ddata']) ? $row['ddata'] : null);
-
         return $ana;
     }
 }

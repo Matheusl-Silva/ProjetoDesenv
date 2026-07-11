@@ -2,7 +2,7 @@
 session_start();
 
 spl_autoload_register(function ($class) {
-    $pastas = ['controller', 'dao', 'models', 'database'];
+    $pastas = ['controller', 'dao', 'models', 'database', 'helpers'];
     
     foreach ($pastas as $pasta) {
         $caminho = __DIR__ . "/../$pasta/$class.php";

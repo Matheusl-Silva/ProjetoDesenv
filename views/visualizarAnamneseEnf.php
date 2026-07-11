@@ -22,9 +22,9 @@
             <div class="container">
                 <div class="d-flex align-items-center">
                     <div class="logo-container-nav">
-                        <img src="../../assets/img/LogoPositivo.png" alt="Logo Portal de Saúde Positivo" class="logo-nav">
+                        <img src="../../assets/img/LogoPositivo.png" alt="Logo LabFlow" class="logo-nav">
                     </div>
-                    <a class="navbar-brand">Portal de Saúde Positivo</a>
+                    <a class="navbar-brand">LabFlow</a>
                 </div>
                 <div class="collapse navbar-collapse justify-content-end">
                     <div class="d-flex align-items-center">
