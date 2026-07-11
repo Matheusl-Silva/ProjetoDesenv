@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/login.css?v=<?php echo time(); ?>">
     <link rel="icon" href="/assets/img/favicon.png" type="image/x-icon">
-    <title>Portal de Saúde Positivo - Cadastro</title>
+    <title>LabFlow - Cadastro</title>
 </head>
 
 <body>

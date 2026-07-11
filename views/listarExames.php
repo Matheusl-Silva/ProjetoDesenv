@@ -46,9 +46,9 @@
         <div class="container">
             <div class="d-flex align-items-center">
                 <div class="logo-container-nav">
-                    <img src="../../assets/img/LogoPositivo.png" alt="Logo Portal de Saúde Positivo" class="logo-nav">
+                    <img src="../../assets/img/LogoPositivo.png" alt="Logo LabFlow" class="logo-nav">
                 </div>
-                <a class="navbar-brand">Portal de Saúde Positivo</a>
+                <a class="navbar-brand">LabFlow</a>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

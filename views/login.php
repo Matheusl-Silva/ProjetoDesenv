@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="/assets/css/login.css?v=<?php echo time(); ?>">
   <link rel="icon" href="/assets/img/favicon.png" type="image/x-icon">
-  <title>Portal de Saúde Positivo - Login</title>
+  <title>LabFlow - Login</title>
 </head>
 
 <body>
@@ -42,7 +42,7 @@
         <div class="logo-circle mx-auto mb-3">
           <i class="bi bi-heart-pulse-fill text-primary fs-2"></i>
         </div>
-        <h2 class="brand-title">Portal Positivo</h2>
+        <h2 class="brand-title">LabFlow</h2>
         <p class="brand-subtitle">Acesso seguro aos seus dados de saúde</p>
       </div>
 

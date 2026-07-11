@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/login.css?v=<?php echo time(); ?>">
     <link rel="icon" href="/assets/img/favicon.png" type="image/x-icon">
-    <title>Portal de Saúde Positivo - Recuperação de Senha</title>
+    <title>LabFlow - Recuperação de Senha</title>
     <style>
         .email-validation-feedback {
             font-size: 0.85rem;
