@@ -63,7 +63,12 @@ return function (Router $router) {
 
         $result = $exameHematoController->cadastrarExame($exameHemato);
 
-        header('Location: /cadastrarHematologia/' . $exameHemato->getPaciente() . '?sucesso=1&exame_id=' . $result);
+        if (!empty($result['ok'])) {
+            header('Location: /cadastrarHematologia/' . $exameHemato->getPaciente() . '?sucesso=1&exame_id=' . $result['id']);
+        } else {
+            $erro = $result['erro'] ?? 'Erro ao cadastrar exame.';
+            header('Location: /cadastrarHematologia/' . $exameHemato->getPaciente() . '?erro=' . urlencode($erro));
+        }
         exit;
     });
 

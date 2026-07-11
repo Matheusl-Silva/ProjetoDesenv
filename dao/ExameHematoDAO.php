@@ -59,8 +59,11 @@ class ExameHematoDAO
             "idPaciente"             => $dadosExame->getPaciente(),
         ];
         $r = ApiClient::post("/exameHemato/", $dados);
-        if ($r['status'] >= 400) return false;
-        return $r['json']['id'] ?? false;
+        if ($r['status'] >= 400 || empty($r['json']['id'])) {
+            $msg = $r['json']['error'] ?? $r['json']['message'] ?? 'Não foi possível cadastrar o exame.';
+            return ['ok' => false, 'erro' => $msg];
+        }
+        return ['ok' => true, 'id' => $r['json']['id']];
     }
 
     public function editar(ExameHemato $exame)

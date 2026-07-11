@@ -166,7 +166,7 @@ CREATE TABLE `paciente` (
   `cmedicamento` varchar(240) DEFAULT NULL,
   `cpatologia` varchar(240) DEFAULT NULL,
   `ddata_nascimento` date NOT NULL,
-  `ddata_cadastro` date NOT NULL,
+  `ddata_cadastro` date NOT NULL DEFAULT (curdate()),
   `ctelefone` varchar(240) NOT NULL,
   `ccpf` varchar(14) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
