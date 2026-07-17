@@ -190,7 +190,7 @@ if ($paciente && $paciente->getDataNasc()) {
     <div class="info-paciente">
         <div class="info-row">
             <div><span class="info-label">Paciente: <?php echo $paciente ? htmlspecialchars($paciente->getNome()) : 'N/A'; ?></span></div>
-            <div><span class="info-label">Nome Social:</span></div>
+            <div></div>
         </div>
         <div class="info-row">
             <div><span class="info-label">Idade: <?php echo $idade; ?></span></div>
@@ -291,22 +291,46 @@ if ($paciente && $paciente->getDataNasc()) {
         <div class="referencia"><?php echo $referencia->getLeucocitosAbsoluto() ?: ''; ?></div>
     </div>
     <div class="linha-resultado">
+        <div class="nome">Blastos.................:</div>
+        <div class="unidade"></div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getBlastos() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getBlastosRelativo() ?: ''; ?></div>
+    </div>
+    <div class="linha-resultado">
+        <div class="nome">Promielócitos...........:</div>
+        <div class="unidade"></div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getPromielocitos() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getPromielocitosRelativo() ?: ''; ?></div>
+    </div>
+    <div class="linha-resultado">
+        <div class="nome">Mielócitos..............:</div>
+        <div class="unidade"></div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getMielocitos() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getMielocitosRelativo() ?: ''; ?></div>
+    </div>
+    <div class="linha-resultado">
+        <div class="nome">Metamielócitos..........:</div>
+        <div class="unidade"></div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getMetamielocitos() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getMetamielocitosRelativo() ?: ''; ?></div>
+    </div>
+    <div class="linha-resultado">
         <div class="nome">Neutrófilos.............:</div>
         <div class="unidade"></div>
         <div class="valor"><?php echo htmlspecialchars($exame->getNeutrofilos() ?? ''); ?></div>
         <div class="referencia"><?php echo $referencia->getNeutrofilosRelativo() ?: ''; ?></div>
     </div>
     <div class="linha-resultado">
-        <div class="nome">Linfócitos..............:</div>
+        <div class="nome">Bastonetes..............:</div>
         <div class="unidade"></div>
-        <div class="valor"></div>
-        <div class="referencia"><?php echo $referencia->getLinfocitosRelativo() ?: ''; ?></div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getBastonetes() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getBastonetesRelativo() ?: ''; ?></div>
     </div>
     <div class="linha-resultado">
-        <div class="nome">Monócitos...............:</div>
+        <div class="nome">Segmentados.............:</div>
         <div class="unidade"></div>
-        <div class="valor"></div>
-        <div class="referencia"><?php echo $referencia->getMonocitosRelativo() ?: ''; ?></div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getSegmentados() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getSegmentadosRelativo() ?: ''; ?></div>
     </div>
     <div class="linha-resultado">
         <div class="nome">Eosinófilos.............:</div>
@@ -321,10 +345,46 @@ if ($paciente && $paciente->getDataNasc()) {
         <div class="referencia"><?php echo $referencia->getBasofilosRelativo() ?: ''; ?></div>
     </div>
     <div class="linha-resultado">
-        <div class="nome">Bastonetes..............:</div>
+        <div class="nome">Linfócitos..............:</div>
         <div class="unidade"></div>
-        <div class="valor"><?php echo htmlspecialchars($exame->getBastonetes() ?? ''); ?></div>
-        <div class="referencia"><?php echo $referencia->getBastonetesRelativo() ?: ''; ?></div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getLinfocitos() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getLinfocitosRelativo() ?: ''; ?></div>
+    </div>
+    <div class="linha-resultado">
+        <div class="nome">Linfócitos atípicos.....:</div>
+        <div class="unidade"></div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getLinfocitosAtipicos() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getLinfocitosAtipicosRelativo() ?: ''; ?></div>
+    </div>
+    <div class="linha-resultado">
+        <div class="nome">Monócitos...............:</div>
+        <div class="unidade"></div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getMonocitos() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getMonocitosRelativo() ?: ''; ?></div>
+    </div>
+    <div class="linha-resultado">
+        <div class="nome">Mieloblastos............:</div>
+        <div class="unidade"></div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getMieloblastos() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getMieloblastosRelativo() ?: ''; ?></div>
+    </div>
+    <div class="linha-resultado">
+        <div class="nome">Outras células..........:</div>
+        <div class="unidade"></div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getOutrasCelulas() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getOutrasCelulasRelativo() ?: ''; ?></div>
+    </div>
+    <div class="linha-resultado">
+        <div class="nome">Células linfoides.......:</div>
+        <div class="unidade"></div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getCelulasLinfoides() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getCelulasLinfoidesRelativo() ?: ''; ?></div>
+    </div>
+    <div class="linha-resultado">
+        <div class="nome">Células monocitoides....:</div>
+        <div class="unidade"></div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getCelulasMonocitoides() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getCelulasMonocitoidesRelativo() ?: ''; ?></div>
     </div>
 
     <!-- PLAQUETOGRAMA -->
@@ -341,6 +401,12 @@ if ($paciente && $paciente->getDataNasc()) {
         <div class="unidade">mil/µL</div>
         <div class="valor"><?php echo htmlspecialchars($exame->getPlaquetas() ?? ''); ?></div>
         <div class="referencia"><?php echo $referencia->getPlaquetas() ?: ''; ?></div>
+    </div>
+    <div class="linha-resultado">
+        <div class="nome">V.P.M...................:</div>
+        <div class="unidade">fL</div>
+        <div class="valor"><?php echo htmlspecialchars($exame->getVolumePlaquetarioMedio() ?? ''); ?></div>
+        <div class="referencia"><?php echo $referencia->getVolumePlaquetarioMedio() ?: ''; ?></div>
     </div>
 
     <div class="observacao">

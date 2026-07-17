@@ -187,7 +187,7 @@ if ($paciente && $paciente->getDataNasc()) {
     <div class="info-paciente">
         <div class="info-row">
             <div><span class="info-label">Paciente: <?php echo $paciente ? htmlspecialchars($paciente->getNome()) : 'N/A'; ?></span></div>
-            <div><span class="info-label">Nome Social:</span></div>
+            <div></div>
         </div>
         <div class="info-row">
             <div><span class="info-label">Idade: <?php echo $idade; ?></span></div>
@@ -296,6 +296,13 @@ if ($paciente && $paciente->getDataNasc()) {
         }
     }
     ?>
+
+    <?php if ($exame->getObservacao() !== null && trim($exame->getObservacao()) !== ''): ?>
+    <div class="secao-titulo" style="margin-top: 8px;">OBSERVAÇÕES</div>
+    <div class="observacao" style="margin-top: 2px; font-size: 7pt;">
+        <?php echo nl2br(htmlspecialchars($exame->getObservacao())); ?>
+    </div>
+    <?php endif; ?>
 
     <div class="observacao">
         OBS: Este laudo é estritamente destinado a fins acadêmicos e, portanto, não possui validade legal.
